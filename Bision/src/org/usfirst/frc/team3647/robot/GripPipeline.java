@@ -1,28 +1,14 @@
 package org.usfirst.frc.team3647.robot;
 
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.HashMap;
 import org.opencv.imgproc.Imgproc;
 
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.vision.VisionPipeline;
-import edu.wpi.first.wpilibj.vision.VisionRunner;
-import edu.wpi.first.wpilibj.vision.VisionThread;
 
 import org.opencv.core.*;
-import org.opencv.core.Core.*;
-import org.opencv.features2d.FeatureDetector;
-import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.imgproc.*;
-import org.opencv.objdetect.*;
 
 /**
 * GripPipeline class.
@@ -33,7 +19,6 @@ import org.opencv.objdetect.*;
 */
 public class GripPipeline implements VisionPipeline {
 	            
-	private VisionThread visionThread;
 	private double centerX = 0.0;
 
 	//Outputs
