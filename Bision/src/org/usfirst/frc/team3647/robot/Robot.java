@@ -2,6 +2,8 @@ package org.usfirst.frc.team3647.robot;
 
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
+
 import org.opencv.core.Rect;
 import org.opencv.imgproc.Imgproc;
 import edu.wpi.cscore.UsbCamera;
@@ -41,7 +43,12 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit() 
 	{
-
+		//Limelight code
+		NetworkTable table = NetworkTable.getTable("limelight");
+		double targetOffsetAngle_Horizontal = table.getNumber("tx", 0);
+		double targetOffsetAngle_Vertical = table.getNumber("ty", 0);
+		double targetArea = table.getNumber("ta", 0);
+		double targetSkew = table.getNumber("ts", 0);
 	}
 
 	//This is the function that is called during the autonomous period
@@ -51,7 +58,7 @@ public class Robot extends IterativeRobot
 	{
 		double centerX;
 		synchronized (imgLock) {
-		centerX = this.centerX;
+			centerX = this.centerX;
 		}
 		double turn = centerX - (IMG_WIDTH / 2);
 		System.out.println("Turn value: " + turn);
