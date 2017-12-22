@@ -564,6 +564,7 @@ public class Robot extends IterativeRobot {
 	//This is the function that runs during Tele-Operated Period
 	public void teleopPeriodic() 
 	{	
+		System.out.println();
 			runTeleOp();	
 		//testEncoders();
 	}
