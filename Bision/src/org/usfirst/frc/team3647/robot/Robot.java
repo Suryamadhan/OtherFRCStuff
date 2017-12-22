@@ -23,6 +23,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit() 
 	{
+		System.out.println();
 		UsbCamera camera = CameraServer.getInstance().startAutomaticCapture("cam0", 0);
 		camera.setResolution(IMG_WIDTH, IMG_HEIGHT);
 		visionThread = new VisionThread(camera, new GripPipeline(), pipeline -> 
