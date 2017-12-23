@@ -768,21 +768,6 @@ public class Robot extends IterativeRobot {
 				
 				else
 				{
-//						if(Math.abs(rightEncValue - leftEncValue) < 6)
-//						{
-//							Motors007.leftTalon.set(leftValue);
-//						    Motors007.rightTalon.set(-leftValue);
-//						}
-//						else if(rightEncValue > leftEncValue)
-//						{
-//							Motors007.leftTalon.set(leftValue);
-//						    Motors007.rightTalon.set(-leftValue + .34);
-//						}
-//						else
-//						{
-//							Motors007.leftTalon.set(leftValue - .34);
-//						    Motors007.rightTalon.set(-leftValue);
-//						}
 					if(Math.abs(rightEncValue - leftEncValue) < 6)
 					{
 						Motors007.leftTalon.set(leftValue);
