@@ -695,6 +695,8 @@ public class Robot extends IterativeRobot {
 	    Motors007.rightTalon.set(((-speed+turn)));
 	}
 	
+	String previousState;
+	int error;
 	//new PID Drive-train
 	public void newDrive()
 	{
@@ -709,15 +711,41 @@ public class Robot extends IterativeRobot {
 		if(leftValue > 0 && rightValue == 0 )
 		{
 			prevState = 1;
+			if(previousState.equals("turn"))
+			{
+				error++;
+			}
+			if(error < 50 && previousState.equals("turn"))
+			{
+				enc.resetEncoders();
+			}
+			else
+			{
+				previousState = "noturn";
+			}
 		}
 		else if(leftValue < 0 && rightValue == 0)
 		{
 			prevState = 2;
+			if(previousState.equals("turn"))
+			{
+				error++;
+			}
+			if(error < 50 && previousState.equals("turn"))
+			{
+				enc.resetEncoders();
+			}
+			else
+			{
+				previousState = "noturn";
+			}
 		}
 		else
 		{
 			enc.resetEncoders();
 			prevState = 0;
+			previousState = "turn";
+			error = 0;
 		}
 		
 		if(prevState == 0)
