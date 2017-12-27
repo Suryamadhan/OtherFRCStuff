@@ -15,9 +15,9 @@ public class Robot extends IterativeRobot {
 	final String customAuto = "My Auto";
 	String autoSelected;
 	SendableChooser<String> chooser = new SendableChooser<>();
-	double left = 1600;
-	double right = 900;
-	double ratio  = left/right;
+	double big = 1600;
+	double small = 900;
+	double ratio;
 	double actualRatio;
 	int currentState = 1;
 	double sum;
@@ -37,6 +37,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void autonomousInit() {
+		currentState = 1;
 		enc.resetEncoders();
 	}
 
@@ -45,9 +46,15 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		
+	}
+
+	public void turnLeft()
+	{
 		switch(currentState)
 		{
 			case 1:
+				ratio  = big/small;
 				actualRatio =(enc.returnleftEncValue()/enc.returnrightEncValue()) / ratio;
 				sum = enc.returnleftEncValue() + enc.returnrightEncValue();
 				if( actualRatio >= .9 && actualRatio <= 1.1)
@@ -58,7 +65,7 @@ public class Robot extends IterativeRobot {
 				{
 					withinRange = false;
 				}
-				if(sum< left + right)
+				if(sum< big + small)
 				{
 					if(sum < 50 || withinRange)
 					{
@@ -103,11 +110,16 @@ public class Robot extends IterativeRobot {
 				{
 					Motors007.leftTalon.set(0);
 					Motors007.rightTalon.set(0);
+					currentState = 2;
 				}
+				break;
+			case 2:
+				enc.resetEncoders();
+				Motors007.leftTalon.set(0);
+				Motors007.rightTalon.set(0);
 				break;
 		}
 	}
-
 	/**
 	 * This function is called periodically during operator control
 	 */

@@ -23,6 +23,7 @@ public class Robot extends IterativeRobot {
 	boolean leftSide, rightSide;
 	int currentState;
 	
+	
 	//Variables used for moving robot autonomously
 	double straightdist = 1900;
 	double straightDistBR = 2170;
@@ -38,6 +39,7 @@ public class Robot extends IterativeRobot {
 	int prevState = 0;
 	String switchWiggle = "left";
 	String gearStatus = "gearOff";
+	double encoderError;
 	
 	//Creating objects...
 	Encoders enc;
@@ -944,9 +946,173 @@ public class Robot extends IterativeRobot {
 			}
 		}
 		
-		
+	}
+	
+	public double functionOne(double lValue, double rValue)
+	{
+		double diff = Math.abs(lValue-rValue);
+		double returnValue = 0.00535714285714 * diff;
+		returnValue+=0.0179;
+		return returnValue;
 		
 	}
+	
+	//new PID Drive-train
+	public void completeB()
+	{
+		double leftValue, rightValue;
+		double checks,checkt,speed,turn;
+		leftValue = sinx(Joystick007.leftJoySticky);
+		rightValue =  (Joystick007.rightJoyStickx);
+		
+		checks = Math.abs(leftValue);
+		checkt = Math.abs(rightValue);
+		
+		if(leftValue > 0 && rightValue == 0 )
+		{
+			prevState = 1;
+			if(previousState.equals("turn"))
+			{
+				error++;
+			}
+			if(error < 50 && previousState.equals("turn"))
+			{
+				enc.resetEncoders();
+			}
+			else
+			{
+				previousState = "noturn";
+			}
+		}
+		else if(leftValue < 0 && rightValue == 0)
+		{
+			prevState = 2;
+			if(previousState.equals("turn"))
+			{
+				error++;
+			}
+			if(error < 50 && previousState.equals("turn"))
+			{
+				enc.resetEncoders();
+			}
+			else
+			{
+				previousState = "noturn";
+			}
+		}
+		else
+		{
+			enc.resetEncoders();
+			prevState = 0;
+			previousState = "turn";
+			error = 0;
+		}
+		
+		if(prevState == 0)
+		{
+			if (checks <.15) 	
+			{
+				speed = 0;
+			}
+			else 			
+			{
+				speed = 1*(checks * leftValue);
+			}
+			if (checkt <.15) 	
+			{
+				turn = 0;
+			}
+			else 			
+			{
+				if(leftValue == 0)
+				{
+					turn = turnConstant()*(rightValue);
+					//turn = .5*(rightValue);
+				}
+				else
+				{
+					turn = turnConstant()*(rightValue);
+					//turn = .5*(rightValue);
+				}
+				
+			}    
+			Motors007.leftTalon.set(((speed+turn)));
+		    Motors007.rightTalon.set(((-speed+turn)));
+		    
+		}
+		
+		else if(prevState == 1)
+		{
+				double rightEncValue, leftEncValue;
+				rightEncValue = enc.returnrightEncValue();
+				leftEncValue = enc.returnleftEncValue();
+				if(leftValue < .3)
+				{
+					enc.resetEncoders();
+					Motors007.leftTalon.set(leftValue);
+					Motors007.rightTalon.set(-leftValue);
+				}
+				
+				else
+				{
+					encoderError = functionOne(leftEncValue, rightEncValue);
+					if(Math.abs(rightEncValue - leftEncValue) < 6)
+					{
+						Motors007.leftTalon.set(leftValue);
+					    Motors007.rightTalon.set(-leftValue);
+					}
+					else
+					{
+						if(rightEncValue > leftEncValue)
+						{
+							Motors007.leftTalon.set(leftValue);
+						    Motors007.rightTalon.set(-leftValue + encoderError);
+						}
+						else
+						{
+							Motors007.leftTalon.set(leftValue - encoderError);
+						    Motors007.rightTalon.set(-leftValue);
+						}
+					}	
+				}	
+		}
+		else
+		{
+			double rightEncValue, leftEncValue;
+			rightEncValue = enc.returnrightEncValue();
+			leftEncValue = enc.returnleftEncValue();
+			if(Math.abs(leftValue)< .3)
+			{
+				enc.resetEncoders();
+				Motors007.leftTalon.set(leftValue);
+				Motors007.rightTalon.set(-leftValue);
+			}
+			else
+			{
+				encoderError = functionOne(leftEncValue, rightEncValue);
+				if(Math.abs(rightEncValue - leftEncValue) < 6)
+				{
+					Motors007.leftTalon.set(leftValue);
+				    Motors007.rightTalon.set(-leftValue);
+				}
+				else
+				{
+					if(rightEncValue > leftEncValue)
+					{
+						Motors007.leftTalon.set(leftValue + encoderError);
+					    Motors007.rightTalon.set(-leftValue);
+					}
+					else
+					{
+						Motors007.leftTalon.set(leftValue);
+					    Motors007.rightTalon.set(-leftValue - encoderError);
+					}
+				}
+			}
+		}
+	
+	}
+	
 	
 	//This is the function we use for our normal drive-train for the X-box controller
 	//In this drive-train, we also use a P loop so that the robot can drive straight
