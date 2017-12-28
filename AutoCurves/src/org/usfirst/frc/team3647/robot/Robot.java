@@ -46,7 +46,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		
+		turnLeft();
 	}
 
 	public void turnLeft()

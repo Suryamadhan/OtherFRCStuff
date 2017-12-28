@@ -601,7 +601,8 @@ public class Robot extends IterativeRobot {
 			joyStickValues.updateContollerValues();
 			updateAllPistons();
 			climberObj.theClimber();
-			newDrive();
+			completeB();
+			//newDrive();
 //			driveTrain();
 //			switches();
 		}
