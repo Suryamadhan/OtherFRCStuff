@@ -957,7 +957,7 @@ public class Robot extends IterativeRobot {
 		
 	}
 	
-	//new PID Drive-train
+	//new B Drive-train
 	public void completeB()
 	{
 		double leftValue, rightValue;
