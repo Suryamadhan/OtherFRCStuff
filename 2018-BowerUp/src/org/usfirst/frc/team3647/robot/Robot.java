@@ -7,19 +7,22 @@ import team3647subsystems.Joysticks;
 
 public class Robot extends IterativeRobot {
 
-	static Encoders enc;
+	Encoders enc;
 	Joysticks joy;
+	Autonomous auto;
 	@Override
 	public void robotInit() 
 	{
 		enc = new Encoders();
 		joy = new Joysticks();
+		auto = new Autonomous();
 	}
 	
 	@Override
 	public void autonomousInit() 
 	{
 		Encoders.resetEncoders();
+		auto.currentState = 1;
 	}
 
 	@Override

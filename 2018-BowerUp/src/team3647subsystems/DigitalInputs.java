@@ -5,7 +5,7 @@ import team3647ConstantsAndFunctions.Constants;
 
 public class DigitalInputs 
 {
-	static boolean left, middle, right;
+	public static boolean left, middle, right;
 	
 	static DigitalInput leftAuto = new DigitalInput(Constants.leftAutoPin);
 	static DigitalInput middleAuto = new DigitalInput(Constants.middleAutoPin);

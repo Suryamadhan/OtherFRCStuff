@@ -12,7 +12,7 @@ public class Encoders
 	
 	public void setEncoderValues()
 	{
-		leftEncoderValue = leftEncoder.get();
+		leftEncoderValue = -leftEncoder.get();
 		rightEncoderValue = rightEncoder.get();
 	}
 	
