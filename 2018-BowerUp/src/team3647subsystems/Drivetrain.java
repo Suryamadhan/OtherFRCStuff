@@ -13,7 +13,6 @@ public class Drivetrain
 	
 	public static void setLeftMotorSpeed(double speed)
 	{
-		Encoders.resetEncoders();
 		leftMotor.set(speed);
 	}
 	

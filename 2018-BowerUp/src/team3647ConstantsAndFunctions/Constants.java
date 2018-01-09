@@ -15,10 +15,18 @@ public class Constants
 	//JoySticks
 	public final static int mainControllerNumber = 0;
 	
+	//Turn Constant for the Drivetrain
 	public static double turnConstant(double yValue)
 	{
 		double turnConstant;
 		turnConstant = .75 -(.25*(Math.abs(yValue)));
 		return turnConstant;
 	}
+	
+	//Pins for Auto
+	public final static int leftAutoPin = 6;
+	public final static int middleAutoPin = 7;
+	public final static int rightAutoPin = 8;
+	
+	
 }
