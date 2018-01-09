@@ -26,7 +26,7 @@ public class Drivetrain
 	{
 		if(yValue > 0 && xValue == 0)
 		{
-			driftStatus = "forward";
+			movingStatus = "forward";
 			if(driftStatus.equals("turn"))
 			{
 				drift++;
