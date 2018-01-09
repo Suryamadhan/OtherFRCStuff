@@ -7,11 +7,6 @@ public class Joysticks
 {
 	public Joystick mainController = new Joystick(Constants.mainControllerNumber);
 	
-//	public Joysticks()
-//	{
-//		 mainController = new Joystick(Constants.mainController);
-//	}
-	
 	// Main contoller Variables
 	public double leftTrigger, rightTrigger, leftJoySticky, leftJoyStickx, rightJoySticky, rightJoyStickx;
 	public boolean rightBumper, leftBumper, buttonA, buttonB, buttonY;

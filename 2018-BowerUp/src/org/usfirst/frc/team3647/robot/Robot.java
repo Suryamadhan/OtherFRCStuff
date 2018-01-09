@@ -19,18 +19,19 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() 
 	{
-		
+		Encoders.resetEncoders();
 	}
 
 	@Override
 	public void autonomousPeriodic() 
 	{
-		
+		enc.setEncoderValues();
 	}
 
 	@Override
 	public void teleopPeriodic() 
 	{
+		enc.setEncoderValues();
 		joy.setMainContollerValues();
 		Drivetrain.arcadeDrive(enc.leftEncoderValue, enc.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
 	}
@@ -40,10 +41,6 @@ public class Robot extends IterativeRobot {
 	{
 		
 	}
-	
-	public static void testy()
-	{
-		enc.resetEncoders();
-	}
+
 }
 

@@ -1,7 +1,5 @@
 package team3647subsystems;
 
-import org.usfirst.frc.team3647.robot.Robot;
-
 import edu.wpi.first.wpilibj.Spark;
 import team3647ConstantsAndFunctions.Constants;
 
@@ -10,7 +8,6 @@ public class Drivetrain
 	public static Spark leftMotor = new Spark(Constants.leftMotorPin);
 	public static Spark rightMotor =new Spark(Constants.righMotorPin);
 	
-	static Encoders enc = new Encoders();
 	static double drift;
 	static String movingStatus, driftStatus;
 	
@@ -29,7 +26,19 @@ public class Drivetrain
 	{
 		if(yValue > 0 && xValue == 0)
 		{
-			movingStatus = "forward";
+			driftStatus = "forward";
+			if(driftStatus.equals("turn"))
+			{
+				drift++;
+			}
+			if(drift < 50 && driftStatus.equals("turn"))
+			{
+				Encoders.resetEncoders();
+			}
+			else
+			{
+				driftStatus = "noturn";
+			}
 		}
 		else if(yValue < 0 && xValue == 0)
 		{
@@ -38,10 +47,12 @@ public class Drivetrain
 		else if(yValue == 0 && xValue == 0)
 		{
 			movingStatus = "stop";
+			driftStatus = "turn";
 		}
 		else
 		{
 			movingStatus = "turning";
+			driftStatus = "turn";
 		}
 		
 		switch(movingStatus)
@@ -51,7 +62,7 @@ public class Drivetrain
 				{
 					setLeftMotorSpeed(yValue);
 					setRightMotorSpeed(-yValue);
-					//reset Encoders
+					Encoders.resetEncoders();
 				}
 				else
 				{
@@ -119,7 +130,7 @@ public class Drivetrain
 				{
 					setLeftMotorSpeed(yValue);
 					setRightMotorSpeed(-yValue);
-					//reset Encoders
+					Encoders.resetEncoders();
 				}
 				else
 				{
@@ -189,7 +200,7 @@ public class Drivetrain
 				speedX = xValue * Constants.turnConstant(yValue);
 				setLeftMotorSpeed(speedY + speedX);
 				setRightMotorSpeed(-speedY + speedX);
-				//Reset Encoders
+				Encoders.resetEncoders();
 				break;
 			case "stop":
 				setLeftMotorSpeed(0);
@@ -197,5 +208,4 @@ public class Drivetrain
 				break;
 		}
 	}
-	
 }
