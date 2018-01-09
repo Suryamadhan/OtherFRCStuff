@@ -10,11 +10,13 @@ public class Drivetrain
 	public static Spark leftMotor = new Spark(Constants.leftMotorPin);
 	public static Spark rightMotor =new Spark(Constants.righMotorPin);
 	
+	static Encoders enc = new Encoders();
 	static double drift;
 	static String movingStatus, driftStatus;
 	
 	public static void setLeftMotorSpeed(double speed)
 	{
+		Encoders.resetEncoders();
 		leftMotor.set(speed);
 	}
 	

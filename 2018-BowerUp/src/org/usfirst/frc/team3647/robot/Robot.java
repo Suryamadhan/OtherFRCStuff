@@ -7,7 +7,7 @@ import team3647subsystems.Joysticks;
 
 public class Robot extends IterativeRobot {
 
-	Encoders enc;
+	static Encoders enc;
 	Joysticks joy;
 	@Override
 	public void robotInit() 
@@ -43,7 +43,7 @@ public class Robot extends IterativeRobot {
 	
 	public static void testy()
 	{
-		
+		enc.resetEncoders();
 	}
 }
 
