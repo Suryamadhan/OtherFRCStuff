@@ -53,8 +53,145 @@ public class Drivetrain
 				}
 				else
 				{
-					
+					if(Math.abs(leftEnc - rightEnc) < 6)
+					{
+						setLeftMotorSpeed(yValue);
+						setRightMotorSpeed(-yValue);
+					}
+					else if(Math.abs(leftEnc - rightEnc) < 20)
+					{
+						if(rightEnc > leftEnc)
+						{
+							 setLeftMotorSpeed(yValue);
+							 setRightMotorSpeed(-yValue + .125);
+						}
+						else
+						{
+							 setLeftMotorSpeed(yValue - .125);
+							 setRightMotorSpeed(-yValue);
+						}
+					}
+					else if(Math.abs(leftEnc - rightEnc) < 34)
+					{
+						if(rightEnc > leftEnc)
+						{
+							 setLeftMotorSpeed(yValue);
+							 setRightMotorSpeed(-yValue + .2);
+						}
+						else
+						{
+							 setLeftMotorSpeed(yValue - .2);
+							 setRightMotorSpeed(-yValue);
+						}
+					}
+					else if(Math.abs(leftEnc - rightEnc) < 48)
+					{
+						if(rightEnc > leftEnc)
+						{
+							 setLeftMotorSpeed(yValue);
+							 setRightMotorSpeed(-yValue + .275);
+						}
+						else
+						{
+							 setLeftMotorSpeed(yValue - .275);
+							 setRightMotorSpeed(-yValue);
+						}
+					}
+					else
+					{
+						if(rightEnc > leftEnc)
+						{
+							 setLeftMotorSpeed(yValue);
+							 setRightMotorSpeed(-yValue + .34);
+						}
+						else
+						{
+							 setLeftMotorSpeed(yValue - .34);
+							 setRightMotorSpeed(-yValue);
+						}
+					}
 				}
+				break;
+			case "backward":
+				if(yValue > -.3)
+				{
+					setLeftMotorSpeed(yValue);
+					setRightMotorSpeed(-yValue);
+					//reset Encoders
+				}
+				else
+				{
+					if(Math.abs(leftEnc - rightEnc) < 6)
+					{
+						setLeftMotorSpeed(yValue);
+						setRightMotorSpeed(-yValue);
+					}
+					else if(Math.abs(leftEnc - rightEnc) < 20)
+					{
+						if(rightEnc > leftEnc)
+						{
+							 setLeftMotorSpeed(yValue + .125);
+							 setRightMotorSpeed(-yValue);
+						}
+						else
+						{
+							 setLeftMotorSpeed(yValue);
+							 setRightMotorSpeed(-yValue - .125);
+						}
+					}
+					else if(Math.abs(leftEnc - rightEnc) < 34)
+					{
+						if(rightEnc > leftEnc)
+						{
+							 setLeftMotorSpeed(yValue + .2);
+							 setRightMotorSpeed(-yValue);
+						}
+						else
+						{
+							 setLeftMotorSpeed(yValue);
+							 setRightMotorSpeed(-yValue - .2);
+						}
+					}
+					else if(Math.abs(leftEnc - rightEnc) < 48)
+					{
+						if(rightEnc > leftEnc)
+						{
+							 setLeftMotorSpeed(yValue + .275);
+							 setRightMotorSpeed(-yValue);
+						}
+						else
+						{
+							 setLeftMotorSpeed(yValue);
+							 setRightMotorSpeed(-yValue - .275);
+						}
+					}
+					else
+					{
+						if(rightEnc > leftEnc)
+						{
+							 setLeftMotorSpeed(yValue + .34);
+							 setRightMotorSpeed(-yValue);
+						}
+						else
+						{
+							 setLeftMotorSpeed(yValue);
+							 setRightMotorSpeed(-yValue - .34);
+						}
+					}
+				}
+				break;
+			case "turning":
+				double speedY, speedX;
+				speedY = Math.abs(yValue);
+				speedY *= yValue;
+				speedX = xValue * Constants.turnConstant(yValue);
+				setLeftMotorSpeed(speedY + speedX);
+				setRightMotorSpeed(-speedY + speedX);
+				//Reset Encoders
+				break;
+			case "stop":
+				setLeftMotorSpeed(0);
+				setRightMotorSpeed(0);
 				break;
 		}
 	}

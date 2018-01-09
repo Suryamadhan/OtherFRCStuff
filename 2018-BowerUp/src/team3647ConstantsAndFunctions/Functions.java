@@ -6,4 +6,5 @@ public class Functions
 	{
 		return Math.sin(x);
 	}
+	
 }
