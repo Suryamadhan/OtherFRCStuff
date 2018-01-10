@@ -28,5 +28,8 @@ public class Constants
 	public final static int middleAutoPin = 7;
 	public final static int rightAutoPin = 8;
 	
-	
+	//Auto numbers
+	public final static double initialStraightLL = 1200;
+	public final static double smallTurnForSwitch = 600 * Math.PI;
+	public final static double bigTurnForSwitch = 1200 * Math.PI;
 }

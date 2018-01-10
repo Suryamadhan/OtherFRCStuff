@@ -21,5 +21,11 @@ public class Encoders
 		leftEncoder.reset();
 		rightEncoder.reset();
 	}
+	
+	public static void testEncoders()
+	{
+		System.out.println("Left Encoder Value: " + leftEncoder.get());
+		System.out.println("Right Encoder Value: " + rightEncoder.get());
+	}
 
 }
