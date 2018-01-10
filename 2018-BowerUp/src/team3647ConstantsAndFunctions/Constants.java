@@ -29,7 +29,11 @@ public class Constants
 	public final static int rightAutoPin = 8;
 	
 	//Auto numbers
-	public final static double initialStraightLL = 1200;
-	public final static double smallTurnForSwitch = 600 * Math.PI;
-	public final static double bigTurnForSwitch = 1200 * Math.PI;
+	public final static double initialStraightLLSWSC = 1200;
+	public final static double smallTurnForSwitchSWSC = 600 * Math.PI;
+	public final static double bigTurnForSwitchSWSC = 1200 * Math.PI;
+	public final static double distanceSwitchLLSWSC = 600;
+	public final static double smallTurnFromSwitchSWSC = 1500 * Math.PI;
+	public final static double bigTurnFromSwitchSWSC = 2700 * Math.PI;
+	public final static double backUpToPickUpCubeSWSC = 5000;
 }

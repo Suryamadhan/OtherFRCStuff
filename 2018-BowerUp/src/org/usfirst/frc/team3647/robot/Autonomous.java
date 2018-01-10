@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3647.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 import team3647ConstantsAndFunctions.Constants;
 import team3647subsystems.DigitalInputs;
 import team3647subsystems.Drivetrain;
@@ -26,7 +27,7 @@ public class Autonomous
 		switch(autoSelected)
 		{
 			case 1:
-				middleStationLL();
+				middleStationLLSWSC();
 				break;
 			case 2:
 				middleStationLR();
@@ -160,12 +161,12 @@ public class Autonomous
 		
 	}
 	
-	public void middleStationLL()
+	public void middleStationLLSWSC()
 	{		
 		switch(currentState)
 		{
 			case 1:
-				requiredStraightDist += (Constants.initialStraightLL - 200);
+				requiredStraightDist = (Constants.initialStraightLLSWSC - 200);
 				if(!Drivetrain.reachedDistance(leftEncoder, rightEncoder, requiredStraightDist))
 				{
 					Drivetrain.driveForward(leftEncoder, rightEncoder, .8);
@@ -176,7 +177,7 @@ public class Autonomous
 				}
 				break;
 			case 2:
-				requiredStraightDist += 200;
+				requiredStraightDist = Constants.initialStraightLLSWSC;
 				if(!Drivetrain.reachedDistance(leftEncoder, rightEncoder, requiredStraightDist))
 				{
 					Drivetrain.driveForward(leftEncoder, rightEncoder, .5);
@@ -191,8 +192,8 @@ public class Autonomous
 				}
 				break;
 			case 3:
-				requiredLeftDist += Constants.smallTurnForSwitch - 200;
-				requiredRightDist += Constants.bigTurnForSwitch - 400;
+				requiredLeftDist = (Constants.smallTurnForSwitchSWSC - 200);
+				requiredRightDist = (Constants.bigTurnForSwitchSWSC - 400);
 				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
 				currentRatio = ((rightEncoder/leftEncoder)/aimedRatio);
 				sum = rightEncoder + leftEncoder;
@@ -251,8 +252,8 @@ public class Autonomous
 				}
 				break;
 			case 4:
-				requiredLeftDist += 200;
-				requiredRightDist += 400;
+				requiredLeftDist = Constants.smallTurnForSwitchSWSC;
+				requiredRightDist = Constants.bigTurnForSwitchSWSC;
 				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
 				currentRatio = ((rightEncoder/leftEncoder)/aimedRatio);
 				sum = rightEncoder + leftEncoder;
@@ -314,8 +315,8 @@ public class Autonomous
 				}
 				break;
 			case 5:
-				requiredLeftDist += 400;
-				requiredRightDist += 200;
+				requiredLeftDist = 400;
+				requiredRightDist = 200;
 				aimedRatio = ((requiredLeftDist)/(requiredRightDist));
 				currentRatio = ((leftEncoder/rightEncoder)/aimedRatio);
 				sum = rightEncoder + leftEncoder;
@@ -374,8 +375,8 @@ public class Autonomous
 				}
 				break;
 			case 6:
-				requiredLeftDist += Constants.bigTurnForSwitch;
-				requiredRightDist += Constants.smallTurnForSwitch;
+				requiredLeftDist = Constants.bigTurnForSwitchSWSC;
+				requiredRightDist = Constants.smallTurnForSwitchSWSC;
 				aimedRatio = ((requiredLeftDist)/(requiredRightDist));
 				currentRatio = ((leftEncoder/rightEncoder)/aimedRatio);
 				sum = rightEncoder + leftEncoder;
@@ -437,7 +438,7 @@ public class Autonomous
 				}
 				break;
 			case 7:
-				requiredStraightDist += Constants.goToSwitch;
+				requiredStraightDist = Constants.distanceSwitchLLSWSC;
 				if(!Drivetrain.reachedDistance(leftEncoder, rightEncoder, requiredStraightDist))
 				{
 					Drivetrain.driveForward(leftEncoder, rightEncoder, .3);
@@ -445,17 +446,246 @@ public class Autonomous
 				else
 				{
 					//Must reach around 140 inches
+					requiredStraightDist = 0;
 					currentState = 8;
 				}
 				break;
 			case 8:
 				Drivetrain.setLeftMotorSpeed(0);
 				Drivetrain.setRightMotorSpeed(0);
+//				deliver box to switch
 //				Encoders.resetEncoders();
+//				Timer.delay(1);
 //				currentState = 9;
-				Encoders.testEncoders();
+				Encoders.testEncoders();//
 				break;
 			case 9:
+				requiredStraightDist = Constants.distanceSwitchLLSWSC;
+				if(!Drivetrain.reachedDistance(leftEncoder, rightEncoder, requiredStraightDist))
+				{
+					Drivetrain.driveBackward(leftEncoder, rightEncoder, -.3);
+				}
+				else
+				{
+					requiredStraightDist = 0;
+					Encoders.resetEncoders();
+					currentState = 10;
+				}
+				break;
+			case 10:
+				requiredLeftDist = 400;
+				requiredRightDist = 720;
+				rightEncoder = Math.abs(rightEncoder);
+				leftEncoder = Math.abs(leftEncoder);
+				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
+				currentRatio = ((rightEncoder/leftEncoder)/aimedRatio);
+				sum = rightEncoder + leftEncoder;
+				if(currentRatio >= .9 && currentRatio <= 1.1)
+				{
+					withinRange = true;
+				}
+				else
+				{
+					withinRange = false;
+				}
+				if(sum < requiredLeftDist + requiredRightDist)
+				{
+					if(withinRange || sum < 50)
+					{
+						Drivetrain.setLeftMotorSpeed(-.3);
+						Drivetrain.setRightMotorSpeed(.54);
+					}
+					else
+					{
+						if(currentRatio > 1.1 && currentRatio < 1.18)
+						{
+							Drivetrain.setLeftMotorSpeed(-.4);
+							Drivetrain.setRightMotorSpeed(.44);
+						}
+						else if(currentRatio > 1.18 && currentRatio < 1.25)
+						{
+							Drivetrain.setLeftMotorSpeed(-.5);
+							Drivetrain.setRightMotorSpeed(.34);
+						}
+						else if(currentRatio > 1.25)
+						{
+							Drivetrain.setLeftMotorSpeed(-.6);
+							Drivetrain.setRightMotorSpeed(.24);
+						}
+						else if(currentRatio < .9 && currentRatio > .82)
+						{
+							Drivetrain.setLeftMotorSpeed(-.2);
+							Drivetrain.setRightMotorSpeed(.64);
+						}
+						else if(currentRatio < .82 && currentRatio > .75)
+						{
+							Drivetrain.setLeftMotorSpeed(-.1);
+							Drivetrain.setRightMotorSpeed(.74);
+						}
+						else
+						{
+							Drivetrain.setLeftMotorSpeed(0);
+							Drivetrain.setRightMotorSpeed(.84);
+						}
+					}
+				}
+				else
+				{
+					currentState = 11;
+				}
+				break;
+			case 11:
+				requiredLeftDist = Constants.smallTurnFromSwitchSWSC;
+				requiredRightDist = Constants.bigTurnFromSwitchSWSC;
+				rightEncoder = Math.abs(rightEncoder);
+				leftEncoder = Math.abs(leftEncoder);
+				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
+				currentRatio = ((rightEncoder/leftEncoder)/aimedRatio);
+				sum = rightEncoder + leftEncoder;
+				if(currentRatio >= .9 && currentRatio <= 1.1)
+				{
+					withinRange = true;
+				}
+				else
+				{
+					withinRange = false;
+				}
+				if(sum < requiredLeftDist + requiredRightDist)
+				{
+					if(withinRange || sum < 50)
+					{
+						Drivetrain.setLeftMotorSpeed(-.45);
+						Drivetrain.setRightMotorSpeed(.81);
+					}
+					else
+					{
+						if(currentRatio > 1.1 && currentRatio < 1.18)
+						{
+							Drivetrain.setLeftMotorSpeed(-.51);
+							Drivetrain.setRightMotorSpeed(.75);
+						}
+						else if(currentRatio > 1.18 && currentRatio < 1.25)
+						{
+							Drivetrain.setLeftMotorSpeed(-.57);
+							Drivetrain.setRightMotorSpeed(.69);
+						}
+						else if(currentRatio > 1.25)
+						{
+							Drivetrain.setLeftMotorSpeed(-.63);
+							Drivetrain.setRightMotorSpeed(.63);
+						}
+						else if(currentRatio < .9 && currentRatio > .82)
+						{
+							Drivetrain.setLeftMotorSpeed(-.39);
+							Drivetrain.setRightMotorSpeed(.87);
+						}
+						else if(currentRatio < .82 && currentRatio > .75)
+						{
+							Drivetrain.setLeftMotorSpeed(-.33);
+							Drivetrain.setRightMotorSpeed(.93);
+						}
+						else
+						{
+							Drivetrain.setLeftMotorSpeed(-.27);
+							Drivetrain.setRightMotorSpeed(.99);
+						}
+					}
+				}
+				else
+				{
+					requiredLeftDist = 0;
+					requiredRightDist = 0;
+					Encoders.resetEncoders();
+					currentState = 12;
+				}
+				break;
+			case 12:
+				requiredStraightDist = (Constants.backUpToPickUpCubeSWSC - 360);
+				if(!Drivetrain.reachedDistance(leftEncoder, rightEncoder, requiredStraightDist))
+				{
+					Drivetrain.driveBackward(leftEncoder, rightEncoder, -.8);
+				}
+				else
+				{
+					currentState = 13;
+				}
+				break;
+			case 13:
+				requiredStraightDist = Constants.backUpToPickUpCubeSWSC;
+				if(!Drivetrain.reachedDistance(leftEncoder, rightEncoder, requiredStraightDist))
+				{
+					Drivetrain.driveBackward(leftEncoder, rightEncoder, -.5);
+				}
+				else
+				{
+					Drivetrain.setLeftMotorSpeed(0);
+					Drivetrain.setRightMotorSpeed(0);
+					Encoders.resetEncoders();
+					Timer.delay(.4);
+					currentState = 8;
+				}
+				break;
+			case 14:
+				requiredLeftDist = (Constants.bigTurnForSwitchSWSC);
+				requiredRightDist = (Constants.smallTurnForSwitchSWSC);
+				leftEncoder = Math.abs(leftEncoder);
+				rightEncoder = Math.abs(rightEncoder);
+				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
+				currentRatio = ((rightEncoder/leftEncoder)/aimedRatio);
+				sum = rightEncoder + leftEncoder;
+				if(currentRatio >= .9 && currentRatio <= 1.1)
+				{
+					withinRange = true;
+				}
+				else
+				{
+					withinRange = false;
+				}
+				if(sum < requiredLeftDist + requiredRightDist)
+				{
+					if(withinRange || sum < 50)
+					{
+						Drivetrain.setLeftMotorSpeed(-.3);
+						Drivetrain.setRightMotorSpeed(.54);
+					}
+					else
+					{
+						if(currentRatio > 1.1 && currentRatio < 1.18)
+						{
+							Drivetrain.setLeftMotorSpeed(-.4);
+							Drivetrain.setRightMotorSpeed(.44);
+						}
+						else if(currentRatio > 1.18 && currentRatio < 1.25)
+						{
+							Drivetrain.setLeftMotorSpeed(-.5);
+							Drivetrain.setRightMotorSpeed(.34);
+						}
+						else if(currentRatio > 1.25)
+						{
+							Drivetrain.setLeftMotorSpeed(-.6);
+							Drivetrain.setRightMotorSpeed(.24);
+						}
+						else if(currentRatio < .9 && currentRatio > .82)
+						{
+							Drivetrain.setLeftMotorSpeed(-.2);
+							Drivetrain.setRightMotorSpeed(.64);
+						}
+						else if(currentRatio < .82 && currentRatio > .75)
+						{
+							Drivetrain.setLeftMotorSpeed(-.1);
+							Drivetrain.setRightMotorSpeed(.74);
+						}
+						else
+						{
+							Drivetrain.setLeftMotorSpeed(0);
+							Drivetrain.setRightMotorSpeed(.84);
+						}
+					}
+				}
+				else
+				{
+					currentState = 11;
+				}
 				break;
 			
 				
