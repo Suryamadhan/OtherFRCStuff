@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3647.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import team3647subsystems.Drivetrain;
 import team3647subsystems.Encoders;
@@ -28,7 +29,12 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() 
 	{
-		enc.setEncoderValues();
+		while(DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
+		{
+			enc.setEncoderValues();
+			auto.runAuto(enc.leftEncoderValue, enc.rightEncoderValue);
+		}
+		
 	}
 
 	@Override
