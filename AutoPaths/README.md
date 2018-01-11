@@ -1,5 +1,11 @@
 # Auto Paths #
 
+## Some vocabulary that may help you read this document ##
+* All paths are labelled follows: Starting Position - Side of Switch and Side of Scale (From FMS) - States what you are doing first and/or second.
+* **Starting Position:** LS = Left Side; RS = Right Side; MS = Middle Side;
+* **Side of Switch and Side of Scale:** LL = Switch on left, Scale on left;  LR = Switch on left, Scale on right;  RR = Switch on right, Scale on right;  RL = Switch on right, Scale on left;
+* **States what you are doing first and/or second:** SCSW = Scale first, Switch Second; SWSC = Switch first, Scale second; SW = Switch only; SC = Scale only; CA = Cross the Auto Line;
+
 ## Fields with No Paths ##
 
 ### Robot starting from the left ###
