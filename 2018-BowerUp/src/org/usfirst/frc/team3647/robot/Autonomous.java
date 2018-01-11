@@ -166,7 +166,11 @@ public class Autonomous
 		switch(currentState)
 		{
 			case 1:
+<<<<<<< HEAD
 				requiredStraightDist = (Constants.initialStraightLLSWSC - 300);
+=======
+				requiredStraightDist = (Constants.initialStraightLLSWSC - 100);
+>>>>>>> 19512b02cc747bdcf593d0ffa960b162be7a9e8a
 				if(!Drivetrain.reachedDistance(leftEncoder, rightEncoder, requiredStraightDist))
 				{
 					Drivetrain.driveForward(leftEncoder, rightEncoder, .8);
