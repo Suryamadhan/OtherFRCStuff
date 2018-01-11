@@ -6,7 +6,7 @@ import team3647ConstantsAndFunctions.Constants;
 public class Drivetrain 
 {
 	public static Spark leftMotor = new Spark(Constants.leftMotorPin);
-	public static Spark rightMotor =new Spark(Constants.righMotorPin);
+	public static Spark rightMotor =new Spark(Constants.rightMotorPin);
 	
 	static double drift, avg;
 	static String movingStatus, driftStatus;

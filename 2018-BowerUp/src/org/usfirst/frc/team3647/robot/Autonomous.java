@@ -3,7 +3,7 @@ package org.usfirst.frc.team3647.robot;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import team3647ConstantsAndFunctions.Constants;
-import team3647subsystems.DigitalInputs;
+//import team3647subsystems.DigitalInputs;
 import team3647subsystems.Drivetrain;
 import team3647subsystems.Encoders;
 
@@ -166,7 +166,7 @@ public class Autonomous
 		switch(currentState)
 		{
 			case 1:
-				requiredStraightDist = (Constants.initialStraightLLSWSC - 200);
+				requiredStraightDist = (Constants.initialStraightLLSWSC - 300);
 				if(!Drivetrain.reachedDistance(leftEncoder, rightEncoder, requiredStraightDist))
 				{
 					Drivetrain.driveForward(leftEncoder, rightEncoder, .8);
@@ -456,7 +456,7 @@ public class Autonomous
 //				deliver box to switch
 //				Encoders.resetEncoders();
 //				Timer.delay(1);
-//				currentState = 9;
+				currentState = 9;
 				Encoders.testEncoders();//
 				break;
 			case 9:
@@ -622,7 +622,7 @@ public class Autonomous
 					Drivetrain.setRightMotorSpeed(0);
 					Encoders.resetEncoders();
 					Timer.delay(.4);
-					currentState = 8;
+					currentState = 15;
 				}
 				break;
 			case 14:
@@ -686,6 +686,10 @@ public class Autonomous
 				{
 					currentState = 11;
 				}
+				break;
+			case 15:
+				Drivetrain.setLeftMotorSpeed(0);
+				Drivetrain.setRightMotorSpeed(0);
 				break;
 			
 				
@@ -810,13 +814,11 @@ LL = 1;
 LR = 2;
 RR = 3;
 RL = 4;
-
 Left Station:
 LL = 5;
 LR = 6;
 RR = 7;
 RL = 8;
-
 Right Station:
 LL = 9;
 LR = 10;
