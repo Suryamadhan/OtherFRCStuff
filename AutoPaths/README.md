@@ -53,7 +53,7 @@
 
 <img width="442" alt="screen shot 2018-01-12 at 9 53 29 am" src="https://user-images.githubusercontent.com/16403870/34888319-b321aab2-f77e-11e7-9150-8165a907246b.png">
 
-### LS-LR-CA and LS-LL-CA###
+### LS-LR-CA and LS-LL-CA ###
 
 <img width="442" alt="screen shot 2018-01-12 at 11 31 13 am" src="https://user-images.githubusercontent.com/16403870/34891962-4fed1b3a-f78c-11e7-875f-809cf8901123.png">
 
