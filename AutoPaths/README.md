@@ -34,8 +34,16 @@
 
 * Note: Even though this path looks identical to LS-LL-SCSW, they are different. In this path, when we pickup the box after we do the scale, we go back to the scale in the same path we used to get the robot to pick up the box.
 
+### LS-LL-SWSW ###
+<img width="442" alt="screen shot 2018-01-12 at 8 39 22 am" src="https://user-images.githubusercontent.com/16403870/34885232-270df45e-f774-11e7-8266-07e73a98c433.png">
+
+
 ### LS-LL-CA ###
 
 <img width="442" alt="screen shot 2018-01-11 at 6 35 29 pm" src="https://user-images.githubusercontent.com/16403870/34857220-5be62d8e-f6fe-11e7-8d4d-5271eea0caab.png">
+
+### LS-LR-SWSC ###
+
+<img width="442" alt="screen shot 2018-01-12 at 9 35 01 am" src="https://user-images.githubusercontent.com/16403870/34887635-0153551c-f77c-11e7-89d2-1b9c4c91a78d.png">
 
 
