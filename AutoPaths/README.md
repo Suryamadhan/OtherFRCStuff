@@ -16,3 +16,13 @@
 
 ### Robot starting from the right ###
 <img width="454" alt="screen shot 2018-01-11 at 11 48 34 am" src="https://user-images.githubusercontent.com/16403870/34844198-8e5508aa-f6c5-11e7-8ec7-c6c70f0c7d60.png">
+
+## Left side paths ##
+
+### LS-LL-SCSW ###
+
+<img width="442" alt="screen shot 2018-01-11 at 2 20 09 pm" src="https://user-images.githubusercontent.com/16403870/34850430-9fe791cc-f6da-11e7-8fb5-b750f7434344.png">
+
+### LS-LL-CA ###
+
+<img width="442" alt="screen shot 2018-01-11 at 6 35 29 pm" src="https://user-images.githubusercontent.com/16403870/34857220-5be62d8e-f6fe-11e7-8d4d-5271eea0caab.png">
