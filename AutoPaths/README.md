@@ -46,6 +46,14 @@
 
 <img width="442" alt="screen shot 2018-01-12 at 9 43 37 am" src="https://user-images.githubusercontent.com/16403870/34888317-b24590ea-f77e-11e7-963e-d046fae26db2.png">
 
+### LS-LR-SCSW ###
+
+<img width="472" alt="screen shot 2018-01-12 at 10 39 29 am" src="https://user-images.githubusercontent.com/16403870/34890015-23c62b20-f785-11e7-9052-97f5c8f4a6f6.png">
+
+### LS-LR-SCSC ###
+
+<img width="472" alt="screen shot 2018-01-12 at 11 02 29 am" src="https://user-images.githubusercontent.com/16403870/34890839-58a0bbb4-f788-11e7-99eb-ba5ba84da7a6.png">
+
 ### LS-LR-SWSW ###
 
 <img width="442" alt="screen shot 2018-01-12 at 9 53 29 am" src="https://user-images.githubusercontent.com/16403870/34888319-b321aab2-f77e-11e7-9150-8165a907246b.png">
