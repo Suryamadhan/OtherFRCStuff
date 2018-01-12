@@ -19,10 +19,23 @@
 
 ## Left side paths ##
 
-### LS-LL-SCSW ###
+### LS-LL-SWSC ###
 
 <img width="442" alt="screen shot 2018-01-11 at 2 20 09 pm" src="https://user-images.githubusercontent.com/16403870/34850430-9fe791cc-f6da-11e7-8fb5-b750f7434344.png">
+
+### LS-LL-SCSW ###
+<img width="442" alt="screen shot 2018-01-12 at 8 20 32 am" src="https://user-images.githubusercontent.com/16403870/34884410-850a96a0-f771-11e7-87eb-3423c4f4dff0.png">
+
+* Note: Even though this path looks identical to LS-LL-SCSC, they are different. In this path, when we pickup the box after we do the scale, we immeditely deliver the box to the switch.
+
+
+### LS-LL-SCSC ###
+<img width="442" alt="screen shot 2018-01-12 at 8 20 32 am" src="https://user-images.githubusercontent.com/16403870/34884410-850a96a0-f771-11e7-87eb-3423c4f4dff0.png">
+
+* Note: Even though this path looks identical to LS-LL-SCSW, they are different. In this path, when we pickup the box after we do the scale, we go back to the scale in the same path we used to get the robot to pick up the box.
 
 ### LS-LL-CA ###
 
 <img width="442" alt="screen shot 2018-01-11 at 6 35 29 pm" src="https://user-images.githubusercontent.com/16403870/34857220-5be62d8e-f6fe-11e7-8d4d-5271eea0caab.png">
+
+
