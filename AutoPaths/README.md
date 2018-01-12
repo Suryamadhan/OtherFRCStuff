@@ -44,6 +44,10 @@
 
 ### LS-LR-SWSC ###
 
-<img width="442" alt="screen shot 2018-01-12 at 9 35 01 am" src="https://user-images.githubusercontent.com/16403870/34887635-0153551c-f77c-11e7-89d2-1b9c4c91a78d.png">
+<img width="442" alt="screen shot 2018-01-12 at 9 43 37 am" src="https://user-images.githubusercontent.com/16403870/34888317-b24590ea-f77e-11e7-963e-d046fae26db2.png">
+
+### LS-LR-SWSW ###
+
+<img width="442" alt="screen shot 2018-01-12 at 9 53 29 am" src="https://user-images.githubusercontent.com/16403870/34888319-b321aab2-f77e-11e7-9150-8165a907246b.png">
 
 
