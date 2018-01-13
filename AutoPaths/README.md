@@ -59,15 +59,15 @@
 
 * Note: Although our goal is just to cross the autoline, we turn left at the end so that we don't stand in the way of our teamates auto paths.
 
-## LS-RR-SWSW ##
+### LS-RR-SWSW ###
 
 <img width="442" alt="screen shot 2018-01-12 at 6 45 23 pm" src="https://user-images.githubusercontent.com/16403870/34902080-10628fda-f7c9-11e7-9b74-d9d866b55d65.png">
 
-## LS-RR-SWSC and LS-RR-SCSW ##
+### LS-RR-SWSC and LS-RR-SCSW ###
 
 <img width="442" alt="screen shot 2018-01-12 at 6 43 26 pm" src="https://user-images.githubusercontent.com/16403870/34902089-3826b2da-f7c9-11e7-8026-22a9c9345b41.png">
 
-## LS-RR-SCSC ##
+### LS-RR-SCSC ###
 
 <img width="447" alt="screen shot 2018-01-12 at 7 02 26 pm" src="https://user-images.githubusercontent.com/16403870/34902191-52439564-f7cb-11e7-8f6e-692fd992d714.png">
 
