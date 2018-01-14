@@ -29,18 +29,6 @@ public class Constants
 	public final static int rightAutoPin = 8;
 	
 	//Auto numbers
-
-<<<<<<< HEAD
-	public final static double initialStraightLLSWSC = 720;
-	public final static double smallTurnForSwitchSWSC = 250 * Math.PI;
-	public final static double bigTurnForSwitchSWSC = 500 * Math.PI;
-	public final static double distanceSwitchLLSWSC = 360;
-	public final static double smallTurnFromSwitchSWSC = 1000 * Math.PI;
-	public final static double bigTurnFromSwitchSWSC = 1800 * Math.PI;
-	public final static double backUpToPickUpCubeSWSC = 3000;
-
-=======
->>>>>>> 6b5249e9ca0a20c94aee4ed9c18d57688b84e29c
 	public final static double initialStraightLLSWSC = 772;
 	public final static double smallTurnForSwitchSWSC = 386 * Math.PI;
 	public final static double bigTurnForSwitchSWSC = 772 * Math.PI;
@@ -49,7 +37,7 @@ public class Constants
 	public final static double bigTurnFromSwitchSWSC = 1735.2 * Math.PI;
 	public final static double backUpToPickUpCubeSWSC = 3214;
 	
-	public final static double moveOnce = 720;
+	public final static double moveOnce = 600;
 	
 	public final static double testStright = 3.22 * moveOnce;
 	public final static double testBigRight = 2.7889 * moveOnce;
