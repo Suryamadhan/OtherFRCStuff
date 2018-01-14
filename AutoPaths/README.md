@@ -34,7 +34,7 @@
 
 * Note: Even though this path looks identical to LS-LL-SCSW, they are different. In this path, when we pickup the box after we do the scale, we go back to the scale in the same path we used to get the robot to pick up the box.
 
-### LS-LL-SWSW ###
+### LS-LL-SWSW and LS-LR-SWSW ###
 <img width="442" alt="screen shot 2018-01-12 at 8 39 22 am" src="https://user-images.githubusercontent.com/16403870/34885232-270df45e-f774-11e7-8266-07e73a98c433.png"> 
 
 ### LS-LR-SWSC ###
@@ -49,17 +49,13 @@
 
 <img width="442" alt="screen shot 2018-01-12 at 11 02 29 am" src="https://user-images.githubusercontent.com/16403870/34890839-58a0bbb4-f788-11e7-99eb-ba5ba84da7a6.png">
 
-### LS-LR-SWSW ###
-
-<img width="442" alt="screen shot 2018-01-12 at 9 53 29 am" src="https://user-images.githubusercontent.com/16403870/34888319-b321aab2-f77e-11e7-9150-8165a907246b.png">
-
 ### LS-LR-CA and LS-LL-CA ###
 
 <img width="442" alt="screen shot 2018-01-12 at 11 31 13 am" src="https://user-images.githubusercontent.com/16403870/34891962-4fed1b3a-f78c-11e7-875f-809cf8901123.png">
 
 * Note: Although our goal is just to cross the autoline, we turn left at the end so that we don't stand in the way of our teamates auto paths.
 
-### LS-RR-SWSW ###
+### LS-RR-SWSW and LS-RL-SWSW ###
 
 <img width="442" alt="screen shot 2018-01-12 at 6 45 23 pm" src="https://user-images.githubusercontent.com/16403870/34902080-10628fda-f7c9-11e7-9b74-d9d866b55d65.png">
 
