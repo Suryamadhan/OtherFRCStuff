@@ -27,7 +27,8 @@ public class Autonomous
 		switch(autoSelected)
 		{
 			case 1:
-				middleStationLLSWSC();
+//				middleStationLLSWSC();
+				test();
 				break;
 			case 2:
 				middleStationLR();
@@ -101,56 +102,145 @@ public class Autonomous
 		
 	}
 	
+	public void test()
+	{
+		switch(currentState)
+		{
+			case 1:
+				requiredStraightDist = (Constants.testStright - 360);
+				if(!Drivetrain.reachedDistance(leftEncoder, rightEncoder, requiredStraightDist))
+				{
+					Drivetrain.driveForward(leftEncoder, rightEncoder, .5);
+				}
+				else
+				{
+					currentState = 2;
+				}
+				break;
+			case 2:
+				requiredStraightDist = Constants.testStright;
+				if(!Drivetrain.reachedDistance(leftEncoder, rightEncoder, requiredStraightDist))
+				{
+					Drivetrain.driveForward(leftEncoder, rightEncoder, .2);
+				}
+				else
+				{
+					requiredStraightDist = 0;
+					currentState = 3;
+				}
+				break;
+			case 3:
+				requiredLeftDist = (Constants.testSmallLeft - 300);
+				requiredRightDist = (Constants.testBigRight - 564);
+				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
+				currentRatio = (((rightEncoder - Constants.testStright)/(leftEncoder - Constants.testStright))/aimedRatio);
+				sum = (rightEncoder - Constants.testStright) + (leftEncoder - Constants.testStright);
+				if(currentRatio >= .9 && currentRatio <= 1.1)
+				{
+					withinRange = true;
+				}
+				else
+				{
+					withinRange = false;
+				}
+				if(sum < requiredLeftDist + requiredRightDist)
+				{
+					if(withinRange || sum < 50)
+					{
+						Drivetrain.setLeftMotorSpeed(.325);
+						Drivetrain.setRightMotorSpeed(-.61);
+					}
+					else
+					{
+						if(currentRatio > 1.1 && currentRatio < 1.18)
+						{
+							Drivetrain.setLeftMotorSpeed(.425);
+							Drivetrain.setRightMotorSpeed(-.51);
+						}
+						else if(currentRatio > 1.18 && currentRatio < 1.25)
+						{
+							Drivetrain.setLeftMotorSpeed(.525);
+							Drivetrain.setRightMotorSpeed(-.41);
+						}
+						else if(currentRatio > 1.25)
+						{
+							Drivetrain.setLeftMotorSpeed(.625);
+							Drivetrain.setRightMotorSpeed(-.31);
+						}
+						else if(currentRatio < .9 && currentRatio > .82)
+						{
+							Drivetrain.setLeftMotorSpeed(.225);
+							Drivetrain.setRightMotorSpeed(-.71);
+						}
+						else if(currentRatio < .82 && currentRatio > .75)
+						{
+							Drivetrain.setLeftMotorSpeed(.125);
+							Drivetrain.setRightMotorSpeed(-.81);
+						}
+						else
+						{
+							Drivetrain.setLeftMotorSpeed(.025);
+							Drivetrain.setRightMotorSpeed(-.91);
+						}
+					}
+				}
+				else
+				{
+					currentState = 4;
+				}
+				break;
+		}
+	}
 	public void selectAuto()
 	{
 		setStation();
 //		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		gameData = "LL";//
-		if(gameData.charAt(0) == 'L' && gameData.charAt(0) == 'L' && middleStation && !rightStation && !leftStation)
+		if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'L' && middleStation && !rightStation && !leftStation)
 		{
 			autoSelected = 1;
 		} 
-		else if(gameData.charAt(0) == 'L' && gameData.charAt(0) == 'R' && middleStation && !rightStation && !leftStation)
+		else if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'R' && middleStation && !rightStation && !leftStation)
 		{
 			autoSelected = 2;
 		}
-		else if(gameData.charAt(0) == 'R' && gameData.charAt(0) == 'R' && middleStation && !rightStation && !leftStation)
+		else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'R' && middleStation && !rightStation && !leftStation)
 		{
 			autoSelected = 3;
 		}
-		else if(gameData.charAt(0) == 'R' && gameData.charAt(0) == 'L' && middleStation && !rightStation && !leftStation)
+		else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'L' && middleStation && !rightStation && !leftStation)
 		{
 			autoSelected = 4;
 		}
-		else if(gameData.charAt(0) == 'L' && gameData.charAt(0) == 'L' && !middleStation && !rightStation && leftStation)
+		else if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'L' && !middleStation && !rightStation && leftStation)
 		{
 			autoSelected = 5;
 		} 
-		else if(gameData.charAt(0) == 'L' && gameData.charAt(0) == 'R' && !middleStation && !rightStation && leftStation)
+		else if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'R' && !middleStation && !rightStation && leftStation)
 		{
 			autoSelected = 6;
 		}
-		else if(gameData.charAt(0) == 'R' && gameData.charAt(0) == 'R' && !middleStation && !rightStation && leftStation)
+		else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'R' && !middleStation && !rightStation && leftStation)
 		{
 			autoSelected = 7;
 		}
-		else if(gameData.charAt(0) == 'R' && gameData.charAt(0) == 'L' && !middleStation && !rightStation && leftStation)
+		else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'L' && !middleStation && !rightStation && leftStation)
 		{
 			autoSelected = 8;
 		}
-		else if(gameData.charAt(0) == 'L' && gameData.charAt(0) == 'L' && !middleStation && rightStation && !leftStation)
+		else if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'L' && !middleStation && rightStation && !leftStation)
 		{
 			autoSelected = 9;
 		} 
-		else if(gameData.charAt(0) == 'L' && gameData.charAt(0) == 'R' && !middleStation && rightStation && !leftStation)
+		else if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'R' && !middleStation && rightStation && !leftStation)
 		{
 			autoSelected = 10;
 		}
-		else if(gameData.charAt(0) == 'R' && gameData.charAt(0) == 'R' && !middleStation && rightStation && !leftStation)
+		else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'R' && !middleStation && rightStation && !leftStation)
 		{
 			autoSelected = 11;
 		}
-		else if(gameData.charAt(0) == 'R' && gameData.charAt(0) == 'L' && !middleStation && rightStation && !leftStation)
+		else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'L' && !middleStation && rightStation && !leftStation)
 		{
 			autoSelected = 12;
 		}
@@ -166,11 +256,7 @@ public class Autonomous
 		switch(currentState)
 		{
 			case 1:
-<<<<<<< HEAD
 				requiredStraightDist = (Constants.initialStraightLLSWSC - 300);
-=======
-				requiredStraightDist = (Constants.initialStraightLLSWSC - 100);
->>>>>>> 19512b02cc747bdcf593d0ffa960b162be7a9e8a
 				if(!Drivetrain.reachedDistance(leftEncoder, rightEncoder, requiredStraightDist))
 				{
 					Drivetrain.driveForward(leftEncoder, rightEncoder, .8);

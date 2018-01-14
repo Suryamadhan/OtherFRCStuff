@@ -48,6 +48,10 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void testPeriodic() 
 	{
+		enc.setEncoderValues();
+		Encoders.testEncoders();
+		joy.setMainContollerValues();
+		Drivetrain.testDrive(joy.leftJoySticky, joy.rightJoyStickx);
 		
 	}
 
