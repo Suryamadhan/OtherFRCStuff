@@ -37,5 +37,11 @@ public class Constants
 	public final static double smallTurnFromSwitchSWSC = 964 * Math.PI;
 	public final static double bigTurnFromSwitchSWSC = 1735.2 * Math.PI;
 	public final static double backUpToPickUpCubeSWSC = 3214;
+	
+	public final static double moveOnce = 720;
+	
+	public final static double testStright = 3.22 * moveOnce;
+	public final static double testBigRight = 2.7889 * moveOnce;
+	public final static double testSmallLeft = 1.4835 * moveOnce;
 
 }

@@ -21,6 +21,12 @@ public class Drivetrain
 		rightMotor.set(speed);
 	}
 	
+	public static void testDrive(double yValue, double xValue)
+	{
+		setLeftMotorSpeed(yValue + xValue);
+		setRightMotorSpeed(-(yValue - xValue));
+	}
+	
 	public static void arcadeDrive(double leftEnc, double rightEnc, double yValue, double xValue)
 	{
 		if(yValue > 0 && xValue == 0)
