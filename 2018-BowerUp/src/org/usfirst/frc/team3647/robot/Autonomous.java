@@ -260,8 +260,10 @@ public class Autonomous
 				requiredLeftDist = (Constants.testSmallLeft - 400);
 				requiredRightDist = (Constants.testBigRight - 752);
 				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
-				currentRatio = (((rightEncoder - Constants.testStright)/(leftEncoder - Constants.testStright))/aimedRatio);
-				sum = (rightEncoder - Constants.testStright) + (leftEncoder - Constants.testStright);
+				rightEncoder = Math.abs(rightEncoder);
+				leftEncoder = Math.abs(leftEncoder);
+				currentRatio = ((rightEncoder/(leftEncoder))/aimedRatio);
+				sum = (rightEncoder) + (leftEncoder);
 				if(currentRatio >= .9 && currentRatio <= 1.1)
 				{
 					withinRange = true;
