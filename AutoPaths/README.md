@@ -67,3 +67,10 @@
 <img width="442" alt="screen shot 2018-01-17 at 11 04 57 am" src="https://user-images.githubusercontent.com/16403870/35061547-69310e4c-fb76-11e7-8b58-c813d912d147.png">
 
 
+## Middle paths ##
+
+### MS-LL-SW ###
+<img width="442" alt="screen shot 2018-01-17 at 12 06 40 pm" src="https://user-images.githubusercontent.com/16403870/35064469-04948bb8-fb7f-11e7-9507-5bd816928fd6.png">
+
+### MS-RR-SW ###
+<img width="442" alt="screen shot 2018-01-17 at 12 06 19 pm" src="https://user-images.githubusercontent.com/16403870/35064502-25378938-fb7f-11e7-9305-aa4dd4042aef.png">
