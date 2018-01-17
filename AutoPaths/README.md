@@ -23,16 +23,9 @@
 
 <img width="442" alt="screen shot 2018-01-11 at 2 20 09 pm" src="https://user-images.githubusercontent.com/16403870/34850430-9fe791cc-f6da-11e7-8fb5-b750f7434344.png">
 
-### LS-LL-SCSW ###
+
+### LS-LL-SCSW and LS-LL-SCSC and LS-RL-SCSC ###
 <img width="442" alt="screen shot 2018-01-12 at 8 20 32 am" src="https://user-images.githubusercontent.com/16403870/34884410-850a96a0-f771-11e7-87eb-3423c4f4dff0.png">
-
-* Note: Even though this path looks identical to LS-LL-SCSC, they are different. In this path, when we pickup the box after we do the scale, we immeditely deliver the box to the switch.
-
-
-### LS-LL-SCSC and LS-RL-SCSC ###
-<img width="442" alt="screen shot 2018-01-12 at 8 20 32 am" src="https://user-images.githubusercontent.com/16403870/34884410-850a96a0-f771-11e7-87eb-3423c4f4dff0.png">
-
-* Note: Even though this path looks identical to LS-LL-SCSW, they are different. In this path, when we pickup the box after we do the scale, we go back to the scale in the same path we used to get the robot to pick up the box.
 
 ### LS-LL-SWSW and LS-LR-SWSW ###
 <img width="442" alt="screen shot 2018-01-12 at 8 39 22 am" src="https://user-images.githubusercontent.com/16403870/34885232-270df45e-f774-11e7-8266-07e73a98c433.png"> 
@@ -66,6 +59,9 @@
 ### LS-RR-SCSC ###
 
 <img width="442" alt="screen shot 2018-01-12 at 7 02 26 pm" src="https://user-images.githubusercontent.com/16403870/34902191-52439564-f7cb-11e7-8f6e-692fd992d714.png">
+
+### LS-RL-SWSC ###
+<img width="442" alt="screen shot 2018-01-17 at 10 47 52 am" src="https://user-images.githubusercontent.com/16403870/35060658-f592a966-fb73-11e7-86af-6b5715bc9519.png">
 
 
 
