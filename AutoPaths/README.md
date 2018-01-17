@@ -29,7 +29,7 @@
 * Note: Even though this path looks identical to LS-LL-SCSC, they are different. In this path, when we pickup the box after we do the scale, we immeditely deliver the box to the switch.
 
 
-### LS-LL-SCSC ###
+### LS-LL-SCSC and LS-RL-SCSC ###
 <img width="442" alt="screen shot 2018-01-12 at 8 20 32 am" src="https://user-images.githubusercontent.com/16403870/34884410-850a96a0-f771-11e7-87eb-3423c4f4dff0.png">
 
 * Note: Even though this path looks identical to LS-LL-SCSW, they are different. In this path, when we pickup the box after we do the scale, we go back to the scale in the same path we used to get the robot to pick up the box.
