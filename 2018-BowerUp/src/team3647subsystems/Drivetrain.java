@@ -1,13 +1,23 @@
 package team3647subsystems;
 
 import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import team3647ConstantsAndFunctions.Constants;
 
 public class Drivetrain 
 {
-	public static CANTalon leftMotor = new CANTalon(Constants.leftMotorPin);
-	public static CANTalon rightMotor =new CANTalon(Constants.rightMotorPin);
+	public static CANTalon leftMotor;
+	public static CANTalon rightMotor;
+	
+	public static void  stuff()
+	{
+		leftMotor = new CANTalon(0);
+		rightMotor =new CANTalon(3);
+	}
 	
 	static double drift, avg;
 	static String movingStatus, driftStatus;
@@ -15,11 +25,13 @@ public class Drivetrain
 	public static void setLeftMotorSpeed(double speed)
 	{
 		leftMotor.set(speed);
+		//leftMotor.set(ControlMode.MotionProfile, speed);
 	}
 	
 	public static void setRightMotorSpeed(double speed)
 	{
 		rightMotor.set(speed);
+	//	rightMotor.set(ControlMode.MotionProfile, speed);
 	}
 	
 	public static void test(double yValue)
