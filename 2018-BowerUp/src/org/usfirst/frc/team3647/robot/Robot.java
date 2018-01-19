@@ -8,13 +8,13 @@ import team3647subsystems.Joysticks;
 
 public class Robot extends IterativeRobot {
 
-	Encoders enc;
+//	Encoders enc;
 	Joysticks joy;
 	Autonomous auto;
 	@Override
 	public void robotInit() 
 	{
-		enc = new Encoders();
+//		enc = new Encoders();
 		joy = new Joysticks();
 		auto = new Autonomous();
 	}
@@ -32,8 +32,8 @@ public class Robot extends IterativeRobot {
 		while(DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
 		{
 			Encoders.testEncoders();
-			enc.setEncoderValues();
-			auto.runAuto(enc.leftEncoderValue, enc.rightEncoderValue);
+//			enc.setEncoderValues();
+//			auto.runAuto(enc.leftEncoderValue, enc.rightEncoderValue);
 		}
 		
 	}
@@ -41,15 +41,16 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() 
 	{
-		enc.setEncoderValues();
+//		enc.setEncoderValues();
 		joy.setMainContollerValues();
-		Drivetrain.arcadeDrive(enc.leftEncoderValue, enc.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
+		Drivetrain.test(joy.leftJoySticky);
+//		Drivetrain.arcadeDrive(enc.leftEncoderValue, enc.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
 	}
 
 	@Override
 	public void testPeriodic() 
 	{
-		enc.setEncoderValues();
+//		enc.setEncoderValues();
 		Encoders.testEncoders();
 		joy.setMainContollerValues();
 		Drivetrain.testDrive(joy.leftJoySticky, joy.rightJoyStickx);

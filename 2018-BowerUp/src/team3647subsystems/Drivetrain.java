@@ -1,12 +1,13 @@
 package team3647subsystems;
 
-import edu.wpi.first.wpilibj.Spark;
+import com.ctre.CANTalon;
+
 import team3647ConstantsAndFunctions.Constants;
 
 public class Drivetrain 
 {
-	public static Spark leftMotor = new Spark(Constants.leftMotorPin);
-	public static Spark rightMotor =new Spark(Constants.rightMotorPin);
+	public static CANTalon leftMotor = new CANTalon(Constants.leftMotorPin);
+	public static CANTalon rightMotor =new CANTalon(Constants.rightMotorPin);
 	
 	static double drift, avg;
 	static String movingStatus, driftStatus;
@@ -19,6 +20,12 @@ public class Drivetrain
 	public static void setRightMotorSpeed(double speed)
 	{
 		rightMotor.set(speed);
+	}
+	
+	public static void test(double yValue)
+	{
+		setRightMotorSpeed(yValue);
+//		setLeftMotorSpeed(yValue);
 	}
 	
 	public static void testDrive(double yValue, double xValue)
