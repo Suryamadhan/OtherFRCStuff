@@ -15,15 +15,10 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() 
 	{
-<<<<<<< HEAD
-//		enc = new Encoders();
-		joy = new Joysticks();
-		auto = new Autonomous();
-=======
 		try
 		{
 			CrashChecker.logRobotInit();
-			enc = new Encoders();
+//			enc = new Encoders();
 			joy = new Joysticks();
 			auto = new Autonomous();
 		}
@@ -32,8 +27,7 @@ public class Robot extends IterativeRobot {
 			CrashChecker.logThrowableCrash(t);
 			throw t;
 		}
-		
->>>>>>> 06786c25e58ec3d49505cdf940a4bba177680ef2
+	
 	}
 	
 	@Override
@@ -68,25 +62,18 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() 
 	{
-<<<<<<< HEAD
-//		enc.setEncoderValues();
-		joy.setMainContollerValues();
-		Drivetrain.test(joy.leftJoySticky);
-//		Drivetrain.arcadeDrive(enc.leftEncoderValue, enc.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
-=======
 		try 
 		{
 			CrashChecker.logTeleopPeriodic();
-			enc.setEncoderValues();
+			//enc.setEncoderValues();
 			joy.setMainContollerValues();
-			Drivetrain.arcadeDrive(enc.leftEncoderValue, enc.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
+			//Drivetrain.arcadeDrive(enc.leftEncoderValue, enc.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
 		}
 		catch(Throwable t)
 		{
 			CrashChecker.logThrowableCrash(t);
 			throw t;
 		}
->>>>>>> 06786c25e58ec3d49505cdf940a4bba177680ef2
 	}
 
 	@Override
