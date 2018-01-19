@@ -3,8 +3,8 @@ package team3647ConstantsAndFunctions;
 public class Constants 
 {
 	//Motor Pins
-	public final static int leftMotorPin = 2;
-	public final static int rightMotorPin = 1;
+	public final static int leftMotorPin = 0;
+	public final static int rightMotorPin = 3;
 	
 	//Encoder Pins
 	public final static int leftEncoderPinSourceA = 0;

@@ -12,8 +12,8 @@ public class Encoders
 	
 	public void setEncoderValues()
 	{
-		leftEncoderValue = -Drivetrain.leftMotor.get();
-		rightEncoderValue = Drivetrain.rightMotor.get();
+//		leftEncoderValue = -Drivetrain.leftMotor.get();
+//		rightEncoderValue = Drivetrain.rightMotor.get();
 	}
 	
 	public static void resetEncoders()
