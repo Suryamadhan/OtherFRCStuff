@@ -11,19 +11,46 @@ public class Robot extends IterativeRobot {
 //	Encoders enc;
 	Joysticks joy;
 	Autonomous auto;
+	
 	@Override
 	public void robotInit() 
 	{
+<<<<<<< HEAD
 //		enc = new Encoders();
 		joy = new Joysticks();
 		auto = new Autonomous();
+=======
+		try
+		{
+			CrashChecker.logRobotInit();
+			enc = new Encoders();
+			joy = new Joysticks();
+			auto = new Autonomous();
+		}
+		catch(Throwable t)
+		{
+			CrashChecker.logThrowableCrash(t);
+			throw t;
+		}
+		
+>>>>>>> 06786c25e58ec3d49505cdf940a4bba177680ef2
 	}
 	
 	@Override
 	public void autonomousInit() 
 	{
-		Encoders.resetEncoders();
-		auto.currentState = 1;
+		try 
+		{
+			CrashChecker.logAutoInit();
+			Encoders.resetEncoders();
+			auto.currentState = 1;
+		}
+		catch(Throwable t)
+		{
+			CrashChecker.logThrowableCrash(t);
+			throw t;
+		}
+		
 	}
 
 	@Override
@@ -41,10 +68,25 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() 
 	{
+<<<<<<< HEAD
 //		enc.setEncoderValues();
 		joy.setMainContollerValues();
 		Drivetrain.test(joy.leftJoySticky);
 //		Drivetrain.arcadeDrive(enc.leftEncoderValue, enc.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
+=======
+		try 
+		{
+			CrashChecker.logTeleopPeriodic();
+			enc.setEncoderValues();
+			joy.setMainContollerValues();
+			Drivetrain.arcadeDrive(enc.leftEncoderValue, enc.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
+		}
+		catch(Throwable t)
+		{
+			CrashChecker.logThrowableCrash(t);
+			throw t;
+		}
+>>>>>>> 06786c25e58ec3d49505cdf940a4bba177680ef2
 	}
 
 	@Override
@@ -54,7 +96,6 @@ public class Robot extends IterativeRobot {
 		Encoders.testEncoders();
 		joy.setMainContollerValues();
 		Drivetrain.testDrive(joy.leftJoySticky, joy.rightJoyStickx);
-		
 	}
 
 }
