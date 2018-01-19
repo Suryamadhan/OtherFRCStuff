@@ -356,4 +356,29 @@ public class Drivetrain
 			}
 		}
 	}
+	
+	public static void reachedTurnDistance(double sum, double requiredLeftDist, double requiredRightDist)
+	{
+		
+	}
+	
+	public static void goStraightLeft(double currentRatio, boolean withinRange, double sum, double requiredLeftDist, double requiredRightDist)
+	{
+		
+	}
+	
+	public static void goStraightRight()
+	{
+		
+	}
+	
+	public static void goBackLeft()
+	{
+		
+	}
+	
+	public static void goBackRight()
+	{
+		
+	}
 }

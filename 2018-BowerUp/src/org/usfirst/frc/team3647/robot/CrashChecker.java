@@ -30,7 +30,7 @@ public class CrashChecker
     }
 	
 	//Pretty much a copy paste from Team 254
-	//Props to them creating this genius method
+	//Props to them for creating this genius method
 	private static void logMarker(String mark, Throwable nullableException) 
 	{
 		try (PrintWriter writer = new PrintWriter(new FileWriter("/home/lvuser/crash_tracking.txt", true))) 

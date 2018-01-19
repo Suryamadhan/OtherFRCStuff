@@ -67,6 +67,7 @@ public class Robot extends IterativeRobot {
 			CrashChecker.logTeleopPeriodic();
 			//enc.setEncoderValues();
 			joy.setMainContollerValues();
+			Drivetrain.test(joy.leftJoySticky);
 			//Drivetrain.arcadeDrive(enc.leftEncoderValue, enc.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
 		}
 		catch(Throwable t)
