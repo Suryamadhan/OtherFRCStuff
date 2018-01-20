@@ -36,12 +36,13 @@ public class Drivetrain
 	
 	public static void setLeftMotorSpeed(double speed)
 	{
-		leftSRX.set(speed);
+//		leftSRX.set(speed, );
+		leftSRX.set(ControlMode.PercentOutput, speed);
 	}
 	
 	public static void setRightMotorSpeed(double speed)
 	{
-		rightSRX.set(speed);
+		rightSRX.set(ControlMode.PercentOutput, speed);
 	}
 	
 	public static void testDrive(double fYValue, double sYValue)
@@ -266,63 +267,66 @@ public class Drivetrain
 	
 	public static void driveForward(double leftEnc, double rightEnc, double speed)
 	{
-		if(Math.abs(leftEnc - rightEnc) < 6)
-		{
-			setLeftMotorSpeed(speed);
-			setRightMotorSpeed(-speed);
-		}
-		else if(Math.abs(leftEnc - rightEnc) < 20)
-		{
-			if(rightEnc > leftEnc)
-			{
-				 setLeftMotorSpeed(speed);
-				 setRightMotorSpeed(-speed + .125);
-			}
-			else
-			{
-				 setLeftMotorSpeed(speed - .125);
-				 setRightMotorSpeed(-speed);
-			}
-		}
-		else if(Math.abs(leftEnc - rightEnc) < 34)
-		{
-			if(rightEnc > leftEnc)
-			{
-				 setLeftMotorSpeed(speed);
-				 setRightMotorSpeed(-speed + .2);
-			}
-			else
-			{
-				 setLeftMotorSpeed(speed - .2);
-				 setRightMotorSpeed(-speed);
-			}
-		}
-		else if(Math.abs(leftEnc - rightEnc) < 48)
-		{
-			if(rightEnc > leftEnc)
-			{
-				 setLeftMotorSpeed(speed);
-				 setRightMotorSpeed(-speed + .275);
-			}
-			else
-			{
-				 setLeftMotorSpeed(speed - .275);
-				 setRightMotorSpeed(-speed);
-			}
-		}
-		else
-		{
-			if(rightEnc > leftEnc)
-			{
-				 setLeftMotorSpeed(speed);
-				 setRightMotorSpeed(-speed + .34);
-			}
-			else
-			{
-				 setLeftMotorSpeed(speed - .34);
-				 setRightMotorSpeed(-speed);
-			}
-		}
+//		if(Math.abs(leftEnc - rightEnc) < 6)
+//		{
+//			setLeftMotorSpeed(speed);
+//			setRightMotorSpeed(-speed);
+//		}
+//		else if(Math.abs(leftEnc - rightEnc) < 20)
+//		{
+//			if(rightEnc > leftEnc)
+//			{
+//				 setLeftMotorSpeed(speed);
+//				 setRightMotorSpeed(-speed + .125);
+//			}
+//			else
+//			{
+//				 setLeftMotorSpeed(speed - .125);
+//				 setRightMotorSpeed(-speed);
+//			}
+//		}
+//		else if(Math.abs(leftEnc - rightEnc) < 34)
+//		{
+//			if(rightEnc > leftEnc)
+//			{
+//				 setLeftMotorSpeed(speed);
+//				 setRightMotorSpeed(-speed + .2);
+//			}
+//			else
+//			{
+//				 setLeftMotorSpeed(speed - .2);
+//				 setRightMotorSpeed(-speed);
+//			}
+//		}
+//		else if(Math.abs(leftEnc - rightEnc) < 48)
+//		{
+//			if(rightEnc > leftEnc)
+//			{
+//				 setLeftMotorSpeed(speed);
+//				 setRightMotorSpeed(-speed + .275);
+//			}
+//			else
+//			{
+//				 setLeftMotorSpeed(speed - .275);
+//				 setRightMotorSpeed(-speed);
+//			}
+//		}
+//		else
+//		{
+//			if(rightEnc > leftEnc)
+//			{
+//				 setLeftMotorSpeed(speed);
+//				 setRightMotorSpeed(-speed + .34);
+//			}
+//			else
+//			{
+//				 setLeftMotorSpeed(speed - .34);
+//				 setRightMotorSpeed(-speed);
+//			}
+//		}
+		
+		setLeftMotorSpeed(speed);
+		setRightMotorSpeed(-speed);
 	}
 	
 	public static void driveBackward(double leftEnc, double rightEnc, double speed)
