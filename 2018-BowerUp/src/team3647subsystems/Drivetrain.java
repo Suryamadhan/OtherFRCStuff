@@ -18,6 +18,16 @@ public class Drivetrain
 	public static VictorSPX _leftSlave2 = new VictorSPX(2);
 	public static VictorSPX _rightSlave2 = new VictorSPX(3);
 	
+	public static void drivetrainInitialization()
+	{
+		setLeftMotorSpeed(0);
+		setRightMotorSpeed(0);
+		_leftSlave1.follow(Drivetrain._frontLeftMotor);
+		_leftSlave2.follow(Drivetrain._frontLeftMotor);
+		_rightSlave1.follow(Drivetrain._frontRightMotor);
+		_rightSlave2.follow(Drivetrain._frontRightMotor);
+	}
+	
 	static double drift, avg;
 	static String movingStatus, driftStatus;
 	

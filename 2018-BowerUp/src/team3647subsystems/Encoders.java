@@ -24,7 +24,7 @@ public class Encoders
 	
 	public void testEncoders()
 	{
-		System.out.println("Left Encoder Value: " + -leftEncoderValue);
+		System.out.println("Left Encoder Value: " + leftEncoderValue);
 		System.out.println("Right Encoder Value: " + rightEncoderValue);
 	}
 

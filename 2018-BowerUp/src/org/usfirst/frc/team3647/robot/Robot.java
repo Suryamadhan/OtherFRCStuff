@@ -27,11 +27,7 @@ public class Robot extends IterativeRobot {
 			enc = new Encoders();
 			joy = new Joysticks();
 			auto = new Autonomous();
-			
-			Drivetrain._leftSlave1.follow(Drivetrain._frontLeftMotor);
-			Drivetrain._leftSlave2.follow(Drivetrain._frontLeftMotor);
-			Drivetrain._rightSlave1.follow(Drivetrain._frontRightMotor);
-			Drivetrain._rightSlave2.follow(Drivetrain._frontRightMotor);
+			Drivetrain.drivetrainInitialization();
 		}
 		catch(Throwable t)
 		{
@@ -65,6 +61,9 @@ public class Robot extends IterativeRobot {
 		{
 //			Encoders.testEncoders();
 			enc.setEncoderValues();
+			Drivetrain.setLeftMotorSpeed(.2);
+			Drivetrain.setRightMotorSpeed(-.2);
+			enc.testEncoders();
 //			auto.runAuto(enc.leftEncoderValue, enc.rightEncoderValue);
 		}
 		
