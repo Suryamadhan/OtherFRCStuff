@@ -47,6 +47,11 @@ public class Drivetrain
 		setRightMotorSpeed(-sYValue);
 	}
 	
+	public static void testPID(double lValue)
+	{
+		leftSRX.set(ControlMode.PercentOutput, lValue);
+	}
+	
 	public static void arcadeDrive(double leftEnc, double rightEnc, double yValue, double xValue)
 	{
 		if(yValue > 0 && xValue == 0)
