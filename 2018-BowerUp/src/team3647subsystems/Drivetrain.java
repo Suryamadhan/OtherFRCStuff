@@ -19,7 +19,7 @@ public class Drivetrain
 	public static VictorSPX leftSPX2 = new VictorSPX(2);
 	public static VictorSPX rightSPX2 = new VictorSPX(3);
 	
-	DifferentialDrive _drive = new DifferentialDrive(leftSRX, rightSRX);
+	public static DifferentialDrive _drive = new DifferentialDrive(leftSRX, rightSRX);
 	
 	public static void drivetrainInitialization()
 	{
@@ -54,8 +54,8 @@ public class Drivetrain
 	{
 		if(yValue != 0 && xValue == 0)
 		{
-			leftSRX.set(ControlMode.PercentOutput, lValue);
-			rightSRX.set(ControlMode.PercentOutput, lValue);
+			leftSRX.set(ControlMode.PercentOutput, yValue);
+			rightSRX.set(ControlMode.PercentOutput,-yValue);
 		}
 		else
 		{
