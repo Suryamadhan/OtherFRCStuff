@@ -67,7 +67,22 @@ public class Robot extends IterativeRobot {
 			CrashChecker.logTeleopPeriodic();
 			enc.setEncoderValues();
 			joy.setMainContollerValues();
-			Drivetrain.arcadeDrive(enc.leftEncoderValue, enc.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
+			if(joy.buttonA)
+			{
+				Drivetrain.setLeftMotorSpeed(1);
+//				Drivetrain.setRightMotorSpeed(-1);
+			}
+			else if(joy.buttonB)
+			{
+				Drivetrain.setLeftMotorSpeed(-1);
+//				Drivetrain.setRightMotorSpeed(1);
+			}
+			else
+			{
+				Drivetrain.setLeftMotorSpeed(0);
+//				Drivetrain.setRightMotorSpeed(0);
+			}
+			//Drivetrain.arcadeDrive(enc.leftEncoderValue, enc.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
 			//Drivetrain.testPID(joy.leftJoySticky, joy.rightJoyStickx);
 		}
 		catch(Throwable t)

@@ -1,6 +1,11 @@
 package org.usfirst.frc.team3647.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -12,17 +17,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	WPI_TalonSRX _frontLeftMotor = new WPI_TalonSRX(11); 		/* device IDs here (1 of 2) */
-	WPI_TalonSRX _frontRightMotor = new WPI_TalonSRX(14);
+	WPI_TalonSRX _frontLeftMotor = new WPI_TalonSRX(0); 		/* device IDs here (1 of 2) */
+//	WPI_TalonSRX _frontRightMotor = new WPI_TalonSRX(14);
 
 	/* extra talons for six motor drives */
-	WPI_VictorSPX _leftSlave1 = new WPI_VictorSPX(13);
-	WPI_VictorSPX _rightSlave1 = new WPI_VictorSPX(15);
-	WPI_VictorSPX _leftSlave2 = new WPI_VictorSPX(16);
-	WPI_VictorSPX _rightSlave2 = new WPI_VictorSPX(17);
+	WPI_VictorSPX _leftSlave1 = new WPI_VictorSPX(1);
+//	WPI_VictorSPX _rightSlave1 = new WPI_VictorSPX(15);
+	WPI_VictorSPX _leftSlave2 = new WPI_VictorSPX(2);
+//	WPI_VictorSPX _rightSlave2 = new WPI_VictorSPX(17);
 	
 	
-	DifferentialDrive _drive = new DifferentialDrive(_frontLeftMotor, _frontRightMotor);
+	//DifferentialDrive _drive = new DifferentialDrive(_frontLeftMotor, _frontRightMotor);
 	
 	Joystick _joy = new Joystick(0);
 
@@ -34,8 +39,8 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		_leftSlave1.follow(_frontLeftMotor);
 	    	_leftSlave2.follow(_frontLeftMotor);
-	    	_rightSlave1.follow(_frontRightMotor);
-	    	_rightSlave2.follow(_frontRightMotor);
+//	    	_rightSlave1.follow(_frontRightMotor);
+//	    	_rightSlave2.follow(_frontRightMotor);
 	}
 
 	/**
@@ -70,7 +75,11 @@ public class Robot extends IterativeRobot {
 	{
 		double forward = _joy.getY(); // logitech gampad left X, positive is forward
 		double turn = _joy.getZ(); //logitech gampad right X, positive means turn right
-		_drive.arcadeDrive(forward, turn);
+		if(Math.abs(forward) < .15)
+		{
+			forward = 0;
+		}
+		_frontLeftMotor.set(forward);
 	}
 
 	/**
