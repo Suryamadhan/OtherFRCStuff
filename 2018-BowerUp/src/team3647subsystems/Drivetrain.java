@@ -101,11 +101,11 @@ public class Drivetrain
 						if(rightEnc > leftEnc)
 						{
 							 setLeftMotorSpeed(yValue);
-							 setRightMotorSpeed(-yValue + .125);
+							 setRightMotorSpeed(-yValue + .15);
 						}
 						else
 						{
-							 setLeftMotorSpeed(yValue - .125);
+							 setLeftMotorSpeed(yValue - .15);
 							 setRightMotorSpeed(-yValue);
 						}
 					}
@@ -114,11 +114,11 @@ public class Drivetrain
 						if(rightEnc > leftEnc)
 						{
 							 setLeftMotorSpeed(yValue);
-							 setRightMotorSpeed(-yValue + .2);
+							 setRightMotorSpeed(-yValue + .25);
 						}
 						else
 						{
-							 setLeftMotorSpeed(yValue - .2);
+							 setLeftMotorSpeed(yValue - .25);
 							 setRightMotorSpeed(-yValue);
 						}
 					}
@@ -127,11 +127,11 @@ public class Drivetrain
 						if(rightEnc > leftEnc)
 						{
 							 setLeftMotorSpeed(yValue);
-							 setRightMotorSpeed(-yValue + .275);
+							 setRightMotorSpeed(-yValue + .35);
 						}
 						else
 						{
-							 setLeftMotorSpeed(yValue - .275);
+							 setLeftMotorSpeed(yValue - .35);
 							 setRightMotorSpeed(-yValue);
 						}
 					}
@@ -140,11 +140,11 @@ public class Drivetrain
 						if(rightEnc > leftEnc)
 						{
 							 setLeftMotorSpeed(yValue);
-							 setRightMotorSpeed(-yValue + .34);
+							 setRightMotorSpeed(-yValue + .4);
 						}
 						else
 						{
-							 setLeftMotorSpeed(yValue - .34);
+							 setLeftMotorSpeed(yValue - .4);
 							 setRightMotorSpeed(-yValue);
 						}
 					}
