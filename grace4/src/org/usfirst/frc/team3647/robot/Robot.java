@@ -46,28 +46,31 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		// TODO find out degree
+		joystickObject.updateMainController();
 		double c = 0.005;
 		double turnDegree;
-		if (getDegrees() > 0 && getDegrees() < 180) {// forward
-			turnDegree = (getDegrees() - 90);
-			leftSpeed = getMagnitude() + c * turnDegree;
-			rightSpeed = -(getMagnitude() - c * turnDegree);
-		} else {// backward
-			turnDegree = (getDegrees() - 90);
-			leftSpeed = -(getMagnitude() + c * turnDegree);
-			rightSpeed = getMagnitude() - c * turnDegree;
-		}
-		joystickObject.updateMainController();
-		if (getMagnitude() == 0) {
-			Motors.setLeftSpeed(0);
-			Motors.setRightSpeed(0);
-
-		} else {
-			
-			Motors.setLeftSpeed(leftSpeed);
-			Motors.setRightSpeed(rightSpeed);
-			}
-		}
+		testFunctions();
+//		if (getDegrees() > 0 && getDegrees() < 180) {// forward
+//			turnDegree = (getDegrees() - 90);
+//			leftSpeed = getMagnitude() + c * turnDegree;
+//			rightSpeed = -(getMagnitude() - c * turnDegree);
+//		} else {// backward
+//			turnDegree = (getDegrees() - 90);
+//			leftSpeed = -(getMagnitude() + c * turnDegree);
+//			rightSpeed = getMagnitude() - c * turnDegree;
+//		}
+//		joystickObject.updateMainController();
+//		if (getMagnitude() == 0) {
+//			Motors.setLeftSpeed(0);
+//			Motors.setRightSpeed(0);
+//
+//		} else {
+//			
+//			Motors.setLeftSpeed(leftSpeed);
+//			Motors.setRightSpeed(rightSpeed);
+//			}
+//		}
+	}
 
 	
 
@@ -119,10 +122,10 @@ public class Robot extends IterativeRobot {
 			return -Math.toDegrees(Math.atan(Joysticks.rightJoySticky / Joysticks.rightJoyStickx));
 		}
 		if (Joysticks.rightJoySticky == 0 && Joysticks.rightJoyStickx > 0) {
-			return 180;
+			return 0;
 		}
 		if (Joysticks.rightJoySticky == 0 && Joysticks.rightJoyStickx < 0) {
-			return 0;
+			return 180;
 		}
 		if (Joysticks.rightJoySticky > 0 && Joysticks.rightJoyStickx == 0) {
 			return 270;
