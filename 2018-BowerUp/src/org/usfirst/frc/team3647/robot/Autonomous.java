@@ -143,46 +143,9 @@ public class Autonomous
 				{
 					withinRange = false;
 				}
-				if(sum < requiredLeftDist + requiredRightDist)
+				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
 				{
-					if(withinRange || sum < 50)
-					{
-						Drivetrain.setLeftMotorSpeed(.325);
-						Drivetrain.setRightMotorSpeed(-.61);
-					}
-					else
-					{
-						if(currentRatio > 1.1 && currentRatio < 1.18)
-						{
-							Drivetrain.setLeftMotorSpeed(.425);
-							Drivetrain.setRightMotorSpeed(-.51);
-						}
-						else if(currentRatio > 1.18 && currentRatio < 1.25)
-						{
-							Drivetrain.setLeftMotorSpeed(.525);
-							Drivetrain.setRightMotorSpeed(-.41);
-						}
-						else if(currentRatio > 1.25)
-						{
-							Drivetrain.setLeftMotorSpeed(.625);
-							Drivetrain.setRightMotorSpeed(-.31);
-						}
-						else if(currentRatio < .9 && currentRatio > .82)
-						{
-							Drivetrain.setLeftMotorSpeed(.225);
-							Drivetrain.setRightMotorSpeed(-.71);
-						}
-						else if(currentRatio < .82 && currentRatio > .75)
-						{
-							Drivetrain.setLeftMotorSpeed(.125);
-							Drivetrain.setRightMotorSpeed(-.81);
-						}
-						else
-						{
-							Drivetrain.setLeftMotorSpeed(.025);
-							Drivetrain.setRightMotorSpeed(-.91);
-						}
-					}
+					Drivetrain.goStraightLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .325, .61, .1);
 				}
 				else
 				{
@@ -203,46 +166,9 @@ public class Autonomous
 				{
 					withinRange = false;
 				}
-				if(sum < requiredLeftDist + requiredRightDist)
+				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
 				{
-					if(withinRange || sum < 50)
-					{
-						Drivetrain.setLeftMotorSpeed(.2);
-						Drivetrain.setRightMotorSpeed(-.376);
-					}
-					else
-					{
-						if(currentRatio > 1.1 && currentRatio < 1.18)
-						{
-							Drivetrain.setLeftMotorSpeed(.25);
-							Drivetrain.setRightMotorSpeed(-.326);
-						}
-						else if(currentRatio > 1.18 && currentRatio < 1.25)
-						{
-							Drivetrain.setLeftMotorSpeed(.3);
-							Drivetrain.setRightMotorSpeed(-.276);
-						}
-						else if(currentRatio > 1.25)
-						{
-							Drivetrain.setLeftMotorSpeed(.35);
-							Drivetrain.setRightMotorSpeed(-.226);
-						}
-						else if(currentRatio < .9 && currentRatio > .82)
-						{
-							Drivetrain.setLeftMotorSpeed(.15);
-							Drivetrain.setRightMotorSpeed(-.426);
-						}
-						else if(currentRatio < .82 && currentRatio > .75)
-						{
-							Drivetrain.setLeftMotorSpeed(.1);
-							Drivetrain.setRightMotorSpeed(-.476);
-						}
-						else
-						{
-							Drivetrain.setLeftMotorSpeed(.05);
-							Drivetrain.setRightMotorSpeed(-.526);
-						}
-					}
+					Drivetrain.goStraightLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .2, .376, .05);
 				}
 				else
 				{
@@ -272,46 +198,13 @@ public class Autonomous
 				{
 					withinRange = false;
 				}
-				if(sum < requiredLeftDist + requiredRightDist)
+				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
 				{
-					if(withinRange || sum < 50)
-					{
-						Drivetrain.setLeftMotorSpeed(.325);
-						Drivetrain.setRightMotorSpeed(-.61);
-					}
-					else
-					{
-						if(currentRatio > 1.1 && currentRatio < 1.18)
-						{
-							Drivetrain.setLeftMotorSpeed(.425);
-							Drivetrain.setRightMotorSpeed(-.51);
-						}
-						else if(currentRatio > 1.18 && currentRatio < 1.25)
-						{
-							Drivetrain.setLeftMotorSpeed(.525);
-							Drivetrain.setRightMotorSpeed(-.41);
-						}
-						else if(currentRatio > 1.25)
-						{
-							Drivetrain.setLeftMotorSpeed(.625);
-							Drivetrain.setRightMotorSpeed(-.31);
-						}
-						else if(currentRatio < .9 && currentRatio > .82)
-						{
-							Drivetrain.setLeftMotorSpeed(.225);
-							Drivetrain.setRightMotorSpeed(-.71);
-						}
-						else if(currentRatio < .82 && currentRatio > .75)
-						{
-							Drivetrain.setLeftMotorSpeed(.125);
-							Drivetrain.setRightMotorSpeed(-.81);
-						}
-						else
-						{
-							Drivetrain.setLeftMotorSpeed(.025);
-							Drivetrain.setRightMotorSpeed(-.91);
-						}
-					}
+					Drivetrain.goBackLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, -.325, -.61, .1);
+				}
+				else
+				{
+					currentState = 7;
 				}
 				break;
 				
