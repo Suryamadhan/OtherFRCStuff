@@ -423,9 +423,46 @@ public class Drivetrain
 		}
 	}
 	
-	public static void goStraightRight()
+	public static void goStraightRight(double currentRatio, boolean withinRange, double sum, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment)
 	{
-		
+		if(withinRange || sum < 50)
+		{
+			Drivetrain.setLeftMotorSpeed(leftSpeed);
+			Drivetrain.setRightMotorSpeed(-rightSpeed);
+		}
+		else
+		{
+			if(currentRatio > 1.1 && currentRatio < 1.18)
+			{
+				Drivetrain.setLeftMotorSpeed(leftSpeed + adjustment);
+				Drivetrain.setRightMotorSpeed(-(rightSpeed - adjustment));
+			}
+			else if(currentRatio > 1.18 && currentRatio < 1.25)
+			{			
+				Drivetrain.setLeftMotorSpeed(leftSpeed + (2*adjustment));
+				Drivetrain.setRightMotorSpeed(-(rightSpeed - (2*adjustment)));
+			}
+			else if(currentRatio > 1.25)
+			{		
+				Drivetrain.setLeftMotorSpeed(leftSpeed + (3*adjustment));
+				Drivetrain.setRightMotorSpeed(-(rightSpeed - (3*adjustment)));
+			}
+			else if(currentRatio < .9 && currentRatio > .82)
+			{
+				Drivetrain.setLeftMotorSpeed(leftSpeed - adjustment);
+				Drivetrain.setRightMotorSpeed(-(rightSpeed + adjustment));
+			}
+			else if(currentRatio < .82 && currentRatio > .75)
+			{
+				Drivetrain.setLeftMotorSpeed(leftSpeed - (2*adjustment));
+				Drivetrain.setRightMotorSpeed(-(rightSpeed + (2*adjustment)));
+			}
+			else
+			{
+				Drivetrain.setLeftMotorSpeed(leftSpeed - (3*adjustment));
+				Drivetrain.setRightMotorSpeed(-(rightSpeed + (3*adjustment)));
+			}
+		}
 	}
 	
 	public static void goBackLeft()
