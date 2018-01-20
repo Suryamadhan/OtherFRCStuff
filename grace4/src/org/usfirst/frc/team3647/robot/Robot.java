@@ -22,7 +22,8 @@ public class Robot extends IterativeRobot {
 	Joysticks joystickObject;
 	@Override
 	public void robotInit() {
-joystickObject = new Joysticks();
+		joystickObject = new Joysticks();
+		Motors.drivetrainInitialization();
 	}
 
 	// This function runs once, right before autonomous period starts.
@@ -146,4 +147,3 @@ joystickObject = new Joysticks();
 		System.out.println("Magnitude: " + magnitude + "; " + "Angle: " + angle + ";");
 	}
 }
-

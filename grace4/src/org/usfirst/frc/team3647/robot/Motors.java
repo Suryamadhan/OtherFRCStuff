@@ -13,7 +13,17 @@ public class Motors {
 		_frontLeftMotor.set(speed);
 		}
 	public static void setRightSpeed(double rightSpeed) {
-		_frontRightMotor.set(-xspeed);
+		_frontRightMotor.set(-speed);
+	}
+	
+	public static void drivetrainInitialization()
+	{
+		setLeftSpeed(0);
+		setRightSpeed(0);
+		_leftSlave1.follow(Drivetrain.leftSRX);
+		_leftSlave2.follow(Drivetrain.leftSRX);    
+		_rightSlave1.follow(Drivetrain.rightSRX);
+		_rightSlave2.follow(Drivetrain.rightSRX);
 	}
 	
 	
