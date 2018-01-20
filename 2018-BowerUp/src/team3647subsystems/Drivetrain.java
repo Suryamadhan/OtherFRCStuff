@@ -18,6 +18,8 @@ public class Drivetrain
 	public static VictorSPX leftSPX2 = new VictorSPX(2);
 	public static VictorSPX rightSPX2 = new VictorSPX(3);
 	
+	DifferentialDrive _drive = new DifferentialDrive(leftSRX, rightSRX);
+	
 	public static void drivetrainInitialization()
 	{
 		setLeftMotorSpeed(0);
@@ -47,9 +49,17 @@ public class Drivetrain
 		setRightMotorSpeed(-sYValue);
 	}
 	
-	public static void testPID(double lValue)
+	public static void testPID(double yValue, double xValue)
 	{
-		leftSRX.set(ControlMode.PercentOutput, lValue);
+		if(yValue != 0 && xValue == 0)
+		{
+			leftSRX.set(ControlMode.PercentOutput, lValue);
+			rightSRX.set(ControlMode.PercentOutput, lValue);
+		}
+		else
+		{
+			_drive.arcadeDrive(yValue, xValue);
+		}
 	}
 	
 	public static void arcadeDrive(double leftEnc, double rightEnc, double yValue, double xValue)
