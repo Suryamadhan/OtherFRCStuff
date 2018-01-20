@@ -10,22 +10,22 @@ import team3647ConstantsAndFunctions.Constants;
 
 public class Drivetrain 
 {
-	public static WPI_TalonSRX _frontLeftMotor = new WPI_TalonSRX(0);
-	public static WPI_TalonSRX _frontRightMotor = new WPI_TalonSRX(3);
+	public static WPI_TalonSRX leftSRX = new WPI_TalonSRX(0);
+	public static WPI_TalonSRX rightSRX = new WPI_TalonSRX(3);
 	
-	public static VictorSPX _leftSlave1 = new VictorSPX(1);
-	public static VictorSPX _rightSlave1 = new VictorSPX(0);
-	public static VictorSPX _leftSlave2 = new VictorSPX(2);
-	public static VictorSPX _rightSlave2 = new VictorSPX(3);
+	public static VictorSPX leftSPX1 = new VictorSPX(1);
+	public static VictorSPX rightSPX1 = new VictorSPX(0);
+	public static VictorSPX leftSPX2 = new VictorSPX(2);
+	public static VictorSPX rightSPX2 = new VictorSPX(3);
 	
 	public static void drivetrainInitialization()
 	{
 		setLeftMotorSpeed(0);
 		setRightMotorSpeed(0);
-		_leftSlave1.follow(Drivetrain._frontLeftMotor);
-		_leftSlave2.follow(Drivetrain._frontLeftMotor);
-		_rightSlave1.follow(Drivetrain._frontRightMotor);
-		_rightSlave2.follow(Drivetrain._frontRightMotor);
+		leftSPX1.follow(Drivetrain.leftSRX);
+		leftSPX2.follow(Drivetrain.leftSRX);
+		rightSPX1.follow(Drivetrain.rightSRX);
+		rightSPX2.follow(Drivetrain.rightSRX);
 	}
 	
 	static double drift, avg;
@@ -34,25 +34,17 @@ public class Drivetrain
 	public static void setLeftMotorSpeed(double speed)
 	{
 		_frontLeftMotor.set(speed);
-		//leftMotor.set(ControlMode.MotionProfile, speed);
 	}
 	
 	public static void setRightMotorSpeed(double speed)
 	{
 		_frontRightMotor.set(speed);
-	//	rightMotor.set(ControlMode.MotionProfile, speed);
 	}
 	
-	public static void test(double yValue, double yes)
+	public static void testDrive(double fYValue, double sYValue)
 	{
-		setRightMotorSpeed(yValue);
-		setLeftMotorSpeed(yValue);
-	}
-	
-	public static void testDrive(double yValue, double xValue)
-	{
-		setLeftMotorSpeed(yValue);
-		setRightMotorSpeed(-xValue);
+		setLeftMotorSpeed(fYValue);
+		setRightMotorSpeed(-sYValue);
 	}
 	
 	public static void arcadeDrive(double leftEnc, double rightEnc, double yValue, double xValue)
