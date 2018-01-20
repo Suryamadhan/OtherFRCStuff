@@ -33,7 +33,7 @@ public class Drivetrain
 	//	rightMotor.set(ControlMode.MotionProfile, speed);
 	}
 	
-	public static void test(double yValue)
+	public static void test(double yValue, double yes)
 	{
 		setRightMotorSpeed(yValue);
 		setLeftMotorSpeed(yValue);
@@ -41,8 +41,8 @@ public class Drivetrain
 	
 	public static void testDrive(double yValue, double xValue)
 	{
-		setLeftMotorSpeed(yValue + xValue);
-		setRightMotorSpeed(-(yValue - xValue));
+		setLeftMotorSpeed(yValue);
+		setRightMotorSpeed(-xValue);
 	}
 	
 	public static void arcadeDrive(double leftEnc, double rightEnc, double yValue, double xValue)

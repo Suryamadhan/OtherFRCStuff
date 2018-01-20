@@ -12,8 +12,8 @@ public class Encoders
 	
 	public void setEncoderValues()
 	{
-		leftEncoderValue = Drivetrain._frontLeftMotor.getSensorCollection().getQuadraturePosition();
-		rightEncoderValue = Drivetrain._frontRightMotor.getSensorCollection().getQuadraturePosition();
+		leftEncoderValue = Drivetrain._frontRightMotor.getSensorCollection().getQuadraturePosition();
+		rightEncoderValue = -Drivetrain._frontLeftMotor.getSensorCollection().getQuadraturePosition();
 	}
 	
 	public static void resetEncoders()

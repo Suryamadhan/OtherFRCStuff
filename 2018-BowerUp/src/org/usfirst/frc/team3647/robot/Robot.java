@@ -78,7 +78,7 @@ public class Robot extends IterativeRobot {
 			CrashChecker.logTeleopPeriodic();
 			enc.setEncoderValues();
 			joy.setMainContollerValues();
-			Drivetrain.test(joy.leftJoySticky);
+			Drivetrain.test(joy.leftJoySticky, joy.rightJoySticky);
 //			System.out.println(1);
 			//Drivetrain.arcadeDrive(enc.leftEncoderValue, enc.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
 		}
@@ -95,7 +95,7 @@ public class Robot extends IterativeRobot {
 		enc.setEncoderValues();
 		enc.testEncoders();
 		joy.setMainContollerValues();
-		Drivetrain.testDrive(joy.leftJoySticky, joy.rightJoyStickx);
+		Drivetrain.testDrive(joy.leftJoySticky, joy.rightJoySticky);
 		if(joy.buttonA)
 		{
 			Encoders.resetEncoders();
