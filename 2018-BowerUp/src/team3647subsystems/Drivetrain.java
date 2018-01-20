@@ -33,12 +33,12 @@ public class Drivetrain
 	
 	public static void setLeftMotorSpeed(double speed)
 	{
-		_frontLeftMotor.set(speed);
+		leftSRX.set(speed);
 	}
 	
 	public static void setRightMotorSpeed(double speed)
 	{
-		_frontRightMotor.set(speed);
+		rightSRX.set(speed);
 	}
 	
 	public static void testDrive(double fYValue, double sYValue)
