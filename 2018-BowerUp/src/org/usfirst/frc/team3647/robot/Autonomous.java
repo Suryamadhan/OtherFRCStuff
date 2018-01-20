@@ -114,7 +114,7 @@ public class Autonomous
 				}
 				else
 				{
-					currentState = 2;
+					currentState = 0;
 				}
 				break;
 			case 2:
@@ -206,6 +206,10 @@ public class Autonomous
 				{
 					currentState = 7;
 				}
+				break;
+			case 0:
+				Drivetrain.setLeftMotorSpeed(0);
+				Drivetrain.setRightMotorSpeed(0);
 				break;
 				
 		}
