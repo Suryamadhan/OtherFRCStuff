@@ -21,6 +21,7 @@ public class Robot extends IterativeRobot {
 			enc = new Encoders();
 			joy = new Joysticks();
 			auto = new Autonomous();
+			Encoders.resetEncoders();
 			Drivetrain.drivetrainInitialization();
 		}
 		catch(Throwable t)
@@ -67,8 +68,8 @@ public class Robot extends IterativeRobot {
 			CrashChecker.logTeleopPeriodic();
 			enc.setEncoderValues();
 			joy.setMainContollerValues();
-			//Drivetrain.arcadeDrive(enc.leftEncoderValue, enc.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
-			Drivetrain.testDrive(joy.leftJoySticky, joy.rightJoyStickx);
+			Drivetrain.arcadeDrive(enc.leftEncoderValue, enc.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
+			//Drivetrain.testDrive(joy.leftJoySticky, joy.rightJoyStickx);
 		}
 		catch(Throwable t)
 		{
