@@ -1,9 +1,6 @@
 package org.usfirst.frc.team3647.robot;
 
-import edu.wpi.first.wpilibj.Spark;
-
-public class Motors 
-{
+public class Motors {
 	public static WPI_TalonSRX _frontLeftMotor = new WPI_TalonSRX(0);
 	public static WPI_TalonSRX _frontRightMotor = new WPI_TalonSRX(3);
 	
@@ -16,6 +13,8 @@ public class Motors
 		_frontLeftMotor.set(speed);
 		}
 	public static void setRightSpeed(double rightSpeed) {
-		_frontRightMotor.set(speed);
+		_frontRightMotor.set(-xspeed);
 	}
+	
+	
 }
