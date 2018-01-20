@@ -46,14 +46,16 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		// TODO find out degree
-		double c = 0.005;
+		joystickObject.updateMainController();
+		double c = 0.0001;
 		double turnDegree;
+		testFunctions();
 		if (getDegrees() > 0 && getDegrees() < 180) {// forward
-			turnDegree = (getDegrees() - 90);
+			turnDegree = -(getDegrees() - 90);
 			leftSpeed = getMagnitude() + c * turnDegree;
 			rightSpeed = -(getMagnitude() - c * turnDegree);
 		} else {// backward
-			turnDegree = (getDegrees() - 90);
+			turnDegree = (getDegrees() - 270);
 			leftSpeed = -(getMagnitude() + c * turnDegree);
 			rightSpeed = getMagnitude() - c * turnDegree;
 		}
@@ -63,11 +65,11 @@ public class Robot extends IterativeRobot {
 			Motors.setRightSpeed(0);
 
 		} else {
-			
 			Motors.setLeftSpeed(leftSpeed);
 			Motors.setRightSpeed(rightSpeed);
 			}
-		}
+		
+	}
 
 	
 
@@ -119,10 +121,10 @@ public class Robot extends IterativeRobot {
 			return -Math.toDegrees(Math.atan(Joysticks.rightJoySticky / Joysticks.rightJoyStickx));
 		}
 		if (Joysticks.rightJoySticky == 0 && Joysticks.rightJoyStickx > 0) {
-			return 180;
+			return 0;
 		}
 		if (Joysticks.rightJoySticky == 0 && Joysticks.rightJoyStickx < 0) {
-			return 0;
+			return 180;
 		}
 		if (Joysticks.rightJoySticky > 0 && Joysticks.rightJoyStickx == 0) {
 			return 270;
@@ -144,6 +146,9 @@ public class Robot extends IterativeRobot {
 		magnitude = getMagnitude();
 		angle = getDegrees();
 
-		System.out.println("Magnitude: " + magnitude + "; " + "Angle: " + angle + ";");
+		if (magnitude!=0 && angle!=0) {
+			System.out.println("Magnitude: " + magnitude + "; " + "Angle: " + angle + ";");
+	
+		}
 	}
 }
