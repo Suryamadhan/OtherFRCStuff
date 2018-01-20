@@ -673,7 +673,7 @@ public class Autonomous
 //				Encoders.resetEncoders();
 //				Timer.delay(1);
 				currentState = 9;
-				Encoders.testEncoders();//
+				//Encoders.testEncoders();//
 				break;
 			case 9:
 				requiredStraightDist = Constants.distanceSwitchLLSWSC;

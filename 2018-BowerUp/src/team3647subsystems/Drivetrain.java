@@ -10,34 +10,33 @@ import team3647ConstantsAndFunctions.Constants;
 
 public class Drivetrain 
 {
-	public static CANTalon leftMotor;
-	public static CANTalon rightMotor;
+	public static WPI_TalonSRX _frontLeftMotor = new WPI_TalonSRX(0);
+	public static WPI_TalonSRX _frontRightMotor = new WPI_TalonSRX(3);
 	
-	public static void  stuff()
-	{
-		leftMotor = new CANTalon(0);
-		rightMotor =new CANTalon(3);
-	}
+	public static VictorSPX _leftSlave1 = new VictorSPX(1);
+	public static VictorSPX _rightSlave1 = new VictorSPX(0);
+	public static VictorSPX _leftSlave2 = new VictorSPX(2);
+	public static VictorSPX _rightSlave2 = new VictorSPX(3);
 	
 	static double drift, avg;
 	static String movingStatus, driftStatus;
 	
 	public static void setLeftMotorSpeed(double speed)
 	{
-		leftMotor.set(speed);
+		_frontLeftMotor.set(speed);
 		//leftMotor.set(ControlMode.MotionProfile, speed);
 	}
 	
 	public static void setRightMotorSpeed(double speed)
 	{
-		rightMotor.set(speed);
+		_frontRightMotor.set(speed);
 	//	rightMotor.set(ControlMode.MotionProfile, speed);
 	}
 	
 	public static void test(double yValue)
 	{
 		setRightMotorSpeed(yValue);
-//		setLeftMotorSpeed(yValue);
+		setLeftMotorSpeed(yValue);
 	}
 	
 	public static void testDrive(double yValue, double xValue)
