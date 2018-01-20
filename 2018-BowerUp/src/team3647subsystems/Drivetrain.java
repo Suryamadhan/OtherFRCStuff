@@ -402,40 +402,40 @@ public class Drivetrain
 	{
 		if(withinRange || sum < 50)
 		{
-			Drivetrain.setLeftMotorSpeed(leftSpeed);
-			Drivetrain.setRightMotorSpeed(-rightSpeed);
+			setLeftMotorSpeed(leftSpeed);
+			setRightMotorSpeed(-rightSpeed);
 		}
 		else
 		{
 			if(currentRatio > 1.1 && currentRatio < 1.18)
 			{
-				Drivetrain.setLeftMotorSpeed(leftSpeed + adjustment);
-				Drivetrain.setRightMotorSpeed(-(rightSpeed - adjustment));
+				setLeftMotorSpeed(leftSpeed + adjustment);
+				setRightMotorSpeed(-(rightSpeed - adjustment));
 			}
 			else if(currentRatio > 1.18 && currentRatio < 1.25)
 			{
-				Drivetrain.setLeftMotorSpeed(leftSpeed + (2*adjustment));
-				Drivetrain.setRightMotorSpeed(-(rightSpeed - (2*adjustment)));
+				setLeftMotorSpeed(leftSpeed + (2*adjustment));
+				setRightMotorSpeed(-(rightSpeed - (2*adjustment)));
 			}
 			else if(currentRatio > 1.25)
 			{
-				Drivetrain.setLeftMotorSpeed(leftSpeed + (3*adjustment));
-				Drivetrain.setRightMotorSpeed(-(rightSpeed - (3*adjustment)));
+				setLeftMotorSpeed(leftSpeed + (3*adjustment));
+				setRightMotorSpeed(-(rightSpeed - (3*adjustment)));
 			}
 			else if(currentRatio < .9 && currentRatio > .82)
 			{
-				Drivetrain.setLeftMotorSpeed(leftSpeed - adjustment);
-				Drivetrain.setRightMotorSpeed(-(rightSpeed + adjustment));
+				setLeftMotorSpeed(leftSpeed - adjustment);
+				setRightMotorSpeed(-(rightSpeed + adjustment));
 			}
 			else if(currentRatio < .82 && currentRatio > .75)
 			{
-				Drivetrain.setLeftMotorSpeed(leftSpeed - (2*adjustment));
-				Drivetrain.setRightMotorSpeed(-(rightSpeed + (2*adjustment)));
+				setLeftMotorSpeed(leftSpeed - (2*adjustment));
+				setRightMotorSpeed(-(rightSpeed + (2*adjustment)));
 			}
 			else
 			{
-				Drivetrain.setLeftMotorSpeed(leftSpeed - (3*adjustment));
-				Drivetrain.setRightMotorSpeed(-(rightSpeed + (3*adjustment)));
+				setLeftMotorSpeed(leftSpeed - (3*adjustment));
+				setRightMotorSpeed(-(rightSpeed + (3*adjustment)));
 			}
 		}
 	}
@@ -444,51 +444,125 @@ public class Drivetrain
 	{
 		if(withinRange || sum < 50)
 		{
-			Drivetrain.setLeftMotorSpeed(leftSpeed);
-			Drivetrain.setRightMotorSpeed(-rightSpeed);
+			setLeftMotorSpeed(leftSpeed);
+			setRightMotorSpeed(-rightSpeed);
 		}
 		else
 		{
 			if(currentRatio > 1.1 && currentRatio < 1.18)
 			{
-				Drivetrain.setLeftMotorSpeed(leftSpeed + adjustment);
-				Drivetrain.setRightMotorSpeed(-(rightSpeed - adjustment));
+				setLeftMotorSpeed(leftSpeed + adjustment);
+				setRightMotorSpeed(-(rightSpeed - adjustment));
 			}
 			else if(currentRatio > 1.18 && currentRatio < 1.25)
 			{			
-				Drivetrain.setLeftMotorSpeed(leftSpeed + (2*adjustment));
-				Drivetrain.setRightMotorSpeed(-(rightSpeed - (2*adjustment)));
+				setLeftMotorSpeed(leftSpeed + (2*adjustment));
+				setRightMotorSpeed(-(rightSpeed - (2*adjustment)));
 			}
 			else if(currentRatio > 1.25)
 			{		
-				Drivetrain.setLeftMotorSpeed(leftSpeed + (3*adjustment));
-				Drivetrain.setRightMotorSpeed(-(rightSpeed - (3*adjustment)));
+				setLeftMotorSpeed(leftSpeed + (3*adjustment));
+				setRightMotorSpeed(-(rightSpeed - (3*adjustment)));
 			}
 			else if(currentRatio < .9 && currentRatio > .82)
 			{
-				Drivetrain.setLeftMotorSpeed(leftSpeed - adjustment);
-				Drivetrain.setRightMotorSpeed(-(rightSpeed + adjustment));
+				setLeftMotorSpeed(leftSpeed - adjustment);
+				setRightMotorSpeed(-(rightSpeed + adjustment));
 			}
 			else if(currentRatio < .82 && currentRatio > .75)
 			{
-				Drivetrain.setLeftMotorSpeed(leftSpeed - (2*adjustment));
-				Drivetrain.setRightMotorSpeed(-(rightSpeed + (2*adjustment)));
+				setLeftMotorSpeed(leftSpeed - (2*adjustment));
+				setRightMotorSpeed(-(rightSpeed + (2*adjustment)));
 			}
 			else
 			{
-				Drivetrain.setLeftMotorSpeed(leftSpeed - (3*adjustment));
-				Drivetrain.setRightMotorSpeed(-(rightSpeed + (3*adjustment)));
+				setLeftMotorSpeed(leftSpeed - (3*adjustment));
+				setRightMotorSpeed(-(rightSpeed + (3*adjustment)));
 			}
 		}
 	}
 	
-	public static void goBackLeft()
+	public static void goBackLeft(double currentRatio, boolean withinRange, double sum, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment)
 	{
-		
+		if(withinRange || sum < 50)
+		{
+			setLeftMotorSpeed(leftSpeed);
+			setRightMotorSpeed(-rightSpeed);
+		}
+		else
+		{
+			if(currentRatio > 1.1 && currentRatio < 1.18)
+			{
+				setLeftMotorSpeed(leftSpeed - adjustment);
+				setRightMotorSpeed(-(rightSpeed + adjustment));
+			}
+			else if(currentRatio > 1.18 && currentRatio < 1.25)
+			{
+				setLeftMotorSpeed(leftSpeed - (2*adjustment));
+				setRightMotorSpeed(-(rightSpeed + (2*adjustment)));
+			}
+			else if(currentRatio > 1.25)
+			{
+				setLeftMotorSpeed(leftSpeed - (3*adjustment));
+				setRightMotorSpeed(-(rightSpeed + (3*adjustment)));
+			}
+			else if(currentRatio < .9 && currentRatio > .82)
+			{
+				setLeftMotorSpeed(leftSpeed + adjustment);
+				setRightMotorSpeed(-(rightSpeed - adjustment));
+			}
+			else if(currentRatio < .82 && currentRatio > .75)
+			{
+				setLeftMotorSpeed(leftSpeed + (2*adjustment));
+				setRightMotorSpeed(-(rightSpeed - (2*adjustment)));
+			}
+			else
+			{
+				setLeftMotorSpeed(leftSpeed + (3*adjustment));
+				setRightMotorSpeed(-(rightSpeed - (3*adjustment)));
+			}
+		}
 	}
 	
-	public static void goBackRight()
+	public static void goBackRight(double currentRatio, boolean withinRange, double sum, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment)
 	{
-		
+		if(withinRange || sum < 50)
+		{
+			setLeftMotorSpeed(leftSpeed);
+			setRightMotorSpeed(-rightSpeed);
+		}
+		else
+		{
+			if(currentRatio > 1.1 && currentRatio < 1.18)
+			{
+				setLeftMotorSpeed(leftSpeed - adjustment);
+				setRightMotorSpeed(-(rightSpeed + adjustment));
+			}
+			else if(currentRatio > 1.18 && currentRatio < 1.25)
+			{
+				setLeftMotorSpeed(leftSpeed - (2*adjustment));
+				setRightMotorSpeed(-(rightSpeed + (2*adjustment)));
+			}
+			else if(currentRatio > 1.25)
+			{
+				setLeftMotorSpeed(leftSpeed - (3*adjustment));
+				setRightMotorSpeed(-(rightSpeed + (3*adjustment)));
+			}
+			else if(currentRatio < .9 && currentRatio > .82)
+			{
+				setLeftMotorSpeed(leftSpeed + adjustment);
+				setRightMotorSpeed(-(rightSpeed - adjustment));
+			}
+			else if(currentRatio < .82 && currentRatio > .75)
+			{
+				setLeftMotorSpeed(leftSpeed + (2*adjustment));
+				setRightMotorSpeed(-(rightSpeed - (2*adjustment)));
+			}
+			else
+			{
+				setLeftMotorSpeed(leftSpeed + (3*adjustment));
+				setRightMotorSpeed(-(rightSpeed - (3*adjustment)));
+			}
+		}
 	}
 }
