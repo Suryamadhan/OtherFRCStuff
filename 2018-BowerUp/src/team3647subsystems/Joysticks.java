@@ -23,7 +23,7 @@ public class Joysticks
 		leftJoySticky = fixJoystickValue(-mainController.getRawAxis(1));
 		leftJoyStickx = fixJoystickValue(mainController.getRawAxis(0));
 		rightJoyStickx = fixJoystickValue(mainController.getRawAxis(4));
-		rightJoySticky = fixJoystickValue(mainController.getRawAxis(5));
+		rightJoySticky = -fixJoystickValue(mainController.getRawAxis(5));
 		
 	}
 	

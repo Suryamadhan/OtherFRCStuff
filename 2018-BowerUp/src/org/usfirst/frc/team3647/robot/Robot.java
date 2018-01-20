@@ -14,12 +14,9 @@ import team3647subsystems.Joysticks;
 
 public class Robot extends IterativeRobot {
 
-//	Encoders enc;
+	Encoders enc;
 	Joysticks joy;
 	Autonomous auto;
-	
-	 CANTalon leftMotor;
-	 CANTalon rightMotor;
 	
 	@Override
 	public void robotInit() 
@@ -27,12 +24,14 @@ public class Robot extends IterativeRobot {
 		try
 		{
 			CrashChecker.logRobotInit();
-//			enc = new Encoders();
-			Drivetrain.stuff();
-//			leftMotor = new CANTalon(0);
-//			rightMotor =new CANTalon(3);
+			enc = new Encoders();
 			joy = new Joysticks();
 			auto = new Autonomous();
+			
+			Drivetrain._leftSlave1.follow(Drivetrain._frontLeftMotor);
+			Drivetrain._leftSlave2.follow(Drivetrain._frontLeftMotor);
+			Drivetrain._rightSlave1.follow(Drivetrain._frontRightMotor);
+			Drivetrain._rightSlave2.follow(Drivetrain._frontRightMotor);
 		}
 		catch(Throwable t)
 		{
@@ -64,8 +63,8 @@ public class Robot extends IterativeRobot {
 	{
 		while(DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
 		{
-			Encoders.testEncoders();
-//			enc.setEncoderValues();
+//			Encoders.testEncoders();
+			enc.setEncoderValues();
 //			auto.runAuto(enc.leftEncoderValue, enc.rightEncoderValue);
 		}
 		
@@ -77,9 +76,9 @@ public class Robot extends IterativeRobot {
 		try 
 		{
 			CrashChecker.logTeleopPeriodic();
-			//enc.setEncoderValues();
+			enc.setEncoderValues();
 			joy.setMainContollerValues();
-//			Drivetrain.test(joy.leftJoySticky);
+			Drivetrain.test(joy.leftJoySticky, joy.rightJoySticky);
 //			System.out.println(1);
 			//Drivetrain.arcadeDrive(enc.leftEncoderValue, enc.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
 		}
@@ -93,10 +92,14 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void testPeriodic() 
 	{
-//		enc.setEncoderValues();
-		Encoders.testEncoders();
+		enc.setEncoderValues();
+		enc.testEncoders();
 		joy.setMainContollerValues();
-		Drivetrain.testDrive(joy.leftJoySticky, joy.rightJoyStickx);
+		Drivetrain.testDrive(joy.leftJoySticky, joy.rightJoySticky);
+		if(joy.buttonA)
+		{
+			Encoders.resetEncoders();
+		}
 	}
 
 }

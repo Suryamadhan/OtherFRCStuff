@@ -12,20 +12,20 @@ public class Encoders
 	
 	public void setEncoderValues()
 	{
-//		leftEncoderValue = -Drivetrain.leftMotor.get();
-//		rightEncoderValue = Drivetrain.rightMotor.get();
+		leftEncoderValue = Drivetrain._frontRightMotor.getSensorCollection().getQuadraturePosition();
+		rightEncoderValue = -Drivetrain._frontLeftMotor.getSensorCollection().getQuadraturePosition();
 	}
 	
 	public static void resetEncoders()
 	{
-		leftEncoder.reset();
-		rightEncoder.reset();
+		Drivetrain._frontLeftMotor.getSensorCollection().setQuadraturePosition(0, 10);
+		Drivetrain._frontRightMotor.getSensorCollection().setQuadraturePosition(0, 10);
 	}
 	
-	public static void testEncoders()
+	public void testEncoders()
 	{
-		System.out.println("Left Encoder Value: " + -leftEncoder.get());
-		System.out.println("Right Encoder Value: " + rightEncoder.get());
+		System.out.println("Left Encoder Value: " + -leftEncoderValue);
+		System.out.println("Right Encoder Value: " + rightEncoderValue);
 	}
 
 }
