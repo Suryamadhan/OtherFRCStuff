@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import team3647ConstantsAndFunctions.Constants;
 
 public class Drivetrain 
@@ -25,7 +26,7 @@ public class Drivetrain
 		setLeftMotorSpeed(0);
 		setRightMotorSpeed(0);
 		leftSPX1.follow(Drivetrain.leftSRX);
-		leftSPX2.follow(Drivetrain.leftSRX);
+		leftSPX2.follow(Drivetrain.leftSRX);    
 		rightSPX1.follow(Drivetrain.rightSRX);
 		rightSPX2.follow(Drivetrain.rightSRX);
 	}
