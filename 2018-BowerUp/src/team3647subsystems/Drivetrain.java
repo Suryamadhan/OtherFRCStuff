@@ -7,7 +7,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.*;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import team3647ConstantsAndFunctions.Constants;
 
@@ -33,35 +32,8 @@ public class Drivetrain
 		rightSPX2.follow(rightSRX);
 	}
 	
-	public static void configPID()
-	{
-		leftSRX.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
-		leftSRX.setSensorPhase(true);
-		leftSRX.configNominalOutputForward(0, 10);
-		leftSRX.configNominalOutputReverse(0, 10);
-		leftSRX.configPeakOutputForward(1, 10);
-		leftSRX.configPeakOutputReverse(-1, 10);
-		leftSRX.config_kF(0, 0.1097, 10);
-		leftSRX.config_kP(0, 0.113333, 10);
-		leftSRX.config_kI(0, 0, 10);
-		leftSRX.config_kD(0, 0, 10);
-		
-		rightSRX.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
-		rightSRX.setSensorPhase(true);
-		rightSRX.configNominalOutputForward(0, 10);
-		rightSRX.configNominalOutputReverse(0, 10);
-		rightSRX.configPeakOutputForward(1, 10);
-		rightSRX.configPeakOutputReverse(-1, 10);
-		rightSRX.config_kF(0, 0.1097, 10);
-		rightSRX.config_kP(0, 0.113333, 10);
-		rightSRX.config_kI(0, 0, 10);
-		rightSRX.config_kD(0, 0, 10);
-		
-	}
-	
-	static double drift, avg;
-	static String movingStatus, driftStatus;
-	
+	static double avg;
+
 	public static void setLeftMotorSpeed(double speed, ControlMode cm)
 	{
 		leftSRX.set(cm, speed);
@@ -92,206 +64,6 @@ public class Drivetrain
 	public static void testPID(double yValue, double xValue)
 	{
 		_drive.arcadeDrive(yValue, xValue);
-		
-		if(Math.abs(xValue - (leftSRX.get() - rightSRX.get()))  < .05 && yValue !=0)
-		{
-			System.out.println(1);
-		}
-		else
-		{
-			System.out.println(0);
-		}
-//		System.out.println("left: " + leftSRX.get());
-//		System.out.println("right: " + rightSRX.get());
-		
-		
-	}
-	
-	public static void arcadeDrive(double leftEnc, double rightEnc, double yValue, double xValue)
-	{
-		if(yValue > 0 && xValue == 0)
-		{
-			movingStatus = "forward";
-			if(driftStatus.equals("turn"))
-			{
-				drift++;
-			}
-			if(drift < 50 && driftStatus.equals("turn"))
-			{
-				Encoders.resetEncoders();
-			}
-			else
-			{
-				driftStatus = "noturn";
-			}
-		}
-		else if(yValue < 0 && xValue == 0)
-		{
-			movingStatus = "backward";
-		}
-		else if(yValue == 0 && xValue == 0)
-		{
-			movingStatus = "stop";
-			driftStatus = "turn";
-		}
-		else
-		{
-			movingStatus = "turning";
-			driftStatus = "turn";
-		}
-		
-		switch(movingStatus)
-		{
-			case "forward":
-				if(yValue < .3)
-				{
-					setLeftMotorSpeed(yValue);
-					setRightMotorSpeed(-yValue);
-					Encoders.resetEncoders();
-				}
-				else
-				{
-					if(Math.abs(leftEnc - rightEnc) < 6)
-					{
-						setLeftMotorSpeed(yValue);
-						setRightMotorSpeed(-yValue);
-					}
-					else if(Math.abs(leftEnc - rightEnc) < 20)
-					{
-						if(rightEnc > leftEnc)
-						{
-							 setLeftMotorSpeed(yValue);
-							 setRightMotorSpeed(-yValue + .15);
-						}
-						else
-						{
-							 setLeftMotorSpeed(yValue - .15);
-							 setRightMotorSpeed(-yValue);
-						}
-					}
-					else if(Math.abs(leftEnc - rightEnc) < 34)
-					{
-						if(rightEnc > leftEnc)
-						{
-							 setLeftMotorSpeed(yValue);
-							 setRightMotorSpeed(-yValue + .25);
-						}
-						else
-						{
-							 setLeftMotorSpeed(yValue - .25);
-							 setRightMotorSpeed(-yValue);
-						}
-					}
-					else if(Math.abs(leftEnc - rightEnc) < 48)
-					{
-						if(rightEnc > leftEnc)
-						{
-							 setLeftMotorSpeed(yValue);
-							 setRightMotorSpeed(-yValue + .35);
-						}
-						else
-						{
-							 setLeftMotorSpeed(yValue - .35);
-							 setRightMotorSpeed(-yValue);
-						}
-					}
-					else
-					{
-						if(rightEnc > leftEnc)
-						{
-							 setLeftMotorSpeed(yValue);
-							 setRightMotorSpeed(-yValue + .4);
-						}
-						else
-						{
-							 setLeftMotorSpeed(yValue - .4);
-							 setRightMotorSpeed(-yValue);
-						}
-					}
-				}
-				break;
-			case "backward":
-				if(yValue > -.3)
-				{
-					setLeftMotorSpeed(yValue);
-					setRightMotorSpeed(-yValue);
-					Encoders.resetEncoders();
-				}
-				else
-				{
-					if(Math.abs(leftEnc - rightEnc) < 6)
-					{
-						setLeftMotorSpeed(yValue);
-						setRightMotorSpeed(-yValue);
-					}
-					else if(Math.abs(leftEnc - rightEnc) < 20)
-					{
-						if(rightEnc > leftEnc)
-						{
-							 setLeftMotorSpeed(yValue + .125);
-							 setRightMotorSpeed(-yValue);
-						}
-						else
-						{
-							 setLeftMotorSpeed(yValue);
-							 setRightMotorSpeed(-yValue - .125);
-						}
-					}
-					else if(Math.abs(leftEnc - rightEnc) < 34)
-					{
-						if(rightEnc > leftEnc)
-						{
-							 setLeftMotorSpeed(yValue + .2);
-							 setRightMotorSpeed(-yValue);
-						}
-						else
-						{
-							 setLeftMotorSpeed(yValue);
-							 setRightMotorSpeed(-yValue - .2);
-						}
-					}
-					else if(Math.abs(leftEnc - rightEnc) < 48)
-					{
-						if(rightEnc > leftEnc)
-						{
-							 setLeftMotorSpeed(yValue + .275);
-							 setRightMotorSpeed(-yValue);
-						}
-						else
-						{
-							 setLeftMotorSpeed(yValue);
-							 setRightMotorSpeed(-yValue - .275);
-						}
-					}
-					else
-					{
-						if(rightEnc > leftEnc)
-						{
-							 setLeftMotorSpeed(yValue + .34);
-							 setRightMotorSpeed(-yValue);
-						}
-						else
-						{
-							 setLeftMotorSpeed(yValue);
-							 setRightMotorSpeed(-yValue - .34);
-						}
-					}
-				}
-				break;
-			case "turning":
-				double speedY, speedX;
-				speedY = Math.abs(yValue);
-				speedY *= yValue;
-				speedX = xValue * Constants.turnConstant(yValue);
-				setLeftMotorSpeed(speedY + speedX);
-				setRightMotorSpeed(-speedY + speedX);
-				Encoders.resetEncoders();
-				break;
-			case "stop":
-				setLeftMotorSpeed(0);
-				setRightMotorSpeed(0);
-				break;
-		}
 	}
 	
 	public static boolean reachedDistance(double leftEnc, double rightEnc, double distance)
@@ -310,63 +82,54 @@ public class Drivetrain
 	
 	public static void driveForward(double leftEnc, double rightEnc, double speed)
 	{
-//		if(Math.abs(leftEnc - rightEnc) < 6)
-//		{
-//			setLeftMotorSpeed(speed);
-//			setRightMotorSpeed(-speed);
-//		}
-//		else if(Math.abs(leftEnc - rightEnc) < 20)
-//		{
-//			if(rightEnc > leftEnc)
-//			{
-//				 setLeftMotorSpeed(speed);
-//				 setRightMotorSpeed(-speed + .125);
-//			}
-//			else
-//			{
-//				 setLeftMotorSpeed(speed - .125);
-//				 setRightMotorSpeed(-speed);
-//			}
-//		}
-//		else if(Math.abs(leftEnc - rightEnc) < 34)
-//		{
-//			if(rightEnc > leftEnc)
-//			{
-//				 setLeftMotorSpeed(speed);
-//				 setRightMotorSpeed(-speed + .2);
-//			}
-//			else
-//			{
-//				 setLeftMotorSpeed(speed - .2);
-//				 setRightMotorSpeed(-speed);
-//			}
-//		}
-//		else if(Math.abs(leftEnc - rightEnc) < 48)
-//		{
-//			if(rightEnc > leftEnc)
-//			{
-//				 setLeftMotorSpeed(speed);
-//				 setRightMotorSpeed(-speed + .275);
-//			}
-//			else
-//			{
-//				 setLeftMotorSpeed(speed - .275);
-//				 setRightMotorSpeed(-speed);
-//			}
-//		}
-//		else
-//		{
-//			if(rightEnc > leftEnc)
-//			{
-//				 setLeftMotorSpeed(speed);
-//				 setRightMotorSpeed(-speed + .34);
-//			}
-//			else
-//			{
-//				 setLeftMotorSpeed(speed - .34);
-//				 setRightMotorSpeed(-speed);
-//			}
-//		}
+		if(Math.abs(leftEnc - rightEnc) < 6)
+		{
+			_drive.arcadeDrive(speed, 0);
+		}
+		else if(Math.abs(leftEnc - rightEnc) < 20)
+		{
+			if(rightEnc > leftEnc)
+			{
+				_drive.arcadeDrive(speed, .075);
+			}
+			else
+			{
+				_drive.arcadeDrive(speed, -.075);
+			}
+		}
+		else if(Math.abs(leftEnc - rightEnc) < 34)
+		{
+			if(rightEnc > leftEnc)
+			{
+				_drive.arcadeDrive(speed, .15);
+			}
+			else
+			{
+				_drive.arcadeDrive(speed, -.15);
+			}
+		}
+		else if(Math.abs(leftEnc - rightEnc) < 48)
+		{
+			if(rightEnc > leftEnc)
+			{
+				_drive.arcadeDrive(speed, .275);
+			}
+			else
+			{
+				_drive.arcadeDrive(speed, -.275);
+			}
+		}
+		else
+		{
+			if(rightEnc > leftEnc)
+			{
+				_drive.arcadeDrive(speed, .34);
+			}
+			else
+			{
+				_drive.arcadeDrive(speed, -.34);
+			}
+		}
 		
 		setLeftMotorSpeed(speed);
 		setRightMotorSpeed(-speed);
@@ -376,8 +139,7 @@ public class Drivetrain
 	{
 		if(Math.abs(leftEnc - rightEnc) < 6)
 		{
-			setLeftMotorSpeed(speed);
-			setRightMotorSpeed(-speed);
+			_drive.arcadeDrive(speed, 0);
 		}
 		else if(Math.abs(leftEnc - rightEnc) < 20)
 		{
