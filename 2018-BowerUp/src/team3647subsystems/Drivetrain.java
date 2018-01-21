@@ -130,9 +130,6 @@ public class Drivetrain
 				_drive.arcadeDrive(speed, -.34);
 			}
 		}
-		
-		setLeftMotorSpeed(speed);
-		setRightMotorSpeed(-speed);
 	}
 	
 	public static void driveBackward(double leftEnc, double rightEnc, double speed)
