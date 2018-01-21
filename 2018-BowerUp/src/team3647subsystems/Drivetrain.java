@@ -91,8 +91,8 @@ public class Drivetrain
 	{
 		if(yValue != 0 && xValue == 0)
 		{
-			leftSRX.set(ControlMode.PercentOutput, yValue);
-			rightSRX.set(ControlMode.PercentOutput,-yValue);
+			leftSRX.set(ControlMode.Velocity, yValue);
+			rightSRX.set(ControlMode.Velocity,-yValue);
 		}
 		else
 		{
