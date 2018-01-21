@@ -18,18 +18,20 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 	WPI_TalonSRX _frontLeftMotor = new WPI_TalonSRX(0); 		/* device IDs here (1 of 2) */
-//	WPI_TalonSRX _frontRightMotor = new WPI_TalonSRX(14);
+	WPI_TalonSRX _frontRightMotor = new WPI_TalonSRX(3);
 
 	/* extra talons for six motor drives */
 	WPI_VictorSPX _leftSlave1 = new WPI_VictorSPX(1);
-//	WPI_VictorSPX _rightSlave1 = new WPI_VictorSPX(15);
+	WPI_VictorSPX _rightSlave1 = new WPI_VictorSPX(0);
 	WPI_VictorSPX _leftSlave2 = new WPI_VictorSPX(2);
-//	WPI_VictorSPX _rightSlave2 = new WPI_VictorSPX(17);
+	WPI_VictorSPX _rightSlave2 = new WPI_VictorSPX(3);
 	
 	
-	//DifferentialDrive _drive = new DifferentialDrive(_frontLeftMotor, _frontRightMotor);
+	DifferentialDrive _drive = new DifferentialDrive(_frontLeftMotor, _frontRightMotor);
 	
 	Joystick _joy = new Joystick(0);
+	
+	//DifferentialDrive drive = new DifferentialDrive();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -39,8 +41,8 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		_leftSlave1.follow(_frontLeftMotor);
 	    	_leftSlave2.follow(_frontLeftMotor);
-//	    	_rightSlave1.follow(_frontRightMotor);
-//	    	_rightSlave2.follow(_frontRightMotor);
+	    	_rightSlave1.follow(_frontRightMotor);
+	    	_rightSlave2.follow(_frontRightMotor);
 	}
 
 	/**
@@ -73,13 +75,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() 
 	{
-		double forward = _joy.getY(); // logitech gampad left X, positive is forward
-		double turn = _joy.getZ(); //logitech gampad right X, positive means turn right
-		if(Math.abs(forward) < .15)
-		{
-			forward = 0;
-		}
-		_frontLeftMotor.set(forward);
+		double forward = -_joy.getY(); // logitech gampad left X, positive is forward
+		double turn = _joy.getX(); //logitech gampad right X, positive means turn right
+		_drive.arcadeDrive(forward, turn);
 	}
 
 	/**

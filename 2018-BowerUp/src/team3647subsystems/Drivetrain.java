@@ -1,12 +1,14 @@
 package team3647subsystems;
 
 import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.*;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import team3647ConstantsAndFunctions.Constants;
 
 public class Drivetrain 
@@ -89,15 +91,20 @@ public class Drivetrain
 	
 	public static void testPID(double yValue, double xValue)
 	{
-		if(yValue != 0 && xValue == 0)
+		_drive.arcadeDrive(yValue, xValue);
+		
+		if(Math.abs(xValue - (leftSRX.get() - rightSRX.get()))  < .05 && yValue !=0)
 		{
-			leftSRX.set(ControlMode.Velocity, yValue);
-			rightSRX.set(ControlMode.Velocity,-yValue);
+			System.out.println(1);
 		}
 		else
 		{
-			_drive.arcadeDrive(yValue, xValue);
+			System.out.println(0);
 		}
+//		System.out.println("left: " + leftSRX.get());
+//		System.out.println("right: " + rightSRX.get());
+		
+		
 	}
 	
 	public static void arcadeDrive(double leftEnc, double rightEnc, double yValue, double xValue)

@@ -23,7 +23,7 @@ public class Robot extends IterativeRobot {
 			auto = new Autonomous();
 			Encoders.resetEncoders();
 			Drivetrain.drivetrainInitialization();
-			Drivetrain.configPID();
+			//Drivetrain.configPID();
 		}
 		catch(Throwable t)
 		{
