@@ -7,7 +7,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.*;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import team3647ConstantsAndFunctions.Constants;
 
@@ -33,35 +32,8 @@ public class Drivetrain
 		rightSPX2.follow(rightSRX);
 	}
 	
-	public static void configPID()
-	{
-		leftSRX.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
-		leftSRX.setSensorPhase(true);
-		leftSRX.configNominalOutputForward(0, 10);
-		leftSRX.configNominalOutputReverse(0, 10);
-		leftSRX.configPeakOutputForward(1, 10);
-		leftSRX.configPeakOutputReverse(-1, 10);
-		leftSRX.config_kF(0, 0.1097, 10);
-		leftSRX.config_kP(0, 0.113333, 10);
-		leftSRX.config_kI(0, 0, 10);
-		leftSRX.config_kD(0, 0, 10);
-		
-		rightSRX.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
-		rightSRX.setSensorPhase(true);
-		rightSRX.configNominalOutputForward(0, 10);
-		rightSRX.configNominalOutputReverse(0, 10);
-		rightSRX.configPeakOutputForward(1, 10);
-		rightSRX.configPeakOutputReverse(-1, 10);
-		rightSRX.config_kF(0, 0.1097, 10);
-		rightSRX.config_kP(0, 0.113333, 10);
-		rightSRX.config_kI(0, 0, 10);
-		rightSRX.config_kD(0, 0, 10);
-		
-	}
-	
-	static double drift, avg;
-	static String movingStatus, driftStatus;
-	
+	static double avg;
+
 	public static void setLeftMotorSpeed(double speed, ControlMode cm)
 	{
 		leftSRX.set(cm, speed);
@@ -110,63 +82,54 @@ public class Drivetrain
 	
 	public static void driveForward(double leftEnc, double rightEnc, double speed)
 	{
-//		if(Math.abs(leftEnc - rightEnc) < 6)
-//		{
-//			setLeftMotorSpeed(speed);
-//			setRightMotorSpeed(-speed);
-//		}
-//		else if(Math.abs(leftEnc - rightEnc) < 20)
-//		{
-//			if(rightEnc > leftEnc)
-//			{
-//				 setLeftMotorSpeed(speed);
-//				 setRightMotorSpeed(-speed + .125);
-//			}
-//			else
-//			{
-//				 setLeftMotorSpeed(speed - .125);
-//				 setRightMotorSpeed(-speed);
-//			}
-//		}
-//		else if(Math.abs(leftEnc - rightEnc) < 34)
-//		{
-//			if(rightEnc > leftEnc)
-//			{
-//				 setLeftMotorSpeed(speed);
-//				 setRightMotorSpeed(-speed + .2);
-//			}
-//			else
-//			{
-//				 setLeftMotorSpeed(speed - .2);
-//				 setRightMotorSpeed(-speed);
-//			}
-//		}
-//		else if(Math.abs(leftEnc - rightEnc) < 48)
-//		{
-//			if(rightEnc > leftEnc)
-//			{
-//				 setLeftMotorSpeed(speed);
-//				 setRightMotorSpeed(-speed + .275);
-//			}
-//			else
-//			{
-//				 setLeftMotorSpeed(speed - .275);
-//				 setRightMotorSpeed(-speed);
-//			}
-//		}
-//		else
-//		{
-//			if(rightEnc > leftEnc)
-//			{
-//				 setLeftMotorSpeed(speed);
-//				 setRightMotorSpeed(-speed + .34);
-//			}
-//			else
-//			{
-//				 setLeftMotorSpeed(speed - .34);
-//				 setRightMotorSpeed(-speed);
-//			}
-//		}
+		if(Math.abs(leftEnc - rightEnc) < 6)
+		{
+			_drive.arcadeDrive(speed, 0);
+		}
+		else if(Math.abs(leftEnc - rightEnc) < 20)
+		{
+			if(rightEnc > leftEnc)
+			{
+				_drive.arcadeDrive(speed, .075);
+			}
+			else
+			{
+				_drive.arcadeDrive(speed, -.075);
+			}
+		}
+		else if(Math.abs(leftEnc - rightEnc) < 34)
+		{
+			if(rightEnc > leftEnc)
+			{
+				_drive.arcadeDrive(speed, .15);
+			}
+			else
+			{
+				_drive.arcadeDrive(speed, -.15);
+			}
+		}
+		else if(Math.abs(leftEnc - rightEnc) < 48)
+		{
+			if(rightEnc > leftEnc)
+			{
+				_drive.arcadeDrive(speed, .275);
+			}
+			else
+			{
+				_drive.arcadeDrive(speed, -.275);
+			}
+		}
+		else
+		{
+			if(rightEnc > leftEnc)
+			{
+				_drive.arcadeDrive(speed, .34);
+			}
+			else
+			{
+				_drive.arcadeDrive(speed, -.34);
+			}
+		}
 		
 		setLeftMotorSpeed(speed);
 		setRightMotorSpeed(-speed);
@@ -176,8 +139,7 @@ public class Drivetrain
 	{
 		if(Math.abs(leftEnc - rightEnc) < 6)
 		{
-			setLeftMotorSpeed(speed);
-			setRightMotorSpeed(-speed);
+			_drive.arcadeDrive(speed, 0);
 		}
 		else if(Math.abs(leftEnc - rightEnc) < 20)
 		{
