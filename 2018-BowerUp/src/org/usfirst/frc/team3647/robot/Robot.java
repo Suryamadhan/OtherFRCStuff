@@ -56,7 +56,10 @@ public class Robot extends IterativeRobot {
 		while(DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
 		{
 			enc.setEncoderValues();
-			auto.runAuto(enc.leftEncoderValue, enc.rightEncoderValue);
+//			auto.runAuto(enc.leftEncoderValue, enc.rightEncoderValue);
+			Drivetrain._drive.arcadeDrive(.8, .7);
+			System.out.println("left" + (Drivetrain.leftSRX.get() + Drivetrain.rightSRX.get()));
+//			System.out.println("right" + Drivetrain.rightSRX.get());
 		}
 		
 	}
