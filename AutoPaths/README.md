@@ -74,3 +74,9 @@
 
 ### MS-RR-SW ###
 <img width="442" alt="screen shot 2018-01-17 at 12 06 19 pm" src="https://user-images.githubusercontent.com/16403870/35064502-25378938-fb7f-11e7-9305-aa4dd4042aef.png">
+
+### MS-LL-SCSC and MS-LL-SCSW ###
+<img width="442" alt="screen shot 2018-01-20 at 4 47 29 pm" src="https://user-images.githubusercontent.com/16403870/35189561-b918d830-fe01-11e7-8b37-e64b8e226bf8.png">
+
+### MS-RR-SCSC and MS-RR-SCSW ###
+<img width="442" alt="screen shot 2018-01-20 at 5 18 12 pm" src="https://user-images.githubusercontent.com/16403870/35189735-f417882e-fe05-11e7-8faf-04026803c5e1.png">

@@ -6,18 +6,18 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.*;
 import team3647ConstantsAndFunctions.Constants;
 
 public class Drivetrain 
 {
-	public static WPI_TalonSRX leftSRX = new WPI_TalonSRX(0);
-	public static WPI_TalonSRX rightSRX = new WPI_TalonSRX(3);
+	public static WPI_TalonSRX leftSRX = new WPI_TalonSRX(Constants.leftMaster);
+	public static WPI_TalonSRX rightSRX = new WPI_TalonSRX(Constants.rightMaster);
 	
-	public static VictorSPX leftSPX1 = new VictorSPX(1);
-	public static VictorSPX rightSPX1 = new VictorSPX(0);
-	public static VictorSPX leftSPX2 = new VictorSPX(2);
-	public static VictorSPX rightSPX2 = new VictorSPX(3);
+	public static VictorSPX leftSPX1 = new VictorSPX(Constants.leftSlave1);
+	public static VictorSPX rightSPX1 = new VictorSPX(Constants.rightSlave1);
+	public static VictorSPX leftSPX2 = new VictorSPX(Constants.leftSlave2);
+	public static VictorSPX rightSPX2 = new VictorSPX(Constants.rightSlave2);
 	
 	public static DifferentialDrive _drive = new DifferentialDrive(leftSRX, rightSRX);
 	
@@ -25,25 +25,61 @@ public class Drivetrain
 	{
 		setLeftMotorSpeed(0);
 		setRightMotorSpeed(0);
-		leftSPX1.follow(Drivetrain.leftSRX);
-		leftSPX2.follow(Drivetrain.leftSRX);    
-		rightSPX1.follow(Drivetrain.rightSRX);
-		rightSPX2.follow(Drivetrain.rightSRX);
+		leftSPX1.follow(leftSRX);
+		leftSPX2.follow(leftSRX);    
+		rightSPX1.follow(rightSRX);
+		rightSPX2.follow(rightSRX);
+	}
+	
+	public static void configPID()
+	{
+		leftSRX.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
+		leftSRX.setSensorPhase(true);
+		leftSRX.configNominalOutputForward(0, 10);
+		leftSRX.configNominalOutputReverse(0, 10);
+		leftSRX.configPeakOutputForward(1, 10);
+		leftSRX.configPeakOutputReverse(-1, 10);
+		leftSRX.config_kF(0, 0.1097, 10);
+		leftSRX.config_kP(0, 0.113333, 10);
+		leftSRX.config_kI(0, 0, 10);
+		leftSRX.config_kD(0, 0, 10);
+		
+		rightSRX.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 10);
+		rightSRX.setSensorPhase(true);
+		rightSRX.configNominalOutputForward(0, 10);
+		rightSRX.configNominalOutputReverse(0, 10);
+		rightSRX.configPeakOutputForward(1, 10);
+		rightSRX.configPeakOutputReverse(-1, 10);
+		rightSRX.config_kF(0, 0.1097, 10);
+		rightSRX.config_kP(0, 0.113333, 10);
+		rightSRX.config_kI(0, 0, 10);
+		rightSRX.config_kD(0, 0, 10);
+		
 	}
 	
 	static double drift, avg;
 	static String movingStatus, driftStatus;
 	
+	public static void setLeftMotorSpeed(double speed, ControlMode cm)
+	{
+		leftSRX.set(cm, speed);
+	}
+	
 	public static void setLeftMotorSpeed(double speed)
 	{
-//		leftSRX.set(speed, );
-		leftSRX.set(ControlMode.PercentOutput, speed);
+		leftSRX.set(speed);
+	}
+	
+	public static void setRightMotorSpeed(double speed, ControlMode cm)
+	{
+		rightSRX.set(cm, speed);
 	}
 	
 	public static void setRightMotorSpeed(double speed)
 	{
-		rightSRX.set(ControlMode.PercentOutput, speed);
+		rightSRX.set(speed);
 	}
+	
 	
 	public static void testDrive(double fYValue, double sYValue)
 	{
@@ -55,8 +91,8 @@ public class Drivetrain
 	{
 		if(yValue != 0 && xValue == 0)
 		{
-			leftSRX.set(ControlMode.PercentOutput, yValue);
-			rightSRX.set(ControlMode.PercentOutput,-yValue);
+			leftSRX.set(ControlMode.Velocity, yValue);
+			rightSRX.set(ControlMode.Velocity,-yValue);
 		}
 		else
 		{
