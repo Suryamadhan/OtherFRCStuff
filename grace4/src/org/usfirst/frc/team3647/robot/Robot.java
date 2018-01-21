@@ -47,17 +47,31 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		// TODO find out degree
 		joystickObject.updateMainController();
-		double c = 0.0001;
+		double c = 0.01;
+		double s = .5;
 		double turnDegree;
 		testFunctions();
-		if (getDegrees() > 0 && getDegrees() < 180) {// forward
-			turnDegree = -(getDegrees() - 90);
-			leftSpeed = getMagnitude() + c * turnDegree;
-			rightSpeed = -(getMagnitude() - c * turnDegree);
-		} else {// backward
+		if (getDegrees() >= 0 && getDegrees() <= 90) {// forward right
+			turnDegree = 90 - getDegrees();
+			leftSpeed = s*getMagnitude();
+			rightSpeed = s*getMagnitude() - c * turnDegree;
+		} 
+		else if(getDegrees() > 90 && getDegrees() < 180) { // forward left
+			turnDegree = (getDegrees() - 90);
+			leftSpeed = s*getMagnitude() - c * turnDegree;
+			rightSpeed = s* getMagnitude();
+		}
+		else if(getDegrees() >= 180 && getDegrees() <= 270) {//backward left
+
+			turnDegree = 270 -getDegrees();
+			leftSpeed = -(s*getMagnitude() - c * turnDegree);
+			rightSpeed = -s*(getMagnitude());
+		}
+		
+		else {// backward right
 			turnDegree = (getDegrees() - 270);
-			leftSpeed = -(getMagnitude() + c * turnDegree);
-			rightSpeed = getMagnitude() - c * turnDegree;
+			leftSpeed = -s*(getMagnitude());
+			rightSpeed = -(s*getMagnitude() - c * turnDegree);
 		}
 		joystickObject.updateMainController();
 		if (getMagnitude() == 0) {

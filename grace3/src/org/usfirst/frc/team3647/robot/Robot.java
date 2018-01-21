@@ -22,9 +22,11 @@ public class Robot extends IterativeRobot {
 		double rightEncoderValue;
 		double rightSpeed;
 		double leftSpeed;
-		double speed;
 		double prevError = 0;
 		double sumError = 0;
+		double kp = 0.2;
+		double ki = 0.01;
+		double kd = .1;
 		
 		// This function is run whenever the robot starts. This function is used for any
 		// initialization of code
@@ -63,36 +65,77 @@ public class Robot extends IterativeRobot {
 
 			leftSpeed = leftJoystickValueY;
 			rightSpeed = leftJoystickValueY;
-			
-			if (leftJoystickValueY == 0)
+		
+			if (leftJoystickValueY ==0)
 			{
 				encoderObject.resetEncoders();
-				Motors.setLeftSpeed(0);
-				Motors.setRightSpeed(0);
+				
 				sumError = 0;
 				prevError = 0;
+				if(rightJoystickValueX != 0) {
+					Motors.setLeftSpeed(.5*rightJoystickValueX);
+					Motors.setRightSpeed(-(.5*rightJoystickValueX));
+				}
+				
+				else {
+					Motors.setLeftSpeed(0);
+					Motors.setRightSpeed(0);
+				}
+				System.out.println(rightJoystickValueX);
 			} 
 			else 
 			{
-//				Motors.leftMotor.set(leftSpeed);
-//				Motors.rightMotor.set(rightSpeed);
-				runPIDStraight();
+				if(leftJoystickValueY > 0) {
+					runPIDforward();
+				}
+				else if(leftJoystickValueY < 0) {
+					runPIDbackward();
+				}
 			}
 			
 
 		}
 
-		public void runPIDStraight() {
-			double kp = 0.015;
-			double ki = 0.005;
-			double kd = 0.095;
-			double error = leftEncoderValue - rightEncoderValue;
+		
+		public void runPIDforward() {
+
+			double error = (leftEncoderValue - rightEncoderValue)/1000;
 			double diffError = error - prevError;
 			sumError = sumError + error;
 			double inputValue = kp * error + ki * sumError + kd * diffError;
-			speed = .8*leftSpeed - inputValue/2;
-			Motors.setLeftSpeed(speed);
-			Motors.setRightSpeed(speed);
+
+			leftSpeed = .8*leftSpeed - inputValue/2;
+			rightSpeed = .8*rightSpeed + inputValue/2; 
+			if (leftSpeed<0) {
+				leftSpeed = 0;
+			}
+			if (rightSpeed<0) {
+				rightSpeed = 0;
+			}
+			Motors.setLeftSpeed(leftSpeed);
+			Motors.setRightSpeed(rightSpeed);
+			prevError = error;
+
+		}
+		
+		public void runPIDbackward() {
+
+			double error = (leftEncoderValue - rightEncoderValue)/1000;
+			double diffError = error - prevError;
+			sumError = sumError + error;
+			double inputValue = kp * error + ki * sumError + kd * diffError;
+
+			leftSpeed = .8*leftSpeed - inputValue/2;
+			rightSpeed = .8*rightSpeed + inputValue/2; 
+
+			if (leftSpeed>0) {
+				leftSpeed = 0;
+			}
+			if (rightSpeed>0) {
+				rightSpeed = 0;
+			}
+			Motors.setLeftSpeed(leftSpeed);
+			Motors.setRightSpeed(rightSpeed);
 			prevError = error;
 		}
 		

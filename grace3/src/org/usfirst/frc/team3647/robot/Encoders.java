@@ -5,11 +5,11 @@ import edu.wpi.first.wpilibj.Encoder;
 public class Encoders {
 
 	public double getRightEncoder() {
-		return Motors._frontLeftMotor.getSensorCollection().getQuadraturePosition();
+		return -Motors._frontLeftMotor.getSensorCollection().getQuadraturePosition();
 	}
 
 	public double getLeftEncoder() {
-		return -Motors._frontRightMotor.getSensorCollection().getQuadraturePosition();
+		return Motors._frontRightMotor.getSensorCollection().getQuadraturePosition();
 	}
 
 	public void resetEncoders() {
