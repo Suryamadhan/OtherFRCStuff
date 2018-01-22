@@ -126,7 +126,7 @@ public class Autonomous
 				else
 				{
 					requiredStraightDist = 0;
-					currentState = 0;
+					currentState = 3;
 				}
 				break;
 			case 3:
