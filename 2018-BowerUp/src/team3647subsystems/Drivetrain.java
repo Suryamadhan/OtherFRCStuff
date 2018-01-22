@@ -68,7 +68,9 @@ public class Drivetrain
 	
 	public static void tankDrive(double lYValue, double rYValue)
 	{
-		drive.
+		drive.tankDrive(lYValue, rYvalue);
+		System.out.println("lvalue: " + lYValue + "; rvalue: " + rYValue); 
+		System.out.println("Left speed: " + leftSRX.get() + "; Right speed: " + rightSRX.get()); 
 	}
 	
 	public static boolean reachedDistance(double leftEnc, double rightEnc, double distance)
