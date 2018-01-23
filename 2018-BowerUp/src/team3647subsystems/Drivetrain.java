@@ -68,7 +68,7 @@ public class Drivetrain
 	
 	public static void tankDrive(double lYValue, double rYValue)
 	{
-		drive.tankDrive(lYValue, rYvalue);
+		drive.tankDrive(lYValue, rYValue, false);
 		System.out.println("lvalue: " + lYValue + "; rvalue: " + rYValue); 
 		System.out.println("Left speed: " + leftSRX.get() + "; Right speed: " + rightSRX.get()); 
 	}
