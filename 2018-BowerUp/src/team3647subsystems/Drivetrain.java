@@ -91,52 +91,52 @@ public class Drivetrain
 	{
 		if(Math.abs(leftEnc - rightEnc) < 6)
 		{
-			drive.arcadeDrive(speed, 0);
+			drive.tankDrive(speed, -speed, false);
 		}
 		else if(Math.abs(leftEnc - rightEnc) < 20)
 		{
 			if(rightEnc > leftEnc)
-			{
-				drive.arcadeDrive(speed, .075);
-			}
+		 	{
+				drive.tankDrive(speed, -speed + .125, false);
+		 	}
 			else
-			{
-				drive.arcadeDrive(speed, -.075);
-			}
-		}
-		else if(Math.abs(leftEnc - rightEnc) < 34)
-		{
-			if(rightEnc > leftEnc)
-			{
-				drive.arcadeDrive(speed, .15);
-			}
+		 	{
+		 		drive.tankDrive(speed - .125, -speed, false);
+		 	}
+		 }
+		 else if(Math.abs(leftEnc - rightEnc) < 34)
+		 {
+		 	if(rightEnc > leftEnc)
+		 	{
+				drive.tankDrive(speed, -speed + .2, false);
+		 	}
 			else
-			{
-				drive.arcadeDrive(speed, -.15);
-			}
-		}
-		else if(Math.abs(leftEnc - rightEnc) < 48)
-		{
-			if(rightEnc > leftEnc)
-			{
-				drive.arcadeDrive(speed, .275);
-			}
-			else
-			{
-				drive.arcadeDrive(speed, -.275);
-			}
-		}
-		else
-		{
-			if(rightEnc > leftEnc)
-			{
-				drive.arcadeDrive(speed, .34);
-			}
-			else
-			{
-				drive.arcadeDrive(speed, -.34);
-			}
-		}
+		 	{
+		 		drive.tankDrive(speed - .2, -speed, false);
+		 	}
+		 }
+		 else if(Math.abs(leftEnc - rightEnc) < 48)
+		 {
+			 if(rightEnc > leftEnc)
+			 {
+				drive.tankDrive(speed, -speed + .275, false);
+			 }
+			 else
+			 {
+			 	drive.tankDrive(speed - .275, -speed, false);
+			 }
+		 }
+		 else
+		 {
+			 if(rightEnc > leftEnc)
+			 {
+				drive.tankDrive(speed, -speed + .33, false);
+			 }
+			 else
+			 {
+			 	drive.tankDrive(speed - .34, -speed, false);
+			 }
+		 }
 	}
 	
 	public static void driveBackward(double leftEnc, double rightEnc, double speed)
