@@ -43,8 +43,8 @@ public class Constants
 	
 	public final static double moveOnce = 600;
 	
-	public final static double testStright = 35 * 100;
-	public final static double testBigRight = 2.7889 * moveOnce;
-	public final static double testSmallLeft = 1.4835 * moveOnce;
+	public final static double testStright = 50 * 100;
+	public final static double testBigRight = 10 * moveOnce;
+	public final static double testSmallLeft = 5.56 * moveOnce;
 
 }

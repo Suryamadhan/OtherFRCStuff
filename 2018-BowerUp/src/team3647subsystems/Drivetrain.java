@@ -149,44 +149,44 @@ public class Drivetrain
 		{
 			if(leftEnc > rightEnc)
 		 	{
-				drive.tankDrive(speed + .075, speed, false);
+				drive.tankDrive(speed + .05, speed, false);
 		 	}
 			else
 		 	{
-		 		drive.tankDrive(speed, speed + .075, false);
+		 		drive.tankDrive(speed, speed + .05, false);
 		 	}
 		 }
 		 else if(Math.abs(leftEnc - rightEnc) < 40)
 		 {
 			 if(leftEnc > rightEnc)
 			 {
-				 drive.tankDrive(speed + .15, speed, false);
+				 drive.tankDrive(speed + .1, speed, false);
 			 }
 			 else
 			 {
-				 drive.tankDrive(speed, speed + .15, false);
+				 drive.tankDrive(speed, speed + .1, false);
 			 }
 		 }
 		 else if(Math.abs(leftEnc - rightEnc) < 60)
 		 {
 			 if(leftEnc > rightEnc)
 			 {
-				 drive.tankDrive(speed +.225, speed, false);
+				 drive.tankDrive(speed +.15, speed, false);
 			 }
 			 else
 			 {
-				 drive.tankDrive(speed, speed + .225, false);
+				 drive.tankDrive(speed, speed + .15, false);
 			 }
 		 }
 		 else
 		 {
 			 if(leftEnc > rightEnc)
 			 {
-				 drive.tankDrive(speed + .3, speed, false);
+				 drive.tankDrive(speed + .2, speed, false);
 			 }
 			 else
 			 {
-			 	drive.tankDrive(speed, speed + .3, false);
+			 	drive.tankDrive(speed, speed + .2, false);
 			 }
 		 }
 	}

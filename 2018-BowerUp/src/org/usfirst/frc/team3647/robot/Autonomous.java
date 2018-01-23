@@ -107,11 +107,10 @@ public class Autonomous
 		switch(currentState)
 		{
 			case 1:
-				requiredStraightDist = (Constants.testStright - 400);
+				requiredStraightDist = (Constants.testStright - 1400);
 				if(!Drivetrain.reachedDistance(leftEncoder, rightEncoder, requiredStraightDist))
 				{
 					Drivetrain.driveForward(leftEncoder, rightEncoder, .5);
-					System.out.println(1);
 				}
 				else
 				{
@@ -132,8 +131,9 @@ public class Autonomous
 				}
 				break;
 			case 3:
-				requiredLeftDist = (Constants.testSmallLeft - 400);
-				requiredRightDist = (Constants.testBigRight - 752);
+				System.out.println(3);
+				requiredLeftDist = (Constants.testSmallLeft - 2000);
+				requiredRightDist = (Constants.testBigRight - 3600);
 				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
 				currentRatio = (((rightEncoder - Constants.testStright)/(leftEncoder - Constants.testStright))/aimedRatio);
 				sum = (rightEncoder - Constants.testStright) + (leftEncoder - Constants.testStright);
@@ -147,7 +147,7 @@ public class Autonomous
 				}
 				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
 				{
-					Drivetrain.goStraightLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .325, .61, .1);
+					Drivetrain.goStraightLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .325, .585, .5);
 				}
 				else
 				{
@@ -155,6 +155,7 @@ public class Autonomous
 				}
 				break;
 			case 4:
+				System.out.println(4);
 				requiredLeftDist = (Constants.testSmallLeft);
 				requiredRightDist = (Constants.testBigRight);
 				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
@@ -170,11 +171,11 @@ public class Autonomous
 				}
 				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
 				{
-					Drivetrain.goStraightLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .2, .376, .05);
+					Drivetrain.goStraightLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .2, .36, .04);
 				}
 				else
 				{
-					currentState = 5;
+					currentState = 0;
 				}
 				break;
 			case 5:
@@ -210,8 +211,8 @@ public class Autonomous
 				}
 				break;
 			case 0:
-				Drivetrain.drive.tankDrive(0, 0);
-				Encoders.resetEncoders();
+				System.out.println(0);
+				Drivetrain.drive.tankDrive(0, 0,false);
 				break;
 				
 		}
