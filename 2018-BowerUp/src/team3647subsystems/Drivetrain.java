@@ -89,63 +89,63 @@ public class Drivetrain
 	
 	public static void driveForward(double leftEnc, double rightEnc, double speed)
 	{
-		if(Math.abs(leftEnc - rightEnc) < 20)
+		if(Math.abs(leftEnc - rightEnc) < 100)
 		{
 			drive.tankDrive(speed, speed, false);
 		}
-		else if(Math.abs(leftEnc - rightEnc) < 30)
+		else if(Math.abs(leftEnc - rightEnc) < 200)
 		{
 			if(leftEnc > rightEnc)
 		 	{
-				drive.tankDrive(speed - .075, speed, false);
+				drive.tankDrive(speed - .05, speed, false);
 		 	}
 			else
 		 	{
-		 		drive.tankDrive(speed, speed - .075, false);
+		 		drive.tankDrive(speed, speed - .05, false);
 		 	}
 		 }
-		 else if(Math.abs(leftEnc - rightEnc) < 40)
+		 else if(Math.abs(leftEnc - rightEnc) < 300)
 		 {
 			 if(leftEnc > rightEnc)
 			 {
-				 drive.tankDrive(speed - .15, speed, false);
+				 drive.tankDrive(speed - .1, speed, false);
 			 }
 			 else
 			 {
-				 drive.tankDrive(speed, speed - .15, false);
+				 drive.tankDrive(speed, speed - .1, false);
 			 }
 		 }
-		 else if(Math.abs(leftEnc - rightEnc) < 60)
+		 else if(Math.abs(leftEnc - rightEnc) < 500)
 		 {
 			 if(leftEnc > rightEnc)
 			 {
-				 drive.tankDrive(speed - .225, speed, false);
+				 drive.tankDrive(speed - .18, speed, false);
 			 }
 			 else
 			 {
-				 drive.tankDrive(speed, speed - .225, false);
+				 drive.tankDrive(speed, speed - .18, false);
 			 }
 		 }
 		 else
 		 {
 			 if(leftEnc > rightEnc)
 			 {
-				 drive.tankDrive(speed - .3, speed, false);
+				 drive.tankDrive(speed - .27, speed, false);
 			 }
 			 else
 			 {
-			 	drive.tankDrive(speed, speed - .3, false);
+			 	drive.tankDrive(speed, speed - .27, false);
 			 }
 		 }
 	}
 	
 	public static void driveBackward(double leftEnc, double rightEnc, double speed)
 	{
-		if(Math.abs(leftEnc - rightEnc) < 20)
+		if(Math.abs(leftEnc - rightEnc) < 50)
 		{
 			drive.tankDrive(speed, speed, false);
 		}
-		else if(Math.abs(leftEnc - rightEnc) < 30)
+		else if(Math.abs(leftEnc - rightEnc) < 150)
 		{
 			if(leftEnc > rightEnc)
 		 	{
@@ -156,37 +156,37 @@ public class Drivetrain
 		 		drive.tankDrive(speed, speed + .05, false);
 		 	}
 		 }
-		 else if(Math.abs(leftEnc - rightEnc) < 40)
-		 {
-			 if(leftEnc > rightEnc)
-			 {
-				 drive.tankDrive(speed + .1, speed, false);
-			 }
-			 else
-			 {
-				 drive.tankDrive(speed, speed + .1, false);
-			 }
+		else if(Math.abs(leftEnc - rightEnc) < 300)
+		{
+			if(leftEnc > rightEnc)
+			{
+				drive.tankDrive(speed + .1, speed, false);
+			}
+			else
+			{
+				drive.tankDrive(speed, speed + .1, false);
+			}
 		 }
-		 else if(Math.abs(leftEnc - rightEnc) < 60)
+		else if(Math.abs(leftEnc - rightEnc) < 500)
 		 {
 			 if(leftEnc > rightEnc)
 			 {
-				 drive.tankDrive(speed +.15, speed, false);
+				 drive.tankDrive(speed +.18, speed, false);
 			 }
 			 else
 			 {
-				 drive.tankDrive(speed, speed + .15, false);
+				 drive.tankDrive(speed, speed + .18, false);
 			 }
 		 }
 		 else
 		 {
 			 if(leftEnc > rightEnc)
 			 {
-				 drive.tankDrive(speed + .2, speed, false);
+				 drive.tankDrive(speed + .27, speed, false);
 			 }
 			 else
 			 {
-			 	drive.tankDrive(speed, speed + .2, false);
+			 	drive.tankDrive(speed, speed + .27, false);
 			 }
 		 }
 	}

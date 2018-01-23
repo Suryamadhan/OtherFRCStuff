@@ -14,6 +14,7 @@ public class Autonomous
 	double requiredLeftDist, requiredRightDist, requiredStraightDist = 0;
 	int autoSelected;
 	String gameData;
+	String auto = "";
 	boolean leftStation, rightStation, middleStation;
 	double aimedRatio, currentRatio;
 	double sum;
@@ -131,12 +132,12 @@ public class Autonomous
 				}
 				break;
 			case 3:
-				System.out.println(3);
+//				System.out.println(3);
 				requiredLeftDist = (Constants.testSmallLeft - 2000);
 				requiredRightDist = (Constants.testBigRight - 3600);
 				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
-				currentRatio = (((rightEncoder - Constants.testStright)/(leftEncoder - Constants.testStright))/aimedRatio);
-				sum = (rightEncoder - Constants.testStright) + (leftEncoder - Constants.testStright);
+				currentRatio = (((rightEncoder)/(leftEncoder))/aimedRatio);
+				sum = (rightEncoder) + (leftEncoder);
 				if(currentRatio >= .9 && currentRatio <= 1.1)
 				{
 					withinRange = true;
@@ -220,60 +221,137 @@ public class Autonomous
 	public void selectAuto()
 	{
 		setStation();
-//		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		gameData = "LL";//
-		if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'L' && middleStation && !rightStation && !leftStation)
+		//gameData = DriverStation.getInstance().getGameSpecificMessage();
+		gameData = "LLL";//
+		auto += gameData.charAt(0);//
+		auto += gameData.charAt(1);//
+		switch(auto)
 		{
-			autoSelected = 1;
-		} 
-		else if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'R' && middleStation && !rightStation && !leftStation)
-		{
-			autoSelected = 2;
+			case "LL":
+				if(middleStation && !rightStation && !leftStation)
+				{
+					autoSelected = 1;
+				} 
+				else if(!middleStation && !rightStation && leftStation)
+				{
+					autoSelected = 5;
+				}
+				else if (!middleStation && rightStation && !leftStation)
+				{
+					autoSelected = 9;
+				}
+				else
+				{
+					autoSelected = 0;
+				}
+				break;
+			case "RR":
+				if(middleStation && !rightStation && !leftStation)
+				{
+					autoSelected = 3;
+				} 
+				else if(!middleStation && !rightStation && leftStation)
+				{
+					autoSelected = 7;
+				}
+				else if (!middleStation && rightStation && !leftStation)
+				{
+					autoSelected = 11;
+				}
+				else 
+				{
+					autoSelected = 0;
+				}
+				break;
+			case "LR":
+				if(middleStation && !rightStation && !leftStation)
+				{
+					autoSelected = 2;
+				} 
+				else if(!middleStation && !rightStation && leftStation)
+				{
+					autoSelected = 6;
+				}
+				else if (!middleStation && rightStation && !leftStation)
+				{
+					autoSelected = 10;
+				}
+				else 
+				{
+					autoSelected = 0;
+				}
+				break;
+			case "RL":
+				if(middleStation && !rightStation && !leftStation)
+				{
+					autoSelected = 4;
+				} 
+				else if(!middleStation && !rightStation && leftStation)
+				{
+					autoSelected = 8;
+				}
+				else if (!middleStation && rightStation && !leftStation)
+				{
+					autoSelected = 12;
+				}
+				else 
+				{
+					autoSelected = 0;
+				}
+				break;
 		}
-		else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'R' && middleStation && !rightStation && !leftStation)
-		{
-			autoSelected = 3;
-		}
-		else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'L' && middleStation && !rightStation && !leftStation)
-		{
-			autoSelected = 4;
-		}
-		else if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'L' && !middleStation && !rightStation && leftStation)
-		{
-			autoSelected = 5;
-		} 
-		else if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'R' && !middleStation && !rightStation && leftStation)
-		{
-			autoSelected = 6;
-		}
-		else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'R' && !middleStation && !rightStation && leftStation)
-		{
-			autoSelected = 7;
-		}
-		else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'L' && !middleStation && !rightStation && leftStation)
-		{
-			autoSelected = 8;
-		}
-		else if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'L' && !middleStation && rightStation && !leftStation)
-		{
-			autoSelected = 9;
-		} 
-		else if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'R' && !middleStation && rightStation && !leftStation)
-		{
-			autoSelected = 10;
-		}
-		else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'R' && !middleStation && rightStation && !leftStation)
-		{
-			autoSelected = 11;
-		}
-		else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'L' && !middleStation && rightStation && !leftStation)
-		{
-			autoSelected = 12;
-		}
-		else
-		{
-			autoSelected = 13;
-		}
+//		if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'L' && middleStation && !rightStation && !leftStation)
+//		{
+//			autoSelected = 1;
+//		} 
+//		else if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'R' && middleStation && !rightStation && !leftStation)
+//		{
+//			autoSelected = 2;
+//		}
+//		else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'R' && middleStation && !rightStation && !leftStation)
+//		{
+//			autoSelected = 3;
+//		}
+//		else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'L' && middleStation && !rightStation && !leftStation)
+//		{
+//			autoSelected = 4;
+//		}
+//		else if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'L' && !middleStation && !rightStation && leftStation)
+//		{
+//			autoSelected = 5;
+//		} 
+//		else if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'R' && !middleStation && !rightStation && leftStation)
+//		{
+//			autoSelected = 6;
+//		}
+//		else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'R' && !middleStation && !rightStation && leftStation)
+//		{
+//			autoSelected = 7;
+//		}
+//		else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'L' && !middleStation && !rightStation && leftStation)
+//		{
+//			autoSelected = 8;
+//		}
+//		else if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'L' && !middleStation && rightStation && !leftStation)
+//		{
+//			autoSelected = 9;
+//		} 
+//		else if(gameData.charAt(0) == 'L' && gameData.charAt(1) == 'R' && !middleStation && rightStation && !leftStation)
+//		{
+//			autoSelected = 10;
+//		}
+//		else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'R' && !middleStation && rightStation && !leftStation)
+//		{
+//			autoSelected = 11;
+//		}
+//		else if(gameData.charAt(0) == 'R' && gameData.charAt(1) == 'L' && !middleStation && rightStation && !leftStation)
+//		{
+//			autoSelected = 12;
+//		}
+//		else
+//		{
+//			autoSelected = 0;
+//		}
 		
 	}
 	
