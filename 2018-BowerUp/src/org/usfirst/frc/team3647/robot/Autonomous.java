@@ -111,6 +111,7 @@ public class Autonomous
 				if(!Drivetrain.reachedDistance(leftEncoder, rightEncoder, requiredStraightDist))
 				{
 					Drivetrain.driveForward(leftEncoder, rightEncoder, .5);
+					System.out.println(1);
 				}
 				else
 				{
@@ -121,6 +122,7 @@ public class Autonomous
 				requiredStraightDist = Constants.testStright;
 				if(!Drivetrain.reachedDistance(leftEncoder, rightEncoder, requiredStraightDist))
 				{
+					System.out.println(1);
 					Drivetrain.driveForward(leftEncoder, rightEncoder, .2);
 				}
 				else
@@ -208,8 +210,8 @@ public class Autonomous
 				}
 				break;
 			case 0:
-				Drivetrain.setLeftMotorSpeed(0);
-				Drivetrain.setRightMotorSpeed(0);
+				Drivetrain.drive.tankDrive(0, 0);
+				Encoders.resetEncoders();
 				break;
 				
 		}

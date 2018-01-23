@@ -91,51 +91,53 @@ public class Drivetrain
 	{
 		if(Math.abs(leftEnc - rightEnc) < 6)
 		{
-			drive.tankDrive(speed, -speed, false);
+			drive.tankDrive(speed, speed, false);
+			System.out.println(6);
 		}
 		else if(Math.abs(leftEnc - rightEnc) < 20)
 		{
-			if(rightEnc > leftEnc)
+			System.out.println(20);
+			if(leftEnc > rightEnc)
 		 	{
-				drive.tankDrive(speed, -speed + .125, false);
+				drive.tankDrive(speed - .125, speed, false);
 		 	}
 			else
 		 	{
-		 		drive.tankDrive(speed - .125, -speed, false);
+		 		drive.tankDrive(speed, speed - .125, false);
 		 	}
 		 }
 		 else if(Math.abs(leftEnc - rightEnc) < 34)
 		 {
-		 	if(rightEnc > leftEnc)
-		 	{
-				drive.tankDrive(speed, -speed + .2, false);
-		 	}
-			else
-		 	{
-		 		drive.tankDrive(speed - .2, -speed, false);
-		 	}
+			 if(leftEnc > rightEnc)
+			 	{
+					drive.tankDrive(speed - .2, speed, false);
+			 	}
+				else
+			 	{
+			 		drive.tankDrive(speed, speed - .2, false);
+			 	}
 		 }
 		 else if(Math.abs(leftEnc - rightEnc) < 48)
 		 {
-			 if(rightEnc > leftEnc)
-			 {
-				drive.tankDrive(speed, -speed + .275, false);
-			 }
-			 else
-			 {
-			 	drive.tankDrive(speed - .275, -speed, false);
-			 }
+			 if(leftEnc > rightEnc)
+			 	{
+					drive.tankDrive(speed - .275, speed, false);
+			 	}
+				else
+			 	{
+			 		drive.tankDrive(speed, speed - .275, false);
+			 	}
 		 }
 		 else
 		 {
-			 if(rightEnc > leftEnc)
-			 {
-				drive.tankDrive(speed, -speed + .33, false);
-			 }
-			 else
-			 {
-			 	drive.tankDrive(speed - .34, -speed, false);
-			 }
+			 if(leftEnc > rightEnc)
+			 	{
+					drive.tankDrive(speed - .33, speed, false);
+			 	}
+				else
+			 	{
+			 		drive.tankDrive(speed, speed - .33, false);
+			 	}
 		 }
 	}
 	
