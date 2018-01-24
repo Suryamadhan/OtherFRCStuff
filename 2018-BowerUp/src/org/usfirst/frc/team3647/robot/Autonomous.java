@@ -9,7 +9,7 @@ import team3647subsystems.Encoders;
 
 public class Autonomous 
 {
-	int currentState;
+	static int currentState;
 	double leftEncoder, rightEncoder;
 	double requiredLeftDist, requiredRightDist, requiredStraightDist = 0;
 	int autoSelected;
