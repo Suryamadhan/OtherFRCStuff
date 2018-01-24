@@ -103,6 +103,86 @@ public class Autonomous
 		
 	}
 	
+	public void yeet() 
+	{
+		switch(currentState)
+		{
+			case 1:
+				requiredStraightDist = (Constants.testStright - 1400);
+				if(!Drivetrain.reachedDistance(leftEncoder, rightEncoder, requiredStraightDist))
+				{
+					Drivetrain.driveForward(leftEncoder, rightEncoder, .6);
+				}
+				else
+				{
+					currentState = 2;
+				}
+				break;
+			case 2:
+				requiredStraightDist = Constants.testStright;
+				if(!Drivetrain.reachedDistance(leftEncoder, rightEncoder, requiredStraightDist))
+				{
+					Drivetrain.driveForward(leftEncoder, rightEncoder, .1);
+				}
+				else
+				{
+					requiredStraightDist = 0;
+					Encoders.resetEncoders();
+					currentState = 5;
+				}
+				break;
+			case 3:
+				requiredLeftDist = (Constants.testSmall - 2000);
+				requiredRightDist = (Constants.testBig - 3600);
+				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
+				currentRatio = (((rightEncoder)/(leftEncoder))/aimedRatio);
+				sum = (rightEncoder) + (leftEncoder);
+				if(currentRatio >= .9 && currentRatio <= 1.1)
+				{
+					withinRange = true;
+				}
+				else
+				{
+					withinRange = false;
+				}
+				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
+				{
+					Drivetrain.goStraightLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .325, .585, .05);
+				}
+				else
+				{
+					currentState = 4;
+				}
+				break;
+			case 4:
+				requiredLeftDist = (Constants.testSmall);
+				requiredRightDist = (Constants.testBig);
+				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
+				currentRatio = (((rightEncoder)/(leftEncoder))/aimedRatio);
+				sum = (rightEncoder) + (leftEncoder);
+				if(currentRatio >= .9 && currentRatio <= 1.1)
+				{
+					withinRange = true;
+				}
+				else
+				{
+					withinRange = false;
+				}
+				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
+				{
+					Drivetrain.goStraightLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .2, .36, .04);
+				}
+				else
+				{
+					currentState = 5;
+				}
+				break;
+			case 5:
+				Drivetrain.drive.tankDrive(0, 0);
+				break;
+		}
+	}
+	
 	public void test()
 	{
 		switch(currentState)
