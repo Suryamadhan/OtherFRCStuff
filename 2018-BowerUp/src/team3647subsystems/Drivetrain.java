@@ -205,12 +205,13 @@ public class Drivetrain
 	
 	public static void goStraightLeft(double currentRatio, boolean withinRange, double sum, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment)
 	{
-		if(withinRange || sum < 50)
+		if(withinRange || sum < 360)
 		{
 			drive.tankDrive(leftSpeed,rightSpeed, false);
 		}
 		else
 		{
+			System.out.println("RIP");
 			if(currentRatio > 1.1 && currentRatio < 1.18)
 			{
 //				setLeftMotorSpeed(leftSpeed + adjustment);
@@ -258,15 +259,19 @@ public class Drivetrain
 	
 	public static void goStraightRight(double currentRatio, boolean withinRange, double sum, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment)
 	{
-		if(withinRange || sum < 50)
+		if(withinRange || sum < 360)
 		{
 //			setLeftMotorSpeed(leftSpeed);
 //			setRightMotorSpeed(-rightSpeed);
 			
 			drive.tankDrive(leftSpeed,rightSpeed, false);
+			System.out.println("no rip");
 		}
 		else
 		{
+			System.out.println("RIP");
+			System.out.println("left:" + leftSRX.get());
+			System.out.println("right:" + rightSRX.get());
 			if(currentRatio > 1.1 && currentRatio < 1.18)
 			{
 //				setLeftMotorSpeed(leftSpeed + adjustment);

@@ -12,6 +12,8 @@ public class Robot extends IterativeRobot {
 	Joysticks joy;
 	Autonomous auto;
 	
+	int yes = 1;
+	
 	@Override
 	public void robotInit() 
 	{
@@ -40,7 +42,7 @@ public class Robot extends IterativeRobot {
 		{
 			CrashChecker.logAutoInit();
 			Encoders.resetEncoders();
-			auto.currentState = 3;
+			yes = 1;
 		}
 		catch(Throwable t)
 		{
@@ -55,9 +57,19 @@ public class Robot extends IterativeRobot {
 	{
 		while(DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
 		{
-			enc.setEncoderValues();
-			enc.testEncoders();
-			auto.runAuto(enc.leftEncoderValue, enc.rightEncoderValue);
+			switch(yes)
+			{
+				case 1:
+					Autonomous.currentState = 1;
+					yes = 2;
+					break;
+				case 2:
+					enc.setEncoderValues();
+					enc.testEncoders();
+					auto.runAuto(enc.leftEncoderValue, enc.rightEncoderValue);
+					System.out.println(Autonomous.currentState);
+					break;
+			}
 		}
 		
 	}

@@ -111,7 +111,7 @@ public class Autonomous
 				requiredStraightDist = (Constants.testStright - 1400);
 				if(!Drivetrain.reachedDistance(leftEncoder, rightEncoder, requiredStraightDist))
 				{
-					Drivetrain.driveForward(leftEncoder, rightEncoder, .5);
+					Drivetrain.driveForward(leftEncoder, rightEncoder, .6);
 				}
 				else
 				{
@@ -122,19 +122,19 @@ public class Autonomous
 				requiredStraightDist = Constants.testStright;
 				if(!Drivetrain.reachedDistance(leftEncoder, rightEncoder, requiredStraightDist))
 				{
-					System.out.println(1);
-					Drivetrain.driveForward(leftEncoder, rightEncoder, .2);
+					Drivetrain.driveForward(leftEncoder, rightEncoder, .1);
 				}
 				else
 				{
 					requiredStraightDist = 0;
-					currentState = 0;
+					Encoders.resetEncoders();
+					currentState = 3;
 				}
 				break;
 			case 3:
-//				System.out.println(3);
-				requiredLeftDist = (Constants.testSmallLeft - 2000);
-				requiredRightDist = (Constants.testBigRight - 3600);
+				System.out.println(3);
+				requiredLeftDist = (Constants.testSmall - 2000);
+				requiredRightDist = (Constants.testBig - 3600);
 				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
 				currentRatio = (((rightEncoder)/(leftEncoder))/aimedRatio);
 				sum = (rightEncoder) + (leftEncoder);
@@ -148,7 +148,7 @@ public class Autonomous
 				}
 				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
 				{
-					Drivetrain.goStraightLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .325, .585, .5);
+					Drivetrain.goStraightLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .325, .585, .05);
 				}
 				else
 				{
@@ -156,12 +156,11 @@ public class Autonomous
 				}
 				break;
 			case 4:
-				System.out.println(4);
-				requiredLeftDist = (Constants.testSmallLeft);
-				requiredRightDist = (Constants.testBigRight);
+				requiredLeftDist = (Constants.testSmall);
+				requiredRightDist = (Constants.testBig);
 				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
-				currentRatio = ((rightEncoder/leftEncoder)/aimedRatio);
-				sum = rightEncoder + leftEncoder;
+				currentRatio = (((rightEncoder)/(leftEncoder))/aimedRatio);
+				sum = (rightEncoder) + (leftEncoder);
 				if(currentRatio >= .9 && currentRatio <= 1.1)
 				{
 					withinRange = true;
@@ -187,8 +186,8 @@ public class Autonomous
 				currentState = 6;
 				break;
 			case 6:
-				requiredLeftDist = (Constants.testSmallLeft - 400);
-				requiredRightDist = (Constants.testBigRight - 752);
+				requiredLeftDist = (Constants.testSmall - 400);
+				requiredRightDist = (Constants.testBig - 752);
 				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
 				rightEncoder = Math.abs(rightEncoder);
 				leftEncoder = Math.abs(leftEncoder);
