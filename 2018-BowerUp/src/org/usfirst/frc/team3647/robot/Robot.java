@@ -55,7 +55,9 @@ public class Robot extends IterativeRobot {
 		while(DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
 		{
 			enc.setEncoderValues();
-			Autonomous.runAuto(enc.leftEncoderValue, enc.rightEncoderValue);
+			enc.testEncoders();
+			Auto.test(enc.leftEncoderValue, enc.rightEncoderValue);
+			//Autonomous.runAuto(enc.leftEncoderValue, enc.rightEncoderValue);
 //			switch(yes)
 //			{
 //				case 1:
@@ -81,8 +83,7 @@ public class Robot extends IterativeRobot {
 			enc.setEncoderValues();
 			joy.setMainContollerValues();
 			Drivetrain.arcadeDrive(enc.leftEncoderValue, enc.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
-			System.out.println("Left " + Drivetrain.leftSRX.get());
-			System.out.println("Right " + Drivetrain.rightSRX.get());
+			enc.testEncoders();
 			//Drivetrain.testDrive(joy.leftJoySticky, joy.rightJoyStickx);
 		}
 		catch(Throwable t)
