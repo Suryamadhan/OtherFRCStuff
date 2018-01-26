@@ -3,12 +3,12 @@ package team3647ConstantsAndFunctions;
 public class Constants 
 {
 	//Motor Pins
-	public final static int leftMaster = 0;
-	public final static int rightMaster = 3;
-	public final static int rightSlave1 = 0;
-	public final static int rightSlave2 = 3;
-	public final static int leftSlave1 = 1;
-	public final static int leftSlave2 = 2;
+	public final static int leftMaster = 57;
+	public final static int rightMaster = 54;
+	public final static int rightSlave1 = 58;
+	public final static int rightSlave2 = 59;
+	public final static int leftSlave1 = 52;
+	public final static int leftSlave2 = 53;
 	
 	//Encoder Pins
 	public final static int leftEncoderPinSourceA = 0;
