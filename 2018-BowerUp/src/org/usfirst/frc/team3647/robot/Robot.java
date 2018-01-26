@@ -64,7 +64,7 @@ public class Robot extends IterativeRobot {
 					yes = 2;
 					break;
 				case 2:
-					enc.setEncoderValues();
+					//enc.setEncoderValues();
 					auto.yeet();
 					System.out.println(Autonomous.currentState);
 					break;
