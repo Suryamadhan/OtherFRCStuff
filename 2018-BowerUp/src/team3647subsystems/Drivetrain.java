@@ -61,7 +61,7 @@ public class Drivetrain
 		setRightMotorSpeed(-sYValue);
 	}
 	
-	public static void testPID(double yValue, double xValue)
+	public static void FRCarcadedrive(double yValue, double xValue)
 	{
 		drive.arcadeDrive(yValue, xValue);
 	}
@@ -69,8 +69,6 @@ public class Drivetrain
 	public static void tankDrive(double lYValue, double rYValue)
 	{
 		drive.tankDrive(lYValue, rYValue, false);
-		System.out.println("lvalue: " + lYValue + "; rvalue: " + rYValue); 
-		System.out.println("Left speed: " + leftSRX.get() + "; Right speed: " + rightSRX.get()); 
 	}
 	
 	static double drift;
@@ -114,137 +112,137 @@ public class Drivetrain
 	 			case "forward":
 	 				if(yValue < .3)
 	 				{
-	 				
-	 					lSpeed =(yValue);
-	 					rSpeed =(-yValue);
+	 					lSpeed = yValue;
+	 					rSpeed = -yValue;
 	 					Encoders.resetEncoders();
 	 				}
 	 				else
 	 				{
-	 					if(Math.abs(leftEnc - rightEnc) < 6)
+	 					if(Math.abs(leftEnc - rightEnc) < 100)
 	 					{
-	 						lSpeed =(yValue);
-	 						rSpeed =(-yValue);
+	 						lSpeed = yValue;
+	 						rSpeed = -yValue;
 	 					}
-	 					else if(Math.abs(leftEnc - rightEnc) < 20)
+	 					else if(Math.abs(leftEnc - rightEnc) < 200)
 						{
 	 						if(rightEnc > leftEnc)
 	 						{
-	 							 lSpeed =(yValue);
-	 						 rSpeed =(-yValue + .15);
-	 					}
+	 							 lSpeed = yValue;
+	 							 rSpeed = -yValue + .05;
+	 						}
+	 						
 	 						else
 	 						{
-	 							 lSpeed =(yValue - .15);
-	 							 rSpeed =(-yValue);
+	 							 lSpeed = yValue - .05;
+	 							 rSpeed = -yValue;
+	 						}
 	 					}
-	 					}
-	 					else if(Math.abs(leftEnc - rightEnc) < 34)
+	 					else if(Math.abs(leftEnc - rightEnc) < 300)
 	 					{
 	 						if(rightEnc > leftEnc)
 	 						{
-	 							 lSpeed =(yValue);
-	 							 rSpeed =(-yValue + .25);
+	 							 lSpeed = yValue;
+	 							 rSpeed = -yValue + .1;
 	 						}
 	 						else
 	 						{
-	 							 lSpeed =(yValue - .25);
-	 							 rSpeed =(-yValue);
+	 							 lSpeed = yValue - .1;
+	 							 rSpeed = -yValue;
 	 						}
 	 					}
-	 					else if(Math.abs(leftEnc - rightEnc) < 48)
+	 					else if(Math.abs(leftEnc - rightEnc) < 500)
 	 					{
 	 						if(rightEnc > leftEnc)
 	 						{
-	 							 lSpeed =(yValue);
-	 							 rSpeed =(-yValue + .35);
-	 						}
-	 					else
-	 						{
-	 							 lSpeed =(yValue - .35);
-	 							 rSpeed =(-yValue);
-	 						}
-	 				}
-	 				else
-	 					{
-	 						if(rightEnc > leftEnc)
-	 						{
-	 							 lSpeed =(yValue);
-	 							 rSpeed =(-yValue + .4);
+	 							 lSpeed = yValue;
+	 							 rSpeed = -yValue + .18;
 	 						}
 	 						else
 	 						{
-	 							 lSpeed =(yValue - .4);
-	 							 rSpeed =(-yValue);
+	 							 lSpeed = yValue - .18;
+	 							 rSpeed = -yValue;
 	 						}
 	 					}
+		 				else
+		 				{
+		 					if(rightEnc > leftEnc)
+		 					{
+		 						 lSpeed = yValue;
+		 						 rSpeed = -yValue + .27;
+		 					}
+		 					else
+		 					{
+		 						 lSpeed = yValue - .27;
+		 						 rSpeed = -yValue;
+		 					}
+		 				}
 	 				}
 	 				drive.tankDrive(lSpeed, -rSpeed, false);
 	 				break;
 	 			case "backward":
 	 				if(yValue > -.3)
 	 				{
-	 				lSpeed =(yValue);
-	 				rSpeed =(-yValue);
+		 				lSpeed =yValue;
+		 				rSpeed =-yValue;
 	 					Encoders.resetEncoders();
 	 				}
 	 				else
 	 				{
-	 					if(Math.abs(leftEnc - rightEnc) < 6)
+	 					if(Math.abs(leftEnc - rightEnc) < 100)
 	 					{
-	 						lSpeed =(yValue);
-	 						rSpeed =(-yValue);
+	 						lSpeed = yValue;
+	 						rSpeed = -yValue;
 	 					}
-	 					else if(Math.abs(leftEnc - rightEnc) < 20)
+	 					else if(Math.abs(leftEnc - rightEnc) < 200)
 	 					{
 	 						if(rightEnc > leftEnc)
 	 						{
-	 							 lSpeed =(yValue + .125);
-	 							 rSpeed =(-yValue);
+	 							 lSpeed = yValue + .05;
+	 							 rSpeed = -yValue;
 	 						}
 	 						else
 	 						{
-	 							 lSpeed =(yValue);
-	 							 rSpeed =(-yValue - .125);
+	 							 lSpeed = yValue;
+	 							 rSpeed = -yValue - .05;
 	 						}
 	 					}
-	 					else if(Math.abs(leftEnc - rightEnc) < 34)
+	 					else if(Math.abs(leftEnc - rightEnc) < 300)
 	 					{
 	 						if(rightEnc > leftEnc)
 	 						{
-	 							 lSpeed =(yValue + .2);
-	 							 rSpeed =(-yValue);
+	 							 lSpeed = yValue + .1;
+	 							 rSpeed = -yValue;
 	 						}
 	 						else
 							{
-								 lSpeed =(yValue);
-	 							 rSpeed =(-yValue - .2);
+								 lSpeed = yValue;
+	 							 rSpeed = -yValue - .1;
 	 						}
 	 					}
-	 					else if(Math.abs(leftEnc - rightEnc) < 48)
+	 					else if(Math.abs(leftEnc - rightEnc) < 500)
 	 					{
 	 						if(rightEnc > leftEnc)
 	 						{
-	 							 lSpeed =(yValue + .275);
-	 							 rSpeed =(-yValue);
+	 							 lSpeed = yValue + .18;
+	 							 rSpeed = -yValue;
 	 						}
 	 						else
 	 						{
-	 							 lSpeed =(yValue);
-	 							 rSpeed =(-yValue - .275);
+	 							 lSpeed = yValue;
+	 							 rSpeed = -yValue - .18;
 	 						}
 	 					}
 	 					else
 	 					{
 	 						if(rightEnc > leftEnc)
 	 						{
-	 							 lSpeed =(yValue + .34);
-	 							 rSpeed =(-yValue);
+	 							 lSpeed = yValue + .27;
+	 							 rSpeed = -yValue;
 	 						}
 	 						else
 	 						{
-	 							 lSpeed =(yValue);
-	 							 rSpeed =(-yValue - .34);
+	 							 lSpeed = yValue;
+	 							 rSpeed = -yValue - .27;
 							}
 	 					}
 	 				}
@@ -255,8 +253,8 @@ public class Drivetrain
 	 				speedY = Math.abs(yValue);
 	 				speedY *= yValue;
 	 				speedX = xValue * Constants.turnConstant(yValue);
-	 				lSpeed =(speedY + speedX);
-	 				rSpeed =(-speedY + speedX);
+	 				lSpeed = speedY + speedX ;
+	 				rSpeed = -speedY + speedX ;
 	 				drive.tankDrive(lSpeed, -rSpeed, false);
 	 				Encoders.resetEncoders();
 	 				break;
@@ -280,6 +278,12 @@ public class Drivetrain
 		{
 			return true;
 		}
+	}
+	
+	public static void testSpeed()
+	{
+		System.out.println("Left speed: " + leftSRX.get());
+		System.out.println("Right speed:" + rightSRX.get());
 	}
 	
 	public static void driveForward(double leftEnc, double rightEnc, double speed)
@@ -336,11 +340,11 @@ public class Drivetrain
 	
 	public static void driveBackward(double leftEnc, double rightEnc, double speed)
 	{
-		if(Math.abs(leftEnc - rightEnc) < 50)
+		if(Math.abs(leftEnc - rightEnc) < 100)
 		{
 			drive.tankDrive(speed, speed, false);
 		}
-		else if(Math.abs(leftEnc - rightEnc) < 150)
+		else if(Math.abs(leftEnc - rightEnc) < 200)
 		{
 			if(leftEnc > rightEnc)
 		 	{

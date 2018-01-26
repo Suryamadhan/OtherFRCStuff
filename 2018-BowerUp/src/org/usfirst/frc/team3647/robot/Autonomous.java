@@ -10,17 +10,17 @@ import team3647subsystems.Encoders;
 public class Autonomous 
 {
 	static int currentState;
-	double leftEncoder, rightEncoder;
-	double requiredLeftDist, requiredRightDist, requiredStraightDist = 0;
-	int autoSelected;
-	String gameData;
-	String auto = "";
-	boolean leftStation, rightStation, middleStation;
-	double aimedRatio, currentRatio;
-	double sum;
-	boolean withinRange;
+	static double leftEncoder, rightEncoder;
+	static double requiredLeftDist, requiredRightDist, requiredStraightDist = 0;
+	static int autoSelected;
+	static String gameData;
+	static String auto = "";
+	static boolean leftStation, rightStation, middleStation;
+	static double aimedRatio, currentRatio;
+	static double sum;
+	static boolean withinRange;
 	
-	public void runAuto(double lValue, double rValue)
+	public static void runAuto(double lValue, double rValue)
 	{
 		selectAuto();
 		leftEncoder = lValue;
@@ -29,7 +29,7 @@ public class Autonomous
 		{
 			case 1:
 //				middleStationLLSWSC();
-				test();
+				yeet();
 				break;
 			case 2:
 				middleStationLR();
@@ -69,7 +69,7 @@ public class Autonomous
 		}
 	}
 	
-	public void setStation()
+	public static void setStation()
 	{
 //		DigitalInputs.setPinValues();
 //		if(DigitalInputs.left && !DigitalInputs.right && !DigitalInputs.middle)
@@ -103,7 +103,7 @@ public class Autonomous
 		
 	}
 	
-	public void yeet() 
+	public static void  yeet() 
 	{
 		switch(currentState)
 		{
@@ -128,7 +128,7 @@ public class Autonomous
 				{
 					requiredStraightDist = 0;
 					Encoders.resetEncoders();
-					currentState = 5;
+					currentState = 3;
 				}
 				break;
 			case 3:
@@ -183,7 +183,7 @@ public class Autonomous
 		}
 	}
 	
-	public void test()
+	public static void test()
 	{
 		switch(currentState)
 		{
@@ -212,7 +212,6 @@ public class Autonomous
 				}
 				break;
 			case 3:
-				System.out.println(3);
 				requiredLeftDist = (Constants.testSmall - 2000);
 				requiredRightDist = (Constants.testBig - 3600);
 				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
@@ -297,7 +296,7 @@ public class Autonomous
 				
 		}
 	}
-	public void selectAuto()
+	public static void selectAuto()
 	{
 		setStation();
 		//gameData = DriverStation.getInstance().getGameSpecificMessage();
@@ -434,7 +433,7 @@ public class Autonomous
 		
 	}
 	
-	public void middleStationLLSWSC()
+	public static void middleStationLLSWSC()
 	{		
 		switch(currentState)
 		{
@@ -969,7 +968,7 @@ public class Autonomous
 		}
 	}
 	
-	public void middleStationLR()
+	public static void middleStationLR()
 	{
 		switch(currentState)
 		{
@@ -979,7 +978,7 @@ public class Autonomous
 		}
 	}
 	
-	public void middleStationRR()
+	public static void middleStationRR()
 	{
 		switch(currentState)
 		{
@@ -989,7 +988,7 @@ public class Autonomous
 		}
 	}
 	
-	public void middleStationRL()
+	public static void middleStationRL()
 	{
 		switch(currentState)
 		{
@@ -999,7 +998,7 @@ public class Autonomous
 		}
 	}
 	
-	public void leftStationLL()
+	public static void leftStationLL()
 	{
 		switch(currentState)
 		{
@@ -1009,7 +1008,7 @@ public class Autonomous
 		}
 	}
 	
-	public void leftStationLR()
+	public static void leftStationLR()
 	{
 		switch(currentState)
 		{
@@ -1019,7 +1018,7 @@ public class Autonomous
 		}
 	}
 	
-	public void leftStationRR()
+	public static void leftStationRR()
 	{
 		switch(currentState)
 		{
@@ -1029,7 +1028,7 @@ public class Autonomous
 		}
 	}
 	
-	public void leftStationRL()
+	public static void leftStationRL()
 	{
 		switch(currentState)
 		{
@@ -1039,7 +1038,7 @@ public class Autonomous
 		}
 	}
 	
-	public void rightStationLL()
+	public static void rightStationLL()
 	{
 		switch(currentState)
 		{
@@ -1050,7 +1049,7 @@ public class Autonomous
 		}
 	}
 	
-	public void rightStationLR()
+	public static void rightStationLR()
 	{
 		switch(currentState)
 		{
@@ -1060,7 +1059,7 @@ public class Autonomous
 		}
 	}
 	
-	public void rightStationRR()
+	public static void rightStationRR()
 	{
 		switch(currentState)
 		{
@@ -1070,7 +1069,7 @@ public class Autonomous
 		}
 	}
 	
-	public void rightStationRL()
+	public static void rightStationRL()
 	{
 		switch(currentState)
 		{
