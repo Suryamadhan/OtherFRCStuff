@@ -9,8 +9,8 @@ public class Encoders
 	
 	public void setEncoderValues()
 	{
-		leftEncoderValue = Drivetrain.rightSRX.getSensorCollection().getQuadraturePosition();
-		rightEncoderValue = -Drivetrain.leftSRX.getSensorCollection().getQuadraturePosition();
+		leftEncoderValue = Drivetrain.leftSRX.getSensorCollection().getQuadraturePosition();
+		rightEncoderValue = -Drivetrain.rightSRX.getSensorCollection().getQuadraturePosition();
 	}
 	
 	public static void resetEncoders()
