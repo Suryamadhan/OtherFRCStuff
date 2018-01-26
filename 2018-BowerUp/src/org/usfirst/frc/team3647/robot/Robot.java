@@ -82,6 +82,8 @@ public class Robot extends IterativeRobot {
 			//enc.setEncoderValues();
 			joy.setMainContollerValues();
 			Drivetrain.testPID(joy.leftJoySticky, joy.rightJoyStickx);
+			System.out.println("Left " + Drivetrain.leftSRX.get());
+			System.out.println("Right " + Drivetrain.rightSRX.get());
 			//Drivetrain.testDrive(joy.leftJoySticky, joy.rightJoyStickx);
 		}
 		catch(Throwable t)

@@ -35,7 +35,7 @@ public class Joysticks
 		}
 		else
 		{
-			return .4 * jValue;
+			return .7 * jValue;
 		}
 	}
 }
