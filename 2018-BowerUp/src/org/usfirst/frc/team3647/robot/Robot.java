@@ -8,7 +8,7 @@ import team3647subsystems.Joysticks;
 
 public class Robot extends IterativeRobot {
 
-	Encoders enc;
+	//Encoders enc;
 	Joysticks joy;
 	Autonomous auto;
 	
@@ -20,10 +20,10 @@ public class Robot extends IterativeRobot {
 		try
 		{
 			CrashChecker.logRobotInit();
-			enc = new Encoders();
+			//enc = new Encoders();
 			joy = new Joysticks();
 			auto = new Autonomous();
-			Encoders.resetEncoders();
+			//Encoders.resetEncoders();
 			Drivetrain.drivetrainInitialization();
 			//Drivetrain.configPID();
 		}
@@ -41,7 +41,7 @@ public class Robot extends IterativeRobot {
 		try 
 		{
 			CrashChecker.logAutoInit();
-			Encoders.resetEncoders();
+			//Encoders.resetEncoders();
 			yes = 1;
 		}
 		catch(Throwable t)
@@ -79,7 +79,7 @@ public class Robot extends IterativeRobot {
 		try 
 		{
 			CrashChecker.logTeleopPeriodic();
-			enc.setEncoderValues();
+			//enc.setEncoderValues();
 			joy.setMainContollerValues();
 			Drivetrain.testPID(joy.leftJoySticky, joy.rightJoyStickx);
 			//Drivetrain.testDrive(joy.leftJoySticky, joy.rightJoyStickx);
@@ -94,8 +94,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void testPeriodic() 
 	{
-		enc.setEncoderValues();
-		enc.testEncoders();
+//		enc.setEncoderValues();
+//		enc.testEncoders();
 		joy.setMainContollerValues();
 		Drivetrain.testDrive(joy.leftJoySticky, joy.rightJoySticky);
 	}
