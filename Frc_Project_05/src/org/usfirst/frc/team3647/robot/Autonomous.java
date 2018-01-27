@@ -37,6 +37,10 @@ public class Autonomous {
 	double forwardTime = 1;
 	double backwardTime = 1;
 	double pauseTime = 1;
+	double sumEncoder = 0;
+	double distance = 11000;
+	boolean reachGoal = false;
+	boolean forward = true;
 	public void TimerInit() {
 		startTime = System.currentTimeMillis();
 		System.out.print("init timer");
@@ -85,31 +89,45 @@ public class Autonomous {
 	
 	public void middleAuto(double lEnc, double rEnc) {
 		// move straight no turn
-
+		sumEncoder = (lEnc + rEnc)/2 + sumEncoder;
 		turnForward = 0;
 		turnBackward = 0;
-		if (System.currentTimeMillis() - startTime<forwardTime*1000){
-			leftSpeed = .8;
-			rightSpeed = .8;
-			System.out.println("PIDForward");
-			runPIDforward(lEnc, rEnc);
-		}
-		else if(System.currentTimeMillis() - startTime<(forwardTime + pauseTime)*1000 ) {
-			System.out.print("pause");
-			Motors.drive.tankDrive(0, 0, false);
 		
-		}
-		else if(System.currentTimeMillis() - startTime<(forwardTime + pauseTime + backwardTime)*1000 ) {
-			leftSpeed = -.8;
-			rightSpeed = -.8;
-			System.out.println("PIDBackward");
-			runPIDbackward(lEnc, rEnc);
+		if (reachGoal) {
+			if (System.currentTimeMillis() - startTime<pauseTime*1000) {
+				Motors.drive.tankDrive(0, 0, false);
+				System.out.print("pause");
+			}else {
+				reachGoal = false;
+				forward = false;
+				sumEncoder = 0;
+			}
 		}
 		else {
-		Motors.drive.tankDrive(0, 0, false);
-		System.out.print("done");
-		
-	}	
+			if (forward) {
+				if (sumEncoder < distance) {
+					leftSpeed = .8;
+					rightSpeed = .8;
+					System.out.println("PIDForward");
+					runPIDforward(lEnc, rEnc);
+				}
+				else {
+					reachGoal = true;
+					TimerInit();
+				}
+			}else {
+				if (sumEncoder < distance) {
+					leftSpeed = -.8;
+					rightSpeed = -.8;
+					System.out.println("PIDbackward");
+					runPIDforward(lEnc, rEnc);
+				}
+				else {
+					Motors.drive.tankDrive(0, 0, false);
+					System.out.print("done");
+				}
+			}
+		}
 }
 	
 	public void rightAuto(double lEnc, double rEnc) {
