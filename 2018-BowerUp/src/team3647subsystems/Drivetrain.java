@@ -410,7 +410,6 @@ public class Drivetrain
 		}
 		else
 		{
-			System.out.println("RIP");
 			if(currentRatio > 1.1 && currentRatio < 1.18)
 			{
 //				setLeftMotorSpeed(leftSpeed + adjustment);
@@ -464,13 +463,9 @@ public class Drivetrain
 //			setRightMotorSpeed(-rightSpeed);
 			
 			drive.tankDrive(leftSpeed,rightSpeed, false);
-			System.out.println("no rip");
 		}
 		else
 		{
-			System.out.println("RIP");
-			System.out.println("left:" + leftSRX.get());
-			System.out.println("right:" + rightSRX.get());
 			if(currentRatio > 1.1 && currentRatio < 1.18)
 			{
 //				setLeftMotorSpeed(leftSpeed + adjustment);

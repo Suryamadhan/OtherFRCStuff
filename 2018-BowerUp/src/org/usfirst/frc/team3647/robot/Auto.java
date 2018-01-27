@@ -8,21 +8,20 @@ public class Auto
 	static double aimedRatio, currentRatio;
 	static double sum;
 	static boolean withinRange;
-	static double leftEncoder, rightEncoder;
 	static double requiredLeftDist, requiredRightDist, requiredStraightDist = 0;
 	static int currentState = 1;
+	
+	
 	public static void test(double lValue, double rValue)
 	{
 		switch(currentState)
 		{
 			case 1:
-				leftEncoder = lValue;
-				rightEncoder = rValue;
 				requiredLeftDist = (Constants.testSmall);
 				requiredRightDist = (Constants.testBig);
 				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
-				currentRatio = (((rightEncoder)/(leftEncoder))/aimedRatio);
-				sum = (rightEncoder) + (leftEncoder);
+				currentRatio = (((rValue)/(lValue))/aimedRatio);
+				sum = (rValue) + (lValue);
 				if(currentRatio >= .9 && currentRatio <= 1.1)
 				{
 					withinRange = true;
