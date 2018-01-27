@@ -1,5 +1,9 @@
 package org.usfirst.frc.team3647.robot;
 
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class Motors 
 {

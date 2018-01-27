@@ -10,7 +10,7 @@ public class Auto
 	static double sum;
 	static boolean withinRange;
 	static double requiredLeftDist, requiredRightDist, requiredStraightDist = 0;
-	static int currentState = 1;
+	static int currentState;
 	
 	
 	public static void test(double lValue, double rValue)
@@ -18,8 +18,6 @@ public class Auto
 		switch(currentState)
 		{
 			case 1:
-<<<<<<< HEAD
-=======
 				requiredStraightDist = Constants.testStright -1400;
 				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
 				{
@@ -39,13 +37,11 @@ public class Auto
 				else
 				{
 					Encoders.resetEncoders();
-					currentState = 3;
+					requiredStraightDist = 0;
+					currentState = 4;
 				}
 				break;
 			case 3:
-				leftEncoder = lValue;
-				rightEncoder = rValue;
->>>>>>> 40d0ac71d226e53f69e60a2582543a6f4141f760
 				requiredLeftDist = (Constants.testSmall);
 				requiredRightDist = (Constants.testBig);
 				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
@@ -61,11 +57,12 @@ public class Auto
 				}
 				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
 				{
-					System.out.println(currentRatio);
+					System.out.println("Big rip");
 					Drivetrain.goStraightLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .325, .585, .05);
 				}
 				else
 				{
+					System.out.println("yes");
 					currentState = 4;
 				}
 				break;

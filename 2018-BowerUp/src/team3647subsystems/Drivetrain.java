@@ -393,6 +393,8 @@ public class Drivetrain
 	
 	public static boolean reachedTurnDistance(double sum, double requiredLeftDist, double requiredRightDist)
 	{
+		System.out.println("Sum:" + sum);
+		System.out.println("required sum:" + (requiredLeftDist + requiredRightDist));
 		if(sum < requiredLeftDist + requiredRightDist)
 		{
 			return false;

@@ -39,7 +39,7 @@ public class Robot extends IterativeRobot {
 		{
 			CrashChecker.logAutoInit();
 			Encoders.resetEncoders();
-			Auto.currentRatio = 1;
+			Auto.currentState = 1;
 		}
 		catch(Throwable t)
 		{
@@ -55,8 +55,9 @@ public class Robot extends IterativeRobot {
 		while(DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
 		{
 			enc.setEncoderValues();
-			enc.testEncoders();
+//			System.out.println(Auto.currentState);
 			Auto.test(enc.leftEncoderValue, enc.rightEncoderValue);
+			enc.testEncoders();
 			//Autonomous.runAuto(enc.leftEncoderValue, enc.rightEncoderValue);
 //			switch(yes)
 //			{
@@ -100,7 +101,11 @@ public class Robot extends IterativeRobot {
 		enc.testEncoders();
 		joy.setMainContollerValues();
 		Drivetrain.testDrive(joy.leftJoySticky, joy.rightJoySticky);
-		Drivetrain.testSpeed();
+		if(joy.buttonA)
+		{
+			Encoders.resetEncoders();
+		}
+		//Drivetrain.testSpeed();
 	}
 
 }

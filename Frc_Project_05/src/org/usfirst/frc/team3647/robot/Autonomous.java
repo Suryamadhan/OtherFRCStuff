@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3647.robot;
 
+import java.util.Date;
+
 public class Autonomous {
 	String autoSelected = "middleAuto";
 	long startTime = System.currentTimeMillis();
@@ -19,13 +21,6 @@ public class Autonomous {
 			Motors.rightSRX.set(0);
 		}
 	}
-	public void example
-	{
-//		Motors.leftSRX.set(0);
-//		Motors.rightSRX.set(0);
-		
-		Motors.drive.tankDrive(leftSpeed, rightSpeed, false);
-	}
 	double leftEncoderValue;
 	double rightEncoderValue;
 	double rightSpeed;
@@ -38,8 +33,8 @@ public class Autonomous {
 	double kd = .1;
 	double turnForward;
 	double turnBackward;
-	double forwardTime =5;
-	double backwardTime =5;
+	double forwardTime =2;
+	double backwardTime =2;
 
 	public void runPIDforward() {
 		double error = (leftEncoderValue - rightEncoderValue - turnForward) / 1000; // scaling down the values to make them easier to
