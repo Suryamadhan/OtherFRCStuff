@@ -39,7 +39,7 @@ public class Robot extends IterativeRobot {
 		{
 			CrashChecker.logAutoInit();
 			Encoders.resetEncoders();
-			Autonomous.currentRatio = 1;
+			Auto.currentRatio = 1;
 		}
 		catch(Throwable t)
 		{

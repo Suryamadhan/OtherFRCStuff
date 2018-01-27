@@ -256,7 +256,7 @@ public class Drivetrain
 //	 				lSpeed = speedY + speedX ;
 //	 				rSpeed = -speedY + speedX ;
 //	 				drive.tankDrive(lSpeed, -rSpeed, false);
-	 				drive.arcadeDrive(yValue, xValue);
+	 				drive.arcadeDrive(yValue, xValue,false);
 	 				Encoders.resetEncoders();
 	 				break;
 	 			case "stop":
