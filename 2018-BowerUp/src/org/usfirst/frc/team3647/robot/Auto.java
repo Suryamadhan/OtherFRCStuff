@@ -2,6 +2,7 @@ package org.usfirst.frc.team3647.robot;
 
 import team3647ConstantsAndFunctions.Constants;
 import team3647subsystems.Drivetrain;
+import team3647subsystems.Encoders;
 
 public class Auto 
 {
@@ -17,6 +18,34 @@ public class Auto
 		switch(currentState)
 		{
 			case 1:
+<<<<<<< HEAD
+=======
+				requiredStraightDist = Constants.testStright -1400;
+				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
+				{
+					Drivetrain.driveForward(lValue, rValue, .6);
+				}
+				else
+				{
+					currentState =2;
+				}
+				break;
+			case 2:
+				requiredStraightDist = Constants.testStright;
+				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
+				{
+					Drivetrain.driveForward(lValue, rValue, .1);
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					currentState = 3;
+				}
+				break;
+			case 3:
+				leftEncoder = lValue;
+				rightEncoder = rValue;
+>>>>>>> 40d0ac71d226e53f69e60a2582543a6f4141f760
 				requiredLeftDist = (Constants.testSmall);
 				requiredRightDist = (Constants.testBig);
 				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
@@ -37,10 +66,10 @@ public class Auto
 				}
 				else
 				{
-					currentState = 2;
+					currentState = 4;
 				}
 				break;
-			case 2:
+			case 4:
 				Drivetrain.drive.tankDrive(0, 0, false);
 				break;
 		}
