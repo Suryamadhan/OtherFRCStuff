@@ -249,13 +249,14 @@ public class Drivetrain
 	 				drive.tankDrive(lSpeed, -rSpeed, false);
 	 				break;
 	 			case "turning":
-	 				double speedY, speedX;
-	 				speedY = Math.abs(yValue);
-	 				speedY *= yValue;
-	 				speedX = xValue * Constants.turnConstant(yValue);
-	 				lSpeed = speedY + speedX ;
-	 				rSpeed = -speedY + speedX ;
-	 				drive.tankDrive(lSpeed, -rSpeed, false);
+//	 				double speedY, speedX;
+//	 				speedY = Math.abs(yValue);
+//	 				speedY *= yValue;
+//	 				speedX = xValue * Constants.turnConstant(yValue);
+//	 				lSpeed = speedY + speedX ;
+//	 				rSpeed = -speedY + speedX ;
+//	 				drive.tankDrive(lSpeed, -rSpeed, false);
+	 				drive.arcadeDrive(yValue, xValue);
 	 				Encoders.resetEncoders();
 	 				break;
 	 			case "stop":
