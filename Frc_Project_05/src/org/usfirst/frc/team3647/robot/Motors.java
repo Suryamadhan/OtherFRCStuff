@@ -7,13 +7,15 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class Motors 
 {
-	public static WPI_TalonSRX leftSRX = new WPI_TalonSRX(0);
-	public static WPI_TalonSRX rightSRX = new WPI_TalonSRX(3);
+
+	public static WPI_TalonSRX leftSRX = new WPI_TalonSRX(57);
+	public static WPI_TalonSRX rightSRX = new WPI_TalonSRX(52);
 	
-	public static VictorSPX leftSPX1 = new VictorSPX(1);
-	public static VictorSPX rightSPX1 = new VictorSPX(0);
-	public static VictorSPX leftSPX2 = new VictorSPX(2);
-	public static VictorSPX rightSPX2 = new VictorSPX(3);
+	public static VictorSPX leftSPX1 = new VictorSPX(52);
+	public static VictorSPX rightSPX1 = new VictorSPX(58);
+	public static VictorSPX leftSPX2 = new VictorSPX(53);
+	public static VictorSPX rightSPX2 = new VictorSPX(59);
+	
 	
 	public static void drivetrainInitialization()
 	{
