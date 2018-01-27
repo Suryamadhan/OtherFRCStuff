@@ -36,6 +36,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit() 
 	{
+		auto.TimerInit();
 		Encoders.resetEncoders();
 	}
 		

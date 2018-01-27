@@ -1,10 +1,12 @@
 package org.usfirst.frc.team3647.robot;
 
-import java.util.Date;
+
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+
 
 public class Autonomous {
 	String autoSelected = "middleAuto";
-	long startTime = System.currentTimeMillis();
+	long startTime;
 	boolean reachedGoal = false;
 	
 	
@@ -17,12 +19,11 @@ public class Autonomous {
 		} else if (autoSelected.equals("leftAuto")) {
 			leftAuto(lEnc, rEnc);
 		} else {
-			Motors.leftSRX.set(0);
-			Motors.rightSRX.set(0);
+			Motors.drive.tankDrive(0, 0, false);
 		}
 	}
-	double leftEncoderValue;
-	double rightEncoderValue;
+	
+	
 	double rightSpeed;
 	double leftSpeed;
 	double speed;
@@ -33,11 +34,15 @@ public class Autonomous {
 	double kd = .1;
 	double turnForward;
 	double turnBackward;
-	double forwardTime =2;
-	double backwardTime =2;
-
-	public void runPIDforward() {
-		double error = (leftEncoderValue - rightEncoderValue - turnForward) / 1000; // scaling down the values to make them easier to
+	double forwardTime = 1;
+	double backwardTime = 1;
+	double pauseTime = 1;
+	public void TimerInit() {
+		startTime = System.currentTimeMillis();
+		System.out.print("init timer");
+	}
+	public void runPIDforward(double lEnc, double rEnc) {
+		double error = (lEnc - lEnc - turnForward) / 1000; // scaling down the values to make them easier to
 																		// interpret
 		double diffError = error - prevError;// previous errors
 		sumError = sumError + error;// sum of all the errors
@@ -57,8 +62,8 @@ public class Autonomous {
 		
 	}
 
-	public void runPIDbackward() {
-		double error = (leftEncoderValue - rightEncoderValue - turnBackward) / 1000;
+	public void runPIDbackward(double lEnc, double rEnc) {
+		double error = (lEnc - rEnc - turnBackward) / 1000;
 		double diffError = error - prevError;
 		sumError = sumError + error;
 		double inputValue = kp * error + ki * sumError + kd * diffError;
@@ -80,72 +85,72 @@ public class Autonomous {
 	
 	public void middleAuto(double lEnc, double rEnc) {
 		// move straight no turn
-		leftSpeed = .3;
-		rightSpeed = .3;
+
 		turnForward = 0;
 		turnBackward = 0;
-		if(reachedGoal == false) {
-			if ((new Date()).getTime() - startTime<5*60*1000){
-				runPIDforward();
-			}
-			else {
-				reachedGoal = true;
-				startTime = System.currentTimeMillis();
-			}
+		if (System.currentTimeMillis() - startTime<forwardTime*1000){
+			leftSpeed = .8;
+			rightSpeed = .8;
+			System.out.println("PIDForward");
+			runPIDforward(lEnc, rEnc);
+		}
+		else if(System.currentTimeMillis() - startTime<(forwardTime + pauseTime)*1000 ) {
+			System.out.print("pause");
+			Motors.drive.tankDrive(0, 0, false);
+		
+		}
+		else if(System.currentTimeMillis() - startTime<(forwardTime + pauseTime + backwardTime)*1000 ) {
+			leftSpeed = -.8;
+			rightSpeed = -.8;
+			System.out.println("PIDBackward");
+			runPIDbackward(lEnc, rEnc);
 		}
 		else {
-			if((new Date()).getTime() - startTime<5*60*1000) {
-				runPIDbackward();
-			}
-		}	
+		Motors.drive.tankDrive(0, 0, false);
+		System.out.print("done");
+		
+	}	
 }
 	
 	public void rightAuto(double lEnc, double rEnc) {
 		// move straight turn right
-	leftSpeed = .3;
-	rightSpeed = .3;
+	leftSpeed = .8;
+	rightSpeed = .8;
 	turnForward = 5;
 	turnBackward = 5;
-		if(reachedGoal == false) {
-			if ((new Date()).getTime() - startTime<forwardTime*60*1000){
-				runPIDforward();
+		
+			if (System.currentTimeMillis() - startTime<forwardTime*1000){
+				System.out.println("PIDForward");
+				runPIDforward(lEnc, rEnc);
+			}
+			else if(System.currentTimeMillis() - startTime<(forwardTime + backwardTime)*1000 ) {
+				System.out.println("PIDBackward");
+				runPIDbackward(lEnc, rEnc);
 			}
 			else {
-				reachedGoal = true;
-				startTime = System.currentTimeMillis();
-			}
-		}
-		else {
-			if((new Date()).getTime() - startTime<backwardTime*60*1000) {
-				runPIDbackward();
-			}
+			Motors.drive.tankDrive(0, 0, false);
 		}	
-
+	}
 			
 		
-	}
+	
 
 	public void leftAuto(double lEnc, double rEnc) {
 		// move straight turn left
-		leftSpeed = .3;
-		rightSpeed = .3;
+		leftSpeed = .8;
+		rightSpeed = .8;
 		turnForward = -5;
 		turnBackward = -5;
-			if(reachedGoal == false) {
-				if ((new Date()).getTime() - startTime<forwardTime*60*1000){
-					runPIDforward();
-				}
-				else {
-					reachedGoal = true;
-					startTime = System.currentTimeMillis();
-				}
-			}
-			else {
-				if((new Date()).getTime() - startTime<backwardTime*60*1000) {
-					runPIDbackward();
-				}
-			}	
-
-		
-	}
+		if (System.currentTimeMillis() - startTime<forwardTime*1000){
+			System.out.println("PIDForward");
+			runPIDforward(lEnc, rEnc);
+		}
+		else if(System.currentTimeMillis() - startTime<(forwardTime + backwardTime)*1000) {
+			System.out.println("PIDBackward");
+			runPIDbackward(lEnc, rEnc);
+		}
+		else {
+		Motors.drive.tankDrive(0, 0, false);
+	}	
+}
 }
