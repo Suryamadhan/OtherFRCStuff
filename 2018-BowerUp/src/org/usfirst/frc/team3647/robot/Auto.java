@@ -61,12 +61,10 @@ public class Auto
 				}
 				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
 				{
-					System.out.println("Big rip");
 					Drivetrain.goStraightLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .325, .585, .05);
 				}
 				else
 				{
-					System.out.println("yes");
 					currentState = 4;
 				}
 				break;
@@ -94,14 +92,15 @@ public class Auto
 				}
 				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
 				{
-					System.out.println("Big rip");
-					Drivetrain.goStraightLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .325, .585, .05);
+					Drivetrain.goBackLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, -.2, -.36, .03);
 				}
 				else
 				{
-					System.out.println("yes");
-					currentState = 4;
+					currentState = 6;
 				}
+				break;
+			case 6:
+				Drivetrain.drive.tankDrive(0, 0, false);
 				break;
 		}
 	}
