@@ -100,6 +100,7 @@ public class Auto
 				}
 				break;
 			case 6:
+				Drivetrain.stop();
 				break;
 		}
 	}
