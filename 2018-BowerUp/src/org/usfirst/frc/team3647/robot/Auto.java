@@ -173,6 +173,41 @@ public class Auto
 		}
 	}
 	
+	public static void BL(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 1:
+				requiredRightDist = (Constants.testBig);
+				requiredLeftDist = (Constants.testSmall);
+				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
+				lValue = Math.abs(lValue);
+				rValue = Math.abs(rValue);
+				currentRatio = (((lValue)/(rValue))/aimedRatio);
+				sum = (rValue) + (lValue);
+				if(currentRatio >= .9 && currentRatio <= 1.1)
+				{
+					withinRange = true;
+				}
+				else
+				{
+					withinRange = false;
+				}
+				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
+				{
+					Drivetrain.goBackLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, -.325, -.585, .04);
+				}
+				else
+				{
+					currentState = 2;
+				}
+				break;
+			case 2:
+				Drivetrain.stop();
+				break;
+		}
+	}
+	
 	
 	
 	public static void initialize()
