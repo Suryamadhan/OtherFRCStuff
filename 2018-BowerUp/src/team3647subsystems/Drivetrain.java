@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.*;
 import team3647ConstantsAndFunctions.Constants;
 
 public class Drivetrain 
@@ -586,43 +587,50 @@ public class Drivetrain
 //				setLeftMotorSpeed(leftSpeed + adjustment);
 //				setRightMotorSpeed(-(rightSpeed - adjustment));
 				
-				drive.tankDrive(leftSpeed - adjustment,-(rightSpeed + adjustment));
+				drive.tankDrive(leftSpeed + adjustment,(rightSpeed - adjustment));
 			}
 			else if(currentRatio > 1.18 && currentRatio < 1.25)
 			{
 //				setLeftMotorSpeed(leftSpeed + (2*adjustment));
 //				setRightMotorSpeed(-(rightSpeed - (2*adjustment)));
 				
-				drive.tankDrive(leftSpeed - (2*adjustment),-(rightSpeed + (2*adjustment)));
+				drive.tankDrive(leftSpeed + (2*adjustment), (rightSpeed - (2*adjustment)));
 			}
 			else if(currentRatio > 1.25)
 			{
 //				setLeftMotorSpeed(leftSpeed + (3*adjustment));
 //				setRightMotorSpeed(-(rightSpeed - (3*adjustment)));
 				
-				drive.tankDrive(leftSpeed - (3*adjustment),-(rightSpeed + (3*adjustment)));
+				drive.tankDrive(leftSpeed + (3*adjustment), (rightSpeed - (3*adjustment)));
 			}
 			else if(currentRatio < .9 && currentRatio > .82)
 			{
 //				setLeftMotorSpeed(leftSpeed - adjustment);
 //				setRightMotorSpeed(-(rightSpeed + adjustment));
 				
-				drive.tankDrive(leftSpeed + adjustment,-(rightSpeed - adjustment));
+				drive.tankDrive(leftSpeed - adjustment, (rightSpeed + adjustment));
 			}
 			else if(currentRatio < .82 && currentRatio > .75)
 			{
 //				setLeftMotorSpeed(leftSpeed - (2*adjustment));
 //				setRightMotorSpeed(-(rightSpeed + (2*adjustment)));
 				
-				drive.tankDrive(leftSpeed + (2*adjustment),-(rightSpeed - (2*adjustment)));
+				drive.tankDrive(leftSpeed - (2*adjustment), (rightSpeed + (2*adjustment)));
 			}
 			else
 			{
 //				setLeftMotorSpeed(leftSpeed - (3*adjustment));
 //				setRightMotorSpeed(-(rightSpeed + (3*adjustment)));
 				
-				drive.tankDrive(leftSpeed + (3*adjustment),-(rightSpeed - (3*adjustment)));
+				drive.tankDrive(leftSpeed - (3*adjustment), (rightSpeed + (3*adjustment)));
 			}
 		}
+	}
+	
+	public static void stop()
+	{
+//		leftSRX.stopMotor();
+//		rightSRX.stopMotor();
+		drive.tankDrive(0,0);
 	}
 }

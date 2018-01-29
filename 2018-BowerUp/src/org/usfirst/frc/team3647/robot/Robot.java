@@ -38,8 +38,7 @@ public class Robot extends IterativeRobot {
 		try 
 		{
 			CrashChecker.logAutoInit();
-			Encoders.resetEncoders();
-			Auto.currentState = 1;
+			Auto.initialize();
 		}
 		catch(Throwable t)
 		{

@@ -69,7 +69,7 @@ public class Auto
 				}
 				break;
 			case 4:
-				Drivetrain.drive.tankDrive(0, 0, false);
+				Drivetrain.stop();
 				Encoders.resetEncoders();
 				Timer.delay(.2);
 				currentState = 5;
@@ -100,8 +100,86 @@ public class Auto
 				}
 				break;
 			case 6:
-				Drivetrain.drive.tankDrive(0, 0, false);
 				break;
 		}
+	}
+	
+	public static void FR(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 1:
+				requiredRightDist = (Constants.testSmall);
+				requiredLeftDist = (Constants.testBig);
+				aimedRatio = ((requiredLeftDist)/(requiredRightDist));
+				currentRatio = (((lValue)/(rValue))/aimedRatio);
+				sum = (rValue) + (lValue);
+				if(currentRatio >= .9 && currentRatio <= 1.1)
+				{
+					withinRange = true;
+				}
+				else
+				{
+					withinRange = false;
+				}
+				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
+				{
+					Drivetrain.goStraightRight(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .585, .325, .04);
+				}
+				else
+				{
+					currentState = 2;
+				}
+				break;
+			case 2:
+				Drivetrain.stop();
+				break;
+		}
+	}
+	
+	public static void BR(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 1:
+				requiredRightDist = (Constants.testSmall);
+				requiredLeftDist = (Constants.testBig);
+				aimedRatio = ((requiredLeftDist)/(requiredRightDist));
+				lValue = Math.abs(lValue);
+				rValue = Math.abs(rValue);
+				currentRatio = (((lValue)/(rValue))/aimedRatio);
+				sum = (rValue) + (lValue);
+				if(currentRatio >= .9 && currentRatio <= 1.1)
+				{
+					withinRange = true;
+				}
+				else
+				{
+					withinRange = false;
+				}
+				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
+				{
+					Drivetrain.goBackRight(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, -.585, -.325, .04);
+				}
+				else
+				{
+					currentState = 2;
+				}
+				break;
+			case 2:
+				Drivetrain.stop();
+				break;
+		}
+	}
+	
+	
+	
+	public static void initialize()
+	{
+		Encoders.resetEncoders();
+		currentState = 1;
+		requiredLeftDist = 0;
+		requiredRightDist = 0;
+		requiredStraightDist = 0;
 	}
 }
