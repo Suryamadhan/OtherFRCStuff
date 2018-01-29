@@ -19,7 +19,7 @@ public class Auto
 		switch(currentState)
 		{
 			case 1:
-				requiredStraightDist = Constants.testStright -2400;
+				requiredStraightDist = Constants.testStright -1440;
 				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
 				{
 					Drivetrain.driveForward(lValue, rValue, .6);
@@ -30,7 +30,7 @@ public class Auto
 				}
 				break;
 			case 2:
-				requiredStraightDist = Constants.testStright-1000;
+				requiredStraightDist = Constants.testStright;
 				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
 				{
 					Drivetrain.driveForward(lValue, rValue, .1);
@@ -38,7 +38,7 @@ public class Auto
 				else
 				{
 					Encoders.resetEncoders();
-					Timer.delay(.2);
+					//Timer.delay(.2);
 					System.out.println("lValue: " + lValue);
 					System.out.println("rValue: " + rValue);
 					requiredStraightDist = 0;
@@ -65,7 +65,7 @@ public class Auto
 				}
 				else
 				{
-					currentState = 4;
+					currentState = 6;
 				}
 				break;
 			case 4:
