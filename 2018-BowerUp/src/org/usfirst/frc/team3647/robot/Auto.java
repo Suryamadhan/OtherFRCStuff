@@ -71,7 +71,7 @@ public class Auto
 				break;
 			case 3:
 				requiredLeftDist = 400;
-				requiredRightDist = 1413.3;
+				requiredRightDist = 1000;
 				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
 				rValue = rValue - prevRightEncoder;
 				lValue = lValue - prevLeftEncoder;
@@ -87,7 +87,7 @@ public class Auto
 				}
 				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
 				{
-					Drivetrain.goStraightLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .15, .53, .04);
+					Drivetrain.goStraightLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .2, .5, .04);
 				}
 				else
 				{
@@ -95,8 +95,8 @@ public class Auto
 				}
 				break;
 			case 4:
-				requiredLeftDist = Constants.MSRRSWsecondsmallTurn - 100;
-				requiredRightDist = Constants.MSRRSWsecondbigTurn - 353.32;
+				requiredLeftDist = Constants.MSRRSWsecondsmallTurn-160;
+				requiredRightDist = Constants.MSRRSWsecondbigTurn-400;
 				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
 				rValue = rValue - prevRightEncoder;
 				lValue = lValue - prevLeftEncoder;
@@ -112,7 +112,7 @@ public class Auto
 				}
 				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
 				{
-					Drivetrain.goStraightLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .2, .707, .05);
+					Drivetrain.goStraightLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .3, .75, .05);
 				}
 				else
 				{
