@@ -1,8 +1,6 @@
 package org.usfirst.frc.team3647.robot;
 
 
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-
 
 public class Autonomous {
 	String autoSelected = "middleAuto";

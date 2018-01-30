@@ -13,6 +13,8 @@ public class Auto
 	static double requiredLeftDist, requiredRightDist, requiredStraightDist = 0;
 	static int currentState;
 	
+	static double prevLeftEncoder, prevRightEncoder;
+	
 	public static StopWatch sw = new StopWatch(); 
 	
 	public static void MSRRSW(double lValue, double rValue)
@@ -20,8 +22,8 @@ public class Auto
 		switch(currentState)
 		{
 			case 1:
-				requiredRightDist = Constants.MSRRSWsmallTurn - 400;
-				requiredLeftDist = Constants.MSRRSWbigTurn - 1413.3;
+				requiredRightDist = Constants.MSRRSWfirstsmallTurn - 400;
+				requiredLeftDist = Constants.MSRRSWfirstbigTurn - 1413.3;
 				aimedRatio = ((requiredLeftDist)/(requiredRightDist));
 				currentRatio = (((lValue)/(rValue))/aimedRatio);
 				sum = (rValue) + (lValue);
@@ -43,8 +45,8 @@ public class Auto
 				}
 				break;
 			case 2:
-				requiredRightDist = Constants.MSRRSWsmallTurn - 100;
-				requiredLeftDist = Constants.MSRRSWbigTurn - 353.32;
+				requiredRightDist = Constants.MSRRSWfirstsmallTurn;
+				requiredLeftDist = Constants.MSRRSWfirstbigTurn;
 				aimedRatio = ((requiredLeftDist)/(requiredRightDist));
 				currentRatio = (((lValue)/(rValue))/aimedRatio);
 				sum = (rValue) + (lValue);
@@ -62,8 +64,8 @@ public class Auto
 				}
 				else
 				{
-					Encoders.resetEncoders();
-					Timer.delay(.3);
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
 					currentState = 3;
 				}
 				break;
@@ -71,6 +73,8 @@ public class Auto
 				requiredLeftDist = 400;
 				requiredRightDist = 1413.3;
 				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
+				rValue = rValue - prevRightEncoder;
+				lValue = lValue - prevLeftEncoder;
 				currentRatio = (((rValue)/(lValue))/aimedRatio);
 				sum = (rValue) + (lValue);
 				if(currentRatio >= .9 && currentRatio <= 1.1)
@@ -91,9 +95,11 @@ public class Auto
 				}
 				break;
 			case 4:
-				requiredLeftDist = Constants.MSRRSWsmallTurn - 100;
-				requiredRightDist = Constants.MSRRSWbigTurn - 353.32;
+				requiredLeftDist = Constants.MSRRSWsecondsmallTurn - 100;
+				requiredRightDist = Constants.MSRRSWsecondbigTurn - 353.32;
 				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
+				rValue = rValue - prevRightEncoder;
+				lValue = lValue - prevLeftEncoder;
 				currentRatio = (((rValue)/(lValue))/aimedRatio);
 				sum = (rValue) + (lValue);
 				if(currentRatio >= .9 && currentRatio <= 1.1)
@@ -110,12 +116,14 @@ public class Auto
 				}
 				else
 				{
-					Encoders.resetEncoders();
-					Timer.delay(.3);
-					currentState = 5;
+					prevRightEncoder = rValue;
+					prevLeftEncoder = lValue;
+					currentState = 6;
 				}
 				break;
 			case 5:
+				lValue = lValue - prevLeftEncoder;
+				rValue = rValue - prevRightEncoder;
 				requiredStraightDist = Constants.MSRRSWStraight -1440;
 				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
 				{
