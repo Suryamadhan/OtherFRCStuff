@@ -63,7 +63,7 @@ public class Auto
 				else
 				{
 					Encoders.resetEncoders();
-					Timer.delay(.047);
+					Timer.delay(.3);
 					currentState = 3;
 				}
 				break;
@@ -111,7 +111,7 @@ public class Auto
 				else
 				{
 					Encoders.resetEncoders();
-					Timer.delay(.047);
+					Timer.delay(.3);
 					currentState = 5;
 				}
 				break;
@@ -123,6 +123,7 @@ public class Auto
 				}
 				else
 				{
+					System.out.println("b");
 					currentState =6;
 				}
 				break;

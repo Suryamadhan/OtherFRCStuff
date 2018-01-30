@@ -56,10 +56,10 @@ public class Robot extends IterativeRobot {
 			enc.setEncoderValues();
 //			if(Auto.currentState!=12)
 //			{
-//				//System.out.println(Auto.currentState);
+			//System.out.println(Auto.currentState);
 //			}
 			
-			Auto.testTurn(enc.leftEncoderValue, enc.rightEncoderValue);
+			Auto.MSRRSW(enc.leftEncoderValue, enc.rightEncoderValue);
 			//Drivetrain.testSpeed();
 			//Auto.test(enc.leftEncoderValue, enc.rightEncoderValue);
 			//enc.testEncoders();
