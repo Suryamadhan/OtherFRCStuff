@@ -54,9 +54,13 @@ public class Robot extends IterativeRobot {
 		while(DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
 		{
 			enc.setEncoderValues();
-//			System.out.println(Auto.currentState);
-			Auto.BR(enc.leftEncoderValue, enc.rightEncoderValue);
-			Drivetrain.testSpeed();
+//			if(Auto.currentState!=12)
+//			{
+//				//System.out.println(Auto.currentState);
+//			}
+			
+			Auto.testTurn(enc.leftEncoderValue, enc.rightEncoderValue);
+			//Drivetrain.testSpeed();
 			//Auto.test(enc.leftEncoderValue, enc.rightEncoderValue);
 			//enc.testEncoders();
 			//Autonomous.runAuto(enc.leftEncoderValue, enc.rightEncoderValue);

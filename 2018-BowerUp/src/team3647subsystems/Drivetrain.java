@@ -270,6 +270,7 @@ public class Drivetrain
 	
 	public static boolean reachedDistance(double leftEnc, double rightEnc, double distance)
 	{
+		
 		avg = Math.abs(leftEnc) + Math.abs(rightEnc);
 		avg/=2;
 		if(avg<distance)

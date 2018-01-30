@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Timer;
 import team3647ConstantsAndFunctions.Constants;
 import team3647subsystems.Drivetrain;
 import team3647subsystems.Encoders;
-
+import com.ctre.phoenix.time.StopWatch;
 public class Auto 
 {
 	static double aimedRatio, currentRatio;
@@ -12,6 +12,126 @@ public class Auto
 	static boolean withinRange;
 	static double requiredLeftDist, requiredRightDist, requiredStraightDist = 0;
 	static int currentState;
+	
+	public static StopWatch sw = new StopWatch(); 
+	
+	public static void testTurn(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 1:
+				requiredRightDist = (Constants.testSmall - 1440);
+				requiredLeftDist = (Constants.testBig - 2592);
+				aimedRatio = ((requiredLeftDist)/(requiredRightDist));
+				currentRatio = (((lValue)/(rValue))/aimedRatio);
+				sum = (rValue) + (lValue);
+				if(currentRatio >= .9 && currentRatio <= 1.1)
+				{
+					withinRange = true;
+				}
+				else
+				{
+					withinRange = false;
+				}
+				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
+				{
+					Drivetrain.goStraightRight(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .585, .325, .04);
+				}
+				else
+				{
+					currentState = 2;
+				}
+				break;
+			case 2:
+				requiredRightDist = (Constants.testSmall);
+				requiredLeftDist = (Constants.testBig);
+				aimedRatio = ((requiredLeftDist)/(requiredRightDist));
+				currentRatio = (((lValue)/(rValue))/aimedRatio);
+				sum = (rValue) + (lValue);
+				if(currentRatio >= .9 && currentRatio <= 1.1)
+				{
+					withinRange = true;
+				}
+				else
+				{
+					withinRange = false;
+				}
+				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
+				{
+					Drivetrain.goStraightRight(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .36, .2, .03);
+				}
+				else
+				{
+					requiredRightDist = 0;
+					requiredLeftDist = 0;
+					currentState = 3;
+				}
+				break;
+			case 3:
+				Drivetrain.stop();
+				Timer.delay(.3);
+				Encoders.resetEncoders();
+				Timer.delay(.3);
+				currentState = 4;
+				break;
+			case 4:
+				requiredRightDist = (Constants.testSmall - 1440);
+				requiredLeftDist = (Constants.testBig - 2592);
+				aimedRatio = ((requiredLeftDist)/(requiredRightDist));
+				lValue = Math.abs(lValue);
+				rValue = Math.abs(rValue);
+				currentRatio = (((lValue)/(rValue))/aimedRatio);
+				sum = (rValue) + (lValue);
+				if(currentRatio >= .9 && currentRatio <= 1.1)
+				{
+					withinRange = true;
+				}
+				else
+				{
+					withinRange = false;
+				}
+				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
+				{
+					Drivetrain.goBackRight(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, -.585, -.325, .04);
+				}
+				else
+				{
+					currentState = 5;
+				}
+				break;
+			case 5:
+				requiredRightDist = (Constants.testSmall);
+				requiredLeftDist = (Constants.testBig);
+				aimedRatio = ((requiredLeftDist)/(requiredRightDist));
+				lValue = Math.abs(lValue);
+				rValue = Math.abs(rValue);
+				currentRatio = (((lValue)/(rValue))/aimedRatio);
+				sum = (rValue) + (lValue);
+				if(currentRatio >= .9 && currentRatio <= 1.1)
+				{
+					withinRange = true;
+				}
+				else
+				{
+					withinRange = false;
+				}
+				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
+				{
+					Drivetrain.goBackRight(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, -.36, -.2, .04);
+				}
+				else
+				{
+					requiredRightDist = 0;
+					requiredLeftDist = 0;
+					currentState = 6;
+				}
+				break;
+			case 6:
+				Drivetrain.stop();
+				break;
+		}
+		
+	}
 	
 	public static void testRight(double lValue, double rValue)
 	{
@@ -152,9 +272,11 @@ public class Auto
 				break;
 			case 8:
 				requiredStraightDist = 1440;
+				lValue = lValue + Constants.testBig;
+				rValue = rValue + Constants.testSmall;
 				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
 				{
-					Drivetrain.driveBackward(lValue, rValue, -.2);
+					Drivetrain.driveBackward(lValue, rValue, -.4);
 				}
 				else
 				{
@@ -163,6 +285,8 @@ public class Auto
 				break;
 			case 9:
 				requiredStraightDist = Constants.testStright - 1440;
+				lValue = lValue + Constants.testBig;
+				rValue = rValue + Constants.testSmall;
 				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
 				{
 					Drivetrain.driveBackward(lValue, rValue, -.6);
@@ -174,9 +298,11 @@ public class Auto
 				break;
 			case 10:
 				requiredStraightDist = Constants.testStright;
+				lValue = lValue + Constants.testBig;
+				rValue = rValue + Constants.testSmall;
 				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
 				{
-					Drivetrain.driveBackward(lValue, rValue, -.1);
+					Drivetrain.driveBackward(lValue, rValue, -.2);
 				}
 				else
 				{
