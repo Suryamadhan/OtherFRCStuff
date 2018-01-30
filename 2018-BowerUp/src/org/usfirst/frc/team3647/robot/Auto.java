@@ -183,7 +183,7 @@ public class Auto
 				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
 				lValue = Math.abs(lValue);
 				rValue = Math.abs(rValue);
-				currentRatio = (((lValue)/(rValue))/aimedRatio);
+				currentRatio = (((rValue)/(lValue))/aimedRatio);
 				sum = (rValue) + (lValue);
 				if(currentRatio >= .9 && currentRatio <= 1.1)
 				{

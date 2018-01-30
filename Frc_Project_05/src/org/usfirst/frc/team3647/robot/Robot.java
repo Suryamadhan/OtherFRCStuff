@@ -1,8 +1,7 @@
 package org.usfirst.frc.team3647.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -15,6 +14,7 @@ public class Robot extends IterativeRobot
 {	
 	Autonomous auto;
 	Encoders enc;
+	Joysticks joy;
 	double leftEncoderValue;
 	double rightEncoderValue;
 	double rightSpeed;
@@ -29,14 +29,15 @@ public class Robot extends IterativeRobot
 	{
 		auto = new Autonomous();
 		enc = new Encoders();
-		Motors.drivetrainInitialization();
+		joy = new Joysticks();
 	}
 
 	 //This function runs once, right before autonomous period starts. 
 	@Override
 	public void autonomousInit() 
 	{
-		Encoders.resetEncoders();
+		auto.AutoVarInit();
+		enc.resetEncoders();
 	}
 		
 
@@ -47,6 +48,10 @@ public class Robot extends IterativeRobot
 	{
 		enc.setEncoderValues();
 		auto.runAuto(enc.leftEncoderValue, enc.rightEncoderValue);
+		if (auto.resetEncoder){
+			enc.resetEncoders();
+			auto.resetEncoder = false;
+		}
 	}
 	
 	//This is the function that is called during the Tele-operated period
@@ -54,7 +59,13 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopPeriodic() 
 	{
-		//don't need this function for this exercise
+		joy.setMainControllerValues();
+		enc.setEncoderValues();
+		Motors.leftSpark.set(joy.leftJoySticky/2);
+		Motors.rightSpark.set(-joy.rightJoySticky/2);
+		System.out.print("left"+enc.leftEncoderValue);
+		System.out.println(" right"+enc.rightEncoderValue);
+
 	}
 
 	//This is the function that is called during the test
@@ -66,4 +77,3 @@ public class Robot extends IterativeRobot
 		
 	}
 }
-

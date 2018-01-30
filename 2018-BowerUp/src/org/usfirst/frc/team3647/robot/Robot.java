@@ -55,7 +55,9 @@ public class Robot extends IterativeRobot {
 		{
 			enc.setEncoderValues();
 //			System.out.println(Auto.currentState);
-			Auto.test(enc.leftEncoderValue, enc.rightEncoderValue);
+			Auto.BR(enc.leftEncoderValue, enc.rightEncoderValue);
+			Drivetrain.testSpeed();
+			//Auto.test(enc.leftEncoderValue, enc.rightEncoderValue);
 			//enc.testEncoders();
 			//Autonomous.runAuto(enc.leftEncoderValue, enc.rightEncoderValue);
 //			switch(yes)
