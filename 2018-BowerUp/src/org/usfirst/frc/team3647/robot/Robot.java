@@ -80,7 +80,7 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() 
 	{
 		enc.setEncoderValues();
-		enc.testEncoders();
+		Encoders.testEncoders();
 		joy.setMainContollerValues();
 		Drivetrain.testDrive(joy.leftJoySticky, joy.rightJoySticky);
 		if(joy.buttonA)

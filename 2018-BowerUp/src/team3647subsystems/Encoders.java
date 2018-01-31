@@ -19,7 +19,7 @@ public class Encoders
 		Drivetrain.rightSRX.getSensorCollection().setQuadraturePosition(0, 10);
 	}
 	
-	public void testEncoders()
+	public static void testEncoders()
 	{
 		System.out.println("Left Encoder Value: " + leftEncoderValue);
 		System.out.println("Right Encoder Value: " + rightEncoderValue);

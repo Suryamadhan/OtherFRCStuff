@@ -122,6 +122,7 @@ public class Auto
 				}
 				break;
 			case 5:
+				Encoders.testEncoders();
 				System.out.println("Before...");
 				System.out.println("lValue " + lValue);
 				System.out.println("rValue " + rValue);
