@@ -52,7 +52,7 @@ public class Robot extends IterativeRobot {
 		while(DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
 		{
 			enc.setEncoderValues();
-			Auto.MSRRSW(enc.leftEncoderValue, enc.rightEncoderValue);
+			Auto.MSRRSW(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 		}
 		
 	}
@@ -65,7 +65,7 @@ public class Robot extends IterativeRobot {
 			CrashChecker.logTeleopPeriodic();
 			enc.setEncoderValues();
 			joy.setMainContollerValues();
-			Drivetrain.arcadeDrive(enc.leftEncoderValue, enc.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
+			Drivetrain.arcadeDrive(Encoders.leftEncoderValue, Encoders.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
 			//Drivetrain.testSpeed();
 			//Drivetrain.testDrive(joy.leftJoySticky, joy.rightJoyStickx);
 		}

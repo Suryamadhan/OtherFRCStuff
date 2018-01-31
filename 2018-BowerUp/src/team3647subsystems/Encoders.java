@@ -5,7 +5,7 @@ import team3647ConstantsAndFunctions.Constants;
 
 public class Encoders 
 {
-	public double leftEncoderValue, rightEncoderValue;
+	public static double leftEncoderValue, rightEncoderValue;
 	
 	public void setEncoderValues()
 	{
