@@ -10,9 +10,7 @@ public class Robot extends IterativeRobot {
 
 	Encoders enc;
 	Joysticks joy;
-	
-	int yes = 1;
-	
+
 	@Override
 	public void robotInit() 
 	{
@@ -54,28 +52,7 @@ public class Robot extends IterativeRobot {
 		while(DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
 		{
 			enc.setEncoderValues();
-//			if(Auto.currentState!=12)
-//			{
-			//System.out.println(Auto.currentState);
-//			}
-			
 			Auto.MSRRSW(enc.leftEncoderValue, enc.rightEncoderValue);
-			//Drivetrain.testSpeed();
-			//Auto.test(enc.leftEncoderValue, enc.rightEncoderValue);
-			//enc.testEncoders();
-			//Autonomous.runAuto(enc.leftEncoderValue, enc.rightEncoderValue);
-//			switch(yes)
-//			{
-//				case 1:
-//					Autonomous.currentState = 1;
-//					yes = 2;
-//					break;
-//				case 2:
-//					enc.setEncoderValues();
-//					auto.yeet();
-//					System.out.println(Autonomous.currentState);
-//					break;
-//			}
 		}
 		
 	}

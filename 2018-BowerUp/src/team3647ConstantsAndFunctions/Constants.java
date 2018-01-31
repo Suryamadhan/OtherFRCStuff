@@ -20,11 +20,12 @@ public class Constants
 	public final static int mainControllerNumber = 0;
 	
 	//Turn Constant for the Drivetrain
-	public static double turnConstant(double yValue)
+	public static double adjustmentConstant(double lValue)
 	{
-		double turnConstant;
-		turnConstant = .75 -(.25*(Math.abs(yValue)));
-		return turnConstant;
+		lValue = Math.abs(lValue);
+		lValue /= 22.85714285713;
+		lValue += .0222;
+		return lValue;
 	}
 	
 	//Pins for Auto
@@ -57,6 +58,8 @@ public class Constants
 	public final static double MSRRSWsecondsmallTurn = 0.47124 * length;
 	
 	public final static double MSRRSWStraight = 1.973 * length;
+	
+	
 	
 
 }
