@@ -95,8 +95,8 @@ public class Auto
 				}
 				break;
 			case 4:
-				requiredLeftDist = Constants.MSRRSWsecondsmallTurn-160;
-				requiredRightDist = Constants.MSRRSWsecondbigTurn-400;
+				requiredLeftDist = Constants.MSRRSWsecondsmallTurn+40;
+				requiredRightDist = Constants.MSRRSWsecondbigTurn+100;
 				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
 				rValue = rValue - prevRightEncoder;
 				lValue = lValue - prevLeftEncoder;
