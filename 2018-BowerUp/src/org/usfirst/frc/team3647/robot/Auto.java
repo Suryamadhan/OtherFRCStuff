@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Timer;
 import team3647ConstantsAndFunctions.Constants;
 import team3647subsystems.Drivetrain;
 import team3647subsystems.Encoders;
-import com.ctre.phoenix.time.StopWatch;
+//import com.ctre.phoenix.time.StopWatch;
 public class Auto 
 {
 	static double aimedRatio, currentRatio;
@@ -15,7 +15,7 @@ public class Auto
 	
 	static double prevLeftEncoder, prevRightEncoder;
 	
-	public static StopWatch sw = new StopWatch(); 
+	//public static StopWatch sw = new StopWatch(); 
 	
 	public static void MSRRSW(double lValue, double rValue)
 	{
@@ -95,8 +95,8 @@ public class Auto
 				}
 				break;
 			case 4:
-				requiredLeftDist = Constants.MSRRSWsecondsmallTurn+40;
-				requiredRightDist = Constants.MSRRSWsecondbigTurn+100;
+				requiredLeftDist = Constants.MSRRSWsecondsmallTurn-40;
+				requiredRightDist = Constants.MSRRSWsecondbigTurn-100;
 				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
 				rValue = rValue - prevRightEncoder;
 				lValue = lValue - prevLeftEncoder;
@@ -118,13 +118,22 @@ public class Auto
 				{
 					prevRightEncoder = rValue;
 					prevLeftEncoder = lValue;
-					currentState = 6;
+					currentState = 5;
 				}
 				break;
 			case 5:
+				System.out.println("Before...");
+				System.out.println("lValue " + lValue);
+				System.out.println("rValue " + rValue);
 				lValue = lValue - prevLeftEncoder;
 				rValue = rValue - prevRightEncoder;
-				requiredStraightDist = Constants.MSRRSWStraight -1440;
+				System.out.println("After...");
+				System.out.println("lValue " + lValue);
+				System.out.println("rValue " + rValue);
+				System.out.println("prevEncoderValues");
+				System.out.println("lValue " + prevLeftEncoder);
+				System.out.println("rValue " + prevRightEncoder);
+				requiredStraightDist = Constants.MSRRSWStraight;
 				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
 				{
 					Drivetrain.driveForward(lValue, rValue, .5);
@@ -132,6 +141,7 @@ public class Auto
 				else
 				{
 					System.out.println("b");
+					
 					currentState =6;
 				}
 				break;

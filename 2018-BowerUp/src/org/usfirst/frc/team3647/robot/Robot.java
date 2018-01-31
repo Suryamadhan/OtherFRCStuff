@@ -66,7 +66,7 @@ public class Robot extends IterativeRobot {
 			enc.setEncoderValues();
 			joy.setMainContollerValues();
 			Drivetrain.arcadeDrive(enc.leftEncoderValue, enc.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
-			Drivetrain.testSpeed();
+			//Drivetrain.testSpeed();
 			//Drivetrain.testDrive(joy.leftJoySticky, joy.rightJoyStickx);
 		}
 		catch(Throwable t)
