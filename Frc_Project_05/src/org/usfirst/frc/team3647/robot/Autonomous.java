@@ -49,7 +49,7 @@ public class Autonomous {
 		System.out.print("init timer");
 	}
 	public void runPIDforward(double lEnc, double rEnc) {
-		double error = (lEnc - lEnc - turnForward) / 1000; // scaling down the values to make them easier to
+		double error = (lEnc - rEnc - turnForward) / 1000; // scaling down the values to make them easier to
 																		// interpret
 		double diffError = error - prevError;// previous errors
 		sumError = sumError + error;// sum of all the errors
@@ -112,8 +112,8 @@ public class Autonomous {
 		else {
 			if (forward) {
 				if (sumEncoder < distance) {
-					leftSpeed = 0.5-.2/(distance/2)*Math.abs(sumEncoder-distance/2);
-					rightSpeed = 0.5-.2/(distance/2)*Math.abs(sumEncoder-distance/2);
+					leftSpeed = 0.8-.2/(distance/2)*Math.abs(sumEncoder-distance/2);
+					rightSpeed = 0.8-.2/(distance/2)*Math.abs(sumEncoder-distance/2);
 					System.out.println("PIDForward");
 					runPIDforward(lEnc, rEnc);
 					System.out.print(sumEncoder);
@@ -124,8 +124,8 @@ public class Autonomous {
 				}
 			}else {
 				if (sumEncoder < distance) {
-					leftSpeed = -(0.5-.2/(distance/2)*Math.abs(sumEncoder-distance/2));
-					rightSpeed = -(0.5-.2/(distance/2)*Math.abs(sumEncoder-distance/2));
+					leftSpeed = -(0.8-.2/(distance/2)*Math.abs(sumEncoder-distance/2));
+					rightSpeed = -(0.8-.2/(distance/2)*Math.abs(sumEncoder-distance/2));
 					System.out.println("PIDbackward");
 					runPIDbackward(lEnc, rEnc);
 					System.out.print(sumEncoder);

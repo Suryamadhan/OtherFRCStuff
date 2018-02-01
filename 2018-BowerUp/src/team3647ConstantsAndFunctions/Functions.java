@@ -285,8 +285,8 @@ public class Functions
 			leftAdjustment = 0;
 			rightAdjustment = 0;
 		}
-		adjustment[1] = leftAdjustment;
-		adjustment [2] = rightAdjustment;
+		adjustment[0] = leftAdjustment;
+		adjustment[1] = rightAdjustment;
 		
 		return adjustment;
 	}
