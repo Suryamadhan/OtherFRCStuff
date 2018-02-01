@@ -2,6 +2,7 @@ package org.usfirst.frc.team3647.robot;
 
 import edu.wpi.first.wpilibj.Timer;
 import team3647ConstantsAndFunctions.Constants;
+import team3647ConstantsAndFunctions.Functions;
 import team3647subsystems.Drivetrain;
 import team3647subsystems.Encoders;
 //import com.ctre.phoenix.time.StopWatch;
@@ -16,6 +17,19 @@ public class Auto
 	static double prevLeftEncoder, prevRightEncoder;
 	
 	//public static StopWatch sw = new StopWatch(); 
+	
+	static double lSSpeed, rSSpeed, lAdjustment, rAdjustment;
+	static double []adjustmentValues = new double[2];
+	
+	public static void MSRRSW1(double lValue, double rValue)
+	{
+		lSSpeed = Functions.MSRRSWsupposedLeftSpeed(lValue);
+		rSSpeed = Functions.MSRRSWsupposedRightSpeed(rValue);
+		adjustmentValues = Functions.MSRRSWcorrection(lValue, rValue);
+		lAdjustment = adjustmentValues[0];
+		rAdjustment = adjustmentValues[1];
+		Drivetrain.drive.tankDrive(lSSpeed + lAdjustment, rSSpeed +rAdjustment, false);
+	}
 	
 	public static void MSRRSW(double lValue, double rValue)
 	{
