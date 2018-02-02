@@ -27,7 +27,6 @@ public class Robot extends IterativeRobot {
 			CrashChecker.logThrowableCrash(t);
 			throw t;
 		}
-	
 	}
 	
 	@Override
@@ -42,8 +41,7 @@ public class Robot extends IterativeRobot {
 		{
 			CrashChecker.logThrowableCrash(t);
 			throw t;
-		}
-		
+		}	
 	}
 
 	@Override
@@ -54,7 +52,6 @@ public class Robot extends IterativeRobot {
 			enc.setEncoderValues();
 			Auto.runAuto(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 		}
-		
 	}
 
 	@Override
@@ -86,6 +83,4 @@ public class Robot extends IterativeRobot {
 			Encoders.resetEncoders();
 		}
 	}
-
 }
-
