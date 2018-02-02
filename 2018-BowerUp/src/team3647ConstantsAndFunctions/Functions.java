@@ -21,7 +21,7 @@ public class Functions
 		{
 			return .15;
 		}
-		else if(lEnc < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWsecondsmallTurn))
+		else
 		{
 			return .2;
 		}
@@ -29,10 +29,10 @@ public class Functions
 //		{
 //			return .6;
 //		}
-		else
-		{
-			return 0;
-		}
+//		else
+//		{
+//			return 0;
+//		}
 	}
 	
 	public static double MSRRSWsupposedRightSpeed(double rEnc)
@@ -49,7 +49,7 @@ public class Functions
 		{
 			return .4;
 		}
-		else if(rEnc < (Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWsecondbigTurn))
+		else
 		{
 			return .534;
 		}
@@ -57,10 +57,10 @@ public class Functions
 //		{
 //			return .6;
 //		}
-		else
-		{
-			return 0;
-		}
+//		else
+//		{
+//			return 0;
+//		}
 	}
 	
 	public static double[] MSRRSWcorrection(double lEnc, double rEnc)
@@ -185,7 +185,7 @@ public class Functions
 				}
 			}
 		}
-		else if(sum < (Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWfirstbigTurn + Constants.MSRRSWsecondbigTurn + Constants.MSRRSWsecondsmallTurn))
+		else
 		{
 			ratio = (rEnc - Constants.MSRRSWfirstsmallTurn)/(lEnc - Constants.MSRRSWfirstbigTurn);
 			if(ratio >= 2.56 && ratio <= 2.76)
@@ -281,11 +281,11 @@ public class Functions
 //				 }
 //			 }
 //		}
-		else
-		{
-			leftAdjustment = 0;
-			rightAdjustment = 0;
-		}
+//		else
+//		{
+//			leftAdjustment = 0;
+//			rightAdjustment = 0;
+//		}
 		adjustment[0] = leftAdjustment;
 		adjustment[1] = rightAdjustment;
 		

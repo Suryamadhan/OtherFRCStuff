@@ -18,18 +18,37 @@ public class Auto
 	
 	//public static StopWatch sw = new StopWatch(); 
 	
-	static double lSSpeed, rSSpeed, lAdjustment, rAdjustment;
+	static double lSSpeed, rSSpeed, lAdjustment, rAdjustment, sum;
 	static double []adjustmentValues = new double[2];
 	
 	public static void MSRRSW1(double lValue, double rValue)
 	{
+		switch(currentState)
+		{
+			case 1:
+				sum = lValue + rValue;
+				if(sum < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWsecondbigTurn + Constants.MSRRSWsecondsmallTurn))
+				{
+					lSSpeed = Functions.MSRRSWsupposedLeftSpeed(lValue);
+					rSSpeed = Functions.MSRRSWsupposedRightSpeed(rValue);
+					adjustmentValues = Functions.MSRRSWcorrection(lValue, rValue);
+					lAdjustment = adjustmentValues[0];
+					rAdjustment = adjustmentValues[1];
+					Drivetrain.drive.tankDrive(lSSpeed + lAdjustment, rSSpeed +rAdjustment, false);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 2;
+				}
+				break;
+			case 2:
+				Drivetrain.drive.tankDrive(0,0, false);
+				break;
+		}
 		Encoders.testEncoders();
-		lSSpeed = Functions.MSRRSWsupposedLeftSpeed(lValue);
-		rSSpeed = Functions.MSRRSWsupposedRightSpeed(rValue);
-		adjustmentValues = Functions.MSRRSWcorrection(lValue, rValue);
-		lAdjustment = adjustmentValues[0];
-		rAdjustment = adjustmentValues[1];
-		Drivetrain.drive.tankDrive(lSSpeed + lAdjustment, rSSpeed +rAdjustment, false);
+		
 	}
 	
 	public static void MSRRSW(double lValue, double rValue)
