@@ -11,11 +11,11 @@ public class Functions
 	{
 		if(lEnc < (Constants.MSRRSWfirstbigTurn - 5087))
 		{
-			return .707;
+			return .613;
 		}
 		else if(lEnc < Constants.MSRRSWfirstbigTurn)
 		{
-			return .53;
+			return .46;
 		}
 		else if(lEnc < (Constants.MSRRSWfirstbigTurn + 1440))
 		{
@@ -47,11 +47,11 @@ public class Functions
 		}
 		else if(rEnc < (Constants.MSRRSWfirstsmallTurn + 5087))
 		{
-			return .53;
+			return .46;
 		}
 		else if(rEnc < (Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWsecondbigTurn))
 		{
-			return .707;
+			return .613;
 		}
 //		else if(rEnc < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWStraight))
 //		{
