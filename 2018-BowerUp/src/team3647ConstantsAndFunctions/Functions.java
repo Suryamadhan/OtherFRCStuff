@@ -11,11 +11,11 @@ public class Functions
 	{
 		if(lEnc < (Constants.MSRRSWfirstbigTurn - 5087))
 		{
-			return .613;
+			return .707;
 		}
 		else if(lEnc < Constants.MSRRSWfirstbigTurn)
 		{
-			return .46;
+			return .53;
 		}
 		else if(lEnc < (Constants.MSRRSWfirstbigTurn + 1440))
 		{
@@ -153,14 +153,14 @@ public class Functions
 				leftAdjustment = 0;
 				rightAdjustment = 0;
 			}
-			else if(ratio >= 3.4 && ratio <= 3.65)
+			else if(ratio >= 2.9 && ratio <= 3.2)
 			{
 				leftAdjustment = 0;
 				rightAdjustment = 0;
 			}
-			else if(ratio >= 3.25 && ratio <= 3.8)
+			else if(ratio >= 2.75 && ratio <= 3.35)
 			{
-				if(ratio >= 3.25 && ratio <= 3.4)
+				if(ratio >= 2.75 && ratio <= 2.9)
 				{
 					leftAdjustment = -0.025;
 					rightAdjustment = 0.025;
@@ -173,7 +173,7 @@ public class Functions
 			}
 			else
 			{
-				if(ratio < 3.25)
+				if(ratio < 2.75)
 				{
 					leftAdjustment = -0.05;
 					rightAdjustment = 0.05;
@@ -193,9 +193,9 @@ public class Functions
 				leftAdjustment = 0;
 				rightAdjustment = 0;
 			}
-			else if(ratio >= 3.25 && ratio <= 3.8)
+			else if(ratio >= 2.75 && ratio <= 3.35)
 			{
-				if(ratio >= 3.25 && ratio <= 3.4)
+				if(ratio >= 2.75 && ratio <= 2.9)
 				{
 					leftAdjustment = -0.05;
 					rightAdjustment = 0.05;
@@ -208,7 +208,7 @@ public class Functions
 			}
 			else
 			{
-				if(ratio < 3.25)
+				if(ratio < 2.75)
 				{
 					leftAdjustment = -0.1;
 					rightAdjustment = 0.1;
