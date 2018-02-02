@@ -18,7 +18,7 @@ public class Auto
 	
 	//public static StopWatch sw = new StopWatch(); 
 	
-	static double lSSpeed, rSSpeed, lAdjustment, rAdjustment, sum;
+	static double lSSpeed, rSSpeed, lAdjustment, rAdjustment;
 	static double []adjustmentValues = new double[2];
 	
 	public static void MSRRSW1(double lValue, double rValue)
