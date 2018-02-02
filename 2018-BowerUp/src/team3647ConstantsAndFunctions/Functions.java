@@ -25,7 +25,7 @@ public class Functions
 		{
 			return .2;
 		}
-//		else if(lEnc < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWStraight))
+//		else if(lEnc < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWsecondsmallTurn + Constants.MSRRSWStraight))
 //		{
 //			return .6;
 //		}
@@ -53,7 +53,7 @@ public class Functions
 		{
 			return .534;
 		}
-//		else if(rEnc < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWStraight))
+//		else if(rEnc < (Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWsecondbigTurn + Constants.MSRRSWStraight))
 //		{
 //			return .6;
 //		}
@@ -220,8 +220,9 @@ public class Functions
 				}
 			}
 		}
-//		else if(sum < 2* (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWStraight))
+//		else if(sum < (Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWfirstbigTurn + Constants.MSRRSWsecondbigTurn + Constants.MSRRSWsecondsmallTurn +  2*Constants.MSRRSWStraight))
 //		{
+//			System.out.println("yes");
 //			if(Math.abs(lEnc - rEnc) < 100)
 //			{
 //				leftAdjustment = 0;

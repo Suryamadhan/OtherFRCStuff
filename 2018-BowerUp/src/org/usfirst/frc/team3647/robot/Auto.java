@@ -23,6 +23,7 @@ public class Auto
 	
 	public static void MSRRSW1(double lValue, double rValue)
 	{
+		Encoders.testEncoders();
 		lSSpeed = Functions.MSRRSWsupposedLeftSpeed(lValue);
 		rSSpeed = Functions.MSRRSWsupposedRightSpeed(rValue);
 		adjustmentValues = Functions.MSRRSWcorrection(lValue, rValue);
