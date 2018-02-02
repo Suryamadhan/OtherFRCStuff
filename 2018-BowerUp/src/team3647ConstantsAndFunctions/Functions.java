@@ -21,7 +21,7 @@ public class Functions
 		{
 			return .15;
 		}
-		else if(lEnc < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWfirstsmallTurn))
+		else if(lEnc < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWsecondsmallTurn))
 		{
 			return .2;
 		}
@@ -49,7 +49,7 @@ public class Functions
 		{
 			return .53;
 		}
-		else if(rEnc < (Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWfirstbigTurn))
+		else if(rEnc < (Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWsecondbigTurn))
 		{
 			return .707;
 		}
@@ -185,7 +185,7 @@ public class Functions
 				}
 			}
 		}
-		else if(sum < 2*(Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWfirstbigTurn))
+		else if(sum < (Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWfirstbigTurn + Constants.MSRRSWsecondbigTurn + Constants.MSRRSWsecondsmallTurn))
 		{
 			ratio = (rEnc - Constants.MSRRSWfirstsmallTurn)/(lEnc - Constants.MSRRSWfirstbigTurn);
 			if(ratio >= 3.4 && ratio <= 3.65)
