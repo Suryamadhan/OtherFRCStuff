@@ -80,12 +80,11 @@ public class Robot extends IterativeRobot {
 		enc.setEncoderValues();
 		Encoders.testEncoders();
 		joy.setMainContollerValues();
-		Drivetrain.testDrive(joy.leftJoySticky, joy.rightJoySticky);
+		Drivetrain.tankDrive(joy.leftJoySticky, joy.rightJoySticky);
 		if(joy.buttonA)
 		{
 			Encoders.resetEncoders();
 		}
-		//Drivetrain.testSpeed();
 	}
 
 }

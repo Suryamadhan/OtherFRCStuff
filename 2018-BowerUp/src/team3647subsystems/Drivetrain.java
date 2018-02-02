@@ -386,44 +386,26 @@ public class Drivetrain
 		{
 			if(currentRatio > 1.1 && currentRatio < 1.18)
 			{
-//				setLeftMotorSpeed(leftSpeed + adjustment);
-//				setRightMotorSpeed(-(rightSpeed - adjustment));
-				
 				drive.tankDrive(leftSpeed + adjustment, (rightSpeed - adjustment), false);
 			}
 			else if(currentRatio > 1.18 && currentRatio < 1.25)
 			{
-//				setLeftMotorSpeed(leftSpeed + (2*adjustment));
-//				setRightMotorSpeed(-(rightSpeed - (2*adjustment)));
-				
 				drive.tankDrive(leftSpeed + (2*adjustment),(rightSpeed - (2*adjustment)), false);
 			}
 			else if(currentRatio > 1.25)
 			{
-//				setLeftMotorSpeed(leftSpeed + (3*adjustment));
-//				setRightMotorSpeed(-(rightSpeed - (3*adjustment)));
-				
 				drive.tankDrive(leftSpeed + (3*adjustment), (rightSpeed - (3*adjustment)), false);
 			}
 			else if(currentRatio < .9 && currentRatio > .82)
 			{
-//				setLeftMotorSpeed(leftSpeed - adjustment);
-//				setRightMotorSpeed(-(rightSpeed + adjustment));
-				
 				drive.tankDrive(leftSpeed - adjustment, (rightSpeed + adjustment), false);
 			}
 			else if(currentRatio < .82 && currentRatio > .75)
 			{
-//				setLeftMotorSpeed(leftSpeed - (2*adjustment));
-//				setRightMotorSpeed(-(rightSpeed + (2*adjustment)));
-				
 				drive.tankDrive(leftSpeed - (2*adjustment), (rightSpeed + (2*adjustment)), false);
 			}
 			else
 			{
-//				setLeftMotorSpeed(leftSpeed - (3*adjustment));
-//				setRightMotorSpeed(-(rightSpeed + (3*adjustment)));
-				
 				drive.tankDrive(leftSpeed - (3*adjustment), (rightSpeed + (3*adjustment)), false);
 			}
 		}
@@ -433,53 +415,32 @@ public class Drivetrain
 	{
 		if(withinRange || sum < 360)
 		{
-//			setLeftMotorSpeed(leftSpeed);
-//			setRightMotorSpeed(-rightSpeed);
-			
 			drive.tankDrive(leftSpeed,rightSpeed, false);
 		}
 		else
 		{
 			if(currentRatio > 1.1 && currentRatio < 1.18)
 			{
-//				setLeftMotorSpeed(leftSpeed + adjustment);
-//				setRightMotorSpeed(-(rightSpeed - adjustment));
-				
 				drive.tankDrive(leftSpeed - adjustment,(rightSpeed + adjustment), false);
 			}
 			else if(currentRatio > 1.18 && currentRatio < 1.25)
 			{
-//				setLeftMotorSpeed(leftSpeed + (2*adjustment));
-//				setRightMotorSpeed(-(rightSpeed - (2*adjustment)));
-				
 				drive.tankDrive(leftSpeed - (2*adjustment),(rightSpeed + (2*adjustment)), false);
 			}
 			else if(currentRatio > 1.25)
 			{
-//				setLeftMotorSpeed(leftSpeed + (3*adjustment));
-//				setRightMotorSpeed(-(rightSpeed - (3*adjustment)));
-				
 				drive.tankDrive(leftSpeed - (3*adjustment),(rightSpeed + (3*adjustment)), false);
 			}
 			else if(currentRatio < .9 && currentRatio > .82)
 			{
-//				setLeftMotorSpeed(leftSpeed - adjustment);
-//				setRightMotorSpeed(-(rightSpeed + adjustment));
-				
 				drive.tankDrive(leftSpeed + adjustment,(rightSpeed - adjustment));
 			}
 			else if(currentRatio < .82 && currentRatio > .75)
 			{
-//				setLeftMotorSpeed(leftSpeed - (2*adjustment));
-//				setRightMotorSpeed(-(rightSpeed + (2*adjustment)));
-				
 				drive.tankDrive(leftSpeed + (2*adjustment),(rightSpeed - (2*adjustment)));
 			}
 			else
 			{
-//				setLeftMotorSpeed(leftSpeed - (3*adjustment));
-//				setRightMotorSpeed(-(rightSpeed + (3*adjustment)));
-				
 				drive.tankDrive(leftSpeed + (3*adjustment),(rightSpeed - (3*adjustment)));
 			}
 		}
@@ -489,53 +450,32 @@ public class Drivetrain
 	{
 		if(withinRange || sum < 50)
 		{
-//			setLeftMotorSpeed(leftSpeed);
-//			setRightMotorSpeed(-rightSpeed);
-			
 			drive.tankDrive(leftSpeed,rightSpeed, false);
 		}
 		else
 		{
 			if(currentRatio > 1.1 && currentRatio < 1.18)
 			{
-//				setLeftMotorSpeed(leftSpeed + adjustment);
-//				setRightMotorSpeed(-(rightSpeed - adjustment));
-				
 				drive.tankDrive(leftSpeed - adjustment, (rightSpeed + adjustment), false);
 			}
 			else if(currentRatio > 1.18 && currentRatio < 1.25)
 			{
-//				setLeftMotorSpeed(leftSpeed + (2*adjustment));
-//				setRightMotorSpeed(-(rightSpeed - (2*adjustment)));
-				
 				drive.tankDrive(leftSpeed - (2*adjustment), (rightSpeed + (2*adjustment)), false);
 			}
 			else if(currentRatio > 1.25)
 			{
-//				setLeftMotorSpeed(leftSpeed + (3*adjustment));
-//				setRightMotorSpeed(-(rightSpeed - (3*adjustment)));
-				
 				drive.tankDrive(leftSpeed - (3*adjustment), (rightSpeed + (3*adjustment)), false);
 			}
 			else if(currentRatio < .9 && currentRatio > .82)
 			{
-//				setLeftMotorSpeed(leftSpeed - adjustment);
-//				setRightMotorSpeed(-(rightSpeed + adjustment));
-				
 				drive.tankDrive(leftSpeed + adjustment, (rightSpeed - adjustment), false);
 			}
 			else if(currentRatio < .82 && currentRatio > .75)
 			{
-//				setLeftMotorSpeed(leftSpeed - (2*adjustment));
-//				setRightMotorSpeed(-(rightSpeed + (2*adjustment)));
-				
 				drive.tankDrive(leftSpeed + (2*adjustment), (rightSpeed - (2*adjustment)), false);
 			}
 			else
 			{
-//				setLeftMotorSpeed(leftSpeed - (3*adjustment));
-//				setRightMotorSpeed(-(rightSpeed + (3*adjustment)));
-				
 				drive.tankDrive(leftSpeed + (3*adjustment), (rightSpeed - (3*adjustment)), false);
 			}
 		}
@@ -545,53 +485,32 @@ public class Drivetrain
 	{
 		if(withinRange || sum < 50)
 		{
-//			setLeftMotorSpeed(leftSpeed);
-//			setRightMotorSpeed(-rightSpeed);
-			
 			drive.tankDrive(leftSpeed,rightSpeed, false);
 		}
 		else
 		{
 			if(currentRatio > 1.1 && currentRatio < 1.18)
 			{
-//				setLeftMotorSpeed(leftSpeed + adjustment);
-//				setRightMotorSpeed(-(rightSpeed - adjustment));
-				
 				drive.tankDrive(leftSpeed + adjustment,(rightSpeed - adjustment), false);
 			}
 			else if(currentRatio > 1.18 && currentRatio < 1.25)
 			{
-//				setLeftMotorSpeed(leftSpeed + (2*adjustment));
-//				setRightMotorSpeed(-(rightSpeed - (2*adjustment)));
-				
 				drive.tankDrive(leftSpeed + (2*adjustment), (rightSpeed - (2*adjustment)), false);
 			}
 			else if(currentRatio > 1.25)
-			{
-//				setLeftMotorSpeed(leftSpeed + (3*adjustment));
-//				setRightMotorSpeed(-(rightSpeed - (3*adjustment)));
-				
+			{	
 				drive.tankDrive(leftSpeed + (3*adjustment), (rightSpeed - (3*adjustment)), false);
 			}
 			else if(currentRatio < .9 && currentRatio > .82)
 			{
-//				setLeftMotorSpeed(leftSpeed - adjustment);
-//				setRightMotorSpeed(-(rightSpeed + adjustment));
-				
 				drive.tankDrive(leftSpeed - adjustment, (rightSpeed + adjustment), false);
 			}
 			else if(currentRatio < .82 && currentRatio > .75)
 			{
-//				setLeftMotorSpeed(leftSpeed - (2*adjustment));
-//				setRightMotorSpeed(-(rightSpeed + (2*adjustment)));
-				
 				drive.tankDrive(leftSpeed - (2*adjustment), (rightSpeed + (2*adjustment)), false);
 			}
 			else
 			{
-//				setLeftMotorSpeed(leftSpeed - (3*adjustment));
-//				setRightMotorSpeed(-(rightSpeed + (3*adjustment)));
-				
 				drive.tankDrive(leftSpeed - (3*adjustment), (rightSpeed + (3*adjustment)), false);
 			}
 		}
@@ -599,8 +518,6 @@ public class Drivetrain
 	
 	public static void stop()
 	{
-//		leftSRX.stopMotor();
-//		rightSRX.stopMotor();
 		drive.tankDrive(0,0);
 	}
 }
