@@ -15,10 +15,12 @@ public class Auto
 	static int currentState;
 	
 	static double prevLeftEncoder, prevRightEncoder;
+	static String gameData, auto;
 	
 	//public static StopWatch sw = new StopWatch(); 
 	
-	static double lSSpeed, rSSpeed, lAdjustment, rAdjustment;
+	static double lSSpeed, rSSpeed, lAdjustment, rAdjustment, error;
+	static boolean lError, rError;
 	static double []adjustmentValues = new double[2];
 	
 	public static void MSRRSW1(double lValue, double rValue)
@@ -29,22 +31,84 @@ public class Auto
 				sum = lValue + rValue;
 				if(sum < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWsecondbigTurn + Constants.MSRRSWsecondsmallTurn))
 				{
-					lSSpeed = Functions.MSRRSWsupposedLeftSpeed(lValue);
-					rSSpeed = Functions.MSRRSWsupposedRightSpeed(rValue);
-					adjustmentValues = Functions.MSRRSWcorrection(lValue, rValue);
+					lSSpeed = Functions.MSRRSWsupposedLeftSpeed1(lValue);
+					rSSpeed = Functions.MSRRSWsupposedRightSpeed1(rValue);
+					adjustmentValues = Functions.MSRRSWcorrection1(lValue, rValue);
 					lAdjustment = adjustmentValues[0];
 					rAdjustment = adjustmentValues[1];
-					Drivetrain.drive.tankDrive(lSSpeed + lAdjustment, rSSpeed +rAdjustment, false);
+					Drivetrain.tankDrive(lSSpeed + lAdjustment, rSSpeed +rAdjustment);
 				}
 				else
 				{
 					prevLeftEncoder = lValue;
 					prevRightEncoder = rValue;
-					currentState = 2;
+					currentState = 4;
 				}
 				break;
 			case 2:
-				Drivetrain.drive.tankDrive(0,0, false);
+				error = Math.abs(prevLeftEncoder - prevRightEncoder);
+				if(prevRightEncoder > prevLeftEncoder)
+				{
+					rError = true;
+					lError = false;
+					currentState = 3;
+				}
+				else if(prevRightEncoder < prevLeftEncoder)
+				{
+					rError = false;
+					lError = true;
+					currentState = 3;
+				}
+				else
+				{
+					rError = false;
+					lError = false;
+					currentState = 3;
+				}
+				break;
+			case 3:
+				if(lError)
+				{
+					lValue = lValue - prevLeftEncoder + error;
+					rValue = rValue - prevRightEncoder;
+					if(!Drivetrain.reachedDistance(lValue, rValue, Constants.MSRRSWStraight))
+					{
+						Drivetrain.driveForward(lValue, rValue, .6);
+					}
+					else
+					{
+						currentState = 4;
+					}
+				}
+				else if(rError)
+				{
+					lValue = lValue - prevLeftEncoder;
+					rValue = rValue - prevRightEncoder + error;
+					if(!Drivetrain.reachedDistance(lValue, rValue, Constants.MSRRSWStraight))
+					{
+						Drivetrain.driveForward(lValue, rValue, .6);
+					}
+					else
+					{
+						currentState = 4;
+					}
+				}
+				else
+				{
+					lValue = lValue - prevLeftEncoder;
+					rValue = rValue - prevRightEncoder;
+					if(!Drivetrain.reachedDistance(lValue, rValue, Constants.MSRRSWStraight))
+					{
+						Drivetrain.driveForward(lValue, rValue, .6);
+					}
+					else
+					{
+						currentState = 4;
+					}
+				}
+				break;
+			case 4:
+				Drivetrain.stop();
 				break;
 		}
 		Encoders.testEncoders();
@@ -680,7 +744,28 @@ public class Auto
 		}
 	}
 	
-	
+	public static void runAuto(double lValue, double rValue)
+	{
+		gameData = "RRR";//
+		//gameData = DriverStation.getInstance().getGameSpecificMessage();
+		auto += gameData.charAt(0);//
+		auto += gameData.charAt(1);//
+		switch(auto)
+		{
+			case "LL":
+				MSRRSW1(lValue, rValue);//
+				break;
+			case "RR":
+				MSRRSW1(lValue, rValue);
+				break;
+			case "RL":
+				MSRRSW1(lValue, rValue);//
+				break;
+			case "LR":
+				MSRRSW1(lValue, rValue);//
+				break;
+		}
+	}
 	
 	public static void initialize()
 	{

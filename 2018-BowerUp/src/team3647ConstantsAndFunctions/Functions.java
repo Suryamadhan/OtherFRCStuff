@@ -7,7 +7,7 @@ public class Functions
 		return Math.sin(x);
 	}
 	
-	public static double MSRRSWsupposedLeftSpeed(double lEnc)
+	public static double MSRRSWsupposedLeftSpeed1(double lEnc)
 	{
 		if(lEnc < (Constants.MSRRSWfirstbigTurn - 5087))
 		{
@@ -21,7 +21,7 @@ public class Functions
 		{
 			return .15;
 		}
-		else if(lEnc < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWsecondsmallTurn))
+		else if(lEnc < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWfirstsmallTurn))
 		{
 			return .2;
 		}
@@ -35,7 +35,7 @@ public class Functions
 		}
 	}
 	
-	public static double MSRRSWsupposedRightSpeed(double rEnc)
+	public static double MSRRSWsupposedRightSpeed1(double rEnc)
 	{
 		if(rEnc < (Constants.MSRRSWfirstsmallTurn - 1440))
 		{
@@ -49,7 +49,7 @@ public class Functions
 		{
 			return .4;
 		}
-		else if(rEnc < (Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWsecondbigTurn))
+		else if(rEnc < (Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWfirstbigTurn))
 		{
 			return .534;
 		}
@@ -63,7 +63,7 @@ public class Functions
 		}
 	}
 	
-	public static double[] MSRRSWcorrection(double lEnc, double rEnc)
+	public static double[] MSRRSWcorrection1(double lEnc, double rEnc)
 	{
 		double leftAdjustment, rightAdjustment;
 		double []adjustment = new double[2];
