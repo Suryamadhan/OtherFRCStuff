@@ -106,7 +106,12 @@ public class Auto
 				}
 				break;
 			case 4:
-				Drivetrain.stop();
+				lSSpeed = Functions.MSRRSWsupposedLeftSpeed1(lValue);
+				rSSpeed = Functions.MSRRSWsupposedRightSpeed1(rValue);
+				adjustmentValues = Functions.MSRRSWcorrection1(lValue, rValue);
+				lAdjustment = adjustmentValues[0];
+				rAdjustment = adjustmentValues[1];
+				Drivetrain.tankDrive(lSSpeed + lAdjustment, rSSpeed +rAdjustment);
 				break;
 		}
 		Encoders.testEncoders();	

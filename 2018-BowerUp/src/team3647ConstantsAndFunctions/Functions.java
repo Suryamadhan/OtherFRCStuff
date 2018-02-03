@@ -7,6 +7,11 @@ public class Functions
 		return Math.sin(x);
 	}
 	
+	public static double MSRRSWcheckCurve(double[] encValues)
+	{
+		if(encValues[0] < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWsecondsmallTurn))
+	}
+	
 	public static double MSRRSWsupposedLeftSpeed1(double lEnc)
 	{
 		if(lEnc < (Constants.MSRRSWfirstbigTurn - 5087))
@@ -21,7 +26,7 @@ public class Functions
 		{
 			return .15;
 		}
-		else if(lEnc < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWfirstsmallTurn))
+		else if(lEnc < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWsecondsmallTurn))
 		{
 			return .2;
 		}
@@ -49,7 +54,7 @@ public class Functions
 		{
 			return .4;
 		}
-		else if(rEnc < (Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWfirstbigTurn))
+		else if(rEnc < (Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWsecondbigTurn))
 		{
 			return .534;
 		}
