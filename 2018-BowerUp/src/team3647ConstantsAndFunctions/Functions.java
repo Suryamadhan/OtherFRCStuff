@@ -9,7 +9,7 @@ public class Functions
 	
 	public static boolean MSRRSWcheckCurve(double lValue, double rValue)
 	{
-		if(lValue < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWsecondsmallTurn) && encValues[1] < (Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWsecondbigTurn))
+		if(lValue < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWfirstsmallTurn) && rValue < (Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWfirstbigTurn))
 		{
 			return false;
 		}
@@ -43,6 +43,7 @@ public class Functions
 //		}
 		else
 		{
+			System.out.println("left stop");
 			return 0;
 		}
 	}
@@ -71,6 +72,7 @@ public class Functions
 //		}
 		else
 		{
+			System.out.println("right stop");
 			return 0;
 		}
 	}

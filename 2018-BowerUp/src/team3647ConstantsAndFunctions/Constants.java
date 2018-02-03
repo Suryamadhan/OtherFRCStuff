@@ -4,7 +4,7 @@ public class Constants
 {
 	//Motor Pins
 	public final static int leftMaster = 57;
-	public final static int rightMaster = 52;
+	public final static int rightMaster = 54;
 	public final static int rightSlave1 = 58;
 	public final static int rightSlave2 = 59;
 	public final static int leftSlave1 = 52;

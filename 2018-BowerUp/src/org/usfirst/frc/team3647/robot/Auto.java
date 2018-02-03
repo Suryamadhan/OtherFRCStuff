@@ -26,21 +26,36 @@ public class Auto
 		switch(currentState)
 		{
 			case 1:
-				if(Functions.MSRRSWcheckCurve(lValue, rValue))
+				sum = lValue + rValue;
+				lSSpeed = Functions.MSRRSWsupposedLeftSpeed1(lValue);
+				rSSpeed = Functions.MSRRSWsupposedRightSpeed1(rValue);
+				adjustmentValues = Functions.MSRRSWcorrection1(lValue, rValue);
+				lAdjustment = adjustmentValues[0];
+				rAdjustment = adjustmentValues[1];
+				if(sum>14000 && Math.abs(lValue - rValue) < 360 && lSSpeed == 0 && rSSpeed == 0 && lAdjustment == 0 && rAdjustment == 0)
 				{
-					lSSpeed = Functions.MSRRSWsupposedLeftSpeed1(lValue);
-					rSSpeed = Functions.MSRRSWsupposedRightSpeed1(rValue);
-					adjustmentValues = Functions.MSRRSWcorrection1(lValue, rValue);
-					lAdjustment = adjustmentValues[0];
-					rAdjustment = adjustmentValues[1];
 					Drivetrain.tankDrive(lSSpeed + lAdjustment, rSSpeed +rAdjustment);
+					System.out.println("yes");
 				}
 				else
 				{
-					prevLeftEncoder = lValue;
-					prevRightEncoder = rValue;
-					currentState = 4;
+					Drivetrain.tankDrive(lSSpeed + lAdjustment, rSSpeed +rAdjustment);
 				}
+//				if(Functions.MSRRSWsupposedLeftSpeed1(lValue) != 0 && Functions.MSRRSWsupposedRightSpeed1(rValue) !=0)
+//				{
+//					lSSpeed = Functions.MSRRSWsupposedLeftSpeed1(lValue);
+//					rSSpeed = Functions.MSRRSWsupposedRightSpeed1(rValue);
+//					adjustmentValues = Functions.MSRRSWcorrection1(lValue, rValue);
+//					lAdjustment = adjustmentValues[0];
+//					rAdjustment = adjustmentValues[1];
+//					Drivetrain.tankDrive(lSSpeed + lAdjustment, rSSpeed +rAdjustment);
+//				}
+//				else
+//				{
+//					prevLeftEncoder = lValue;
+//					prevRightEncoder = rValue;
+//					currentState = 4;
+//				}
 				break;
 			case 2:
 				error = Math.abs(prevLeftEncoder - prevRightEncoder);
@@ -105,6 +120,12 @@ public class Auto
 				}
 				break;
 			case 4:
+//				lSSpeed = Functions.MSRRSWsupposedLeftSpeed1(lValue);
+//				rSSpeed = Functions.MSRRSWsupposedRightSpeed1(rValue);
+//				adjustmentValues = Functions.MSRRSWcorrection1(lValue, rValue);
+//				lAdjustment = adjustmentValues[0];
+//				rAdjustment = adjustmentValues[1];
+//				Drivetrain.tankDrive(lSSpeed + lAdjustment, rSSpeed +rAdjustment);
 				Drivetrain.stop();
 				break;
 		}
