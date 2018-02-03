@@ -54,8 +54,8 @@ public class Constants
 	public final static double MSRRSWfirstbigTurn = 1.665 * length;
 	public final static double MSRRSWfirstsmallTurn = 0.47124 * length;
 	
-	public final static double MSRRSWsecondbigTurn = .8 * length;
-	public final static double MSRRSWsecondsmallTurn = .3 * length;
+	public final static double MSRRSWsecondbigTurn = 1.665 * length;
+	public final static double MSRRSWsecondsmallTurn = 0.47124 * length;
 	
 	public final static double MSRRSWStraight = 1.973 * length;
 	

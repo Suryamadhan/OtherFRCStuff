@@ -51,7 +51,7 @@ public class Robot extends IterativeRobot {
 		while(DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
 		{
 			enc.setEncoderValues();
-			Auto.MSRRSW1(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
+			Auto.MSRRSW2(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 		}
 	}
 
