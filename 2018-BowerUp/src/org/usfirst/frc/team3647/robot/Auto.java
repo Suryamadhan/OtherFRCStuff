@@ -26,8 +26,7 @@ public class Auto
 		switch(currentState)
 		{
 			case 1:
-				sum = lValue + rValue;
-				if(sum < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWsecondbigTurn + Constants.MSRRSWsecondsmallTurn))
+				if(Functions.MSRRSWcheckCurve(lValue, rValue))
 				{
 					lSSpeed = Functions.MSRRSWsupposedLeftSpeed1(lValue);
 					rSSpeed = Functions.MSRRSWsupposedRightSpeed1(rValue);
@@ -106,12 +105,7 @@ public class Auto
 				}
 				break;
 			case 4:
-				lSSpeed = Functions.MSRRSWsupposedLeftSpeed1(lValue);
-				rSSpeed = Functions.MSRRSWsupposedRightSpeed1(rValue);
-				adjustmentValues = Functions.MSRRSWcorrection1(lValue, rValue);
-				lAdjustment = adjustmentValues[0];
-				rAdjustment = adjustmentValues[1];
-				Drivetrain.tankDrive(lSSpeed + lAdjustment, rSSpeed +rAdjustment);
+				Drivetrain.stop();
 				break;
 		}
 		Encoders.testEncoders();	

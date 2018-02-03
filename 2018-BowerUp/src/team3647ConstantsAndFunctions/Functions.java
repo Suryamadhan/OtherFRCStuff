@@ -7,9 +7,16 @@ public class Functions
 		return Math.sin(x);
 	}
 	
-	public static double MSRRSWcheckCurve(double[] encValues)
+	public static boolean MSRRSWcheckCurve(double lValue, double rValue)
 	{
-		if(encValues[0] < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWsecondsmallTurn))
+		if(lValue < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWsecondsmallTurn) && encValues[1] < (Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWsecondbigTurn))
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 	
 	public static double MSRRSWsupposedLeftSpeed1(double lEnc)
