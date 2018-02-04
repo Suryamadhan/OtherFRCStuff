@@ -363,20 +363,23 @@ public class Drivetrain
 	
 	public static boolean reachedTurnDistance(double sum, double requiredLeftDist, double requiredRightDist)
 	{
-		System.out.println("Sum:" + sum);
-		System.out.println("required sum:" + (requiredLeftDist + requiredRightDist));
 		if(sum < requiredLeftDist + requiredRightDist)
 		{
 			return false;
 		}
 		else
 		{
+			System.out.println("Sum:" + sum);
+			System.out.println("leftDist: " + requiredLeftDist);
+			System.out.println("rightDist: " + requiredRightDist);
+			System.out.println("required sum:" + (requiredLeftDist + requiredRightDist));
 			return true;
 		}
 	}
 	
 	public static void goStraightLeft(double currentRatio, boolean withinRange, double sum, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment)
 	{
+		System.out.println("yes");
 		if(withinRange || sum < 360)
 		{
 			drive.tankDrive(leftSpeed,rightSpeed, false);

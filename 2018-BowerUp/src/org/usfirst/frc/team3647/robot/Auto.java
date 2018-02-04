@@ -10,6 +10,7 @@ public class Auto
 {
 	static double aimedRatio, currentRatio;
 	static double sum;
+	static int test = 0;
 	static boolean withinRange;
 	static double requiredLeftDist, requiredRightDist, requiredStraightDist = 0;
 	static int currentState;
@@ -74,11 +75,11 @@ public class Auto
 				}
 				break;
 			case 3:
-				requiredRightDist = 1766.61;
-				requiredLeftDist = 500;
+				requiredRightDist = Constants.MSRRSWsecondbigTurn;
+				requiredLeftDist = Constants.MSRRSWsecondsmallTurn;
 				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
-				lValue -= prevLeftEncoder;
-				rValue -= prevRightEncoder;
+				lValue = lValue - prevLeftEncoder;
+				rValue = rValue - prevRightEncoder;
 				currentRatio = (((rValue)/(lValue))/aimedRatio);
 				sum = (rValue) + (lValue);
 				if(currentRatio >= .9 && currentRatio <= 1.1)
@@ -89,23 +90,34 @@ public class Auto
 				{
 					withinRange = false;
 				}
-				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
+				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist-405))
 				{
-					Drivetrain.goStraightLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .15, .53, .028);
+					if(rValue < 1766.61 && lValue < 500)
+					{
+						Drivetrain.goStraightLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .15, .53, .028);
+					}
+					else
+					{
+						Drivetrain.goStraightLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .2, .65, .035);
+					}
+					
 				}
 				else
 				{
-					currentState = 4;
+					currentState = 5;
 				}
 				break;
 			case 4:
 				requiredRightDist = Constants.MSRRSWsecondbigTurn;
 				requiredLeftDist = Constants.MSRRSWsecondsmallTurn;
 				aimedRatio = ((requiredRightDist)/(requiredLeftDist));
-				lValue -= prevLeftEncoder;
-				rValue -= prevRightEncoder;
+				lValue = lValue - prevLeftEncoder;
+				rValue = rValue - prevRightEncoder;
 				currentRatio = (((rValue)/(lValue))/aimedRatio);
 				sum = (rValue) + (lValue);
+//				System.out.println("sum: " + sum);
+//				System.out.println("rValue: " + rValue);
+//				System.out.println("lValue" + lValue);
 				if(currentRatio >= .9 && currentRatio <= 1.1)
 				{
 					withinRange = true;
@@ -114,12 +126,22 @@ public class Auto
 				{
 					withinRange = false;
 				}
-				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
+				System.out.println("oof");
+				if(sum < requiredLeftDist + requiredRightDist)
 				{
+					test++;
+					System.out.println("test" + test);
+					System.out.println("sum: " + sum);
+					System.out.println("requiredLeftDist" + requiredLeftDist);
+					System.out.println("requiredRightDist" + requiredRightDist);
 					Drivetrain.goStraightLeft(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, .2, .707, .035);
 				}
 				else
 				{
+					System.out.println("oof" + test);
+					System.out.println("sum: " + sum);
+					System.out.println("requiredLeftDist" + requiredLeftDist);
+					System.out.println("requiredRightDist" + requiredRightDist);
 					currentState = 5;
 				}
 			case 5:
@@ -128,66 +150,86 @@ public class Auto
 				currentState = 6;
 				break;
 			case 6:
-				error = Math.abs(prevLeftEncoder - prevRightEncoder);
-				if(prevRightEncoder > prevLeftEncoder)
+				lValue = lValue - prevLeftEncoder;
+				rValue = rValue - prevRightEncoder;
+				if(!Drivetrain.reachedDistance(lValue, rValue, Constants.MSRRSWStraight - 1440))
 				{
-					rError = true;
-					lError = false;
-					currentState = 9;
-				}
-				else if(prevRightEncoder < prevLeftEncoder)
-				{
-					rError = false;
-					lError = true;
-					currentState = 9;
+					Drivetrain.driveForward(lValue, rValue, .6, .06);
 				}
 				else
 				{
-					rError = false;
-					lError = false;
-					currentState = 9;
+					currentState =7;
 				}
+//				error = Math.abs(prevLeftEncoder - prevRightEncoder);
+//				if(prevRightEncoder > prevLeftEncoder)
+//				{
+//					rError = true;
+//					lError = false;
+//					currentState = 9;
+//				}
+//				else if(prevRightEncoder < prevLeftEncoder)
+//				{
+//					rError = false;
+//					lError = true;
+//					currentState = 9;
+//				}
+//				else
+//				{
+//					rError = false;
+//					lError = false;
+//					currentState = 9;
+//				}
 				break;
 			case 7:
-				if(lError)
+				lValue = lValue - prevLeftEncoder;
+				rValue = rValue - prevRightEncoder;
+				if(!Drivetrain.reachedDistance(lValue, rValue, Constants.MSRRSWStraight))
 				{
-					lValue = lValue - prevLeftEncoder + error;
-					rValue = rValue - prevRightEncoder;
-					if(!Drivetrain.reachedDistance(lValue, rValue, Constants.MSRRSWStraight))
-					{
-						Drivetrain.driveForward(lValue, rValue, .6, .06);
-					}
-					else
-					{
-						currentState = 8;
-					}
-				}
-				else if(rError)
-				{
-					lValue = lValue - prevLeftEncoder;
-					rValue = rValue - prevRightEncoder + error;
-					if(!Drivetrain.reachedDistance(lValue, rValue, Constants.MSRRSWStraight))
-					{
-						Drivetrain.driveForward(lValue, rValue, .6, .06);
-					}
-					else
-					{
-						currentState = 8;
-					}
+					Drivetrain.driveForward(lValue, rValue, .2, .03);
 				}
 				else
 				{
-					lValue = lValue - prevLeftEncoder;
-					rValue = rValue - prevRightEncoder;
-					if(!Drivetrain.reachedDistance(lValue, rValue, Constants.MSRRSWStraight))
-					{
-						Drivetrain.driveForward(lValue, rValue, .6, .06);
-					}
-					else
-					{
-						currentState = 8;
-					}
+					currentState =9;
 				}
+//				if(lError)
+//				{
+//					lValue = lValue - prevLeftEncoder + error;
+//					rValue = rValue - prevRightEncoder;
+//					if(!Drivetrain.reachedDistance(lValue, rValue, Constants.MSRRSWStraight))
+//					{
+//						Drivetrain.driveForward(lValue, rValue, .6, .06);
+//					}
+//					else
+//					{
+//						currentState = 9;
+//					}
+//				}
+//				else if(rError)
+//				{
+//					lValue = lValue - prevLeftEncoder;
+//					rValue = rValue - prevRightEncoder + error;
+//					if(!Drivetrain.reachedDistance(lValue, rValue, Constants.MSRRSWStraight))
+//					{
+//						Drivetrain.driveForward(lValue, rValue, .6, .06);
+//					}
+//					else
+//					{
+//						currentState = 9;
+//					}
+//				}
+//				else
+//				{
+//					lValue = lValue - prevLeftEncoder;
+//					rValue = rValue - prevRightEncoder;
+//					if(!Drivetrain.reachedDistance(lValue, rValue, Constants.MSRRSWStraight))
+//					{
+//						Drivetrain.driveForward(lValue, rValue, .6, .06);
+//					}
+//					else
+//					{
+//						currentState = 9;
+//					}
+//				}
 				break;
 			case 9:
 				Drivetrain.stop();
