@@ -22,6 +22,39 @@ public class Auto
 	static boolean lError, rError;
 	static double []adjustmentValues = new double[2];
 	
+	public static void semicircle(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 1:
+				requiredRightDist = (Constants.testSmallUTurn);
+				requiredLeftDist = (Constants.testBigUTurn);
+				aimedRatio = ((requiredLeftDist)/(requiredRightDist));
+				currentRatio = (((lValue)/(rValue))/aimedRatio);
+				sum = (rValue) + (lValue);
+				if(currentRatio >= .9 && currentRatio <= 1.1)
+				{
+					withinRange = true;
+				}
+				else
+				{
+					withinRange = false;
+				}
+				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
+				{
+					Drivetrain.goBackRight(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, -.813, -.45, .05);
+				}
+				else
+				{
+					currentState = 2;
+				}
+				break;
+			case 2:
+				Drivetrain.stop();
+				break;
+		}
+	}
+	
 	public static void MSRRSW2(double lValue, double rValue)
 	{
 		switch(currentState)

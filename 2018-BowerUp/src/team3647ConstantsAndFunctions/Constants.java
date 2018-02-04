@@ -59,7 +59,8 @@ public class Constants
 	
 	public final static double MSRRSWStraight = 1.973 * length;
 	
-	
+	public final static double testBigUTurn = 5.34 * length;
+	public final static double testSmallUTurn = 2.956 * length;
 	
 
 }
