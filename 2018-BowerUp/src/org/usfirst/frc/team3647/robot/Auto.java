@@ -30,6 +30,8 @@ public class Auto
 				requiredRightDist = (Constants.testSmallUTurn);
 				requiredLeftDist = (Constants.testBigUTurn);
 				aimedRatio = ((requiredLeftDist)/(requiredRightDist));
+				lValue = Math.abs(lValue);
+				rValue = Math.abs(rValue);
 				currentRatio = (((lValue)/(rValue))/aimedRatio);
 				sum = (rValue) + (lValue);
 				if(currentRatio >= .9 && currentRatio <= 1.1)
@@ -40,17 +42,31 @@ public class Auto
 				{
 					withinRange = false;
 				}
-				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist, requiredRightDist))
+				if(!Drivetrain.reachedTurnDistance(sum, requiredLeftDist+845, requiredRightDist-200))
 				{
-					Drivetrain.goBackRight(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, -.813, -.45, .05);
+					Drivetrain.goBackRight(currentRatio, withinRange, sum, requiredLeftDist, requiredRightDist, -.92, -.3, .04);
 				}
 				else
 				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
 					currentState = 2;
 				}
 				break;
 			case 2:
-				Drivetrain.stop();
+				lValue = -lValue - prevLeftEncoder;
+				rValue = -rValue - prevRightEncoder;
+				if(!Drivetrain.reachedDistance(lValue, rValue, 9000))
+				{
+					Drivetrain.driveBackward(lValue, rValue, -.4, .04);
+				}
+				else
+				{
+					//System.out.println("yeet");
+					Drivetrain.stop();
+				}
+					
+				
 				break;
 		}
 	}
