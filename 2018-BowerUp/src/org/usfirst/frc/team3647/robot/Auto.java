@@ -287,116 +287,7 @@ public class Auto
 		
 	}
 	
-	public static void MSRRSW1(double lValue, double rValue)
-	{
-		switch(currentState)
-		{
-			case 1:
-				sum = lValue + rValue;
-				lSSpeed = Functions.MSRRSWsupposedLeftSpeed1(lValue);
-				rSSpeed = Functions.MSRRSWsupposedRightSpeed1(rValue);
-				adjustmentValues = Functions.MSRRSWcorrection1(lValue, rValue);
-				lAdjustment = adjustmentValues[0];
-				rAdjustment = adjustmentValues[1];
-				if(sum>14000 && Math.abs(lValue - rValue) < 360 && lSSpeed == 0 && rSSpeed == 0 && lAdjustment == 0 && rAdjustment == 0)
-				{
-					Drivetrain.tankDrive(lSSpeed + lAdjustment, rSSpeed +rAdjustment);
-					System.out.println("yes");
-				}
-				else
-				{
-					Drivetrain.tankDrive(lSSpeed + lAdjustment, rSSpeed +rAdjustment);
-				}
-//				if(Functions.MSRRSWsupposedLeftSpeed1(lValue) != 0 && Functions.MSRRSWsupposedRightSpeed1(rValue) !=0)
-//				{
-//					lSSpeed = Functions.MSRRSWsupposedLeftSpeed1(lValue);
-//					rSSpeed = Functions.MSRRSWsupposedRightSpeed1(rValue);
-//					adjustmentValues = Functions.MSRRSWcorrection1(lValue, rValue);
-//					lAdjustment = adjustmentValues[0];
-//					rAdjustment = adjustmentValues[1];
-//					Drivetrain.tankDrive(lSSpeed + lAdjustment, rSSpeed +rAdjustment);
-//				}
-//				else
-//				{
-//					prevLeftEncoder = lValue;
-//					prevRightEncoder = rValue;
-//					currentState = 4;
-//				}
-				break;
-			case 2:
-				error = Math.abs(prevLeftEncoder - prevRightEncoder);
-				if(prevRightEncoder > prevLeftEncoder)
-				{
-					rError = true;
-					lError = false;
-					currentState = 3;
-				}
-				else if(prevRightEncoder < prevLeftEncoder)
-				{
-					rError = false;
-					lError = true;
-					currentState = 3;
-				}
-				else
-				{
-					rError = false;
-					lError = false;
-					currentState = 3;
-				}
-				break;
-			case 3:
-				if(lError)
-				{
-					lValue = lValue - prevLeftEncoder + error;
-					rValue = rValue - prevRightEncoder;
-					if(!Drivetrain.reachedDistance(lValue, rValue, Constants.MSRRSWStraight))
-					{
-						Drivetrain.driveForward(lValue, rValue, .6, .06);
-					}
-					else
-					{
-						currentState = 4;
-					}
-				}
-				else if(rError)
-				{
-					lValue = lValue - prevLeftEncoder;
-					rValue = rValue - prevRightEncoder + error;
-					if(!Drivetrain.reachedDistance(lValue, rValue, Constants.MSRRSWStraight))
-					{
-						Drivetrain.driveForward(lValue, rValue, .6, .06);
-					}
-					else
-					{
-						currentState = 4;
-					}
-				}
-				else
-				{
-					lValue = lValue - prevLeftEncoder;
-					rValue = rValue - prevRightEncoder;
-					if(!Drivetrain.reachedDistance(lValue, rValue, Constants.MSRRSWStraight))
-					{
-						Drivetrain.driveForward(lValue, rValue, .6, .06);
-					}
-					else
-					{
-						currentState = 4;
-					}
-				}
-				break;
-			case 4:
-//				lSSpeed = Functions.MSRRSWsupposedLeftSpeed1(lValue);
-//				rSSpeed = Functions.MSRRSWsupposedRightSpeed1(rValue);
-//				adjustmentValues = Functions.MSRRSWcorrection1(lValue, rValue);
-//				lAdjustment = adjustmentValues[0];
-//				rAdjustment = adjustmentValues[1];
-//				Drivetrain.tankDrive(lSSpeed + lAdjustment, rSSpeed +rAdjustment);
-				Drivetrain.stop();
-				break;
-		}
-		Encoders.testEncoders();	
-	}
+	
 	
 	public static void testTurn(double lValue, double rValue)
 	{
@@ -901,16 +792,16 @@ public class Auto
 		switch(auto)
 		{
 			case "LL":
-				MSRRSW1(lValue, rValue);//
+				MSRRSW2(lValue, rValue);//
 				break;
 			case "RR":
-				MSRRSW1(lValue, rValue);
+				MSRRSW2(lValue, rValue);
 				break;
 			case "RL":
-				MSRRSW1(lValue, rValue);//
+				MSRRSW2(lValue, rValue);//
 				break;
 			case "LR":
-				MSRRSW1(lValue, rValue);//
+				MSRRSW2(lValue, rValue);//
 				break;
 		}
 	}
