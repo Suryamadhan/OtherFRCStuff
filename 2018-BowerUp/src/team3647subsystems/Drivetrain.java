@@ -13,6 +13,9 @@ import team3647ConstantsAndFunctions.Constants;
 
 public class Drivetrain 
 {
+	public static double aimedRatio, currentRatio, sum;
+	public static boolean withinRange;
+	
 	public static WPI_TalonSRX leftSRX = new WPI_TalonSRX(Constants.leftMaster);
 	public static WPI_TalonSRX rightSRX = new WPI_TalonSRX(Constants.rightMaster);
 	
@@ -415,6 +418,52 @@ public class Drivetrain
 	
 	public static void goStraightRight(double currentRatio, boolean withinRange, double sum, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment)
 	{
+		if(withinRange || sum < 360)
+		{
+			drive.tankDrive(leftSpeed,rightSpeed, false);
+		}
+		else
+		{
+			if(currentRatio > 1.1 && currentRatio < 1.18)
+			{
+				drive.tankDrive(leftSpeed - adjustment,(rightSpeed + adjustment), false);
+			}
+			else if(currentRatio > 1.18 && currentRatio < 1.25)
+			{
+				drive.tankDrive(leftSpeed - (2*adjustment),(rightSpeed + (2*adjustment)), false);
+			}
+			else if(currentRatio > 1.25)
+			{
+				drive.tankDrive(leftSpeed - (3*adjustment),(rightSpeed + (3*adjustment)), false);
+			}
+			else if(currentRatio < .9 && currentRatio > .82)
+			{
+				drive.tankDrive(leftSpeed + adjustment,(rightSpeed - adjustment));
+			}
+			else if(currentRatio < .82 && currentRatio > .75)
+			{
+				drive.tankDrive(leftSpeed + (2*adjustment),(rightSpeed - (2*adjustment)));
+			}
+			else
+			{
+				drive.tankDrive(leftSpeed + (3*adjustment),(rightSpeed - (3*adjustment)));
+			}
+		}
+	}
+	
+	public static void goStraightRight(double lValue, double rValue, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment, boolean calculations)
+	{
+		aimedRatio = ((requiredLeftDist)/(requiredRightDist));
+		currentRatio = (((lValue)/(rValue))/aimedRatio);
+		sum = (rValue) + (lValue);
+		if(currentRatio >= .9 && currentRatio <= 1.1)
+		{
+			withinRange = true;
+		}
+		else
+		{
+			withinRange = false;
+		}
 		if(withinRange || sum < 360)
 		{
 			drive.tankDrive(leftSpeed,rightSpeed, false);

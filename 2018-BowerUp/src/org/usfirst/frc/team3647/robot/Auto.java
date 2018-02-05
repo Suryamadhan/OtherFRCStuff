@@ -9,7 +9,7 @@ import team3647subsystems.Encoders;
 public class Auto 
 {
 	static double aimedRatio, currentRatio;
-	static double sum;
+	static double sum, speed, lSpeed, rSpeed;
 	static int test = 0;
 	static boolean withinRange;
 	static double requiredLeftDist, requiredRightDist, requiredStraightDist = 0;
@@ -18,9 +18,51 @@ public class Auto
 	static double prevLeftEncoder, prevRightEncoder;
 	static String gameData, auto;
 	
-	static double lSSpeed, rSSpeed, lAdjustment, rAdjustment, error;
+	static double lSSpeed, rSSpeed, lAdjustment, rAdjustment, error, adjustment;
 	static boolean lError, rError;
 	static double []adjustmentValues = new double[2];
+	
+	public static void LSLRSW(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 1:
+				requiredStraightDist = Constants.LSLRSWstraight;
+				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
+				{
+					speed = Functions.LSLRSWinitialStraight(lValue, rValue);
+					adjustment = Constants.adjustmentConstant(speed);
+					Drivetrain.driveForward(lValue, rValue, speed, adjustment);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder =  rValue;
+					currentState = 2;
+				}
+				break;
+			case 2:
+				lValue -= prevLeftEncoder;
+				rValue -= prevRightEncoder;
+				requiredLeftDist = Constants.LSLRSWfirstBigTurn;
+				requiredRightDist = Constants.LSLRSWfirstSmallTurn;
+				if(!Drivetrain.reachedTurnDistance(rValue + lValue, requiredLeftDist, requiredRightDist))
+				{
+					lSpeed = Functions.LSLRSWfirstCurveLeftSpeed(lValue);
+					rSpeed = lSpeed/Functions.LSLRSWfirstCurveRightSpeedConstant;
+					adjustment = Constants.adjustmentConstant(lSpeed);
+					Drivetrain.goStraightRight(lValue, rValue, requiredLeftDist, requiredRightDist, lSpeed, rSpeed, adjustment, false);
+				}
+				else
+				{
+					currentState = 3;
+				}
+				break;
+			case 3:
+				Drivetrain.stop();
+				break;
+		}
+	}
 	
 	public static void semicircle(double lValue, double rValue)
 	{

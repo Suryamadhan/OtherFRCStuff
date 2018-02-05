@@ -2,305 +2,35 @@ package team3647ConstantsAndFunctions;
 
 public class Functions 
 {
+	public static double sum, speed;
+	
 	public static double sinx(double x)
 	{
 		return Math.sin(x);
 	}
 	
-	public static boolean MSRRSWcheckCurve(double lValue, double rValue)
+	public static double LSLRSWinitialStraight(double lValue, double rValue)
 	{
-		if(lValue < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWsecondsmallTurn) && rValue < (Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWsecondbigTurn))
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
-	}
-	
-	public static double MSRRSWsupposedLeftSpeed1(double lEnc)
-	{
-		if(lEnc < (Constants.MSRRSWfirstbigTurn - 5087))
-		{
-			return .707;
-		}
-		else if(lEnc < Constants.MSRRSWfirstbigTurn)
-		{
-			return .53;
-		}
-		else if(lEnc < (Constants.MSRRSWfirstbigTurn + 1440))
-		{
-			return .15;
-		}
-		else if(lEnc < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWsecondsmallTurn))
-		{
-			return .2;
-		}
-//		else if(lEnc < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWsecondsmallTurn + Constants.MSRRSWStraight))
-//		{
-//			return .6;
-//		}
-		else
-		{
-			return 0;
-		}
-	}
-	
-	public static double MSRRSWsupposedRightSpeed1(double rEnc)
-	{
-		if(rEnc < (Constants.MSRRSWfirstsmallTurn - 1440))
-		{
-			return .2;
-		}
-		else if(rEnc < Constants.MSRRSWfirstsmallTurn)
-		{
-			return .15;
-		}
-		else if(rEnc < (Constants.MSRRSWfirstsmallTurn + 5087))
-		{
-			return .4;
-		}
-		else if(rEnc < (Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWsecondbigTurn))
-		{
-			return .534;
-		}
-//		else if(rEnc < (Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWsecondbigTurn + Constants.MSRRSWStraight))
-//		{
-//			return .6;
-//		}
-		else
-		{
-			return 0;
-		}
-	}
-	
-	public static double[] MSRRSWcorrection1(double lEnc, double rEnc)
-	{
-		double leftAdjustment, rightAdjustment;
-		double []adjustment = new double[2];
-		double ratio, sum;
-		sum = lEnc + rEnc;
+		//This function would change if length of the straight distance changes
 		
-		if(sum < 240)
-		{
-			leftAdjustment = 0;
-			rightAdjustment = 0;
-		}
-		else if(sum < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWfirstsmallTurn - 6527))
-		{
-			ratio = (lEnc/rEnc);
-			if(ratio >= 3.4 && ratio <= 3.65)
-			{
-				leftAdjustment = 0;
-				rightAdjustment = 0;
-			}
-			else if(ratio >= 3.25 && ratio <= 3.8)
-			{
-				if(ratio >= 3.25 && ratio <= 3.4)
-				{
-					leftAdjustment = 0.05;
-					rightAdjustment = -0.05;
-				}
-				else
-				{
-					leftAdjustment = -0.05;
-					rightAdjustment = 0.05;
-				}
-			}
-			else
-			{
-				if(ratio < 3.25)
-				{
-					leftAdjustment = 0.1;
-					rightAdjustment = -0.1;
-				}
-				else
-				{
-					leftAdjustment = -0.1;
-					rightAdjustment = 0.1;
-				}
-			}
-		}
-		else if(sum< (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWfirstsmallTurn))
-		{
-			ratio = (lEnc/rEnc);
-			if(ratio >= 3.4 && ratio <= 3.65)
-			{
-				leftAdjustment = 0;
-				rightAdjustment = 0;
-			}
-			else if(ratio >= 3.25 && ratio <= 3.8)
-			{
-				if(ratio >= 3.25 && ratio <= 3.4)
-				{
-					leftAdjustment = 0.025;
-					rightAdjustment = -0.025;
-				}
-				else
-				{
-					leftAdjustment = -0.025;
-					rightAdjustment = 0.025;
-				}
-			}
-			else
-			{
-				if(ratio < 3.25)
-				{
-					leftAdjustment = 0.05;
-					rightAdjustment = -0.05;
-				}
-				else
-				{
-					leftAdjustment = -0.05;
-					rightAdjustment = 0.05;
-				}
-			}
-		}
-		else if(sum < (Constants.MSRRSWfirstbigTurn + Constants.MSRRSWfirstsmallTurn + 6527))
-		{
-			ratio = (rEnc - Constants.MSRRSWfirstsmallTurn)/(lEnc - Constants.MSRRSWfirstbigTurn);
-			if((rEnc - Constants.MSRRSWfirstsmallTurn) + (lEnc - Constants.MSRRSWfirstbigTurn) < 240)
-			{
-				leftAdjustment = 0;
-				rightAdjustment = 0;
-			}
-			else if(ratio >= 2.56 && ratio <= 2.76)
-			{
-				leftAdjustment = 0;
-				rightAdjustment = 0;
-			}
-			else if(ratio >= 2.4 && ratio <= 2.9)
-			{
-				if(ratio >= 2.4 && ratio <= 2.56)
-				{
-					leftAdjustment = -0.025;
-					rightAdjustment = 0.025;
-				}
-				else
-				{
-					leftAdjustment = 0.025;
-					rightAdjustment = -0.025;
-				}
-			}
-			else
-			{
-				if(ratio < 2.4)
-				{
-					leftAdjustment = -0.05;
-					rightAdjustment = 0.05;
-				}
-				else
-				{
-					leftAdjustment = 0.05;
-					rightAdjustment = -0.05;
-				}
-			}
-		}
-		else if(sum < (Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWfirstbigTurn + Constants.MSRRSWsecondbigTurn + Constants.MSRRSWsecondsmallTurn))
-		{
-			ratio = (rEnc - Constants.MSRRSWfirstsmallTurn)/(lEnc - Constants.MSRRSWfirstbigTurn);
-			if(ratio >= 2.56 && ratio <= 2.76)
-			{
-				leftAdjustment = 0;
-				rightAdjustment = 0;
-			}
-			else if(ratio >= 2.4 && ratio <= 2.9)
-			{
-				if(ratio >= 2.4 && ratio <= 2.56)
-				{
-					leftAdjustment = -0.05;
-					rightAdjustment = 0.05;
-				}
-				else
-				{
-					leftAdjustment = 0.05;
-					rightAdjustment = -0.05;
-				}
-			}
-			else
-			{
-				if(ratio < 2.4)
-				{
-					leftAdjustment = -0.1;
-					rightAdjustment = 0.1;
-				}
-				else
-				{
-					leftAdjustment = 0.1;
-					rightAdjustment = -0.1;
-				}
-			}
-		}
-//		else if(sum < (Constants.MSRRSWfirstsmallTurn + Constants.MSRRSWfirstbigTurn + Constants.MSRRSWsecondbigTurn + Constants.MSRRSWsecondsmallTurn +  2*Constants.MSRRSWStraight))
-//		{
-//			System.out.println("yes");
-//			if(Math.abs(lEnc - rEnc) < 100)
-//			{
-//				leftAdjustment = 0;
-//				rightAdjustment = 0;
-//			}
-//			else if(Math.abs(lEnc - rEnc) < 200)
-//			{
-//				if(lEnc > rEnc)
-//			 	{
-//					leftAdjustment = -.05;
-//					rightAdjustment = 0;
-//			 	}
-//				else
-//			 	{
-//					leftAdjustment = 0;
-//					rightAdjustment = -.05;
-//			 	}
-//			 }
-//			 else if(Math.abs(lEnc - rEnc) < 300)
-//			 {
-//				 if(lEnc > rEnc)
-//				 {
-//					 leftAdjustment = -.1;
-//					 rightAdjustment = 0;
-//				 }
-//				 else
-//				 {
-//					 leftAdjustment = 0;
-//					 rightAdjustment = -.1;
-//				 }
-//			 }
-//			 else if(Math.abs(lEnc - rEnc) < 500)
-//			 {
-//				 if(lEnc > rEnc)
-//				 {
-//					 leftAdjustment = -.18;
-//					 rightAdjustment = 0;
-//				 }
-//				 else
-//				 {
-//					 leftAdjustment = 0;
-//					 rightAdjustment = -.18;
-//				 }
-//			 }
-//			 else
-//			 {
-//				 if(lEnc > rEnc)
-//				 {
-//					 leftAdjustment = -.27;
-//					 rightAdjustment = 0;
-//				 }
-//				 else
-//				 {
-//					 leftAdjustment = 0;
-//					 rightAdjustment = -.27;
-//				 }
-//			 }
-//		}
-		else
-		{
-			leftAdjustment = 0;
-			rightAdjustment = 0;
-		}
-		adjustment[0] = leftAdjustment;
-		adjustment[1] = rightAdjustment;
-		
-		return adjustment;
+		sum = lValue + rValue;
+		sum *= 0.000143112244898;
+		sum+=.574;
+		speed = sinx(sum);
+		return speed;
 	}
+	
+	public static double LSLRSWfirstCurveLeftSpeed(double lValue)
+	{
+		//This function would change if length of the straight distance changes
+		
+		lValue*=0.000318878296695;
+		lValue+=.574;
+		speed = sinx(lValue);
+		return speed;
+	}
+	
+	public static final double LSLRSWfirstCurveRightSpeedConstant = 1.88235294118;
+	
+	
 }
