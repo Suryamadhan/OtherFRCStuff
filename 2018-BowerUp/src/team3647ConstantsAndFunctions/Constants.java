@@ -63,8 +63,8 @@ public class Constants
 	public final static double testSmallUTurn = 1.48 * length;
 	
 	public final static double LSLRSWstraight = 2.8 * length;
-	public final static double LSLRSWfirstBigTurn = 2.8 * length;
-	public final static double LSLRSWfirstSmallTurn = 2.8 * length;
+	public final static double LSLRSWfirstBigTurn = 2.4 * length;
+	public final static double LSLRSWfirstSmallTurn = 1.275 * length;
 	
 
 }
