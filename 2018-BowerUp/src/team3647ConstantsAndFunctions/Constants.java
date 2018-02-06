@@ -62,9 +62,19 @@ public class Constants
 	public final static double testBigUTurn = 4.44* length;
 	public final static double testSmallUTurn = 1.48 * length;
 	
-	public final static double LSLRSWstraight = 2.8 * length;
-	public final static double LSLRSWfirstBigTurn = 2.4 * length;
-	public final static double LSLRSWfirstSmallTurn = 1.275 * length;
+	public final static double switchStraight = 2.8 * length;
+	public final static double switchFirstBigTurn = 2.4 * length;
+	public final static double switchFirstSmallTurn = 1.275 * length;
 	
+	public final static double scaleStraight = 8 * length;
+	public final static double scaleFirstBigTurn = 2.08915911464 * length;
+	public final static double scaleFirstSmallTurn = 0.8969247026 * length;
+	
+	public final static double middleRSwitchBigTurn = 1.6650441064 * length;
+	public final static double middleRSwitchSmallTurn = 0.471238898038 * length;
+	
+	public static final double switchFirstCurveSmallSpeedConstant = 1.88235294118;
+	public static final double scaleFirstCurveSmallSpeedConstant = 2.3292469352;
+	public static final double middleRightCurveSmallSpeedConstant = 3.53333333333;
 
 }
