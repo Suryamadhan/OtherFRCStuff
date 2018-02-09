@@ -2,9 +2,10 @@ package org.usfirst.frc.team3647.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import team3647elevator.Elevator;
+import team3647elevator.Intake;
 import team3647subsystems.Drivetrain;
 import team3647subsystems.Encoders;
-import team3647subsystems.Intake;
 import team3647subsystems.Joysticks;
 
 public class Robot extends IterativeRobot {
@@ -79,6 +80,7 @@ public class Robot extends IterativeRobot {
 		Encoders.testEncoders();
 		joy.setMainContollerValues();
 		Drivetrain.tankDrive(joy.leftJoySticky, joy.rightJoySticky);
+		Elevator.moveEleVader(joy.leftJoyStickx * .2);
 		//Intake.run(joy.leftJoySticky, joy.rightJoySticky);
 		if(joy.buttonA)
 		{

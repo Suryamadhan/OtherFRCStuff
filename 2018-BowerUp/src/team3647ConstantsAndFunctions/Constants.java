@@ -76,5 +76,10 @@ public class Constants
 	public static final double switchFirstCurveSmallSpeedConstant = 1.88235294118;
 	public static final double scaleFirstCurveSmallSpeedConstant = 2.3292469352;
 	public static final double middleRightCurveSmallSpeedConstant = 3.53333333333;
+	
+	public static final double stop = 0;
+	public static final double pickUp = 100;
+	public static final double sWitch = 200;
+	public static final double scale = 300;
 
 }

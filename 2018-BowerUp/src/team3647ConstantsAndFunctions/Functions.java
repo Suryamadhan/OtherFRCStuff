@@ -61,8 +61,64 @@ public class Functions
 		return speed;
 	}
 	
-	public static final double switchFirstCurveSmallSpeedConstant = 1.88235294118;
-	public static final double scaleFirstCurveSmallSpeedConstant = 2.3292469352;
+	public static double stopToPickUp(double eValue)
+	{
+		
+	}
 	
+	public static double stopToSwitch(double eValue)
+	{
+		
+	}
+	
+	public static double stopToScale(double eValue)
+	{
+		
+	}
+	
+	public static double pickUpToStop(double eValue)
+	{
+		
+	}
+	
+	public static double pickUpToSwitch(double eValue)
+	{
+		
+	}
+	
+	public static double pickUpToScale(double eValue)
+	{
+		
+	}
+	
+	public static double switchToStop(double eValue)
+	{
+		
+	}
+	
+	public static double switchToPickUp(double eValue)
+	{
+		
+	}
+	
+	public static double switchToScale(double eValue)
+	{
+		
+	}
+	
+	public static double scaleToStop(double eValue)
+	{
+		
+	}
+	
+	public static double scaleToPickUp(double eValue)
+	{
+		
+	}
+	
+	public static double scaleToSwitch(double eValue)
+	{
+		
+	}
 	
 }

@@ -372,17 +372,12 @@ public class Drivetrain
 		}
 		else
 		{
-			System.out.println("Sum:" + sum);
-			System.out.println("leftDist: " + requiredLeftDist);
-			System.out.println("rightDist: " + requiredRightDist);
-			System.out.println("required sum:" + (requiredLeftDist + requiredRightDist));
 			return true;
 		}
 	}
 	
 	public static void goStraightLeft(double currentRatio, boolean withinRange, double sum, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment)
 	{
-		System.out.println("yes");
 		if(withinRange || sum < 360)
 		{
 			drive.tankDrive(leftSpeed,rightSpeed, false);
