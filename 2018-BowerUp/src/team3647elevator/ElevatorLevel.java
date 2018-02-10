@@ -8,7 +8,7 @@ public class ElevatorLevel
 {
 	public static double elevatorEncoderValue;
 	
-	public static DigitalInput stopSensor = new DigitalInput(9); 
+	public static DigitalInput bannerSensor = new DigitalInput(9); 
 	
 	public void setElevatorEncoder()
 	{
@@ -27,9 +27,10 @@ public class ElevatorLevel
 	
 	public static boolean reachedStop()
 	{
-		if(stopSensor.get())
+		if(bannerSensor.get())
 		{
 			resetElevatorEncoders();
+			Elevator.stopEleVader();
 			return true;
 		}
 		else

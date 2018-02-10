@@ -1,11 +1,12 @@
 package team3647elevator;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import team3647ConstantsAndFunctions.Constants;
 import team3647ConstantsAndFunctions.Functions;
 
 public class Elevator 
 {
-	static int elevatorState = 0;
+	public static Integer elevatorState;
 	/*
 	 * 0. Start
 	 * 1. Stop
@@ -13,10 +14,10 @@ public class Elevator
 	 * 3. Switch
 	 * 4. Scale
 	 */
-	static int aimedElevatorState;
+	static Integer aimedElevatorState;
 	
-	static boolean stop, pickUp, sWitch, scale, moving;
-	
+	static boolean stop, pickUp, sWitch, scale, moving, manualOverride, originalPositionButton;
+	static double overrideValue;
 	
 	public static WPI_TalonSRX leftElevator = new WPI_TalonSRX();
 	public static WPI_TalonSRX rightElevator = new WPI_TalonSRX();
@@ -44,7 +45,20 @@ public class Elevator
 		scale = scaleButton;
 	}
 	
-	public static void runElevator(double speed)
+	public static void setManualOverride(double jValue)
+	{
+		if(jValue == 0)
+		{
+			manualOverride = false;
+		}
+		else
+		{
+			overrideValue = jValue;
+			manualOverride = true;
+		}
+	}
+	
+	public static void runElevator()
 	{
 		switch(elevatorState)
 		{
@@ -54,14 +68,20 @@ public class Elevator
 					elevatorState = 1;
 					aimedElevatorState = 1;
 				}
+				// else if banner aint workin: override
 				else
 				{
 					moveEleVader(-.2);
 				}
 				break;
 			case 1:
-				if(stop)
+				if(manualOverride)
 				{
+					aimedElevatorState = null;
+				}
+				else if(stop)
+				{
+					originalPositionButton = true;
 					aimedElevatorState = 1;
 				}
 				else if(pickUp)
@@ -79,6 +99,21 @@ public class Elevator
 				switch(aimedElevatorState)
 				{
 					case 1:
+						if(originalPositionButton)
+						{
+							if(ElevatorLevel.reachedStop())
+							{
+								originalPositionButton = false;
+							}
+							else
+							{
+								moveEleVader(Functions.pickUpToStop(ElevatorLevel.elevatorEncoderValue));
+							}
+						}
+						else
+						{
+							stopEleVader();
+						}
 						break;
 					case 2:
 						if(ElevatorLevel.reachedPickUp())
@@ -113,15 +148,23 @@ public class Elevator
 							moveEleVader(Functions.stopToScale(ElevatorLevel.elevatorEncoderValue));
 						}
 						break;
+					case null:
+						elevatorState = null;
+						break;
 				}
 				break;
 			case 2:
-				if(stop)
+				if(manualOverride)
+				{
+					aimedElevatorState = null;
+				}
+				else if(stop)
 				{
 					aimedElevatorState = 1;
 				}
 				else if(pickUp)
 				{
+					originalPositionButton = true;
 					aimedElevatorState = 2;
 				}
 				else if(sWitch)
@@ -134,7 +177,7 @@ public class Elevator
 				}
 				switch(aimedElevatorState)
 				{
-					case 1:
+					case 1:						
 						if(ElevatorLevel.reachedStop())
 						{
 							stopEleVader();
@@ -146,16 +189,45 @@ public class Elevator
 						}
 						break;
 					case 2:
-						break;
-					case 3:
-						if(ElevatorLevel.reachedSwitch())
+						if(originalPositionButton)
 						{
-							stopEleVader();
-							elevatorState = 3;
+							if(ElevatorLevel.reachedPickUp())
+							{
+								originalPositionButton = false;
+							}
+							else
+							{
+								moveEleVader(Functions.pickUpToStop(ElevatorLevel.elevatorEncoderValue));
+							}
 						}
 						else
 						{
-							moveEleVader(Functions.pickUpToSwitch(ElevatorLevel.elevatorEncoderValue));
+							stopEleVader();
+						}
+						break;
+					case 3:
+						if(!manualOverride)
+						{
+							if(ElevatorLevel.reachedSwitch())
+							{
+								stopEleVader();
+								elevatorState = 3;
+							}
+							else
+							{
+								moveEleVader(Functions.pickUpToSwitch(ElevatorLevel.elevatorEncoderValue));
+							}
+						}
+						else
+						{
+							if(ElevatorLevel.reachedSwitch())
+							{
+								elevatorState = 3;
+							}
+							else
+							{
+								moveEleVader(overrideValue);
+							}
 						}
 						break;
 					case 4:
@@ -188,6 +260,21 @@ public class Elevator
 				{
 					aimedElevatorState = 4;
 				}
+				else if(manualOverride)
+				{
+					if(overrideValue < 0)
+					{
+						aimedElevatorState = 2;
+					}
+					else
+					{
+						aimedElevatorState = 4;
+					}
+				}
+				else
+				{
+					aimedElevatorState = 3;
+				}
 				switch(aimedElevatorState)
 				{
 					case 1:
@@ -202,27 +289,49 @@ public class Elevator
 						}
 						break;
 					case 2:
-						if(ElevatorLevel.reachedPickUp())
+						if(!manualOverride)
 						{
-							stopEleVader();
-							elevatorState = 2;
+							if(ElevatorLevel.reachedPickUp())
+							{
+								stopEleVader();
+								elevatorState = 2;
+							}
+							else
+							{
+								moveEleVader(Functions.switchToPickUp(ElevatorLevel.elevatorEncoderValue));
+							}
 						}
 						else
 						{
-							moveEleVader(Functions.switchToPickUp(ElevatorLevel.elevatorEncoderValue));
+							if(ElevatorLevel.reachedPickUp())
+							{
+								elevatorState = 2;
+							}
+							else
+							{
+								moveEleVader(overrideValue);
+							}
 						}
 						break;
 					case 3:
+						stopEleVader();
 						break;
 					case 4:
-						if(ElevatorLevel.reachedScale())
+						if(!manualOverride)
 						{
-							stopEleVader();
-							elevatorState = 4;
+							if(ElevatorLevel.reachedScale())
+							{
+								stopEleVader();
+								elevatorState = 4;
+							}
+							else
+							{
+								moveEleVader(Functions.switchToScale(ElevatorLevel.elevatorEncoderValue));
+							}
 						}
 						else
 						{
-							moveEleVader(Functions.switchToScale(ElevatorLevel.elevatorEncoderValue));
+							
 						}
 						break;
 				}
@@ -280,10 +389,136 @@ public class Elevator
 						}
 						break;
 					case 4:
+						stopEleVader();
 						break;
+				}
+				break;
+			case null:
+				if(stop || pickUp || sWitch || scale)
+				{
+					if(stop)
+					{
+						if(ElevatorLevel.reachedStop())
+						{
+							elevatorState = 1;
+							aimedElevatorState = 1;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= 0 && ElevatorLevel.elevatorEncoderValue < Constants.pickUp)
+						{
+							elevatorState = 1;
+							aimedElevatorState = 1;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= Constants.pickUp && ElevatorLevel.elevatorEncoderValue < Constants.sWitch)
+						{
+							elevatorState = 2;
+							aimedElevatorState = 1;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= Constants.sWitch && ElevatorLevel.elevatorEncoderValue < Constants.scale)
+						{
+							elevatorState = 3;
+							aimedElevatorState = 1;
+						}
+						else
+						{
+							elevatorState = 4;
+							aimedElevatorState = 1;
+						}	
+					}
+					else if(pickUp)
+					{
+						if(ElevatorLevel.reachedStop())
+						{
+							elevatorState = 1;
+							aimedElevatorState = 2;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= 0 && ElevatorLevel.elevatorEncoderValue < Constants.pickUp)
+						{
+							elevatorState = 1;
+							aimedElevatorState = 2;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= Constants.pickUp && ElevatorLevel.elevatorEncoderValue < Constants.sWitch)
+						{
+							elevatorState = 2;
+							aimedElevatorState = 2;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= Constants.sWitch && ElevatorLevel.elevatorEncoderValue < Constants.scale)
+						{
+							elevatorState = 3;
+							aimedElevatorState = 2;
+						}
+						else
+						{
+							elevatorState = 4;
+							aimedElevatorState = 2;
+						}
+					}
+					else if(sWitch)
+					{
+						if(ElevatorLevel.reachedStop())
+						{
+							elevatorState = 1;
+							aimedElevatorState = 3;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= 0 && ElevatorLevel.elevatorEncoderValue < Constants.pickUp)
+						{
+							elevatorState = 1;
+							aimedElevatorState = 3;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= Constants.pickUp && ElevatorLevel.elevatorEncoderValue < Constants.sWitch)
+						{
+							elevatorState = 2;
+							aimedElevatorState = 3;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= Constants.sWitch && ElevatorLevel.elevatorEncoderValue < Constants.scale)
+						{
+							elevatorState = 3;
+							aimedElevatorState = 3;
+						}
+						else
+						{
+							elevatorState = 4;
+							aimedElevatorState = 3;
+						}
+					}
+					else if(scale)
+					{
+						if(ElevatorLevel.reachedStop())
+						{
+							elevatorState = 1;
+							aimedElevatorState = 4;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= 0 && ElevatorLevel.elevatorEncoderValue < Constants.pickUp)
+						{
+							elevatorState = 1;
+							aimedElevatorState = 4;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= Constants.pickUp && ElevatorLevel.elevatorEncoderValue < Constants.sWitch)
+						{
+							elevatorState = 2;
+							aimedElevatorState = 4;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= Constants.sWitch && ElevatorLevel.elevatorEncoderValue < Constants.scale)
+						{
+							elevatorState = 3;
+							aimedElevatorState = 4;
+						}
+						else
+						{
+							elevatorState = 4;
+							aimedElevatorState = 4;
+						}
+					}
+					else
+					{
+						elevatorState = null;
+						aimedElevatorState = null;
+					}
+				}
+				else
+				{
+					moveEleVader(overrideValue);
 				}
 				break;
 		}
 	}
-
 }

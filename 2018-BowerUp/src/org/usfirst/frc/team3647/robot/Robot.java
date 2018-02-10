@@ -55,7 +55,13 @@ public class Robot extends IterativeRobot {
 			Auto.RSRSW(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 		}
 	}
-
+	
+	@Override
+	public void teleopInit()
+	{
+		Elevator.elevatorState = 0;
+	}
+	
 	@Override
 	public void teleopPeriodic() 
 	{
@@ -78,8 +84,9 @@ public class Robot extends IterativeRobot {
 	{
 		enc.setEncoderValues();
 		Encoders.testEncoders();
-		joy.setMainContollerValues();
-		Drivetrain.tankDrive(joy.leftJoySticky, joy.rightJoySticky);
+		joy.updateControllers();
+		//Drivetrain.tankDrive(joy.leftJoySticky, joy.rightJoySticky);
+		Elevator.setElevatorButtons(joy.buttonB1, joy.buttonA1, joy.buttonX1,  joy.buttonY1);
 		Elevator.moveEleVader(joy.leftJoyStickx * .2);
 		//Intake.run(joy.leftJoySticky, joy.rightJoySticky);
 		if(joy.buttonA)
