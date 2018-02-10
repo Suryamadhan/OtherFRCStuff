@@ -35,7 +35,7 @@ public class Functions
 	{
 		//This function would change if length of the straight distance changes
 		
-		lValue*=0.000333928571429;
+		lValue*=0.000143112244898;
 		lValue+=.574;
 		speed = sinx(lValue);
 		return speed;

@@ -63,7 +63,7 @@ public class Constants
 	public final static double testSmallUTurn = 1.48 * length;
 	
 	public final static double switchStraight = 2.8 * length;
-	public final static double switchFirstBigTurn = 2.4 * length;
+	public final static double switchFirstBigTurn = 4.8 * length;
 	public final static double switchFirstSmallTurn = 1.275 * length;
 	
 	public final static double scaleStraight = 8 * length;
