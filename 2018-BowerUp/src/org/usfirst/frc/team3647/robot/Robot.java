@@ -3,7 +3,7 @@ package org.usfirst.frc.team3647.robot;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import team3647elevator.Elevator;
-import team3647elevator.Intake;
+import team3647elevator.intakeWheels;
 import team3647subsystems.Drivetrain;
 import team3647subsystems.Encoders;
 import team3647subsystems.Joysticks;

@@ -4,7 +4,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
-public class Intake 
+public class intakeWheels 
 {
 	public static WPI_TalonSRX leftIntakeMotor = new WPI_TalonSRX(62);
 	public static WPI_TalonSRX rightIntakeMotor = new WPI_TalonSRX(52);
