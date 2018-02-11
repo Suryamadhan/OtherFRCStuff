@@ -78,8 +78,8 @@ public class Constants
 	public static final double middleRightCurveSmallSpeedConstant = 3.53333333333;
 	
 	public static final double stop = 0;
-	public static final double pickUp = 100;
-	public static final double sWitch = 200;
-	public static final double scale = 300;
+	public static final double pickUp = 2900;
+	public static final double sWitch = 15000;
+	public static final double scale = 43600;
 
 }

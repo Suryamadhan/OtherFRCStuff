@@ -19,17 +19,19 @@ public class Elevator
 	static boolean stop, pickUp, sWitch, scale, moving, manualOverride, originalPositionButton;
 	static double overrideValue;
 	
-	public static WPI_TalonSRX leftElevator = new WPI_TalonSRX();
-	public static WPI_TalonSRX rightElevator = new WPI_TalonSRX();
+	public static WPI_TalonSRX leftElevator = new WPI_TalonSRX(52);
+	public static WPI_TalonSRX rightElevator = new WPI_TalonSRX(62);
 	
-	public static VictorSPX leftElevatorSPX = new VictorSPX();
-	public static VictorSPX rightElevatorSPX = new VictorSPX();
+	public static VictorSPX leftElevatorSPX = new VictorSPX(54);
+	public static VictorSPX rightElevatorSPX = new VictorSPX(57);
 	
 	public static DifferentialDrive elevatorDrive = new DifferentialDrive(leftElevator, rightElevator);
 	
 	public static void moveEleVader(double speed)
 	{
-		elevatorDrive.tankDrive(speed, speed, false);
+		elevatorDrive.tankDrive(speed, -speed, false);
+		leftElevatorSPX.follow(leftElevator);
+		rightElevator.follow(rightElevator);
 	}
 	
 	public static void stopEleVader()
