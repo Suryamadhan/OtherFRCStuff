@@ -8,7 +8,7 @@ public class ElevatorLevel
 {
 	public static double elevatorEncoderValue;
 	
-	public static DigitalInput bannerSensor = new DigitalInput(9); 
+	public static DigitalInput bannerSensor = new DigitalInput(1); 
 	
 	public void setElevatorEncoder()
 	{
@@ -41,7 +41,7 @@ public class ElevatorLevel
 	
 	public static boolean reachedPickUp()
 	{
-		if(elevatorEncoderValue > Constants.pickUp - 400 && elevatorEncoderValue < Constants.pickUp + 400)
+		if(elevatorEncoderValue > Constants.pickUp - 200 && elevatorEncoderValue < Constants.pickUp + 200)
 		{
 			return true;
 		}
@@ -53,7 +53,7 @@ public class ElevatorLevel
 	
 	public static boolean reachedSwitch()
 	{
-		if(elevatorEncoderValue > Constants.sWitch - 400 && elevatorEncoderValue < Constants.sWitch + 400)
+		if(elevatorEncoderValue > Constants.sWitch - 200 && elevatorEncoderValue < Constants.sWitch + 200)
 		{
 			return true;
 		}
@@ -65,7 +65,7 @@ public class ElevatorLevel
 	
 	public static boolean reachedScale()
 	{
-		if(elevatorEncoderValue > Constants.scale - 400 && elevatorEncoderValue < Constants.scale + 400)
+		if(elevatorEncoderValue > Constants.scale - 200 && elevatorEncoderValue < Constants.scale + 200)
 		{
 			return true;
 		}

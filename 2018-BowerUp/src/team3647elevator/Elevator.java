@@ -29,7 +29,7 @@ public class Elevator
 	
 	public static void moveEleVader(double speed)
 	{
-		elevatorDrive.tankDrive(speed, -speed, false);
+		elevatorDrive.tankDrive(-speed, speed, false);
 		leftElevatorSPX.follow(leftElevator);
 		rightElevator.follow(rightElevator);
 	}
@@ -198,38 +198,33 @@ public class Elevator
 								originalPositionButton = false;
 							}
 							else
-							{
-								moveEleVader(Functions.pickUpToStop(ElevatorLevel.elevatorEncoderValue));
+							{ 
+								if(ElevatorLevel.elevatorEncoderValue > Constants.pickUp)
+								{
+									moveEleVader(Functions.switchToPickUp(ElevatorLevel.elevatorEncoderValue));
+								}
+								else
+								{
+									moveEleVader(Functions.stopToPickUp(ElevatorLevel.elevatorEncoderValue));
+								}
+								
 							}
 						}
+						
 						else
 						{
 							stopEleVader();
 						}
 						break;
 					case 3:
-						if(!manualOverride)
+						if(ElevatorLevel.reachedSwitch())
 						{
-							if(ElevatorLevel.reachedSwitch())
-							{
-								stopEleVader();
-								elevatorState = 3;
-							}
-							else
-							{
-								moveEleVader(Functions.pickUpToSwitch(ElevatorLevel.elevatorEncoderValue));
-							}
+							stopEleVader();
+							elevatorState = 3;
 						}
 						else
 						{
-							if(ElevatorLevel.reachedSwitch())
-							{
-								elevatorState = 3;
-							}
-							else
-							{
-								moveEleVader(overrideValue);
-							}
+							moveEleVader(Functions.pickUpToSwitch(ElevatorLevel.elevatorEncoderValue));
 						}
 						break;
 					case 4:
@@ -243,10 +238,17 @@ public class Elevator
 							moveEleVader(Functions.pickUpToScale(ElevatorLevel.elevatorEncoderValue));
 						}
 						break;
+					case null:
+						elevatorState = null;
+						break;
 				}
 				break;
 			case 3:
-				if(stop)
+				if(manualOverride)
+				{
+					aimedElevatorState = null;
+				}
+				else if(stop)
 				{
 					aimedElevatorState = 1;
 				}
@@ -262,21 +264,6 @@ public class Elevator
 				{
 					aimedElevatorState = 4;
 				}
-				else if(manualOverride)
-				{
-					if(overrideValue < 0)
-					{
-						aimedElevatorState = 2;
-					}
-					else
-					{
-						aimedElevatorState = 4;
-					}
-				}
-				else
-				{
-					aimedElevatorState = 3;
-				}
 				switch(aimedElevatorState)
 				{
 					case 1:
@@ -291,55 +278,63 @@ public class Elevator
 						}
 						break;
 					case 2:
-						if(!manualOverride)
+						if(ElevatorLevel.reachedPickUp())
 						{
-							if(ElevatorLevel.reachedPickUp())
-							{
-								stopEleVader();
-								elevatorState = 2;
-							}
-							else
-							{
-								moveEleVader(Functions.switchToPickUp(ElevatorLevel.elevatorEncoderValue));
-							}
+							stopEleVader();
+							elevatorState = 2;
 						}
 						else
 						{
-							if(ElevatorLevel.reachedPickUp())
-							{
-								elevatorState = 2;
-							}
-							else
-							{
-								moveEleVader(overrideValue);
-							}
+							moveEleVader(Functions.switchToPickUp(ElevatorLevel.elevatorEncoderValue));
 						}
 						break;
 					case 3:
-						stopEleVader();
-						break;
-					case 4:
-						if(!manualOverride)
+						if(originalPositionButton)
 						{
-							if(ElevatorLevel.reachedScale())
+							if(ElevatorLevel.reachedSwitch())
 							{
-								stopEleVader();
-								elevatorState = 4;
+								originalPositionButton = false;
 							}
 							else
-							{
-								moveEleVader(Functions.switchToScale(ElevatorLevel.elevatorEncoderValue));
+							{ 
+								if(ElevatorLevel.elevatorEncoderValue > Constants.sWitch)
+								{
+									moveEleVader(Functions.scaleToSwitch(ElevatorLevel.elevatorEncoderValue));
+								}
+								else
+								{
+									moveEleVader(Functions.pickUpToSwitch(ElevatorLevel.elevatorEncoderValue));
+								}
+								
 							}
 						}
 						else
 						{
-							
+							stopEleVader();
 						}
+						break;
+					case 4:
+						if(ElevatorLevel.reachedScale())
+						{
+							stopEleVader();
+							elevatorState = 4;
+						}
+						else
+						{
+							moveEleVader(Functions.switchToScale(ElevatorLevel.elevatorEncoderValue));
+						}
+						break;
+					case null:
+						elevatorState = null;
 						break;
 				}
 				break;
 			case 4:
-				if(stop)
+				if(manualOverride)
+				{
+					aimedElevatorState = null;
+				}
+				else if(stop)
 				{
 					aimedElevatorState = 1;
 				}
@@ -391,7 +386,24 @@ public class Elevator
 						}
 						break;
 					case 4:
-						stopEleVader();
+						if(originalPositionButton)
+						{
+							if(ElevatorLevel.reachedScale())
+							{
+								originalPositionButton = false;
+							}
+							else
+							{
+								moveEleVader(Functions.scaleToStop(ElevatorLevel.elevatorEncoderValue));
+							}
+						}
+						else
+						{
+							stopEleVader();
+						}
+						break;
+					case null:
+						elevatorState = null;
 						break;
 				}
 				break;

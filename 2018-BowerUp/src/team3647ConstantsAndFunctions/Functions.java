@@ -93,42 +93,51 @@ public class Functions
 	
 	public static double pickUpToSwitch(double eValue)
 	{
-		
+		eValue*=0.0000449333333333;
+		eValue+=2.17;
+		speed = sinx(eValue);
+		return speed;
 	}
 	
 	public static double pickUpToScale(double eValue)
 	{
-		
+		eValue*=0.0000321559633028;
+		eValue+=1.552;
+		speed = sinx(eValue);
+		return speed;
 	}
 	
 	public static double switchToStop(double eValue)
 	{
-		
+		return -.2;
 	}
 	
 	public static double switchToPickUp(double eValue)
 	{
-		
+		return -.2;
 	}
 	
 	public static double switchToScale(double eValue)
 	{
-		
+		eValue*=0.0000321559633028;
+		eValue+=1.552;
+		speed = sinx(eValue);
+		return speed;
 	}
 	
 	public static double scaleToStop(double eValue)
 	{
-		
+		return -.2;
 	}
 	
 	public static double scaleToPickUp(double eValue)
 	{
-		
+		return -.2;
 	}
 	
 	public static double scaleToSwitch(double eValue)
 	{
-		
+		return -.2;
 	}
 	
 }

@@ -1,5 +1,7 @@
 package team3647pistons;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 public class IntakeTilt 
 {
 	//Double Pistons
