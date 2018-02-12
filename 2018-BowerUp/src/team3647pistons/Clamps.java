@@ -5,16 +5,16 @@ public class Clamps
 {
 	//Single Piston
 	
-	public static Solenoid piston = new Solenoid(1); //input number may be diff
+	public static Solenoid clampPiston = new Solenoid(1); //input number may be diff
 	
 	public static void clampThePiston()
 	{
-		piston.set(true);
+		clampPiston.set(true);
 	}
 	
 	public static void unClampThePiston()
 	{
-		piston.set(false);
+		clampPiston.set(false);
 	}
 	
 	//The function we will be calling in Robot.java and Auto

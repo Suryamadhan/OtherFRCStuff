@@ -22,11 +22,11 @@ public class IntakeTilt
 	{
 		if(joyValue)
 		{
-			intakeTilted();
+			intakeTitled();
 		}
 		else
 		{
-			intakeNotTilted();
+			intakeNotTitled();
 		}
 	}
 }

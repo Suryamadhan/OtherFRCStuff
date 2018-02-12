@@ -22,6 +22,49 @@ public class Auto
 	static boolean lError, rError;
 	static double []adjustmentValues = new double[2];
 	
+	
+	public static void crossBaseline(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 0:
+				if(lValue == 0 && rValue ==0)
+				{
+					currentState = 1;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+				}
+				break;
+			case 1:
+				requiredStraightDist = Constants.crossBaseline - 4000;
+				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
+				{
+					Drivetrain.driveForward(lValue, rValue, .8, Constants.adjustmentConstant(.8));
+				}
+				else
+				{
+					currentState = 2;
+				}
+				break;
+			case 2:
+				requiredStraightDist = Constants.crossBaseline;
+				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
+				{
+					Drivetrain.driveForward(lValue, rValue, .3, Constants.adjustmentConstant(.3));
+				}
+				else
+				{
+					currentState = 3;
+				}
+				break;
+			case 3:
+				Drivetrain.stop();
+				break;
+		}
+	}
+	
 	public static void LSLSC1(double lValue, double rValue)
 	{
 		switch(currentState)

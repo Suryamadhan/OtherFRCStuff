@@ -4,16 +4,16 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 public class Intake 
 {
 	//Double Pistons
-	public static DoubleSolenoid piston = new DoubleSolenoid(1,2);
+	public static DoubleSolenoid intakePiston = new DoubleSolenoid(1,2);
 	
 	public static void openIntake()
 	{
-		piston.set(DoubleSolenoid.Value.kForward);
+		intakePiston.set(DoubleSolenoid.Value.kForward);
 	}
 	
 	public static void closeIntake()
 	{
-		piston.set(DoubleSolenoid.Value.kReverse);
+		intakePiston.set(DoubleSolenoid.Value.kReverse);
 	}
 	
 	public static void runIntake(boolean joyValue)
