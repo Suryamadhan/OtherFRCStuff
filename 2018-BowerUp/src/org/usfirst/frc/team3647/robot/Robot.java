@@ -75,10 +75,11 @@ public class Robot extends IterativeRobot {
 			enc.setEncoderValues();
 			joy.updateControllers();
 			Drivetrain.arcadeDrive(Encoders.leftEncoderValue, Encoders.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
-			yes.setElevatorEncoder();
-			Elevator.setElevatorButtons(joy.buttonA, joy.buttonB, joy.leftBumper,  joy.rightBumper);
-			Elevator.setManualOverride(joy.rightJoySticky);
-			Elevator.runElevator();
+			intakeWheels.run(joy.leftJoySticky1, joy.rightJoySticky1);
+//			yes.setElevatorEncoder();
+//			Elevator.setElevatorButtons(joy.buttonA, joy.buttonB, joy.leftBumper,  joy.rightBumper);
+//			Elevator.setManualOverride(joy.rightJoySticky);
+//			Elevator.runElevator();
 		}
 		catch(Throwable t)
 		{

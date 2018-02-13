@@ -1,18 +1,20 @@
 package team3647elevator;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class intakeWheels 
 {
-	public static WPI_TalonSRX leftIntakeMotor = new WPI_TalonSRX(62);
-	public static WPI_TalonSRX rightIntakeMotor = new WPI_TalonSRX(52);
-	static DifferentialDrive intake = new DifferentialDrive(leftIntakeMotor, rightIntakeMotor);
+	public static VictorSPX leftIntakeMotor = new VictorSPX(55);
+	public static VictorSPX rightIntakeMotor = new VictorSPX(56);
 	
 	public static void run(double lValue, double rValue)
 	{
-		intake.tankDrive(lValue, -rValue, false);
+		leftIntakeMotor.set(ControlMode.PercentOutput, lValue);
+		rightIntakeMotor.set(ControlMode.PercentOutput, rValue);
 	}
 
 }

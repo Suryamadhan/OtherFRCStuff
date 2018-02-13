@@ -1,5 +1,8 @@
 package team3647elevator;
 
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import team3647ConstantsAndFunctions.Constants;
 import team3647ConstantsAndFunctions.Functions;
@@ -79,7 +82,7 @@ public class Elevator
 			case 1:
 				if(manualOverride)
 				{
-					aimedElevatorState = null;
+					aimedElevatorState = -1;
 				}
 				else if(stop)
 				{
@@ -150,15 +153,15 @@ public class Elevator
 							moveEleVader(Functions.stopToScale(ElevatorLevel.elevatorEncoderValue));
 						}
 						break;
-					case null:
-						elevatorState = null;
+					case -1:
+						elevatorState = -1;
 						break;
 				}
 				break;
 			case 2:
 				if(manualOverride)
 				{
-					aimedElevatorState = null;
+					aimedElevatorState = -1;
 				}
 				else if(stop)
 				{
@@ -238,15 +241,15 @@ public class Elevator
 							moveEleVader(Functions.pickUpToScale(ElevatorLevel.elevatorEncoderValue));
 						}
 						break;
-					case null:
-						elevatorState = null;
+					case -1:
+						elevatorState = -1;
 						break;
 				}
 				break;
 			case 3:
 				if(manualOverride)
 				{
-					aimedElevatorState = null;
+					aimedElevatorState = -1;
 				}
 				else if(stop)
 				{
@@ -324,15 +327,15 @@ public class Elevator
 							moveEleVader(Functions.switchToScale(ElevatorLevel.elevatorEncoderValue));
 						}
 						break;
-					case null:
-						elevatorState = null;
+					case -1:
+						elevatorState = -1;
 						break;
 				}
 				break;
 			case 4:
 				if(manualOverride)
 				{
-					aimedElevatorState = null;
+					aimedElevatorState = -1;
 				}
 				else if(stop)
 				{
@@ -402,12 +405,12 @@ public class Elevator
 							stopEleVader();
 						}
 						break;
-					case null:
-						elevatorState = null;
+					case -1:
+						elevatorState = -1;
 						break;
 				}
 				break;
-			case null:
+			case -1:
 				if(stop || pickUp || sWitch || scale)
 				{
 					if(stop)
@@ -524,8 +527,8 @@ public class Elevator
 					}
 					else
 					{
-						elevatorState = null;
-						aimedElevatorState = null;
+						elevatorState = -1;
+						aimedElevatorState = -1;
 					}
 				}
 				else
