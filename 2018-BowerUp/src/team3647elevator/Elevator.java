@@ -19,7 +19,7 @@ public class Elevator
 	 */
 	static Integer aimedElevatorState;
 	
-	static boolean stop, pickUp, sWitch, scale, moving, manualOverride, originalPositionButton;
+	public static boolean stop, pickUp, sWitch, scale, moving, manualOverride, originalPositionButton;
 	static double overrideValue;
 	
 	public static WPI_TalonSRX leftElevator = new WPI_TalonSRX(52);
@@ -63,6 +63,8 @@ public class Elevator
 		}
 	}
 	
+	
+	
 	public static void runElevator()
 	{
 		switch(elevatorState)
@@ -70,13 +72,14 @@ public class Elevator
 			case 0:
 				if(ElevatorLevel.reachedStop())
 				{
+					ElevatorLevel.resetElevatorEncoders();
+					stopEleVader();
 					elevatorState = 1;
 					aimedElevatorState = 1;
 				}
-				// else if banner aint workin: override
 				else
 				{
-					moveEleVader(-.2);
+					moveEleVader(-.3);
 				}
 				break;
 			case 1:
@@ -108,6 +111,8 @@ public class Elevator
 						{
 							if(ElevatorLevel.reachedStop())
 							{
+								ElevatorLevel.resetElevatorEncoders();
+								stopEleVader();
 								originalPositionButton = false;
 							}
 							else
