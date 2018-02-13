@@ -97,66 +97,6 @@ public class Drivetrain
 	 			{
 	 				driveForward(leftEnc, rightEnc, yValue, Constants.adjustmentConstant(yValue));
 	 			}
-//	 				if(Math.abs(leftEnc - rightEnc) < 100)
-//	 				{
-//	 					lSpeed = yValue;
-//	 					rSpeed = -yValue;
-//	 				}
-//	 				else if(Math.abs(leftEnc - rightEnc) < 200)
-//					{
-//	 					if(rightEnc > leftEnc)
-//	 					{
-//	 						 lSpeed = yValue;
-//	 						 rSpeed = -yValue + .05;
-//	 					}	
-//	 					else
-//	 					{
-//	 						 lSpeed = yValue - .05;
-//	 						 rSpeed = -yValue;
-//	 					}
-//					}
-//	 				else if(Math.abs(leftEnc - rightEnc) < 300)
-//	 				{
-//	 					if(rightEnc > leftEnc)
-//	 					{
-//	 						lSpeed = yValue;
-//	 						rSpeed = -yValue + .1;
-//	 					}
-//	 					else
-//	 					{
-//	 						lSpeed = yValue - .1;
-//	 						rSpeed = -yValue;
-//	 					}
-//	 				}
-//	 				else if(Math.abs(leftEnc - rightEnc) < 500)
-//	 				{
-//	 					if(rightEnc > leftEnc)
-//	 					{
-//	 						lSpeed = yValue;
-//	 						rSpeed = -yValue + .18;
-//	 					}
-//	 					else
-//	 					{
-//	 						lSpeed = yValue - .18;
-//							rSpeed = -yValue;	 						
-//						}
-//	 				}
-//	 				
-//	 				else
-//	 				{
-//	 					if(rightEnc > leftEnc)
-//	 					{
-//	 						lSpeed = yValue;
-//	 						rSpeed = -yValue + .27;
-//	 					}
-//	 					else
-//	 					{
-//	 						 lSpeed = yValue - .27;
-//	 						 rSpeed = -yValue;
-//	 					}
-//	 				}
-//	 			}
-//	 			drive.tankDrive(lSpeed, -rSpeed, false);
 	 			break;
 	 		case "backward":
 	 			if(yValue > -.2)
@@ -169,65 +109,6 @@ public class Drivetrain
 	 			{
 	 				driveBackward(leftEnc, rightEnc, yValue, Constants.adjustmentConstant(yValue));
 	 			}
-//	 				if(Math.abs(leftEnc - rightEnc) < 100)
-//	 				{
-//	 					lSpeed = yValue;
-//	 					rSpeed = -yValue;
-//	 				}
-//	 				else if(Math.abs(leftEnc - rightEnc) < 200)
-//	 				{
-//	 					if(rightEnc > leftEnc)
-//	 					{
-//	 						 lSpeed = yValue + .05;
-//	 						 rSpeed = -yValue;
-//	 					}
-//	 					else
-//	 					{
-//	 						 lSpeed = yValue;
-//	 						 rSpeed = -yValue - .05;
-//	 					}
-//	 				}
-//	 				else if(Math.abs(leftEnc - rightEnc) < 300)
-//	 				{
-//	 					if(rightEnc > leftEnc)
-//	 					{
-//	 						lSpeed = yValue + .1;
-//	 						rSpeed = -yValue;
-//	 					}
-//	 					else
-//						{
-//							lSpeed = yValue;
-//							rSpeed = -yValue - .1;
-//	 					}
-//	 				}
-//	 				else if(Math.abs(leftEnc - rightEnc) < 500)
-//	 				{
-//	 					if(rightEnc > leftEnc)
-//	 					{
-//	 						lSpeed = yValue + .18;
-//	 						rSpeed = -yValue;
-//	 					}
-//	 					else
-//	 					{
-//	 						lSpeed = yValue;
-//	 						rSpeed = -yValue - .18;
-//	 					}
-//	 				}
-//	 				else
-//	 				{
-//	 					if(rightEnc > leftEnc)
-//	 					{
-//	 						 lSpeed = yValue + .27;
-//	 						 rSpeed = -yValue;
-//	 					}
-//	 					else
-//	 					{
-//	 						 lSpeed = yValue;
-//	 						 rSpeed = -yValue - .27;
-//						}
-//	 				}
-//	 			}
-//	 			drive.tankDrive(lSpeed, -rSpeed, false);
 	 			break;
 	 		case "turning":
 	 			drive.arcadeDrive(yValue, xValue,false);
@@ -376,42 +257,7 @@ public class Drivetrain
 		}
 	}
 	
-	public static void goStraightLeft(double currentRatio, boolean withinRange, double sum, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment)
-	{
-		if(withinRange || sum < 360)
-		{
-			drive.tankDrive(leftSpeed,rightSpeed, false);
-		}
-		else
-		{
-			if(currentRatio > 1.1 && currentRatio < 1.18)
-			{
-				drive.tankDrive(leftSpeed + adjustment, (rightSpeed - adjustment), false);
-			}
-			else if(currentRatio > 1.18 && currentRatio < 1.25)
-			{
-				drive.tankDrive(leftSpeed + (2*adjustment),(rightSpeed - (2*adjustment)), false);
-			}
-			else if(currentRatio > 1.25)
-			{
-				drive.tankDrive(leftSpeed + (3*adjustment), (rightSpeed - (3*adjustment)), false);
-			}
-			else if(currentRatio < .9 && currentRatio > .82)
-			{
-				drive.tankDrive(leftSpeed - adjustment, (rightSpeed + adjustment), false);
-			}
-			else if(currentRatio < .82 && currentRatio > .75)
-			{
-				drive.tankDrive(leftSpeed - (2*adjustment), (rightSpeed + (2*adjustment)), false);
-			}
-			else
-			{
-				drive.tankDrive(leftSpeed - (3*adjustment), (rightSpeed + (3*adjustment)), false);
-			}
-		}
-	}
-	
-	public static void goStraightLeft(double lValue, double rValue, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment, boolean calculations)
+	public static void goStraightLeft(double lValue, double rValue, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment)
 	{
 		aimedRatio = ((requiredRightDist)/(requiredLeftDist));
 		currentRatio = (((rValue)/(lValue))/aimedRatio);
@@ -457,42 +303,7 @@ public class Drivetrain
 		}
 	}
 	
-	public static void goStraightRight(double currentRatio, boolean withinRange, double sum, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment)
-	{
-		if(withinRange || sum < 360)
-		{
-			drive.tankDrive(leftSpeed,rightSpeed, false);
-		}
-		else
-		{
-			if(currentRatio > 1.1 && currentRatio < 1.18)
-			{
-				drive.tankDrive(leftSpeed - adjustment,(rightSpeed + adjustment), false);
-			}
-			else if(currentRatio > 1.18 && currentRatio < 1.25)
-			{
-				drive.tankDrive(leftSpeed - (2*adjustment),(rightSpeed + (2*adjustment)), false);
-			}
-			else if(currentRatio > 1.25)
-			{
-				drive.tankDrive(leftSpeed - (3*adjustment),(rightSpeed + (3*adjustment)), false);
-			}
-			else if(currentRatio < .9 && currentRatio > .82)
-			{
-				drive.tankDrive(leftSpeed + adjustment,(rightSpeed - adjustment));
-			}
-			else if(currentRatio < .82 && currentRatio > .75)
-			{
-				drive.tankDrive(leftSpeed + (2*adjustment),(rightSpeed - (2*adjustment)));
-			}
-			else
-			{
-				drive.tankDrive(leftSpeed + (3*adjustment),(rightSpeed - (3*adjustment)));
-			}
-		}
-	}
-	
-	public static void goStraightRight(double lValue, double rValue, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment, boolean calculations)
+	public static void goStraightRight(double lValue, double rValue, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment)
 	{
 		aimedRatio = ((requiredLeftDist)/(requiredRightDist));
 		currentRatio = (((lValue)/(rValue))/aimedRatio);
@@ -538,8 +349,13 @@ public class Drivetrain
 		}
 	}
 	
-	public static void goBackLeft(double currentRatio, boolean withinRange, double sum, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment)
+	public static void goBackLeft(double lValue, double rValue, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment)
 	{
+		aimedRatio = ((requiredRightDist)/(requiredLeftDist));
+		rValue = Math.abs(rValue);
+		lValue = Math.abs(lValue);
+		currentRatio = (((rValue)/(lValue))/aimedRatio);
+		sum = (rValue) + (lValue);
 		if(withinRange || sum < 50)
 		{
 			drive.tankDrive(leftSpeed,rightSpeed, false);
@@ -573,8 +389,13 @@ public class Drivetrain
 		}
 	}
 	
-	public static void goBackRight(double currentRatio, boolean withinRange, double sum, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment)
+	public static void goBackRight(double lValue, double rValue, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment)
 	{
+		aimedRatio = ((requiredLeftDist)/(requiredRightDist));
+		rValue = Math.abs(rValue);
+		lValue = Math.abs(lValue);
+		currentRatio = (((lValue)/(rValue))/aimedRatio);
+		sum = (rValue) + (lValue);
 		if(withinRange || sum < 50)
 		{
 			drive.tankDrive(leftSpeed,rightSpeed, false);

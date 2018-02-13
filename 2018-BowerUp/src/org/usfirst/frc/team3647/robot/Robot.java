@@ -13,7 +13,7 @@ public class Robot extends IterativeRobot {
 
 	Encoders enc;
 	Joysticks joy;
-	ElevatorLevel yes;
+	ElevatorLevel eleVader;
 
 	@Override
 	public void robotInit() 
@@ -23,7 +23,7 @@ public class Robot extends IterativeRobot {
 			CrashChecker.logRobotInit();
 			enc = new Encoders();
 			joy = new Joysticks();
-			yes = new ElevatorLevel();
+			eleVader = new ElevatorLevel();
 			Encoders.resetEncoders();
 			ElevatorLevel.resetElevatorEncoders();
 			Drivetrain.drivetrainInitialization();
@@ -95,7 +95,7 @@ public class Robot extends IterativeRobot {
 		Encoders.testEncoders();
 		joy.updateControllers();
 		//Drivetrain.tankDrive(joy.leftJoySticky, joy.rightJoySticky);
-		yes.setElevatorEncoder();
+		eleVader.setElevatorEncoder();
 		Elevator.moveEleVader(joy.rightJoySticky * .4);
 		System.out.println(ElevatorLevel.bannerSensor.get());
 		//Intake.run(joy.leftJoySticky, joy.rightJoySticky);

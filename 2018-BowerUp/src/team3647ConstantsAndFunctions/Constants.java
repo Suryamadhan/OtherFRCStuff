@@ -72,16 +72,27 @@ public class Constants
 	public final static double scaleFirstBigTurn = 2.08915911464 * length;
 	public final static double scaleFirstSmallTurn = 0.8969247026 * length;
 	
-	public final static double middleRSwitchBigTurn = 1.6650441064 * length;
+	
 	public final static double middleRSwitchSmallTurn = 0.471238898038 * length;
 	
 	public static final double switchFirstCurveSmallSpeedConstant = 1.88235294118;
 	public static final double scaleFirstCurveSmallSpeedConstant = 2.3292469352;
-	public static final double middleRightCurveSmallSpeedConstant = 3.53333333333;
+	
 	
 	public static final double stop = 0;
-	public static final double pickUp = 2900;
-	public static final double sWitch = 15000;
-	public static final double scale = 43600;
+	public static final double pickUp = 2000;
+	public static final double sWitch = 10000;
+	public static final double scale = 35000;
+	
+	
+	//newB
+	public final static double middleLSwitchBigTurn = 2.30907060039 * length;
+	public static final double middleLeftCurveSmallSpeedConstant = 2.07042253521;
+	public static final double middleLSwitchStraightToSwitch = 1 * length;
+	
+	public final static double middleRSwitchBigTurn = 1.6650441064 * length;
+	public static final double middleRightCurveSmallSpeedConstant = 3.53333333333;
+	public static final double middleRSwitchStraightToSwitch = 1.93 * length;
+	
 
 }
