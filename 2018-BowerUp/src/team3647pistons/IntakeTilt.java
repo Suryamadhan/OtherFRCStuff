@@ -8,12 +8,12 @@ public class IntakeTilt
 	
 	public static DoubleSolenoid piston = new DoubleSolenoid(1,2);
 	
-	public static void intakeTitled()
+	public static void intakeTilted()
 	{
 		piston.set(DoubleSolenoid.Value.kForward);
 	}
 	
-	public static void intakeNotTitled()
+	public static void intakeNotTilted()
 	{
 		piston.set(DoubleSolenoid.Value.kReverse);
 	}
