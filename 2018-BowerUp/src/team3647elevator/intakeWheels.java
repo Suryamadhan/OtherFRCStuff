@@ -13,8 +13,8 @@ public class intakeWheels
 	
 	public static void run(double lValue, double rValue)
 	{
-		leftIntakeMotor.set(ControlMode.PercentOutput, lValue);
-		rightIntakeMotor.set(ControlMode.PercentOutput, rValue);
+		leftIntakeMotor.set(ControlMode.PercentOutput, -lValue);
+		rightIntakeMotor.set(ControlMode.PercentOutput, -rValue);
 	}
 
 }

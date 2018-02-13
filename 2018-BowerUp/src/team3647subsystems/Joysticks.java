@@ -7,6 +7,8 @@ public class Joysticks
 {
 	public Joystick mainController = new Joystick(Constants.mainControllerNumber);
 	
+	public Joystick mainController1 = new Joystick(Constants.mainControllerNumber);
+	
 	// Main contoller Variables
 	public double leftTrigger, rightTrigger, leftJoySticky, leftJoyStickx, rightJoySticky, rightJoyStickx;
 	public boolean rightBumper, leftBumper, buttonA, buttonB, buttonY;
@@ -32,17 +34,17 @@ public class Joysticks
 	
 	public void setCoDriverContollerValues()
 	{
-		rightBumper1 =	mainController.getRawButton(6);
-		leftBumper1 =	mainController.getRawButton(5);
-		leftTrigger1 = fixJoystickValue(mainController.getRawAxis(2));
-		buttonA1 =	mainController.getRawButton(1);
-		buttonB1 = mainController.getRawButton(2);
-		rightTrigger1 = fixJoystickValue(mainController.getRawAxis(3));
-		buttonY1 = mainController.getRawButton(4);
-		leftJoySticky1 = fixJoystickValue(-mainController.getRawAxis(1));
-		leftJoyStickx1 = fixJoystickValue(mainController.getRawAxis(0));
-		rightJoyStickx1 = fixJoystickValue(mainController.getRawAxis(4));
-		rightJoySticky1 = -fixJoystickValue(mainController.getRawAxis(5));
+		rightBumper1 =	mainController1.getRawButton(6);
+		leftBumper1 =	mainController1.getRawButton(5);
+		leftTrigger1 = fixJoystickValue(mainController1.getRawAxis(2));
+		buttonA1 =	mainController1.getRawButton(1);
+		buttonB1 = mainController1.getRawButton(2);
+		rightTrigger1 = fixJoystickValue(mainController1.getRawAxis(3));
+		buttonY1 = mainController1.getRawButton(4);
+		leftJoySticky1 = fixJoystickValue(-mainController1.getRawAxis(1));
+		leftJoyStickx1 = fixJoystickValue(mainController1.getRawAxis(0));
+		rightJoyStickx1 = fixJoystickValue(mainController1.getRawAxis(4));
+		rightJoySticky1 = -fixJoystickValue(mainController1.getRawAxis(5));
 	}
 	
 	public void updateControllers()
