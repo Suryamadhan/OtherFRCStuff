@@ -8,6 +8,7 @@ import team3647subsystems.Encoders;
 
 public class Auto 
 {
+	
 	static double aimedRatio, currentRatio;
 	static double sum, speed, lSpeed, rSpeed;
 	static int test = 0;
