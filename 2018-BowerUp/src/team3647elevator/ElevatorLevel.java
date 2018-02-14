@@ -33,11 +33,11 @@ public class ElevatorLevel
 	{
 		if(bannerSensor.get())
 		{
-			return true;
+			return false;
 		}
 		else
 		{
-			return false;
+			return true;
 		}
 	}
 	

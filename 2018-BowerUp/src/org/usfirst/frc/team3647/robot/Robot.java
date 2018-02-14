@@ -94,14 +94,12 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() 
 	{
 		enc.setEncoderValues();
-		//Encoders.testEncoders();
+		Encoders.testEncoders();
 		joy.updateControllers();
 		//Drivetrain.tankDrive(joy.leftJoySticky, joy.rightJoySticky);
 		eleVader.setElevatorEncoder();
 		Elevator.moveEleVader(joy.rightJoySticky * .4);
-		//System.out.println(ElevatorLevel.bannerSensor.get());
-		System.out.println("left" + Elevator.leftElevator.getOutputCurrent());
-		System.out.println("right" + Elevator.rightElevator.getOutputCurrent());
+		//System.out.println(ElevatorLevel.reachedStop());
 		//Intake.run(joy.leftJoySticky, joy.rightJoySticky);
 		if(joy.buttonA)
 		{
