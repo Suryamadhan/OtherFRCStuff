@@ -12,6 +12,10 @@ public class ElevatorLevel
 	
 	public void setElevatorEncoder()
 	{
+		if(reachedStop())
+		{
+			resetElevatorEncoders();
+		}
 		elevatorEncoderValue = Elevator.leftElevator.getSensorCollection().getQuadraturePosition();
 	}
 	
@@ -29,7 +33,6 @@ public class ElevatorLevel
 	{
 		if(bannerSensor.get())
 		{
-			resetElevatorEncoders();
 			return true;
 		}
 		else

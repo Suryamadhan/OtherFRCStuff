@@ -56,6 +56,7 @@ public class Robot extends IterativeRobot {
 		while(DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
 		{
 			enc.setEncoderValues();
+			eleVader.setElevatorEncoder();
 			Elevator.runElevator();
 			Auto.MSLSW(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 		}
@@ -77,10 +78,10 @@ public class Robot extends IterativeRobot {
 			joy.updateControllers();
 			Drivetrain.arcadeDrive(Encoders.leftEncoderValue, Encoders.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
 			intakeWheels.run(joy.leftTrigger, joy.rightTrigger);
-//			yes.setElevatorEncoder();
-//			Elevator.setElevatorButtons(joy.buttonA, joy.buttonB, joy.leftBumper,  joy.rightBumper);
-//			Elevator.setManualOverride(joy.rightJoySticky);
-//			Elevator.runElevator();
+			eleVader.setElevatorEncoder();
+			Elevator.setElevatorButtons(joy.buttonA, joy.buttonB, joy.leftBumper,  joy.rightBumper);
+			Elevator.setManualOverride(joy.rightJoySticky);
+			Elevator.runElevator();
 		}
 		catch(Throwable t)
 		{
@@ -99,6 +100,7 @@ public class Robot extends IterativeRobot {
 		eleVader.setElevatorEncoder();
 		Elevator.moveEleVader(joy.rightJoySticky * .4);
 		System.out.println(ElevatorLevel.bannerSensor.get());
+		System.out.println(Elevator.leftElevator);
 		//Intake.run(joy.leftJoySticky, joy.rightJoySticky);
 		if(joy.buttonA)
 		{

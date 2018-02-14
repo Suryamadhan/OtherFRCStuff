@@ -643,6 +643,71 @@ public class Auto
 		}
 	}
 	
+	public static void RSRSCSC(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 0:
+				if(lValue == 0 && rValue ==0 && Elevator.elevatorState == 1)
+				{
+					currentState = 1;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+				}
+				break;
+			case 1:
+				requiredStraightDist = Constants.scaleStraight - 2500;
+				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
+				{
+					speed = .75;
+					adjustment = Constants.adjustmentConstant(speed);
+					Drivetrain.driveForward(lValue, rValue, speed, adjustment);
+				}
+				else
+				{
+					currentState = 2;
+				}
+				break;
+			case 2:
+				requiredStraightDist = Constants.scaleStraight;
+				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
+				{
+					speed = .4;
+					adjustment = Constants.adjustmentConstant(speed);
+					Drivetrain.driveForward(lValue, rValue, speed, adjustment);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder =  rValue;
+					currentState = 3;
+				}
+				break;
+			case 3:
+				lValue -= prevLeftEncoder;
+				rValue -= prevRightEncoder;
+				requiredRightDist = Constants.scaleFirstBigTurn;
+				requiredLeftDist = requiredRightDist/Constants.scaleFirstCurveSmallSpeedConstant;
+				if(!Drivetrain.reachedTurnDistance(rValue + lValue, requiredLeftDist, requiredRightDist))
+				{
+					rSpeed = .55;
+					lSpeed = rSpeed/Constants.scaleFirstCurveSmallSpeedConstant;
+					adjustment = Constants.adjustmentConstant(rSpeed);
+					Drivetrain.goStraightRight(lValue, rValue, requiredLeftDist, requiredRightDist, lSpeed, rSpeed, adjustment);
+				}
+				else
+				{
+					currentState = 6;
+				}
+				break;
+			case 6:
+				Drivetrain.stop();
+				break;
+		}
+	}
+	
 //	public static void RSRSC(double lValue, double rValue)
 //	{
 //		switch(currentState)

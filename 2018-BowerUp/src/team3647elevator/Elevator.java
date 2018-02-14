@@ -190,6 +190,7 @@ public class Elevator
 					case 1:						
 						if(ElevatorLevel.reachedStop())
 						{
+							ElevatorLevel.resetElevatorEncoders();
 							stopEleVader();
 							elevatorState = 1;
 						}
@@ -278,6 +279,7 @@ public class Elevator
 						if(ElevatorLevel.reachedStop())
 						{
 							stopEleVader();
+							ElevatorLevel.resetElevatorEncoders();
 							elevatorState = 1;
 						}
 						else
@@ -364,6 +366,7 @@ public class Elevator
 						if(ElevatorLevel.reachedStop())
 						{
 							stopEleVader();
+							ElevatorLevel.resetElevatorEncoders();
 							elevatorState = 1;
 						}
 						else
@@ -422,6 +425,7 @@ public class Elevator
 					{
 						if(ElevatorLevel.reachedStop())
 						{
+							ElevatorLevel.resetElevatorEncoders();
 							elevatorState = 1;
 							aimedElevatorState = 1;
 						}
@@ -450,6 +454,7 @@ public class Elevator
 					{
 						if(ElevatorLevel.reachedStop())
 						{
+							ElevatorLevel.resetElevatorEncoders();
 							elevatorState = 1;
 							aimedElevatorState = 2;
 						}
@@ -478,6 +483,7 @@ public class Elevator
 					{
 						if(ElevatorLevel.reachedStop())
 						{
+							ElevatorLevel.resetElevatorEncoders();
 							elevatorState = 1;
 							aimedElevatorState = 3;
 						}
@@ -506,6 +512,7 @@ public class Elevator
 					{
 						if(ElevatorLevel.reachedStop())
 						{
+							ElevatorLevel.resetElevatorEncoders();
 							elevatorState = 1;
 							aimedElevatorState = 4;
 						}

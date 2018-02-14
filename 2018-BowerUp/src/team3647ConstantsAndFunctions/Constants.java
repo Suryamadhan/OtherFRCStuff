@@ -92,5 +92,10 @@ public class Constants
 	public final static double scaleFirstBigTurn = 2.08915911464 * length;
 	public static final double scaleFirstCurveSmallSpeedConstant = 2.3292469352;
 	
+	//2 cube autos Big Jank
+	public final static double doubleLongTurnScaleBackUpToWall = 2.29336263712 * length;
+	public static final double doubleScaleWallandScaleCurveSmallSpeedConstant = 2.08571428571;
+	
+	
 
 }
