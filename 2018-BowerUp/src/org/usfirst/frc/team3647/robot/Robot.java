@@ -2,6 +2,7 @@ package org.usfirst.frc.team3647.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Solenoid;
 import team3647elevator.Elevator;
 import team3647elevator.ElevatorLevel;
 import team3647elevator.intakeWheels;
@@ -14,6 +15,7 @@ public class Robot extends IterativeRobot {
 	Encoders enc;
 	Joysticks joy;
 	ElevatorLevel eleVader;
+	Solenoid yes;
 
 	@Override
 	public void robotInit() 
@@ -25,6 +27,7 @@ public class Robot extends IterativeRobot {
 			joy = new Joysticks();
 			eleVader = new ElevatorLevel();
 			Encoders.resetEncoders();
+			yes = new Solenoid(7);
 			ElevatorLevel.resetElevatorEncoders();
 			Drivetrain.drivetrainInitialization();
 		}

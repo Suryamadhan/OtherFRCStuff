@@ -33,8 +33,10 @@ public class Elevator
 	public static void moveEleVader(double speed)
 	{
 		elevatorDrive.tankDrive(-speed, speed, false);
+//		leftElevatorSPX.set(ControlMode.PercentOutput, -speed);
+//		rightElevatorSPX.set(ControlMode.PercentOutput, -speed);
 		leftElevatorSPX.follow(leftElevator);
-		rightElevator.follow(rightElevator);
+		rightElevatorSPX.follow(rightElevator);
 	}
 	
 	public static void stopEleVader()
