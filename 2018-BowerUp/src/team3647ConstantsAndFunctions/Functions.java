@@ -141,54 +141,54 @@ public class Functions
 	}
 	
 	// new auto functions
-	public static double middleRBigTurn(double eValue)
+	public static double middleRBigTurn(double eValue)//
 	{
-		eValue*=0.000179416651105;
+		eValue*=0.000232226080487;
 		eValue+=4.429;
 		eValue/=2;
 		speed = sinx(eValue);
 		return speed;
 	}
 	
-	public static double middleRStraighttoSwitch(double eValue)
+	public static double middleRStraighttoSwitch(double eValue)//
 	{
-		eValue*=0.000856181060104;
+		eValue*=0.000799102322763;
 		eValue +=1.0471975512;
 		eValue/=2;
 		speed = sinx(eValue);
 		return speed;
 	}
 	
-	public static double middleLBigTurn(double eValue)
+	public static double middleLBigTurn(double eValue)//
 	{
-		eValue*=0.000179416651105;
+		eValue*=0.000167455541031;
 		eValue+=4.429;
 		eValue/=2;
 		speed = sinx(eValue);
 		return speed;
 	}
 	
-	public static double middleLStraighttoSwitch(double eValue)
+	public static double middleLStraighttoSwitch(double eValue)//
 	{
-		eValue*=0.000242142857143;
+		eValue*=0.000226;
 		eValue +=4.996;
 		eValue/=2;
 		speed = sinx(eValue);
 		return speed;
 	}
 	
-	public static double straightForSwitch(double eValue)
+	public static double straightForSwitch(double eValue)//
 	{
-		eValue*=0.000522261904762;
+		eValue*=0.000487444444444;
 		eValue += 1.287;
 		eValue/=2;
 		speed = sinx(eValue);
 		return speed;
 	}
 	
-	public static double BigTurnSwitch(double eValue)
+	public static double BigTurnSwitch(double eValue)//
 	{
-		eValue*=0.000542689935418;
+		eValue*=0.00050651060639;
 		eValue += 1.855;
 		eValue/=2;
 		speed = sinx(eValue);

@@ -48,7 +48,7 @@ public class Constants
 	public final static double testBig = 10 * moveOnce;
 	public final static double testSmall = 5.56 * moveOnce;
 	
-	public final static double length = 2800;
+	public final static double length = 3000;
 	
 	
 	public final static double MSRRSWfirstbigTurn = 1.665 * length;
