@@ -9,7 +9,7 @@ import team3647ConstantsAndFunctions.Functions;
 
 public class Elevator 
 {
-	public static Integer elevatorState;
+	public static int elevatorState;
 	/*
 	 * 0. Start
 	 * 1. Stop
