@@ -2,6 +2,8 @@ package org.usfirst.frc.team3647.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.MotorSafety;
+import edu.wpi.first.wpilibj.MotorSafetyHelper;
 import team3647elevator.Elevator;
 import team3647elevator.ElevatorLevel;
 import team3647elevator.intakeWheels;
@@ -14,6 +16,8 @@ public class Robot extends IterativeRobot {
 	Encoders enc;
 	Joysticks joy;
 	ElevatorLevel eleVader;
+	MotorSafety yes;
+	MotorSafetyHelper yayt;
 
 	@Override
 	public void robotInit() 
@@ -22,6 +26,7 @@ public class Robot extends IterativeRobot {
 		{
 			CrashChecker.logRobotInit();
 			enc = new Encoders();
+			yayt = new MotorSafetyHelper(yes);
 			joy = new Joysticks();
 			eleVader = new ElevatorLevel();
 			Encoders.resetEncoders();
@@ -94,12 +99,15 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void testPeriodic() 
 	{
+		yayt.setSafetyEnabled(false);
 		enc.setEncoderValues();
-		Encoders.testEncoders();
+		//Encoders.testEncoders();
 		joy.updateControllers();
 		//Drivetrain.tankDrive(joy.leftJoySticky, joy.rightJoySticky);
 		eleVader.setElevatorEncoder();
 		Elevator.moveEleVader(joy.rightJoySticky * .4);
+		ElevatorLevel.testElevatorEncoders();
+		System.out.println(ElevatorLevel.reachedStop());
 		//Intake.run(joy.leftJoySticky, joy.rightJoySticky);
 		if(joy.buttonA)
 		{
