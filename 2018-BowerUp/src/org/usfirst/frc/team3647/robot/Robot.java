@@ -2,11 +2,9 @@ package org.usfirst.frc.team3647.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Solenoid;
 import team3647elevator.Elevator;
 import team3647elevator.ElevatorLevel;
 import team3647elevator.intakeWheels;
-import team3647pistons.Shifter;
 import team3647subsystems.Drivetrain;
 import team3647subsystems.Encoders;
 import team3647subsystems.Joysticks;
@@ -16,7 +14,6 @@ public class Robot extends IterativeRobot {
 	Encoders enc;
 	Joysticks joy;
 	ElevatorLevel eleVader;
-	// yes;
 
 	@Override
 	public void robotInit() 
@@ -28,7 +25,6 @@ public class Robot extends IterativeRobot {
 			joy = new Joysticks();
 			eleVader = new ElevatorLevel();
 			Encoders.resetEncoders();
-			//yes = new Shifter();
 			ElevatorLevel.resetElevatorEncoders();
 			Drivetrain.drivetrainInitialization();
 		}
@@ -81,9 +77,8 @@ public class Robot extends IterativeRobot {
 			enc.setEncoderValues();
 			joy.updateControllers();
 			Drivetrain.arcadeDrive(Encoders.leftEncoderValue, Encoders.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
-			//System.out.println("oof");
 			//intakeWheels.run(joy.leftTrigger, joy.rightTrigger);
-			//Shifter.runPiston(joy.buttonY);
+			
 			eleVader.setElevatorEncoder();
 			Elevator.setElevatorButtons(joy.buttonA, joy.buttonB, joy.leftBumper,  joy.rightBumper);
 			Elevator.setManualOverride(joy.rightJoySticky);
@@ -105,7 +100,6 @@ public class Robot extends IterativeRobot {
 		//Drivetrain.tankDrive(joy.leftJoySticky, joy.rightJoySticky);
 		eleVader.setElevatorEncoder();
 		Elevator.moveEleVader(joy.rightJoySticky * .4);
-		//System.out.println(ElevatorLevel.reachedStop());
 		//Intake.run(joy.leftJoySticky, joy.rightJoySticky);
 		if(joy.buttonA)
 		{
