@@ -241,9 +241,9 @@ public class Functions
 		return speed;
 	}
 	
-	public static double straightForScale(double eValue)
+	public static double straightForScale(double eValue)//
 	{
-		eValue*=0.000132541666667;
+		eValue*=0.000143541666667;
 		eValue += 1.551;
 		eValue/=2;
 		speed = sinx(eValue);
