@@ -80,7 +80,6 @@ public class Robot extends IterativeRobot {
 			enc.setEncoderValues();
 			joy.updateControllers();
 			Drivetrain.arcadeDrive(Encoders.leftEncoderValue, Encoders.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
-			System.out.println("oof");
 			//intakeWheels.run(joy.leftTrigger, joy.rightTrigger);
 			
 			eleVader.setElevatorEncoder();
@@ -104,7 +103,6 @@ public class Robot extends IterativeRobot {
 		//Drivetrain.tankDrive(joy.leftJoySticky, joy.rightJoySticky);
 		eleVader.setElevatorEncoder();
 		Elevator.moveEleVader(joy.rightJoySticky * .4);
-		//System.out.println(ElevatorLevel.reachedStop());
 		//Intake.run(joy.leftJoySticky, joy.rightJoySticky);
 		if(joy.buttonA)
 		{

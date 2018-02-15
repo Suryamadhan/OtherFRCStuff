@@ -9,7 +9,7 @@ import team3647ConstantsAndFunctions.Functions;
 
 public class Elevator 
 {
-	public static Integer elevatorState;
+	public static int elevatorState;
 	/*
 	 * 0. Start
 	 * 1. Stop
@@ -17,7 +17,7 @@ public class Elevator
 	 * 3. Switch
 	 * 4. Scale
 	 */
-	static Integer aimedElevatorState;
+	static int aimedElevatorState;
 	
 	public static boolean stop, pickUp, sWitch, scale, moving, manualOverride, originalPositionButton;
 	static double overrideValue;
