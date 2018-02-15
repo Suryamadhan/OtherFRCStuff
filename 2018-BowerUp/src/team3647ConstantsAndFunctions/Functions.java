@@ -63,11 +63,12 @@ public class Functions
 	
 	public static double stopToPickUp(double eValue)
 	{
-		eValue*=0.000163448275862;
-		eValue+=1.899;
-		speed = sinx(eValue);
-		speed/=2;
-		return speed;
+//		eValue*=0.000163448275862;
+//		eValue+=1.899;
+//		speed = sinx(eValue);
+//		speed/=2;
+//		return speed;
+		return .2;
 	}
 	
 	public static double stopToSwitch(double eValue)

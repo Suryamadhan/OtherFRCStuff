@@ -70,9 +70,9 @@ public class Constants
 	
 	
 	public static final double stop = 0;
-	public static final double pickUp = 2000;
+	public static final double pickUp = 1000;
 	public static final double sWitch = 10000;
-	public static final double scale = 35000;
+	public static final double scale = 22000;
 	
 	
 	//newB
