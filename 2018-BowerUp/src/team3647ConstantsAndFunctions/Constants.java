@@ -96,6 +96,7 @@ public class Constants
 	public final static double osScaleToOtherSide = 2.51327412287 * length;
 	
 	
+	
 	//2 cube autos Big Jank
 	public final static double doubleLongTurnScaleBackUpToWall = 2.29336263712 * length;
 	public static final double doubleScaleWallandScaleCurveSmallSpeedConstant = 2.08571428571;

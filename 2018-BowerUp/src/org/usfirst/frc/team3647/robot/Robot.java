@@ -84,10 +84,10 @@ public class Robot extends IterativeRobot {
 			Drivetrain.arcadeDrive(Encoders.leftEncoderValue, Encoders.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
 			//intakeWheels.run(joy.leftTrigger, joy.rightTrigger);
 			
-//			eleVader.setElevatorEncoder();
-//			Elevator.setElevatorButtons(joy.buttonA, joy.buttonB, joy.leftBumper,  joy.rightBumper);
-//			Elevator.setManualOverride(joy.rightJoySticky);
-//			Elevator.runElevator();
+			eleVader.setElevatorEncoder();
+			Elevator.setElevatorButtons(joy.buttonA, joy.buttonB, joy.leftBumper,  joy.rightBumper);
+			Elevator.setManualOverride(joy.rightJoySticky * .4);
+			Elevator.runElevator();
 		}
 		catch(Throwable t)
 		{
