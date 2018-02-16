@@ -53,72 +53,194 @@ public class Drivetrain
 	public static void arcadeDrive(double leftEnc, double rightEnc, double yValue, double xValue)
 	 {
 		double lSpeed, rSpeed;
-	 	if(yValue > 0 && xValue == 0)
-	 	{
-	 		movingStatus = "forward";
-	 		if(driftStatus.equals("turn"))
+	 		if(yValue > 0 && xValue == 0)
 	 		{
-	 			drift++;
+	 			movingStatus = "forward";
+	 			if(driftStatus.equals("turn"))
+	 			{
+	 				drift++;
+	 			}
+	 			if(drift < 50 && driftStatus.equals("turn"))
+	 			{
+	 				Encoders.resetEncoders();
+	 			}
+	 			else
+	 			{
+	 				driftStatus = "noturn";
+	 			}
 	 		}
-	 		if(drift < 50 && driftStatus.equals("turn"))
+	 		else if(yValue < 0 && xValue == 0)
 	 		{
-	 			Encoders.resetEncoders();
+	 			movingStatus = "backward";
 	 		}
+	 		else if(yValue == 0 && xValue == 0)
+	 		{
+	 			movingStatus = "stop";
+	 		driftStatus = "turn";
+	 	}
 	 		else
 	 		{
-	 			driftStatus = "noturn";
+	 			movingStatus = "turning";
+	 			driftStatus = "turn";
 	 		}
-	 	}
-	 	else if(yValue < 0 && xValue == 0)
-	 	{
-	 		movingStatus = "backward";
-	 	}
-	 	else if(yValue == 0 && xValue == 0)
-	 	{
-	 		movingStatus = "stop";
-	 		driftStatus = "turn";
-	 	}
-	 	else
-	 	{
-	 		movingStatus = "turning";
-	 		driftStatus = "turn";
-	 	}
-	 	
-	 	switch(movingStatus)
-	 	{
-	 		case "forward":
-	 			if(yValue < .2)
-	 			{
-	 				lSpeed = yValue;
-	 				rSpeed = -yValue;
+	 		
+	 		switch(movingStatus)
+	 		{
+	 			case "forward":
+	 				if(yValue < .3)
+	 				{
+	 					lSpeed = yValue;
+	 					rSpeed = -yValue;
+	 					Encoders.resetEncoders();
+	 				}
+	 				else
+	 				{
+	 					if(Math.abs(leftEnc - rightEnc) < 100)
+	 					{
+	 						lSpeed = yValue;
+	 						rSpeed = -yValue;
+	 					}
+	 					else if(Math.abs(leftEnc - rightEnc) < 200)
+						{
+	 						if(rightEnc > leftEnc)
+	 						{
+	 							 lSpeed = yValue;
+	 							 rSpeed = -yValue + .05;
+	 						}
+	 						
+	 						else
+	 						{
+	 							 lSpeed = yValue - .05;
+	 							 rSpeed = -yValue;
+	 						}
+	 					}
+	 					else if(Math.abs(leftEnc - rightEnc) < 300)
+	 					{
+	 						if(rightEnc > leftEnc)
+	 						{
+	 							 lSpeed = yValue;
+	 							 rSpeed = -yValue + .1;
+	 						}
+	 						else
+	 						{
+	 							 lSpeed = yValue - .1;
+	 							 rSpeed = -yValue;
+	 						}
+	 					}
+	 					else if(Math.abs(leftEnc - rightEnc) < 500)
+	 					{
+	 						if(rightEnc > leftEnc)
+	 						{
+	 							 lSpeed = yValue;
+	 							 rSpeed = -yValue + .18;
+	 						}
+	 						else
+	 						{
+	 							 lSpeed = yValue - .18;
+	 							 rSpeed = -yValue;
+	 						}
+	 					}
+		 				else
+		 				{
+		 					if(rightEnc > leftEnc)
+		 					{
+		 						 lSpeed = yValue;
+		 						 rSpeed = -yValue + .27;
+		 					}
+		 					else
+		 					{
+		 						 lSpeed = yValue - .27;
+		 						 rSpeed = -yValue;
+		 					}
+		 				}
+	 				}
+	 				drive.tankDrive(lSpeed, -rSpeed, false);
+	 				break;
+	 			case "backward":
+	 				if(yValue > -.3)
+	 				{
+		 				lSpeed =yValue;
+		 				rSpeed =-yValue;
+	 					Encoders.resetEncoders();
+	 				}
+	 				else
+	 				{
+	 					if(Math.abs(leftEnc - rightEnc) < 100)
+	 					{
+	 						lSpeed = yValue;
+	 						rSpeed = -yValue;
+	 					}
+	 					else if(Math.abs(leftEnc - rightEnc) < 200)
+	 					{
+	 						if(rightEnc > leftEnc)
+	 						{
+	 							 lSpeed = yValue + .05;
+	 							 rSpeed = -yValue;
+	 						}
+	 						else
+	 						{
+	 							 lSpeed = yValue;
+	 							 rSpeed = -yValue - .05;
+	 						}
+	 					}
+	 					else if(Math.abs(leftEnc - rightEnc) < 300)
+	 					{
+	 						if(rightEnc > leftEnc)
+	 						{
+	 							 lSpeed = yValue + .1;
+	 							 rSpeed = -yValue;
+	 						}
+	 						else
+							{
+								 lSpeed = yValue;
+	 							 rSpeed = -yValue - .1;
+	 						}
+	 					}
+	 					else if(Math.abs(leftEnc - rightEnc) < 500)
+	 					{
+	 						if(rightEnc > leftEnc)
+	 						{
+	 							 lSpeed = yValue + .18;
+	 							 rSpeed = -yValue;
+	 						}
+	 						else
+	 						{
+	 							 lSpeed = yValue;
+	 							 rSpeed = -yValue - .18;
+	 						}
+	 					}
+	 					else
+	 					{
+	 						if(rightEnc > leftEnc)
+	 						{
+	 							 lSpeed = yValue + .27;
+	 							 rSpeed = -yValue;
+	 						}
+	 						else
+	 						{
+	 							 lSpeed = yValue;
+	 							 rSpeed = -yValue - .27;
+							}
+	 					}
+	 				}
+	 				drive.tankDrive(lSpeed, -rSpeed, false);
+	 				break;
+	 			case "turning":
+//	 				double speedY, speedX;
+//	 				speedY = Math.abs(yValue);
+//	 				speedY *= yValue;
+//	 				speedX = xValue * Constants.turnConstant(yValue);
+//	 				lSpeed = speedY + speedX ;
+//	 				rSpeed = -speedY + speedX ;
+//	 				drive.tankDrive(lSpeed, -rSpeed, false);
+	 				drive.arcadeDrive(yValue, xValue,false);
 	 				Encoders.resetEncoders();
-	 			}
-	 			else
-	 			{
-	 				System.out.println("no oof");
-	 				driveForward(leftEnc, rightEnc, yValue, .08);
-	 			}
-	 			break;
-	 		case "backward":
-	 			if(yValue > -.2)
-	 			{
-		 			lSpeed =yValue;
-		 			rSpeed =-yValue;
-	 				Encoders.resetEncoders();
-	 			}
-	 			else
-	 			{
-	 				driveBackward(leftEnc, rightEnc, yValue,  .08);
-	 			}
-	 			break;
-	 		case "turning":
-	 			System.out.println("oof");
-	 			drive.arcadeDrive(yValue, xValue,false);
-	 			Encoders.resetEncoders();
-	 			break;
-	 		case "stop":
-	 			drive.tankDrive(0, 0, false);
-	 			break;
+	 				break;
+	 			case "stop":
+	 				lSpeed =(0);
+	 				rSpeed =(0);
+	 				drive.tankDrive(lSpeed, -rSpeed, false);
+	 				break;
 	 		}
 	  	}
 	

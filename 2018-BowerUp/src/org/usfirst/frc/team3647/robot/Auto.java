@@ -461,7 +461,8 @@ public class Auto
 				{
 					speed = Functions.straightForSwitch(avg);
 					adjustment = Constants.adjustmentConstant(speed);
-					Drivetrain.driveForward(lValue, rValue, speed, adjustment);
+//					Drivetrain.driveForward(lValue, rValue, speed, adjustment);
+					Drivetrain.arcadeDrive(lValue, rValue, speed, 0);
 				}
 				else
 				{
