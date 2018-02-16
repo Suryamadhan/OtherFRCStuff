@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.MotorSafetyHelper;
 import team3647elevator.Elevator;
 import team3647elevator.ElevatorLevel;
 import team3647elevator.intakeWheels;
+import team3647elevator.oof;
 import team3647subsystems.Drivetrain;
 import team3647subsystems.Encoders;
 import team3647subsystems.Joysticks;
@@ -108,7 +109,7 @@ public class Robot extends IterativeRobot {
 //		Elevator.moveEleVader(joy.rightJoySticky * .4);
 //		ElevatorLevel.testElevatorEncoders();
 //		System.out.println(ElevatorLevel.reachedStop());
-		intakeWheels.run(joy.leftJoySticky, joy.rightJoySticky);
+		oof.b(joy.rightJoySticky);
 		if(joy.buttonA)
 		{
 			Encoders.resetEncoders();
