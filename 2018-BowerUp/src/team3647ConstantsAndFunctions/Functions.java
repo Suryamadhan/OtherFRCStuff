@@ -242,6 +242,7 @@ public class Functions
 		eValue += 1.855;
 		eValue/=2;
 		speed = sinx(eValue);
+		speed*=1.42;
 		return speed;
 	}
 	

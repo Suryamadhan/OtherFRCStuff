@@ -67,7 +67,7 @@ public class Robot extends IterativeRobot {
 		{
 			enc.setEncoderValues();
 			eleVader.setElevatorEncoder();
-			Auto.LSLSWF(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
+			Auto.testB(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 		}
 	}
 	
@@ -86,6 +86,7 @@ public class Robot extends IterativeRobot {
 			enc.setEncoderValues();
 			joy.updateControllers();
 			Drivetrain.arcadeDrive(Encoders.leftEncoderValue, Encoders.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
+			Encoders.testEncoders();
 			//intakeWheels.run(joy.leftTrigger, joy.rightTrigger);
 //			Shifter.runPiston(joy.buttonA);
 //			Intake.runIntake(joy.buttonB);
@@ -108,16 +109,18 @@ public class Robot extends IterativeRobot {
 		enc.setEncoderValues();
 		//Encoders.testEncoders();
 		joy.updateControllers();
+		Drivetrain.drive.arcadeDrive(joy.leftJoySticky, joy.rightJoyStickx, false);
 		//Drivetrain.tankDrive(joy.leftJoySticky, joy.rightJoySticky);
 		eleVader.setElevatorEncoder();
-		Elevator.moveEleVader(joy.rightJoySticky * .4);
-		ElevatorLevel.testElevatorEncoders();
-//		System.out.println(ElevatorLevel.reachedStop());
+		//Elevator.moveEleVader(joy.rightJoySticky * .4);
+		//ElevatorLevel.testElevatorEncoders();
+		Encoders.testEncoders();
+		//System.out.println(ElevatorLevel.reachedStop());
 		//oof.b(joy.rightJoySticky);
-//		if(joy.buttonA)
-//		{
-//			Encoders.resetEncoders();
-//		}
+		if(joy.buttonA)
+		{
+			Encoders.resetEncoders();
+		}
 //		oof.b(joy.leftJoySticky, joy.rightJoySticky);
 //		Intake.runIntake(joy.buttonA);
 //	}

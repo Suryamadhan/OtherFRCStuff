@@ -48,6 +48,79 @@ public class Drivetrain
 		drive.tankDrive(lYValue, rYValue, false);
 	}
 	
+	public static void forw(double leftEnc, double rightEnc, double yValue, double xValue)
+	{
+		double lSpeed, rSpeed;
+		if(yValue < .3)
+			{
+				lSpeed = yValue;
+				rSpeed = -yValue;
+				Encoders.resetEncoders();
+			}
+			else
+			{
+				if(Math.abs(leftEnc - rightEnc) < 100)
+				{
+					lSpeed = yValue;
+					rSpeed = -yValue;
+				}
+				else if(Math.abs(leftEnc - rightEnc) < 200)
+			{
+					if(rightEnc > leftEnc)
+					{
+						 lSpeed = yValue;
+						 rSpeed = -yValue + .05;
+					}
+					
+					else
+					{
+						 lSpeed = yValue - .05;
+						 rSpeed = -yValue;
+					}
+				}
+				else if(Math.abs(leftEnc - rightEnc) < 300)
+				{
+					if(rightEnc > leftEnc)
+					{
+						 lSpeed = yValue;
+						 rSpeed = -yValue + .1;
+					}
+					else
+					{
+						 lSpeed = yValue - .1;
+						 rSpeed = -yValue;
+					}
+				}
+				else if(Math.abs(leftEnc - rightEnc) < 500)
+				{
+					if(rightEnc > leftEnc)
+					{
+						 lSpeed = yValue;
+						 rSpeed = -yValue + .18;
+					}
+					else
+					{
+						 lSpeed = yValue - .18;
+						 rSpeed = -yValue;
+					}
+				}
+				else
+				{
+					if(rightEnc > leftEnc)
+					{
+						 lSpeed = yValue;
+						 rSpeed = -yValue + .27;
+					}
+					else
+					{
+						 lSpeed = yValue - .27;
+						 rSpeed = -yValue;
+					}
+				}
+			}
+			drive.tankDrive(lSpeed, -rSpeed, false);
+	}
+	
 	static double drift;
 	static String movingStatus, driftStatus;
 	public static void arcadeDrive(double leftEnc, double rightEnc, double yValue, double xValue)

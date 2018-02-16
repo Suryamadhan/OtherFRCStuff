@@ -85,8 +85,8 @@ public class Constants
 	public static final double middleRSwitchStraightToSwitch = 1.93 * length;
 	
 	public final static double switchStraight = 3 * length;
-	public final static double switchFirstBigTurn = 2.51327412287 * length;
-	public static final double switchFirstCurveSmallSpeedConstant = 1.88235294118;
+	public final static double switchFirstBigTurn = 1.6 * length;
+	public static final double switchFirstCurveSmallSpeedConstant = 3;
 	
 	public final static double scaleStraight = 8 * length;
 	public final static double scaleFirstBigTurn = 2.08915911464 * length;

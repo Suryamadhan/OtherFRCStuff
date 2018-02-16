@@ -437,6 +437,50 @@ public class Auto
 		}
 	}
 	
+	public static void testB(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 0:
+				if(lValue == 0 && rValue == 0)
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					currentState = 1;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					Elevator.moveEleVader(-.2);
+				}
+				break;
+			case 1:
+				if(!Drivetrain.reachedDistance(lValue, rValue, 9000))
+				{
+					Drivetrain.forw(lValue, rValue, .7,0);
+				}
+				else
+				{
+					currentState = 99;
+				}
+				break;
+			case 99:
+				if((lValue + rValue) < 100)
+				{
+					currentState = 2;
+					Encoders.testEncoders();
+				}
+				else
+				{
+					Encoders.resetEncoders();
+				}
+				break;
+			case 2:
+				Drivetrain.stop();
+				break;
+		}
+	}
+	
 	public static void LSLSWF(double lValue, double rValue)
 	{
 		switch(currentState)
@@ -461,19 +505,28 @@ public class Auto
 				{
 					speed = Functions.straightForSwitch(avg);
 					adjustment = Constants.adjustmentConstant(speed);
-//					Drivetrain.driveForward(lValue, rValue, speed, adjustment);
-					Drivetrain.arcadeDrive(lValue, rValue, speed, 0);
+					Drivetrain.forw(lValue, rValue, speed, 0);
 				}
 				else
 				{
 					prevLeftEncoder = lValue;
 					prevRightEncoder = rValue;
+					currentState = 99;
+				}
+				break;
+			case 99:
+				if((lValue + rValue) < 100)
+				{
 					currentState = 2;
+				}
+				else
+				{
+					Encoders.resetEncoders();
 				}
 				break;
 			case 2:
-				lValue -= prevLeftEncoder;
-				rValue -= prevRightEncoder;
+//				lValue -= prevLeftEncoder;
+//				rValue -= prevRightEncoder;
 				requiredLeftDist = Constants.switchFirstBigTurn;
 				requiredRightDist = requiredLeftDist/Constants.switchFirstCurveSmallSpeedConstant;
 				if(!Drivetrain.reachedTurnDistance(rValue + lValue, requiredLeftDist, requiredRightDist))
@@ -664,7 +717,7 @@ public class Auto
 				{
 					Elevator.stopEleVader();
 					ElevatorLevel.resetElevatorEncoders();
-					currentState = 1;
+					currentState = 2;
 				}
 				else
 				{
@@ -679,7 +732,7 @@ public class Auto
 					avg = (lValue + rValue)/2;
 					speed = Functions.straightForScale(avg);
 					adjustment = Constants.adjustmentConstant(speed);
-					Drivetrain.driveForward(lValue, rValue, speed, adjustment);
+					Drivetrain.arcadeDrive(lValue, rValue, speed, 0);
 				}
 				else
 				{
@@ -689,8 +742,8 @@ public class Auto
 				}
 				break;
 			case 2:
-				lValue -= prevLeftEncoder;
-				rValue -= prevRightEncoder;
+//				lValue -= prevLeftEncoder;
+//				rValue -= prevRightEncoder;
 				requiredLeftDist = Constants.scaleFirstBigTurn;
 				requiredRightDist = requiredLeftDist/Constants.scaleFirstCurveSmallSpeedConstant;
 				if(!Drivetrain.reachedTurnDistance(rValue + lValue, requiredLeftDist, requiredRightDist))
