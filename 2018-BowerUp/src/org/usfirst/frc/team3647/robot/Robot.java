@@ -105,10 +105,10 @@ public class Robot extends IterativeRobot {
 		joy.updateControllers();
 		//Drivetrain.tankDrive(joy.leftJoySticky, joy.rightJoySticky);
 		eleVader.setElevatorEncoder();
-//		Elevator.moveEleVader(joy.rightJoySticky * .4);
-//		ElevatorLevel.testElevatorEncoders();
+		Elevator.moveEleVader(joy.rightJoySticky * .4);
+		ElevatorLevel.testElevatorEncoders();
 //		System.out.println(ElevatorLevel.reachedStop());
-		oof.b(joy.rightJoySticky);
+		//oof.b(joy.rightJoySticky);
 		if(joy.buttonA)
 		{
 			Encoders.resetEncoders();
