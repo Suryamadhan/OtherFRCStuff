@@ -1,21 +1,22 @@
 package team3647pistons;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 
 public class IntakeTilt 
 {
 	//Double Pistons
 	
-	public static DoubleSolenoid piston = new DoubleSolenoid(1,2);
+	public static Solenoid piston = new Solenoid(5);
 	
 	public static void intakeTitled()
 	{
-		piston.set(DoubleSolenoid.Value.kForward);
+		piston.set(true);
 	}
 	
 	public static void intakeNotTitled()
 	{
-		piston.set(DoubleSolenoid.Value.kReverse);
+		piston.set(false);
 	}
 	
 	public static void runPiston(boolean joyValue)

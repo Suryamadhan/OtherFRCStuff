@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3647.robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.MotorSafety;
@@ -8,6 +9,8 @@ import team3647elevator.Elevator;
 import team3647elevator.ElevatorLevel;
 import team3647elevator.intakeWheels;
 import team3647elevator.oof;
+import team3647pistons.Intake;
+import team3647pistons.Shifter;
 import team3647subsystems.Drivetrain;
 import team3647subsystems.Encoders;
 import team3647subsystems.Joysticks;
@@ -25,6 +28,7 @@ public class Robot extends IterativeRobot {
 	{
 		try
 		{
+			
 			CrashChecker.logRobotInit();
 			enc = new Encoders();
 			yayt = new MotorSafetyHelper(yes);
@@ -63,7 +67,7 @@ public class Robot extends IterativeRobot {
 		{
 			enc.setEncoderValues();
 			eleVader.setElevatorEncoder();
-			Auto.MSRSWF(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
+			Auto.LSLSWF(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 		}
 	}
 	
@@ -83,11 +87,12 @@ public class Robot extends IterativeRobot {
 			joy.updateControllers();
 			Drivetrain.arcadeDrive(Encoders.leftEncoderValue, Encoders.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
 			//intakeWheels.run(joy.leftTrigger, joy.rightTrigger);
-			
-			eleVader.setElevatorEncoder();
-			Elevator.setElevatorButtons(joy.buttonA, joy.buttonB, joy.leftBumper,  joy.rightBumper);
-			Elevator.setManualOverride(joy.rightJoySticky * .4);
-			Elevator.runElevator();
+//			Shifter.runPiston(joy.buttonA);
+//			Intake.runIntake(joy.buttonB);
+//			eleVader.setElevatorEncoder();
+//			Elevator.setElevatorButtons(joy.buttonA, joy.buttonB, joy.leftBumper,  joy.rightBumper);
+//			Elevator.setManualOverride(joy.rightJoySticky * .4);
+//			Elevator.runElevator();
 		}
 		catch(Throwable t)
 		{
@@ -109,9 +114,12 @@ public class Robot extends IterativeRobot {
 		ElevatorLevel.testElevatorEncoders();
 //		System.out.println(ElevatorLevel.reachedStop());
 		//oof.b(joy.rightJoySticky);
-		if(joy.buttonA)
-		{
-			Encoders.resetEncoders();
-		}
+//		if(joy.buttonA)
+//		{
+//			Encoders.resetEncoders();
+//		}
+//		oof.b(joy.leftJoySticky, joy.rightJoySticky);
+//		Intake.runIntake(joy.buttonA);
+//	}
 	}
 }

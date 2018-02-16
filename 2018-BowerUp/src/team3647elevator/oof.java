@@ -8,25 +8,25 @@ public class oof
 	public static VictorSPX rightIntakeMotor = new VictorSPX(56);
 	public static VictorSPX leftIntakeMotor = new VictorSPX(55);
 	
-	public static void b(double yes)
+	public static void b(double yes, double no)
 	{
-		rightIntakeMotor.set(ControlMode.PercentOutput, yes);
-		leftIntakeMotor.set(ControlMode.PercentOutput, yes);
+		rightIntakeMotor.set(ControlMode.PercentOutput, no);
+		leftIntakeMotor.set(ControlMode.PercentOutput, yes );
 	}
 	
 	public static void shootCube()
 	{
-		b(-1);
+		b(1, 1);
 	}
 	
 	public static void stopIntake()
 	{
-		b(0);
+		b(0, 0);
 	}
 	
 	public static void pickUpCube()
 	{
-		b(1);
+		b(-1, -1);
 	}
 	
 }

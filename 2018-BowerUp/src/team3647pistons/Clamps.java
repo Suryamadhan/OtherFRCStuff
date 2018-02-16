@@ -5,7 +5,7 @@ public class Clamps
 {
 	//Single Piston
 	
-	public static Solenoid clampPiston = new Solenoid(1); //input number may be diff
+	public static Solenoid clampPiston = new Solenoid(6); //input number may be diff
 	
 	public static void clampThePiston()
 	{

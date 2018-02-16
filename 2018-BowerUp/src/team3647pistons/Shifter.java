@@ -6,7 +6,7 @@ public class Shifter
 {
 	//Double Pistons
 	
-		public static DoubleSolenoid piston = new DoubleSolenoid(0,1);
+		public static DoubleSolenoid piston = new DoubleSolenoid(1,0);
 		
 		public static void intakeTitled()
 		{

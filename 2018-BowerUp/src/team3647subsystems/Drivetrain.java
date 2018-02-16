@@ -96,7 +96,7 @@ public class Drivetrain
 	 			else
 	 			{
 	 				System.out.println("no oof");
-	 				driveForward(leftEnc, rightEnc, yValue, Constants.adjustmentConstant(yValue));
+	 				driveForward(leftEnc, rightEnc, yValue, .08);
 	 			}
 	 			break;
 	 		case "backward":
@@ -108,7 +108,7 @@ public class Drivetrain
 	 			}
 	 			else
 	 			{
-	 				driveBackward(leftEnc, rightEnc, yValue, Constants.adjustmentConstant(yValue));
+	 				driveBackward(leftEnc, rightEnc, yValue,  .08);
 	 			}
 	 			break;
 	 		case "turning":

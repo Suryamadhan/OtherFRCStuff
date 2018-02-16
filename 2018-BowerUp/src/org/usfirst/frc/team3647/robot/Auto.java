@@ -490,8 +490,8 @@ public class Auto
 			case 3:
 				Drivetrain.stop();
 				Timer.delay(.3);
-				Encoders.resetEncoders();
-				currentState = 5;
+				//Encoders.resetEncoders();
+				currentState = 6;
 				break;
 			case 5:
 				if(ElevatorLevel.reachedSwitch())
@@ -510,6 +510,7 @@ public class Auto
 				currentState = 7;
 				break;
 			case 7:
+				Encoders.testEncoders();
 				oof.stopIntake();
 				Elevator.stopEleVader();
 				Drivetrain.stop();
