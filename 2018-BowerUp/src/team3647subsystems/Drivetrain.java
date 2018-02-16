@@ -95,6 +95,7 @@ public class Drivetrain
 	 			}
 	 			else
 	 			{
+	 				System.out.println("no oof");
 	 				driveForward(leftEnc, rightEnc, yValue, Constants.adjustmentConstant(yValue));
 	 			}
 	 			break;
@@ -111,6 +112,7 @@ public class Drivetrain
 	 			}
 	 			break;
 	 		case "turning":
+	 			System.out.println("oof");
 	 			drive.arcadeDrive(yValue, xValue,false);
 	 			Encoders.resetEncoders();
 	 			break;
