@@ -14,19 +14,4 @@ public class oof
 		leftIntakeMotor.set(ControlMode.PercentOutput, yes);
 	}
 	
-	public static void shootCube()
-	{
-		b(-1);
-	}
-	
-	public static void stopIntake()
-	{
-		b(0);
-	}
-	
-	public static void pickUpCube()
-	{
-		b(1);
-	}
-	
 }

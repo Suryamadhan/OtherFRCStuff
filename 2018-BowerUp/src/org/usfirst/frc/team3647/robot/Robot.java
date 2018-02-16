@@ -63,7 +63,6 @@ public class Robot extends IterativeRobot {
 		{
 			enc.setEncoderValues();
 			eleVader.setElevatorEncoder();
-			Elevator.runElevator();
 			Auto.MSLSW(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 		}
 	}

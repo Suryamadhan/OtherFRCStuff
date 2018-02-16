@@ -6,6 +6,7 @@ import team3647ConstantsAndFunctions.Functions;
 import team3647elevator.Elevator;
 import team3647elevator.ElevatorLevel;
 import team3647elevator.intakeWheels;
+import team3647elevator.oof;
 import team3647subsystems.Drivetrain;
 import team3647subsystems.Encoders;
 
@@ -32,6 +33,7 @@ public class Auto
 	 * 4. LSLSW2
 	 * 5. RSRSC2
 	 * 6. LSLSC2
+	 * 7. RSLSCF
 	 */
 	
 	static double aimedRatio, currentRatio;
@@ -47,6 +49,690 @@ public class Auto
 	static double lSSpeed, rSSpeed, lAdjustment, rAdjustment, error, adjustment;
 	static boolean lError, rError;
 	static double []adjustmentValues = new double[2];
+	
+	public static void RSLSCF(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 0:
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					currentState = 1;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					Elevator.moveEleVader(-.2);
+				}
+				break;
+			case 1:
+				
+				break;
+		}
+	}
+	
+	public static void RSRSWF(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 0:
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					currentState = 1;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					Elevator.moveEleVader(-.2);
+				}
+				break;
+			case 1:
+				requiredStraightDist = Constants.switchStraight;
+				avg = (lValue + rValue)/2;
+				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
+				{
+					speed = Functions.straightForSwitch(avg);
+					adjustment = Constants.adjustmentConstant(speed);
+					Drivetrain.driveForward(lValue, rValue, speed, adjustment);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder =  rValue;
+					currentState = 2;
+				}
+				break;
+			case 2:
+				lValue -= prevLeftEncoder;
+				rValue -= prevRightEncoder;
+				requiredRightDist = Constants.switchFirstBigTurn;
+				requiredLeftDist = requiredRightDist/Constants.switchFirstCurveSmallSpeedConstant;
+				if(!Drivetrain.reachedTurnDistance(rValue + lValue, requiredLeftDist, requiredRightDist))
+				{
+					rSpeed = Functions.BigTurnSwitch(rValue);
+					lSpeed = rSpeed/Constants.switchFirstCurveSmallSpeedConstant;
+					adjustment = Constants.adjustmentConstant(rSpeed);
+					Drivetrain.goStraightLeft(lValue, rValue, requiredLeftDist, requiredRightDist, lSpeed, rSpeed, adjustment);
+				}
+				else
+				{
+					currentState = 3;
+				}
+				break;
+			case 3:
+				Drivetrain.stop();
+				Timer.delay(.3);
+				Encoders.resetEncoders();
+				currentState = 5;
+				break;
+			case 5:
+				if(ElevatorLevel.reachedSwitch())
+				{
+					Elevator.stopEleVader();
+					currentState = 6;
+				}
+				else
+				{
+					Elevator.moveEleVader(.4);
+				}
+				break;
+			case 6:
+				oof.shootCube();
+				Timer.delay(.5);
+				currentState = 7;
+				break;
+			case 7:
+				oof.stopIntake();
+				Elevator.stopEleVader();
+				Drivetrain.stop();
+				break;
+//			case 4:
+//				if(ElevatorLevel.reachedSwitch())
+//				{
+//					Elevator.stopEleVader();
+//					currentState = 5;
+//				}
+//				else
+//				{
+//					Elevator.setElevatorButtons(false, false, true, false);
+//					Elevator.runElevator();
+//				}
+//				break;
+//			case 5:
+//				if(!intakeWheels.hasCube())
+//				{
+//					Timer.delay(.35);
+//					currentState = 6;
+//				}
+//				else
+//				{
+//					intakeWheels.shootCube();
+//				}
+//				break;
+//			case 6:
+//				intakeWheels.stopIntake();
+//				Elevator.stopEleVader();
+//				Drivetrain.stop();
+//				break;
+		}
+	}
+	
+	public static void MSLSWF(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 0:
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					currentState = 1;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					Elevator.moveEleVader(-.2);
+				}
+				break;
+			case 1:
+				requiredRightDist = Constants.middleLSwitchBigTurn;
+				requiredLeftDist = requiredRightDist/Constants.middleLeftCurveSmallSpeedConstant;
+				if(!Drivetrain.reachedTurnDistance(rValue + lValue, requiredLeftDist, requiredRightDist))
+				{
+					rSpeed = Functions.middleLBigTurn(rValue);
+					lSpeed = rSpeed/Constants.middleLeftCurveSmallSpeedConstant;
+					adjustment = Constants.adjustmentConstant(rSpeed);
+					Drivetrain.goStraightLeft(lValue, rValue, requiredLeftDist, requiredRightDist, lSpeed, rSpeed, adjustment);
+				}
+				else
+				{
+					currentState = 2;
+				}
+				break;
+			case 2:
+				lValue -= prevLeftEncoder;
+				rValue -= prevRightEncoder;
+				requiredLeftDist = Constants.middleLSwitchBigTurn;
+				requiredRightDist = requiredLeftDist/Constants.middleLeftCurveSmallSpeedConstant;
+				if(!Drivetrain.reachedTurnDistance(rValue + lValue, requiredLeftDist, requiredRightDist))
+				{
+					lSpeed =  Functions.middleLBigTurn(lValue);
+					rSpeed = lSpeed/Constants.middleLeftCurveSmallSpeedConstant;
+					adjustment = Constants.adjustmentConstant(lSpeed);
+					Drivetrain.goStraightRight(lValue, rValue, requiredLeftDist, requiredRightDist, lSpeed, rSpeed, adjustment);
+				}
+				else
+				{
+					lValue += prevLeftEncoder;
+					rValue += prevRightEncoder;
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 3;
+				}
+				break;
+			case 3:
+				lValue -= prevLeftEncoder;
+				rValue -= prevRightEncoder;
+				avg = (lValue + rValue);
+				if(!Drivetrain.reachedDistance(lValue, rValue, Constants.middleLSwitchStraightToSwitch))
+				{
+					speed = Functions.middleLStraighttoSwitch(avg);
+					adjustment = Constants.adjustmentConstant(speed);
+					Drivetrain.driveForward(lValue, rValue, speed, adjustment);
+				}
+				else
+				{
+					currentState = 4;
+				}
+				break;
+			case 4:
+				Drivetrain.stop();
+				Timer.delay(.3);
+				Encoders.resetEncoders();
+				currentState = 5;
+				break;
+			case 5:
+				if(ElevatorLevel.reachedSwitch())
+				{
+					Elevator.stopEleVader();
+					currentState = 6;
+				}
+				else
+				{
+					Elevator.moveEleVader(.4);
+				}
+				break;
+			case 6:
+				oof.shootCube();
+				Timer.delay(.5);
+				currentState = 7;
+				break;
+			case 7:
+				oof.stopIntake();
+				Elevator.stopEleVader();
+				Drivetrain.stop();
+				break;	
+//			case 5:
+//				if(ElevatorLevel.reachedSwitch())
+//				{
+//					Elevator.stopEleVader();
+//					currentState = 6;
+//				}
+//				else
+//				{
+//					Elevator.setElevatorButtons(false, false, true, false);
+//					Elevator.runElevator();
+//				}
+//				break;
+//			case 6:
+//				if(!intakeWheels.hasCube())
+//				{
+//					Timer.delay(.35);
+//					currentState = 7;
+//				}
+//				else
+//				{
+//					intakeWheels.shootCube();
+//				}
+//				break;
+//			case 7:
+//				intakeWheels.stopIntake();
+//				Elevator.stopEleVader();
+//				Drivetrain.stop();
+//				break;
+			
+		}
+	}
+	
+	public static void MSRSWF(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 0:
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					currentState = 1;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					Elevator.moveEleVader(-.2);
+				}
+				break;
+			case 1:
+				requiredLeftDist = Constants.middleRSwitchBigTurn;
+				requiredRightDist = requiredLeftDist/Constants.middleRightCurveSmallSpeedConstant;
+				if(!Drivetrain.reachedTurnDistance(rValue+lValue, requiredLeftDist, requiredRightDist))
+				{
+					lSpeed = Functions.middleRBigTurn(lValue);
+					rSpeed = lSpeed/Constants.middleRightCurveSmallSpeedConstant;
+					adjustment = Constants.adjustmentConstant(speed);
+					Drivetrain.goStraightRight(lValue, rValue, requiredLeftDist, requiredRightDist, lSpeed, rSpeed, adjustment);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder =  rValue;
+					currentState = 2;
+				}
+				break;
+			case 2:
+				lValue -= prevLeftEncoder;
+				rValue -= prevRightEncoder;
+				requiredRightDist = Constants.middleRSwitchBigTurn;
+				requiredLeftDist = requiredRightDist/Constants.middleRightCurveSmallSpeedConstant;
+				if(!Drivetrain.reachedTurnDistance(rValue+lValue, requiredLeftDist, requiredRightDist))
+				{
+					rSpeed = Functions.middleRBigTurn(rValue);
+					lSpeed = rSpeed/Constants.middleRightCurveSmallSpeedConstant;
+					adjustment = Constants.adjustmentConstant(speed);
+					Drivetrain.goStraightLeft(lValue, rValue, requiredLeftDist, requiredRightDist, lSpeed, rSpeed, adjustment);
+				}
+				else
+				{
+					lValue += prevLeftEncoder;
+					rValue += prevRightEncoder;
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 3;
+				}
+				break;
+			case 3:
+				lValue -= prevLeftEncoder;
+				rValue -= prevRightEncoder;
+				avg = (lValue + rValue)/2;
+				requiredStraightDist = Constants.middleRSwitchStraightToSwitch;
+				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
+				{
+					speed = Functions.middleRStraighttoSwitch(avg);
+					adjustment = Constants.adjustmentConstant(speed);
+					Drivetrain.driveForward(lValue, rValue, speed, adjustment);
+				}
+				else
+				{
+					currentState = 4;
+				}
+				break;
+			case 4:
+				Drivetrain.stop();
+				Timer.delay(.3);
+				Encoders.resetEncoders();
+				currentState = 5;
+				break;
+			case 5:
+				if(ElevatorLevel.reachedSwitch())
+				{
+					Elevator.stopEleVader();
+					currentState = 6;
+				}
+				else
+				{
+					Elevator.moveEleVader(.4);
+				}
+				break;
+			case 6:
+				oof.shootCube();
+				Timer.delay(.5);
+				currentState = 7;
+				break;
+			case 7:
+				oof.stopIntake();
+				Elevator.stopEleVader();
+				Drivetrain.stop();
+				break;
+//			case 5:
+//				if(ElevatorLevel.reachedSwitch())
+//				{
+//					Elevator.stopEleVader();
+//					currentState = 6;
+//				}
+//				else
+//				{
+//					Elevator.setElevatorButtons(false, false, true, false);
+//					Elevator.runElevator();
+//				}
+//				break;
+//			case 6:
+//				if(!intakeWheels.hasCube())
+//				{
+//					Timer.delay(.35);
+//					currentState = 7;
+//				}
+//				else
+//				{
+//					intakeWheels.shootCube();
+//				}
+//				break;
+//			case 7:
+//				intakeWheels.stopIntake();
+//				Elevator.stopEleVader();
+//				Drivetrain.stop();
+//				break;
+		}
+	}
+	
+	public static void LSLSWF(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 0:
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					currentState = 1;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					Elevator.moveEleVader(-.2);
+				}
+				break;
+			case 1:
+				requiredStraightDist = Constants.switchStraight;
+				avg = (lValue + rValue)/2;
+				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
+				{
+					speed = Functions.straightForSwitch(avg);
+					adjustment = Constants.adjustmentConstant(speed);
+					Drivetrain.driveForward(lValue, rValue, speed, adjustment);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 2;
+				}
+				break;
+			case 2:
+				lValue -= prevLeftEncoder;
+				rValue -= prevRightEncoder;
+				requiredLeftDist = Constants.switchFirstBigTurn;
+				requiredRightDist = requiredLeftDist/Constants.switchFirstCurveSmallSpeedConstant;
+				if(!Drivetrain.reachedTurnDistance(rValue + lValue, requiredLeftDist, requiredRightDist))
+				{
+					lSpeed = Functions.BigTurnSwitch(lValue);
+					rSpeed = lSpeed/Constants.switchFirstCurveSmallSpeedConstant;
+					adjustment = Constants.adjustmentConstant(lSpeed);
+					Drivetrain.goStraightRight(lValue, rValue, requiredLeftDist, requiredRightDist, lSpeed, rSpeed, adjustment);
+				}
+				else
+				{
+					currentState = 3;
+				}
+				break;
+			case 3:
+				Drivetrain.stop();
+				Timer.delay(.3);
+				Encoders.resetEncoders();
+				currentState = 5;
+				break;
+			case 5:
+				if(ElevatorLevel.reachedSwitch())
+				{
+					Elevator.stopEleVader();
+					currentState = 6;
+				}
+				else
+				{
+					Elevator.moveEleVader(.4);
+				}
+				break;
+			case 6:
+				oof.shootCube();
+				Timer.delay(.5);
+				currentState = 7;
+				break;
+			case 7:
+				oof.stopIntake();
+				Elevator.stopEleVader();
+				Drivetrain.stop();
+				break;
+//			case 4:
+//				if(ElevatorLevel.reachedSwitch())
+//				{
+//					Elevator.stopEleVader();
+//					currentState = 5;
+//				}
+//				else
+//				{
+//					Elevator.setElevatorButtons(false, false, true, false);
+//					Elevator.runElevator();
+//				}
+//				break;
+//			case 5:
+//				if(!intakeWheels.hasCube())
+//				{
+//					Timer.delay(.35);
+//					currentState = 6;
+//				}
+//				else
+//				{
+//					intakeWheels.shootCube();
+//				}
+//				break;
+//			case 6:
+//				intakeWheels.stopIntake();
+//				Elevator.stopEleVader();
+//				Drivetrain.stop();
+//				break;
+		}
+	}
+	
+	public static void RSRSCF(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 0:
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					currentState = 1;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					Elevator.moveEleVader(-.2);
+				}
+				break;
+			case 1:
+				requiredStraightDist = Constants.scaleStraight;
+				avg = (lValue + rValue)/2;
+				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
+				{
+					speed = Functions.straightForScale(avg);
+					adjustment = Constants.adjustmentConstant(speed);
+					Drivetrain.driveForward(lValue, rValue, speed, adjustment);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 2;
+				}
+				break;
+			case 2:
+				lValue -= prevLeftEncoder;
+				rValue -= prevRightEncoder;
+				requiredRightDist = Constants.scaleFirstBigTurn;
+				requiredLeftDist = requiredRightDist/Constants.scaleFirstCurveSmallSpeedConstant;
+				if(!Drivetrain.reachedTurnDistance(rValue + lValue, requiredLeftDist, requiredRightDist))
+				{
+					rSpeed = Functions.BigTurnScale(rValue);
+					lSpeed = rSpeed/Constants.scaleFirstCurveSmallSpeedConstant;
+					adjustment = Constants.adjustmentConstant(rSpeed);
+					Drivetrain.goStraightRight(lValue, rValue, requiredLeftDist, requiredRightDist, lSpeed, rSpeed, adjustment);
+				}
+				else
+				{
+					currentState = 3;
+				}
+				break;
+			case 3:
+				Drivetrain.stop();
+				Timer.delay(.3);
+				Encoders.resetEncoders();
+				currentState = 5;
+				break;
+			case 5:
+				if(ElevatorLevel.reachedSwitch())
+				{
+					Elevator.stopEleVader();
+					currentState = 6;
+				}
+				else
+				{
+					Elevator.moveEleVader(.4);
+				}
+				break;
+			case 6:
+				oof.shootCube();
+				Timer.delay(.5);
+				currentState = 7;
+				break;
+			case 7:
+				oof.stopIntake();
+				Elevator.stopEleVader();
+				Drivetrain.stop();
+				break;
+//			case 4:
+//				if(ElevatorLevel.reachedScale())
+//				{
+//					Elevator.stopEleVader();
+//					currentState = 5;
+//				}
+//				else
+//				{
+//					Elevator.setElevatorButtons(false, false, false, true);
+//					Elevator.runElevator();
+//				}
+//				break;
+//			case 5:
+//				if(!intakeWheels.hasCube())
+//				{
+//					Timer.delay(.35);
+//					currentState = 6;
+//				}
+//				else
+//				{
+//					intakeWheels.shootCube();
+//				}
+//				break;
+//			case 6:
+//				intakeWheels.stopIntake();
+//				Elevator.stopEleVader();
+//				Drivetrain.stop();
+//				break;
+		}
+	}
+	
+	public static void LSLSCF(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 0:
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					currentState = 1;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					Elevator.moveEleVader(-.2);
+				}
+				break;
+			case 1:
+				requiredStraightDist = Constants.scaleStraight;
+				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
+				{
+					avg = (lValue + rValue)/2;
+					speed = Functions.straightForScale(avg);
+					adjustment = Constants.adjustmentConstant(speed);
+					Drivetrain.driveForward(lValue, rValue, speed, adjustment);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 2;
+				}
+				break;
+			case 2:
+				lValue -= prevLeftEncoder;
+				rValue -= prevRightEncoder;
+				requiredLeftDist = Constants.scaleFirstBigTurn;
+				requiredRightDist = requiredLeftDist/Constants.scaleFirstCurveSmallSpeedConstant;
+				if(!Drivetrain.reachedTurnDistance(rValue + lValue, requiredLeftDist, requiredRightDist))
+				{
+					avg = (lValue + rValue)/2;
+					lSpeed = Functions.BigTurnScale(avg);
+					rSpeed = lSpeed/Constants.scaleFirstCurveSmallSpeedConstant;
+					adjustment = Constants.adjustmentConstant(lSpeed);
+					Drivetrain.goStraightRight(lValue, rValue, requiredLeftDist, requiredRightDist, lSpeed, rSpeed, adjustment);
+				}
+				else
+				{
+					currentState = 3;
+				}
+				break;
+			case 3:
+				Drivetrain.stop();
+				Timer.delay(.3);
+				Encoders.resetEncoders();
+				currentState = 5;
+				break;
+			case 5:
+				if(ElevatorLevel.reachedSwitch())
+				{
+					Elevator.stopEleVader();
+					currentState = 6;
+				}
+				else
+				{
+					Elevator.moveEleVader(.4);
+				}
+				break;
+			case 6:
+				oof.shootCube();
+				Timer.delay(.5);
+				currentState = 7;
+				break;
+			case 7:
+				oof.stopIntake();
+				Elevator.stopEleVader();
+				Drivetrain.stop();
+				break;
+		}
+	}
 	
 	public static void MSLSW(double lValue, double rValue)
 	{
@@ -180,111 +866,7 @@ public class Auto
 		}
 	}
 	
-	public static void MSLSWF(double lValue, double rValue)
-	{
-		switch(currentState)
-		{
-			case 0:
-				if(lValue == 0 && rValue == 0 && Elevator.elevatorState == 1)
-				{
-					Elevator.setElevatorButtons(true, false, false, false);
-					currentState = 1;
-				}
-				else
-				{
-					Encoders.resetEncoders();
-					Elevator.setElevatorButtons(true, false, false, false);
-					Elevator.runElevator();
-				}
-				break;
-			case 1:
-				requiredRightDist = Constants.middleLSwitchBigTurn;
-				requiredLeftDist = requiredRightDist/Constants.middleLeftCurveSmallSpeedConstant;
-				if(!Drivetrain.reachedTurnDistance(rValue + lValue, requiredLeftDist, requiredRightDist))
-				{
-					rSpeed = Functions.middleLBigTurn(rValue);
-					lSpeed = rSpeed/Constants.middleLeftCurveSmallSpeedConstant;
-					adjustment = Constants.adjustmentConstant(rSpeed);
-					Drivetrain.goStraightLeft(lValue, rValue, requiredLeftDist, requiredRightDist, lSpeed, rSpeed, adjustment);
-				}
-				else
-				{
-					currentState = 2;
-				}
-				break;
-			case 2:
-				lValue -= prevLeftEncoder;
-				rValue -= prevRightEncoder;
-				requiredLeftDist = Constants.middleLSwitchBigTurn;
-				requiredRightDist = requiredLeftDist/Constants.middleLeftCurveSmallSpeedConstant;
-				if(!Drivetrain.reachedTurnDistance(rValue + lValue, requiredLeftDist, requiredRightDist))
-				{
-					lSpeed =  Functions.middleLBigTurn(lValue);
-					rSpeed = lSpeed/Constants.middleLeftCurveSmallSpeedConstant;
-					adjustment = Constants.adjustmentConstant(lSpeed);
-					Drivetrain.goStraightRight(lValue, rValue, requiredLeftDist, requiredRightDist, lSpeed, rSpeed, adjustment);
-				}
-				else
-				{
-					lValue += prevLeftEncoder;
-					rValue += prevRightEncoder;
-					prevLeftEncoder = lValue;
-					prevRightEncoder = rValue;
-					currentState = 3;
-				}
-				break;
-			case 3:
-				lValue -= prevLeftEncoder;
-				rValue -= prevRightEncoder;
-				avg = (lValue + rValue);
-				if(!Drivetrain.reachedDistance(lValue, rValue, Constants.middleLSwitchStraightToSwitch))
-				{
-					speed = Functions.middleLStraighttoSwitch(avg);
-					adjustment = Constants.adjustmentConstant(speed);
-					Drivetrain.driveForward(lValue, rValue, speed, adjustment);
-				}
-				else
-				{
-					currentState = 4;
-				}
-				break;
-			case 4:
-				Drivetrain.stop();
-				Timer.delay(.3);
-				Encoders.resetEncoders();
-				currentState = 5;
-				break;
-			case 5:
-				if(ElevatorLevel.reachedSwitch())
-				{
-					Elevator.stopEleVader();
-					currentState = 6;
-				}
-				else
-				{
-					Elevator.setElevatorButtons(false, false, true, false);
-					Elevator.runElevator();
-				}
-				break;
-			case 6:
-				if(!intakeWheels.hasCube())
-				{
-					Timer.delay(.35);
-					currentState = 7;
-				}
-				else
-				{
-					intakeWheels.shootCube();
-				}
-				break;
-			case 7:
-				intakeWheels.stopIntake();
-				Elevator.stopEleVader();
-				Drivetrain.stop();
-				break;
-			
-		}
-	}
+	
 	
 	
 	
@@ -568,113 +1150,7 @@ public class Auto
 		}
 	}
 	
-	public static void MSRSWF(double lValue, double rValue)
-	{
-		switch(currentState)
-		{
-			case 0:
-				if(lValue == 0 && rValue == 0 && Elevator.elevatorState == 1)
-				{
-					Elevator.setElevatorButtons(true, false, false, false);
-					currentState = 1;
-				}
-				else
-				{
-					Encoders.resetEncoders();
-					Elevator.setElevatorButtons(true, false, false, false);
-					Elevator.runElevator();
-				}
-				break;
-			case 1:
-				requiredLeftDist = Constants.middleRSwitchBigTurn;
-				requiredRightDist = requiredLeftDist/Constants.middleRightCurveSmallSpeedConstant;
-				if(!Drivetrain.reachedTurnDistance(rValue+lValue, requiredLeftDist, requiredRightDist))
-				{
-					lSpeed = Functions.middleRBigTurn(lValue);
-					rSpeed = lSpeed/Constants.middleRightCurveSmallSpeedConstant;
-					adjustment = Constants.adjustmentConstant(speed);
-					Drivetrain.goStraightRight(lValue, rValue, requiredLeftDist, requiredRightDist, lSpeed, rSpeed, adjustment);
-				}
-				else
-				{
-					prevLeftEncoder = lValue;
-					prevRightEncoder =  rValue;
-					currentState = 2;
-				}
-				break;
-			case 2:
-				lValue -= prevLeftEncoder;
-				rValue -= prevRightEncoder;
-				requiredRightDist = Constants.middleRSwitchBigTurn;
-				requiredLeftDist = requiredRightDist/Constants.middleRightCurveSmallSpeedConstant;
-				if(!Drivetrain.reachedTurnDistance(rValue+lValue, requiredLeftDist, requiredRightDist))
-				{
-					rSpeed = Functions.middleRBigTurn(rValue);
-					lSpeed = rSpeed/Constants.middleRightCurveSmallSpeedConstant;
-					adjustment = Constants.adjustmentConstant(speed);
-					Drivetrain.goStraightLeft(lValue, rValue, requiredLeftDist, requiredRightDist, lSpeed, rSpeed, adjustment);
-				}
-				else
-				{
-					lValue += prevLeftEncoder;
-					rValue += prevRightEncoder;
-					prevLeftEncoder = lValue;
-					prevRightEncoder = rValue;
-					currentState = 3;
-				}
-				break;
-			case 3:
-				lValue -= prevLeftEncoder;
-				rValue -= prevRightEncoder;
-				avg = (lValue + rValue)/2;
-				requiredStraightDist = Constants.middleRSwitchStraightToSwitch;
-				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
-				{
-					speed = Functions.middleRStraighttoSwitch(avg);
-					adjustment = Constants.adjustmentConstant(speed);
-					Drivetrain.driveForward(lValue, rValue, speed, adjustment);
-				}
-				else
-				{
-					currentState = 4;
-				}
-				break;
-			case 4:
-				Drivetrain.stop();
-				Timer.delay(.3);
-				Encoders.resetEncoders();
-				currentState = 5;
-				break;
-			case 5:
-				if(ElevatorLevel.reachedSwitch())
-				{
-					Elevator.stopEleVader();
-					currentState = 6;
-				}
-				else
-				{
-					Elevator.setElevatorButtons(false, false, true, false);
-					Elevator.runElevator();
-				}
-				break;
-			case 6:
-				if(!intakeWheels.hasCube())
-				{
-					Timer.delay(.35);
-					currentState = 7;
-				}
-				else
-				{
-					intakeWheels.shootCube();
-				}
-				break;
-			case 7:
-				intakeWheels.stopIntake();
-				Elevator.stopEleVader();
-				Drivetrain.stop();
-				break;
-		}
-	}
+	
 	
 //	public static void LSLSC(double lValue, double rValue)
 //	{
@@ -793,6 +1269,8 @@ public class Auto
 		}
 	}
 	
+	
+	
 	public static void RSRSC2(double lValue, double rValue)
 	{
 		switch(currentState)
@@ -858,92 +1336,7 @@ public class Auto
 		}
 	}
 	
-	public static void RSRSCF(double lValue, double rValue)
-	{
-		switch(currentState)
-		{
-			case 0:
-				if(lValue == 0 && rValue == 0 && Elevator.elevatorState == 1)
-				{
-					Elevator.setElevatorButtons(true, false, false, false);
-					currentState = 1;
-				}
-				else
-				{
-					Encoders.resetEncoders();
-					Elevator.setElevatorButtons(true, false, false, false);
-					Elevator.runElevator();
-				}
-				break;
-			case 1:
-				requiredStraightDist = Constants.scaleStraight;
-				avg = (lValue + rValue)/2;
-				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
-				{
-					speed = Functions.straightForScale(avg);
-					adjustment = Constants.adjustmentConstant(speed);
-					Drivetrain.driveForward(lValue, rValue, speed, adjustment);
-				}
-				else
-				{
-					prevLeftEncoder = lValue;
-					prevRightEncoder = rValue;
-					currentState = 2;
-				}
-				break;
-			case 2:
-				lValue -= prevLeftEncoder;
-				rValue -= prevRightEncoder;
-				requiredRightDist = Constants.scaleFirstBigTurn;
-				requiredLeftDist = requiredRightDist/Constants.scaleFirstCurveSmallSpeedConstant;
-				if(!Drivetrain.reachedTurnDistance(rValue + lValue, requiredLeftDist, requiredRightDist))
-				{
-					rSpeed = Functions.BigTurnScale(rValue);
-					lSpeed = rSpeed/Constants.scaleFirstCurveSmallSpeedConstant;
-					adjustment = Constants.adjustmentConstant(rSpeed);
-					Drivetrain.goStraightRight(lValue, rValue, requiredLeftDist, requiredRightDist, lSpeed, rSpeed, adjustment);
-				}
-				else
-				{
-					currentState = 3;
-				}
-				break;
-			case 3:
-				Drivetrain.stop();
-				Timer.delay(.3);
-				Encoders.resetEncoders();
-				currentState = 4;
-				break;
-			case 4:
-				if(ElevatorLevel.reachedScale())
-				{
-					Elevator.stopEleVader();
-					currentState = 5;
-				}
-				else
-				{
-					Elevator.setElevatorButtons(false, false, false, true);
-					Elevator.runElevator();
-				}
-				break;
-			case 5:
-				if(!intakeWheels.hasCube())
-				{
-					Timer.delay(.35);
-					currentState = 6;
-				}
-				else
-				{
-					intakeWheels.shootCube();
-				}
-				break;
-			case 6:
-				intakeWheels.stopIntake();
-				Elevator.stopEleVader();
-				Drivetrain.stop();
-				break;
-		}
-	}
+	
 	
 	public static void RSRSCSC(double lValue, double rValue)
 	{
@@ -1076,92 +1469,7 @@ public class Auto
 		}
 	}
 	
-	public static void RSRSWF(double lValue, double rValue)
-	{
-		switch(currentState)
-		{
-			case 0:
-				if(lValue == 0 && rValue == 0 && Elevator.elevatorState == 1)
-				{
-					Elevator.setElevatorButtons(true, false, false, false);
-					currentState = 1;
-				}
-				else
-				{
-					Encoders.resetEncoders();
-					Elevator.setElevatorButtons(true, false, false, false);
-					Elevator.runElevator();
-				}
-				break;
-			case 1:
-				requiredStraightDist = Constants.switchStraight;
-				avg = (lValue + rValue)/2;
-				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
-				{
-					speed = Functions.straightForSwitch(avg);
-					adjustment = Constants.adjustmentConstant(speed);
-					Drivetrain.driveForward(lValue, rValue, speed, adjustment);
-				}
-				else
-				{
-					prevLeftEncoder = lValue;
-					prevRightEncoder =  rValue;
-					currentState = 2;
-				}
-				break;
-			case 2:
-				lValue -= prevLeftEncoder;
-				rValue -= prevRightEncoder;
-				requiredRightDist = Constants.switchFirstBigTurn;
-				requiredLeftDist = requiredRightDist/Constants.switchFirstCurveSmallSpeedConstant;
-				if(!Drivetrain.reachedTurnDistance(rValue + lValue, requiredLeftDist, requiredRightDist))
-				{
-					rSpeed = Functions.BigTurnSwitch(rValue);
-					lSpeed = rSpeed/Constants.switchFirstCurveSmallSpeedConstant;
-					adjustment = Constants.adjustmentConstant(rSpeed);
-					Drivetrain.goStraightLeft(lValue, rValue, requiredLeftDist, requiredRightDist, lSpeed, rSpeed, adjustment);
-				}
-				else
-				{
-					currentState = 3;
-				}
-				break;
-			case 3:
-				Drivetrain.stop();
-				Timer.delay(.3);
-				Encoders.resetEncoders();
-				currentState = 4;
-				break;
-			case 4:
-				if(ElevatorLevel.reachedSwitch())
-				{
-					Elevator.stopEleVader();
-					currentState = 5;
-				}
-				else
-				{
-					Elevator.setElevatorButtons(false, false, true, false);
-					Elevator.runElevator();
-				}
-				break;
-			case 5:
-				if(!intakeWheels.hasCube())
-				{
-					Timer.delay(.35);
-					currentState = 6;
-				}
-				else
-				{
-					intakeWheels.shootCube();
-				}
-				break;
-			case 6:
-				intakeWheels.stopIntake();
-				Elevator.stopEleVader();
-				Drivetrain.stop();
-				break;
-		}
-	}
+	
 	
 //	public static void RSRSC(double lValue, double rValue)
 //	{
@@ -1557,92 +1865,6 @@ public class Auto
 		}
 	}
 	
-	public static void LSLSWF(double lValue, double rValue)
-	{
-		switch(currentState)
-		{
-			case 0:
-				if(lValue == 0 && rValue == 0 && Elevator.elevatorState == 1)
-				{
-					Elevator.setElevatorButtons(true, false, false, false);
-					currentState = 1;
-				}
-				else
-				{
-					Encoders.resetEncoders();
-					Elevator.setElevatorButtons(true, false, false, false);
-					Elevator.runElevator();
-				}
-				break;
-			case 1:
-				requiredStraightDist = Constants.switchStraight;
-				avg = (lValue + rValue)/2;
-				if(!Drivetrain.reachedDistance(lValue, rValue, requiredStraightDist))
-				{
-					speed = Functions.straightForSwitch(avg);
-					adjustment = Constants.adjustmentConstant(speed);
-					Drivetrain.driveForward(lValue, rValue, speed, adjustment);
-				}
-				else
-				{
-					prevLeftEncoder = lValue;
-					prevRightEncoder = rValue;
-					currentState = 2;
-				}
-				break;
-			case 2:
-				lValue -= prevLeftEncoder;
-				rValue -= prevRightEncoder;
-				requiredLeftDist = Constants.switchFirstBigTurn;
-				requiredRightDist = requiredLeftDist/Constants.switchFirstCurveSmallSpeedConstant;
-				if(!Drivetrain.reachedTurnDistance(rValue + lValue, requiredLeftDist, requiredRightDist))
-				{
-					lSpeed = Functions.BigTurnSwitch(lValue);
-					rSpeed = lSpeed/Constants.switchFirstCurveSmallSpeedConstant;
-					adjustment = Constants.adjustmentConstant(lSpeed);
-					Drivetrain.goStraightRight(lValue, rValue, requiredLeftDist, requiredRightDist, lSpeed, rSpeed, adjustment);
-				}
-				else
-				{
-					currentState = 3;
-				}
-				break;
-			case 3:
-				Drivetrain.stop();
-				Timer.delay(.3);
-				Encoders.resetEncoders();
-				currentState = 4;
-				break;
-			case 4:
-				if(ElevatorLevel.reachedSwitch())
-				{
-					Elevator.stopEleVader();
-					currentState = 5;
-				}
-				else
-				{
-					Elevator.setElevatorButtons(false, false, true, false);
-					Elevator.runElevator();
-				}
-				break;
-			case 5:
-				if(!intakeWheels.hasCube())
-				{
-					Timer.delay(.35);
-					currentState = 6;
-				}
-				else
-				{
-					intakeWheels.shootCube();
-				}
-				break;
-			case 6:
-				intakeWheels.stopIntake();
-				Elevator.stopEleVader();
-				Drivetrain.stop();
-				break;
-		}
-	}
 	
 	public static void LSLSW(double lValue, double rValue)
 	{
