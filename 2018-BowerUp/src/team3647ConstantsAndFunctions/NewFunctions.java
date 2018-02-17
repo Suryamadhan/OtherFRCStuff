@@ -5,11 +5,13 @@ public class NewFunctions
 	public static double msrswfStraighToSwitch = 102;
 	public static double msrswtotalTurnLength = 56.5486677646;
 	public static double msrswsmallTurnLength = 15.7079632679;
+	public static double msrswfirstTurnRatio = 3.6;
 	
 	public static double mslswInitialStraight = 8;
 	public static double mslswMediumTurn = 56.5486677646;
 	public static double mslswBigTurn = 97.3893722613;
 	public static double mslswSmallTurn = 15.7079632679;
+	public static double mslswirstTurnRatio = 1.72222222222;
 	
 	
 	public static double msrswfLeftSpeed(double lValue, double rValue, int step)
@@ -52,7 +54,7 @@ public class NewFunctions
 		{
 			if(rValue < msrswsmallTurnLength && lValue < msrswtotalTurnLength)
 			{
-				rValue =msrswfLeftSpeed(lValue, rValue, step)/3.6;
+				rValue =msrswfLeftSpeed(lValue, rValue, step)/msrswfirstTurnRatio;
 				return rValue;
 			}
 			else if(rValue < msrswsmallTurnLength)
@@ -99,14 +101,14 @@ public class NewFunctions
 			if(rValue < msrswsmallTurnLength && lValue < msrswtotalTurnLength)
 			{
 				ratio = lValue/rValue;
-				if(ratio <= 3.7 && ratio >= 3.5)
+				if(ratio <= (msrswfirstTurnRatio + .1) && ratio >= (msrswfirstTurnRatio - .1))
 				{
 					adjustmentValues[0] = 0;
 					adjustmentValues[1] = 0;
 				}
 				else
 				{
-					if(ratio >= 3.7)
+					if(ratio >= (msrswfirstTurnRatio + .1))
 					{
 						adjustmentValues[0] = -.2;
 						adjustmentValues[1] = .1;
@@ -188,7 +190,7 @@ public class NewFunctions
 		{
 			if(lValue < mslswMediumTurn && rValue < mslswBigTurn)
 			{
-				lValue =mslsswfRightSpeed(lValue, rValue, step)/1.72222222222;
+				lValue =mslsswfRightSpeed(lValue, rValue, step)/mslswirstTurnRatio;
 				return lValue;
 			}
 			else if(lValue < mslswMediumTurn)
@@ -227,6 +229,10 @@ public class NewFunctions
 				rValue+=.8;
 				return rValue;
 				//.8 to .4
+			}
+			else
+			{
+				return 0;
 			}
 		}
 		else
@@ -279,7 +285,18 @@ public class NewFunctions
 				adjustmentValues[1] = 0;
 			}
 		}
-		
+		else if(step == 2) 
+		{
+			if(lValue < mslswMediumTurn && rValue < mslswBigTurn)
+			{
+				
+			}
+			else
+			{
+				adjustmentValues[0] = 0;
+				adjustmentValues[1] = 0;
+			}
+		}
 		else
 		{
 			adjustmentValues[0] = 0;

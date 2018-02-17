@@ -143,6 +143,18 @@ public class NewAutos
 			case 2:
 				lValue-=prevLeftEncoder;
 				rValue-=prevRightEncoder;
+				lSSpeed = NewFunctions.mslsswfLeftSpeed(lValue, rValue, 2);
+				rSSpeed = NewFunctions.mslsswfRightSpeed(lValue, rValue, 2);
+				if(lSSpeed == 0 && rSSpeed == 0)
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 3;
+				}
+				else
+				{
+					
+				}
 				break;
 		}
 	}
