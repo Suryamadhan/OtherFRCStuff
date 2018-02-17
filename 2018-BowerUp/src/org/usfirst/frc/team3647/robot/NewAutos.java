@@ -19,7 +19,7 @@ public class NewAutos
 	{
 		switch(currentState)
 		{
-			case 1:
+			case 1: 
 				lSSpeed = NewFunctions.msrswfLeftSpeed(lValue, rValue, 1);
 				rSSpeed = NewFunctions.msrswfRightSpeed(lValue, rValue, 1);
 				if(lSSpeed == 0 && rSSpeed == 0)
