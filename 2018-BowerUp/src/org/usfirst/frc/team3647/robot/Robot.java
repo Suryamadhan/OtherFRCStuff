@@ -51,7 +51,7 @@ public class Robot extends IterativeRobot {
 		try 
 		{
 			CrashChecker.logAutoInit();
-			Auto.initialize();
+			NewAutos.initialize();
 		}
 		catch(Throwable t)
 		{
