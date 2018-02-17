@@ -1,7 +1,7 @@
 package team3647pistons;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
-public class Intake 
+public class intakeMechanism 
 {
 	//Double Pistons
 	public static DoubleSolenoid intakePiston = new DoubleSolenoid(2,3);

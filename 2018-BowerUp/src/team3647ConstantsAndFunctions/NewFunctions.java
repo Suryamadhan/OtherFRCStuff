@@ -2,11 +2,17 @@ package team3647ConstantsAndFunctions;
 
 public class NewFunctions 
 {
-	public static double msrsrfStraighToSwitch = 102;
+	public static double msrswfStraighToSwitch = 102;
 	public static double msrswtotalTurnLength = 56.5486677646;
 	public static double msrswsmallTurnLength = 15.7079632679;
 	
-	public static double msrswfLeftSpeed(double lValue, double rValue, double step)
+	public static double mslswInitialStraight = 8;
+	public static double mslswMediumTurn = 56.5486677646;
+	public static double mslswBigTurn = 97.3893722613;
+	public static double mslswSmallTurn = 15.7079632679;
+	
+	
+	public static double msrswfLeftSpeed(double lValue, double rValue, int step)
 	{
 		if(step == 1)
 		{
@@ -23,7 +29,7 @@ public class NewFunctions
 		}
 		else if(step == 2)
 		{
-			if(lValue < msrsrfStraighToSwitch)
+			if(lValue < msrswfStraighToSwitch)
 			{
 				lValue*=(-0.005);
 				lValue+=.9;
@@ -40,7 +46,7 @@ public class NewFunctions
 		}
 	}
 	
-	public static double msrswfRightSpeed(double lValue, double rValue, double step)
+	public static double msrswfRightSpeed(double lValue, double rValue, int step)
 	{
 		if(step == 1)
 		{
@@ -66,7 +72,7 @@ public class NewFunctions
 		}
 		else if(step == 2)
 		{
-			if(rValue < msrsrfStraighToSwitch)
+			if(rValue < msrswfStraighToSwitch)
 			{
 				rValue*=(-0.005);
 				rValue+=.9;
@@ -84,7 +90,7 @@ public class NewFunctions
 		}
 	}
 	
-	public static double[] msrswfadjustment(double lValue, double rValue, double step)
+	public static double[] msrswfadjustment(double lValue, double rValue, int step)
 	{
 		double []adjustmentValues = new double[2];
 		double ratio;
@@ -120,14 +126,14 @@ public class NewFunctions
 		}
 		else if(step == 2)
 		{
-			if(Math.abs(rValue - lValue) < 24)
+			if(Math.abs(rValue - lValue) < .2)
 			{
 				adjustmentValues[0] = 0;
 				adjustmentValues[1] = 0;
 			}
 			else if(lValue > rValue)
 			{
-				if(Math.abs(rValue - lValue) < 100)
+				if(Math.abs(rValue - lValue) < .6)
 				{
 					adjustmentValues[0] = -.1;
 					adjustmentValues[1] = .1;
@@ -140,7 +146,7 @@ public class NewFunctions
 			}
 			else if(lValue < rValue)
 			{
-				if(Math.abs(rValue - lValue) < 100)
+				if(Math.abs(rValue - lValue) < .6)
 				{
 					adjustmentValues[0] = .1;
 					adjustmentValues[1] = -.1;
@@ -162,6 +168,124 @@ public class NewFunctions
 			adjustmentValues[0] = 0;
 			adjustmentValues[1] = 0;
 		}
+		return adjustmentValues;
+	}
+	
+	public static double mslsswfLeftSpeed(double lValue, double rValue, int step)
+	{
+		if(step == 1)
+		{
+			if(lValue < mslswInitialStraight)
+			{
+				return .4;
+			}
+			else
+			{
+				return 0;
+			}
+		}
+		if(step == 2)
+		{
+			if(lValue < mslswMediumTurn && rValue < mslswBigTurn)
+			{
+				lValue =mslsswfRightSpeed(lValue, rValue, step)/1.72222222222;
+				return lValue;
+			}
+			else if(lValue < mslswMediumTurn)
+			{
+				return .2;
+			}
+			else
+			{
+				return 0;
+			}
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static double mslsswfRightSpeed(double lValue, double rValue, int step)
+	{
+		if(step == 1)
+		{
+			if(rValue < mslswInitialStraight)
+			{
+				return .37;
+			}
+			else
+			{
+				return 0;
+			}
+		}
+		else if(step == 2)
+		{
+			if(rValue < mslswBigTurn)
+			{
+				rValue*=(-0.00410722433785);
+				rValue+=.8;
+				return rValue;
+				//.8 to .4
+			}
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static double[] mslsswfadjustment(double lValue, double rValue, int step)
+	{
+		double []adjustmentValues = new double[2];
+		double ratio;
+		
+		if(step == 1)
+		{
+			if(Math.abs(rValue - lValue) < .2)
+			{
+				adjustmentValues[0] = 0;
+				adjustmentValues[1] = 0;
+			}
+			else if(lValue > rValue)
+			{
+				if(Math.abs(rValue - lValue) < .6)
+				{
+					adjustmentValues[0] = -.1;
+					adjustmentValues[1] = .1;
+				}
+				else
+				{
+					adjustmentValues[0] = -.2;
+					adjustmentValues[1] = .2;
+				}
+			}
+			else if(lValue < rValue)
+			{
+				if(Math.abs(rValue - lValue) < .6)
+				{
+					adjustmentValues[0] = .1;
+					adjustmentValues[1] = -.1;
+				}
+				else
+				{
+					adjustmentValues[0] = .2;
+					adjustmentValues[1] = -.2;
+				}
+			}
+			else
+			{
+				adjustmentValues[0] = 0;
+				adjustmentValues[1] = 0;
+			}
+		}
+		
+		else
+		{
+			adjustmentValues[0] = 0;
+			adjustmentValues[1] = 0;
+		}
+		
 		return adjustmentValues;
 	}
 	

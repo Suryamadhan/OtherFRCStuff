@@ -1,16 +1,13 @@
 package team3647elevator;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-
 import edu.wpi.first.wpilibj.DigitalInput;
 
-public class oof 
+public class Intake 
 {
 	public static VictorSPX rightIntakeMotor = new VictorSPX(56);
 	public static VictorSPX leftIntakeMotor = new VictorSPX(55);
 	
-	public static DigitalInput bannerSensor = new DigitalInput(0); 
+//	public static DigitalInput bannerSensor = new DigitalInput(99); 
 	
 	public static void b(double lTrigger, double rTrigger)
 	{
@@ -47,5 +44,4 @@ public class oof
 	{
 		b(1, 0);
 	}
-	
 }
