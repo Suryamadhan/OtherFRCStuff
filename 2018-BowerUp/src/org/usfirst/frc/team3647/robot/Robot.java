@@ -87,6 +87,9 @@ public class Robot extends IterativeRobot {
 			joy.updateControllers();
 			Drivetrain.arcadeDrive(Encoders.leftEncoderValue, Encoders.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
 			Encoders.testEncoders();
+			oof.b(joy.rightTrigger1, joy.leftTrigger1);
+			Shifter.runPiston(joy.buttonA1);
+			Intake.runIntake(joy.buttonB1);
 			//intakeWheels.run(joy.leftTrigger, joy.rightTrigger);
 //			Shifter.runPiston(joy.buttonA);
 //			Intake.runIntake(joy.buttonB);

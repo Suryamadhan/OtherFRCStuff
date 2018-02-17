@@ -12,15 +12,30 @@ public class oof
 	
 	public static DigitalInput bannerSensor = new DigitalInput(0); 
 	
-	public static void b(double yes, double no)
+	public static void b(double lTrigger, double rTrigger)
 	{
-		rightIntakeMotor.set(ControlMode.PercentOutput, no);
-		leftIntakeMotor.set(ControlMode.PercentOutput, yes );
+		if(lTrigger > 0)
+		{
+			rightIntakeMotor.set(ControlMode.PercentOutput, -lTrigger);
+			leftIntakeMotor.set(ControlMode.PercentOutput, -lTrigger);
+		}
+		else if(rTrigger > 0)
+		{
+			rightIntakeMotor.set(ControlMode.PercentOutput, rTrigger);
+			leftIntakeMotor.set(ControlMode.PercentOutput, rTrigger);
+		}
+		else
+		{
+			rightIntakeMotor.set(ControlMode.PercentOutput, 0);
+			leftIntakeMotor.set(ControlMode.PercentOutput, 0);
+		}
+			
+		
 	}
 	
 	public static void shootCube()
 	{
-		b(1, 1);
+		b(0, 1);
 	}
 	
 	public static void stopIntake()
@@ -30,7 +45,7 @@ public class oof
 	
 	public static void pickUpCube()
 	{
-		b(-1, -1);
+		b(1, 0);
 	}
 	
 }
