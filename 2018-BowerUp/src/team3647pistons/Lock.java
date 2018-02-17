@@ -1,11 +1,12 @@
 package team3647pistons;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 
 public class Lock 
 {
 	//Double Pistons
-	boolean IQ2 = false;
+	static boolean IQ2 = false;
 	public static Solenoid piston = new Solenoid(5);
 	
 	public static void lock()
@@ -33,4 +34,5 @@ public class Lock
 				IQ2 = true;
 			}
 		}
+	}
 }
