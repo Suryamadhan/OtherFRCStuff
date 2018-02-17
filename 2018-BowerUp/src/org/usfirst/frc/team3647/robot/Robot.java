@@ -85,11 +85,15 @@ public class Robot extends IterativeRobot {
 			CrashChecker.logTeleopPeriodic();
 			enc.setEncoderValues();
 			joy.updateControllers();
+			eleVader.setElevatorEncoder();
 			Drivetrain.arcadeDrive(Encoders.leftEncoderValue, Encoders.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
 			Encoders.testEncoders();
 			oof.b(joy.rightTrigger1, joy.leftTrigger1);
 			Shifter.runPiston(joy.buttonA1);
 			Intake.runIntake(joy.buttonB1);
+			Elevator.setElevatorButtons(joy.buttonA1, joy.buttonB1, joy.leftBumper1,  joy.rightBumper1);
+			Elevator.setManualOverride(joy.rightJoySticky * .4);
+			Elevator.runElevator();
 			//intakeWheels.run(joy.leftTrigger, joy.rightTrigger);
 //			Shifter.runPiston(joy.buttonA);
 //			Intake.runIntake(joy.buttonB);
