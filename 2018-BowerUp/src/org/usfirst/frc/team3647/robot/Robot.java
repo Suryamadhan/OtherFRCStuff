@@ -50,7 +50,7 @@ public class Robot extends IterativeRobot {
 		try 
 		{
 			CrashChecker.logAutoInit();
-			NewAutos.initialize();
+			//NewAutos.initialize();
 		}
 		catch(Throwable t)
 		{
@@ -66,7 +66,6 @@ public class Robot extends IterativeRobot {
 		{
 			enc.setEncoderValues();
 			eleVader.setElevatorEncoder();
-			NewAutos.testDrift(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 //			Auto.testB(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 		}
 	}
@@ -90,11 +89,11 @@ public class Robot extends IterativeRobot {
 			//oof.b(joy.rightTrigger1, joy.leftTrigger1);
 			Clamps.runPiston(joy.leftBumper1);
 			intakeMechanism.runIntake(joy.rightBumper1);
-			Elevator.moveEleVader(joy.rightJoySticky1 * 0.4);
+			//Elevator.moveEleVader(joy.rightJoySticky1 * 0.4);
 			//System.out.println(joy.rightBumper1);
-			//Elevator.setElevatorButtons(joy.buttonA1, joy.buttonB1, joy.buttonY1,  joy.buttonX1);
-			//Elevator.setManualOverride(joy.rightJoySticky1 * .4);
-			//Elevator.runElevator();
+			Elevator.setElevatorButtons(joy.buttonA1, joy.buttonB1, joy.buttonY1,  joy.buttonX1);
+			Elevator.setManualOverride(joy.rightJoySticky1 * .4);
+			Elevator.runElevator();
 			//intakeWheels.run(joy.leftTrigger, joy.rightTrigger);
 //			Shifter.runPiston(joy.buttonA);
 //			Intake.runIntake(joy.buttonB);
@@ -117,13 +116,14 @@ public class Robot extends IterativeRobot {
 		enc.setEncoderValues();
 		//Encoders.testEncoders();
 		joy.updateControllers();
-		Drivetrain.drive.arcadeDrive(joy.leftJoySticky, joy.rightJoyStickx, false);
+		//Drivetrain.drive.arcadeDrive(joy.leftJoySticky, joy.rightJoyStickx, false);
 		//Drivetrain.tankDrive(joy.leftJoySticky, joy.rightJoySticky);
 		eleVader.setElevatorEncoder();
-		//Elevator.moveEleVader(joy.rightJoySticky * .4);
-		//ElevatorLevel.testElevatorEncoders();
-		Encoders.testEncoders();
-		//System.out.println(ElevatorLevel.reachedStop());
+		Shifter.runPiston(joy.buttonY1);
+		Elevator.moveEleVader(joy.rightJoySticky1 * 0.4);		//Elevator.moveEleVader(joy.rightJoySticky * .4);
+		ElevatorLevel.testElevatorEncoders();
+		//Encoders.testEncoders();
+		System.out.println(ElevatorLevel.reachedStop());
 		//oof.b(joy.rightJoySticky);
 		if(joy.buttonA)
 		{
