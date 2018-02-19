@@ -1,6 +1,7 @@
 package team3647pistons;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Timer;
 
 public class Shifter 
 {
@@ -8,12 +9,12 @@ public class Shifter
 	
 		public static DoubleSolenoid piston = new DoubleSolenoid(1,0);
 		
-		public static void intakeTitled()
+		public static void Shifted()
 		{
 			piston.set(DoubleSolenoid.Value.kForward);
 		}
 		
-		public static void intakeNotTitled()
+		public static void notShifted()
 		{
 			piston.set(DoubleSolenoid.Value.kReverse);
 		}
@@ -22,11 +23,16 @@ public class Shifter
 		{
 			if(joyValue)
 			{
-				intakeTitled();
-			}
-			else
-			{
-				intakeNotTitled();
+				if(piston.get() == DoubleSolenoid.Value.kReverse)
+				{
+					Shifted();
+					Timer.delay(.75);
+				}
+				else
+				{
+					notShifted();
+					Timer.delay(.75);
+				}
 			}
 		}	
 }
