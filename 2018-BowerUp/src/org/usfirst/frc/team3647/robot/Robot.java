@@ -50,7 +50,7 @@ public class Robot extends IterativeRobot {
 		try 
 		{
 			CrashChecker.logAutoInit();
-			//NewAutos.initialize();
+			NewAutos.initialize();
 		}
 		catch(Throwable t)
 		{
@@ -66,6 +66,7 @@ public class Robot extends IterativeRobot {
 		{
 			enc.setEncoderValues();
 			eleVader.setElevatorEncoder();
+			NewAutos.testDrift(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 //			Auto.testB(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 		}
 	}
