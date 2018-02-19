@@ -92,9 +92,10 @@ public class Functions
 //		eValue/=2;
 //		speed = sinx(eValue);
 //		return speed;
-		eValue*=(-0.0000666666666667);
-		eValue+=.8;
-		return eValue;
+//		eValue*=(-0.0000666666666667);
+//		eValue+=.8;
+//		return eValue;
+		return .4;
 		//.8 to .2
 		
 	}
