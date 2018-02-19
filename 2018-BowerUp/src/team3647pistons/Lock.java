@@ -2,37 +2,38 @@ package team3647pistons;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Timer;
 
 public class Lock 
 {
 	//Double Pistons
-	static boolean IQ2 = false;
 	public static Solenoid piston = new Solenoid(5);
-	
+		
 	public static void lock()
 	{
 		piston.set(true);
 	}
-	
+		
 	public static void unLock()
 	{
 		piston.set(false);
 	}
-	
+		
 	public static void runPiston(boolean joyValue)
 	{
 		if(joyValue)
 		{
-			if(!IQ2)
+			if(!piston.get())
 			{
 				lock();
-				IQ2 = false;
+				Timer.delay(.75);
 			}
 			else
 			{
 				unLock();
-				IQ2 = true;
+				Timer.delay(.75);
 			}
 		}
 	}
 }
+
