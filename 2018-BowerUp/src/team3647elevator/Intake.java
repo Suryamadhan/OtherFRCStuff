@@ -11,39 +11,39 @@ public class Intake
 	
 //	public static DigitalInput bannerSensor = new DigitalInput(99); 
 	
-//	public static void b(double lTrigger, double rTrigger)
-//	{
-//		if(lTrigger > 0)
-//		{
-//			rightIntakeMotor.set(ControlMode.PercentOutput, -lTrigger);
-//			leftIntakeMotor.set(ControlMode.PercentOutput, -lTrigger);
-//		}
-//		else if(rTrigger > 0)
-//		{
-//			rightIntakeMotor.set(ControlMode.PercentOutput, rTrigger);
-//			leftIntakeMotor.set(ControlMode.PercentOutput, rTrigger);
-//		}
-//		else
-//		{
-//			rightIntakeMotor.set(ControlMode.PercentOutput, 0);
-//			leftIntakeMotor.set(ControlMode.PercentOutput, 0);
-//		}
-//			
-//		
-//	}
-//	
-//	public static void shootCube()
-//	{
-//		b(0, 1);
-//	}
-//	
-//	public static void stopIntake()
-//	{
-//		b(0, 0);
-//	}
-//	
-//	public static void pickUpCube()
-//	{
-//		b(1, 0);
-//	}
+	public static void b(double lTrigger, double rTrigger)
+	{
+		if(lTrigger > 0)
+		{
+			rightIntakeMotor.set(ControlMode.PercentOutput, -lTrigger);
+			leftIntakeMotor.set(ControlMode.PercentOutput, -lTrigger);
+		}
+		else if(rTrigger > 0)
+		{
+			rightIntakeMotor.set(ControlMode.PercentOutput, rTrigger);
+			leftIntakeMotor.set(ControlMode.PercentOutput, rTrigger);
+		}
+		else
+		{
+			rightIntakeMotor.set(ControlMode.PercentOutput, 0);
+			leftIntakeMotor.set(ControlMode.PercentOutput, 0);
+		}
+			
+		
+	}
+	
+	public static void shootCube()
+	{
+		b(0, 1);
+	}
+	
+	public static void stopIntake()
+	{
+		b(0, 0);
+	}
+	
+	public static void pickUpCube()
+	{
+		b(1, 0);
+	}
 }
