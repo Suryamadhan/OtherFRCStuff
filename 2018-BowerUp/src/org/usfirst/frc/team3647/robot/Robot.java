@@ -120,6 +120,8 @@ public class Robot extends IterativeRobot {
 		Elevator.setManualOverride(joy.rightJoySticky * .4);
 		Elevator.runElevator();
 		
+		System.out.println("CurrentState: " + Elevator.elevatorState + "; Supposed-State: " + Elevator.aimedElevatorState);
+		
 //		joy.updateControllers();
 //		Elevator.moveEleVader(joy.rightJoySticky * 0.4);	
 //		System.out.println(joy.rightJoySticky);

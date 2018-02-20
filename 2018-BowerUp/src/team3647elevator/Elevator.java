@@ -17,7 +17,7 @@ public class Elevator
 	 * 3. Switch
 	 * 4. Scale
 	 */
-	static int aimedElevatorState;
+	public static int aimedElevatorState;
 	
 	public static boolean stop, pickUp, sWitch, scale, moving, manualOverride, originalPositionButton;
 	static double overrideValue;
