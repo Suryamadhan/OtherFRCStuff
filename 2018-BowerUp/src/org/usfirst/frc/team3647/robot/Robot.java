@@ -114,26 +114,30 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void testPeriodic() 
 	{
-		yayt.setSafetyEnabled(false);
-		enc.setEncoderValues();
-		//Encoders.testEncoders();
 		joy.updateControllers();
-		//Drivetrain.drive.arcadeDrive(joy.leftJoySticky, joy.rightJoyStickx, false);
-		//Drivetrain.tankDrive(joy.leftJoySticky, joy.rightJoySticky);
-		eleVader.setElevatorEncoder();
-		Shifter.runPiston(joy.buttonY1);
-		Elevator.moveEleVader(joy.rightJoySticky1 * 0.4);		//Elevator.moveEleVader(joy.rightJoySticky * .4);
-		ElevatorLevel.testElevatorEncoders();
-		//Encoders.testEncoders();
-		System.out.println(ElevatorLevel.reachedStop());
-		//oof.b(joy.rightJoySticky);
-		if(joy.buttonA)
-		{
-			Encoders.resetEncoders();
-		}
-//		oof.b(joy.leftJoySticky, joy.rightJoySticky);
-//		Intake.runIntake(joy.buttonA);
-//	}
+		Elevator.moveEleVader(joy.rightJoySticky * 0.4);	
+		System.out.println(joy.rightJoySticky);
+		
+//		yayt.setSafetyEnabled(false);
+//		enc.setEncoderValues();
+//		//Encoders.testEncoders();
+//		joy.updateControllers();
+//		//Drivetrain.drive.arcadeDrive(joy.leftJoySticky, joy.rightJoyStickx, false);
+//		//Drivetrain.tankDrive(joy.leftJoySticky, joy.rightJoySticky);
+//		eleVader.setElevatorEncoder();
+//		Shifter.runPiston(joy.buttonY1);
+//		Elevator.moveEleVader(joy.rightJoySticky1 * 0.4);		//Elevator.moveEleVader(joy.rightJoySticky * .4);
+//		ElevatorLevel.testElevatorEncoders();
+//		//Encoders.testEncoders();
+//		System.out.println(ElevatorLevel.reachedStop());
+//		//oof.b(joy.rightJoySticky);
+//		if(joy.buttonA)
+//		{
+//			Encoders.resetEncoders();
+//		}
+////		oof.b(joy.leftJoySticky, joy.rightJoySticky);
+////		Intake.runIntake(joy.buttonA);
+////	}
 	}
 	
 	public void runVader()
