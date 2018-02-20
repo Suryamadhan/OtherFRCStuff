@@ -17,6 +17,7 @@ public class NewFunctions
 	public static double lslscfstraight = 210;
 	public static double lslscfbigTurn = 111.526539202;
 	public static double lslscfsmallTurn = 62.8318530718;
+	public static double lslscffirstTurnRatio = 1.775;
 	
 	public static double[] goStraight(double lValue, double rValue)
 	{
@@ -459,6 +460,15 @@ public class NewFunctions
 		avg*=(-0.00214285714286);
 		avg+=.9;
 		return avg;
+		//.9 to .45
+	}
+	
+	public static double lslscfBigTurnSpeed(double lValue)
+	{
+		lValue*=(-0.00358659026687);
+		lValue+=.7;
+		return lValue;
+		//.7 to .3
 	}
 	
 	

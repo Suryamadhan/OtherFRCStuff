@@ -115,17 +115,18 @@ public class Functions
 //		{
 //			return switchToScale(eValue);
 //		}
-		if(eValue < Constants.sWitch)
-		{
-			return 1;
-		}
-		else
-		{
-			eValue*=(-0.0000333333333333);
-			eValue+=1.2;
-			return eValue;
-			//.9 to .2
-		}
+//		if(eValue < Constants.sWitch)
+//		{
+//			return 1;
+//		}
+//		else
+//		{
+//			eValue*=(-0.0000333333333333);
+//			eValue+=1.2;
+//			return eValue;
+//			//.9 to .2
+//		}
+		return .4;
 	}
 	
 	public static double pickUpToStop(double eValue)
@@ -140,9 +141,10 @@ public class Functions
 //		eValue/=2;
 //		speed = sinx(eValue);
 //		return speed;
-		eValue*=(-0.0000625);
-		eValue+=.763;
-		return eValue;
+//		eValue*=(-0.0000625);
+//		eValue+=.763;
+//		return eValue;
+		return .3;
 		//.7 to .2
 	}
 	
@@ -153,9 +155,10 @@ public class Functions
 //		eValue/=2;
 //		speed = sinx(eValue);
 //		return speed;
-		eValue*=(-0.0000224137931034);
-		eValue+=.87;
-		return eValue;
+//		eValue*=(-0.0000224137931034);
+//		eValue+=.87;
+//		return eValue;
+		return .4;
 		//.85 to 2
 	}
 	
@@ -171,9 +174,10 @@ public class Functions
 	
 	public static double switchToScale(double eValue)//
 	{
-		eValue*=(-0.0000285714285714);
-		eValue+=1.057;
-		return eValue;
+//		eValue*=(-0.0000285714285714);
+//		eValue+=1.057;
+//		return eValue;
+		return .4;
 		//.8 to .2
 	}
 	

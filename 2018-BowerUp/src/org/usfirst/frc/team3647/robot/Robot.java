@@ -114,9 +114,14 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void testPeriodic() 
 	{
-		joy.updateControllers();
-		Elevator.moveEleVader(joy.rightJoySticky * 0.4);	
-		System.out.println(joy.rightJoySticky);
+		eleVader.setElevatorEncoder();
+		Elevator.setElevatorButtons(joy.buttonA, joy.buttonB, joy.buttonY,  joy.buttonX);
+		Elevator.setManualOverride(joy.rightJoySticky * .4);
+		Elevator.runElevator();
+		
+//		joy.updateControllers();
+//		Elevator.moveEleVader(joy.rightJoySticky * 0.4);	
+//		System.out.println(joy.rightJoySticky);
 		
 //		yayt.setSafetyEnabled(false);
 //		enc.setEncoderValues();
@@ -139,6 +144,7 @@ public class Robot extends IterativeRobot {
 ////		Intake.runIntake(joy.buttonA);
 ////	}
 	}
+	
 	
 	public void runVader()
 	{

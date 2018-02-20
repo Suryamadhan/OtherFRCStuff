@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3647.robot;
 
 import edu.wpi.first.wpilibj.Timer;
+import team3647ConstantsAndFunctions.Constants;
 import team3647ConstantsAndFunctions.Functions;
 import team3647ConstantsAndFunctions.NewFunctions;
 import team3647elevator.Elevator;
@@ -12,7 +13,7 @@ import team3647subsystems.Encoders;
 public class NewAutos 
 {
 	static int currentState;
-	static double lSSpeed, rSSpeed;
+	static double lSSpeed, rSSpeed, adjustmentConstant;
 	static double []adjustmentValues = new double[2];
 	static double prevLeftEncoder, prevRightEncoder;
 	
@@ -21,7 +22,7 @@ public class NewAutos
 		switch(currentState)
 		{
 			case 0:
-				if(lValue == 0 && rValue == 0)
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
 				{
 					Elevator.stopEleVader();
 					ElevatorLevel.resetElevatorEncoders();
@@ -30,17 +31,13 @@ public class NewAutos
 				else
 				{
 					Encoders.resetEncoders();
+					Elevator.moveEleVader(-.2);
 				}
 				break;
 			case 1:
-				if(lValue < 20)
-				{
-					Drivetrain.drive.tankDrive(.9, .9, false);
-				}
-				else
-				{
-					currentState = 2;
-				}
+				Drivetrain.drive.tankDrive(.9, .9, false);
+				Timer.delay(2.5);
+				currentState = 2;
 				break;
 			case 2:
 				Drivetrain.stop();
@@ -302,7 +299,61 @@ public class NewAutos
 				}
 				break;
 			case 2:
-				
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				if(!Drivetrain.reachedTurnDistance(lValue+rValue, NewFunctions.lslscfbigTurn, NewFunctions.lslscfsmallTurn))
+				{
+					lSSpeed = NewFunctions.lslscfBigTurnSpeed(lValue);
+					rSSpeed = lSSpeed/NewFunctions.lslscffirstTurnRatio;
+					adjustmentConstant = Constants.adjustmentConstant(lSSpeed);
+					Drivetrain.goStraightRight(lValue, rValue, NewFunctions.lslscfbigTurn, NewFunctions.lslscfsmallTurn, lSSpeed, rSSpeed, adjustmentConstant);
+				}
+				else
+				{
+					currentState = 3;
+				}
+				break;
+			case 3:
+				Drivetrain.stop();
+				if(lValue == 0 && rValue == 0)
+				{
+					currentState = 4;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+				}
+				break;
+			case 4:
+				if(ElevatorLevel.reachedSwitch())
+				{
+					Elevator.stopEleVader();
+					currentState = 5;
+				}
+				else
+				{
+					Elevator.moveEleVader(.4);
+				}
+				break;
+			case 5:
+				Intake.shootCube();
+				Timer.delay(1);
+				currentState = 6;
+//				if(Intake.bannerSensor.get())
+//				{
+//					Intake.shootCube();
+//				}
+//				else
+//				{
+//					Timer.delay(.4);
+//					oof.stopIntake();
+//					currentState = 6;
+//				}
+				break;
+			case 6:
+				Intake.stopIntake();
+				Elevator.stopEleVader();
+				Drivetrain.stop();
 				break;
 		}
 	}
