@@ -41,7 +41,7 @@ public class Elevator
 	
 	public static void stopEleVader()
 	{
-		elevatorDrive.tankDrive(0, 0, false);
+		moveEleVader(0);
 	}
 	
 	public static void setElevatorButtons(boolean stopButton, boolean pickUpButton, boolean switchButton, boolean scaleButton)
@@ -54,7 +54,7 @@ public class Elevator
 	
 	public static void setManualOverride(double jValue)
 	{
-		if(jValue == 0)
+		if(Math.abs(jValue) >.2 )
 		{
 			manualOverride = false;
 		}
@@ -64,6 +64,503 @@ public class Elevator
 			manualOverride = true;
 		}
 	}
+	
+	public static void runDarthVader()
+	{
+		switch(elevatorState)
+		{
+			case 0://start
+				if(ElevatorLevel.reachedStop())
+				{
+					stopEleVader();
+					aimedElevatorState = 1;
+					elevatorState = 1;
+				}
+				else
+				{
+					moveEleVader(-.2);
+				}
+				break;
+			case 1://stop
+				if(manualOverride)
+				{
+					aimedElevatorState = -1;
+				}
+				else if(stop)
+				{
+					aimedElevatorState = 1;
+					originalPositionButton = true;
+				}
+				else if(pickUp)
+				{
+					aimedElevatorState = 2;
+					originalPositionButton = false;
+				}
+				else if(sWitch)
+				{
+					aimedElevatorState = 3;
+					originalPositionButton = false;
+				}
+				else if(scale)
+				{
+					aimedElevatorState = 4;
+					originalPositionButton = false;
+				}
+				switch(aimedElevatorState)
+				{
+					case 1:
+						if(originalPositionButton)
+						{
+							if(ElevatorLevel.reachedStop())
+							{
+								stopEleVader();
+								originalPositionButton = false;
+							}
+							else
+							{
+								moveEleVader(-.2);//
+							}
+						}
+						else
+						{
+							stopEleVader();
+						}
+						break;
+					case 2:
+						if(ElevatorLevel.reachedPickUp())
+						{
+							stopEleVader();
+							elevatorState = 2;
+						}
+						else
+						{
+							moveEleVader(.25);//
+						}
+						break;
+					case 3:
+						if(ElevatorLevel.reachedSwitch())
+						{
+							stopEleVader();
+							elevatorState = 3;
+						}
+						else
+						{
+							moveEleVader(.4);//
+						}
+						break;
+					case 4:
+						if(ElevatorLevel.reachedScale())
+						{
+							stopEleVader();
+							elevatorState = 4;
+						}
+						else
+						{
+							moveEleVader(.5);//
+						}
+						break;
+					case -1:
+						elevatorState = -1;
+						break;
+				}
+				break;
+			case 2://pickup
+				if(manualOverride)
+				{
+					aimedElevatorState = -1;
+				}
+				else if(stop)
+				{
+					aimedElevatorState = 1;
+					originalPositionButton = false;
+				}
+				else if(pickUp)
+				{
+					aimedElevatorState = 2;
+					originalPositionButton = true;
+				}
+				else if(sWitch)
+				{
+					aimedElevatorState = 3;
+					originalPositionButton = false;
+				}
+				else if(scale)
+				{
+					aimedElevatorState = 4;
+					originalPositionButton = false;
+				}
+				switch(aimedElevatorState)
+				{
+					case 1:
+						if(ElevatorLevel.reachedStop())
+						{
+							stopEleVader();
+							elevatorState = 1;
+						}
+						else
+						{
+							moveEleVader(-.2);//
+						}
+						break;
+					case 2:
+						if(originalPositionButton)
+						{
+							if(ElevatorLevel.reachedPickUp())
+							{
+								stopEleVader();
+								originalPositionButton = false;
+							}
+							else
+							{
+								if(ElevatorLevel.elevatorEncoderValue > Constants.pickUp)
+								{
+									moveEleVader(-.2);//
+								}
+								else
+								{
+									moveEleVader(.2);//
+								}
+								
+							}
+						}
+						break;
+					case 3:
+						if(ElevatorLevel.reachedSwitch())
+						{
+							stopEleVader();
+							elevatorState = 3;
+						}
+						else
+						{
+							moveEleVader(.35);//
+						}
+						break;
+					case 4:
+						if(ElevatorLevel.reachedScale())
+						{
+							stopEleVader();
+							elevatorState = 4;
+						}
+						else
+						{
+							moveEleVader(.45);//
+						}
+						break;
+					case -1:
+						elevatorState = -1;
+						break;
+				}
+				break;
+			case 3:
+				if(manualOverride)
+				{
+					aimedElevatorState = -1;
+				}
+				else if(stop)
+				{
+					aimedElevatorState = 1;
+					originalPositionButton = false;
+				}
+				else if(pickUp)
+				{
+					aimedElevatorState = 2;
+					originalPositionButton = false;
+				}
+				else if(sWitch)
+				{
+					aimedElevatorState = 3;
+					originalPositionButton = true;
+				}
+				else if(scale)
+				{
+					aimedElevatorState = 4;
+					originalPositionButton = false;
+				}
+				switch(aimedElevatorState)
+				{
+					case 1:
+						if(ElevatorLevel.reachedStop())
+						{
+							stopEleVader();
+							elevatorState = 1;
+						}
+						else
+						{
+							moveEleVader(-.2);//
+						}
+						break;
+					case 2:
+						if(ElevatorLevel.reachedPickUp())
+						{
+							stopEleVader();
+							elevatorState = 2;
+						}
+						else
+						{
+							moveEleVader(-.2);//
+						}
+						
+						break;
+					case 3:
+						if(originalPositionButton)
+						{
+							if(ElevatorLevel.reachedSwitch())
+							{
+								stopEleVader();
+								originalPositionButton = false;
+							}
+							else
+							{
+								if(ElevatorLevel.elevatorEncoderValue > Constants.sWitch)
+								{
+									moveEleVader(-.2);//
+								}
+								else
+								{
+									moveEleVader(.25);//
+								}
+								
+							}
+						}
+						break;
+					case 4:
+						if(ElevatorLevel.reachedScale())
+						{
+							stopEleVader();
+							elevatorState = 4;
+						}
+						else
+						{
+							moveEleVader(.4);//
+						}
+						break;
+					case -1:
+						elevatorState = -1;
+						break;
+				}
+				break;
+			case 4:
+				if(manualOverride)
+				{
+					aimedElevatorState = -1;
+				}
+				else if(stop)
+				{
+					aimedElevatorState = 1;
+					originalPositionButton = false;
+				}
+				else if(pickUp)
+				{
+					aimedElevatorState = 2;
+					originalPositionButton = false;
+				}
+				else if(sWitch)
+				{
+					aimedElevatorState = 3;
+					originalPositionButton = false;
+				}
+				else if(scale)
+				{
+					aimedElevatorState = 4;
+					originalPositionButton = true;
+				}
+				switch(aimedElevatorState)
+				{
+					case 1:
+						if(ElevatorLevel.reachedStop())
+						{
+							stopEleVader();
+							elevatorState = 1;
+						}
+						else
+						{
+							moveEleVader(-.2);//
+						}
+						break;
+					case 2:
+						if(ElevatorLevel.reachedPickUp())
+						{
+							stopEleVader();
+							elevatorState = 2;
+						}
+						else
+						{
+							moveEleVader(-.3);//
+						}
+						
+						break;
+					case 3:
+						if(ElevatorLevel.reachedSwitch())
+						{
+							stopEleVader();
+							elevatorState = 3;
+						}
+						else
+						{
+							moveEleVader(-.25);//
+						}
+						break;
+					case 4:
+						if(originalPositionButton)
+						{
+							if(ElevatorLevel.reachedSwitch())
+							{
+								stopEleVader();
+								originalPositionButton = false;
+							}
+							else
+							{
+								if(ElevatorLevel.elevatorEncoderValue > Constants.scale)
+								{
+									moveEleVader(-.1);//
+								}
+								else
+								{
+									moveEleVader(.25);//
+								}
+								
+							}
+						}
+						break;
+					case -1:
+						elevatorState = -1;
+						break;
+				}
+				break;
+			case -1:
+				if(stop || pickUp || sWitch || scale)
+				{
+					if(stop)
+					{
+						if(ElevatorLevel.reachedStop())
+						{
+							ElevatorLevel.resetElevatorEncoders();
+							elevatorState = 1;
+							aimedElevatorState = 1;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= 0 && ElevatorLevel.elevatorEncoderValue < Constants.pickUp)
+						{
+							elevatorState = 1;
+							aimedElevatorState = 1;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= Constants.pickUp && ElevatorLevel.elevatorEncoderValue < Constants.sWitch)
+						{
+							elevatorState = 2;
+							aimedElevatorState = 1;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= Constants.sWitch && ElevatorLevel.elevatorEncoderValue < Constants.scale)
+						{
+							elevatorState = 3;
+							aimedElevatorState = 1;
+						}
+						else
+						{
+							elevatorState = 4;
+							aimedElevatorState = 1;
+						}	
+					}
+					else if(pickUp)
+					{
+						if(ElevatorLevel.reachedStop())
+						{
+							ElevatorLevel.resetElevatorEncoders();
+							elevatorState = 1;
+							aimedElevatorState = 2;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= 0 && ElevatorLevel.elevatorEncoderValue < Constants.pickUp)
+						{
+							elevatorState = 1;
+							aimedElevatorState = 2;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= Constants.pickUp && ElevatorLevel.elevatorEncoderValue < Constants.sWitch)
+						{
+							elevatorState = 2;
+							aimedElevatorState = 2;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= Constants.sWitch && ElevatorLevel.elevatorEncoderValue < Constants.scale)
+						{
+							elevatorState = 3;
+							aimedElevatorState = 2;
+						}
+						else
+						{
+							elevatorState = 4;
+							aimedElevatorState = 2;
+						}
+					}
+					else if(sWitch)
+					{
+						if(ElevatorLevel.reachedStop())
+						{
+							ElevatorLevel.resetElevatorEncoders();
+							elevatorState = 1;
+							aimedElevatorState = 3;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= 0 && ElevatorLevel.elevatorEncoderValue < Constants.pickUp)
+						{
+							elevatorState = 1;
+							aimedElevatorState = 3;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= Constants.pickUp && ElevatorLevel.elevatorEncoderValue < Constants.sWitch)
+						{
+							elevatorState = 2;
+							aimedElevatorState = 3;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= Constants.sWitch && ElevatorLevel.elevatorEncoderValue < Constants.scale)
+						{
+							elevatorState = 3;
+							aimedElevatorState = 3;
+						}
+						else
+						{
+							elevatorState = 4;
+							aimedElevatorState = 3;
+						}
+					}
+					else if(scale)
+					{
+						if(ElevatorLevel.reachedStop())
+						{
+							ElevatorLevel.resetElevatorEncoders();
+							elevatorState = 1;
+							aimedElevatorState = 4;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= 0 && ElevatorLevel.elevatorEncoderValue < Constants.pickUp)
+						{
+							elevatorState = 1;
+							aimedElevatorState = 4;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= Constants.pickUp && ElevatorLevel.elevatorEncoderValue < Constants.sWitch)
+						{
+							elevatorState = 2;
+							aimedElevatorState = 4;
+						}
+						else if(ElevatorLevel.elevatorEncoderValue >= Constants.sWitch && ElevatorLevel.elevatorEncoderValue < Constants.scale)
+						{
+							elevatorState = 3;
+							aimedElevatorState = 4;
+						}
+						else
+						{
+							elevatorState = 4;
+							aimedElevatorState = 4;
+						}
+					}
+					else
+					{
+						elevatorState = -1;
+						aimedElevatorState = -1;
+					}
+				}
+				else
+				{
+					moveEleVader(overrideValue);
+				}
+				break;
+		}
+	}
+	
+	
 	
 	
 	
