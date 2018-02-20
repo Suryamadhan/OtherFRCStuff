@@ -201,7 +201,7 @@ public class Elevator
 						{
 							if(ElevatorLevel.elevatorEncoderValue > Constants.pickUp)
 							{
-								moveEleVader(-.2);//
+								moveEleVader(-.1);//
 							}
 							else
 							{
@@ -297,7 +297,7 @@ public class Elevator
 						{
 							if(ElevatorLevel.elevatorEncoderValue > Constants.sWitch)
 							{
-								moveEleVader(-.2);//
+								moveEleVader(-.1);//
 							}
 							else
 							{
