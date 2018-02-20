@@ -54,7 +54,7 @@ public class Elevator
 	
 	public static void setManualOverride(double jValue)
 	{
-		if(Math.abs(jValue) >.2 )
+		if(Math.abs(jValue) <.2 )
 		{
 			manualOverride = false;
 		}

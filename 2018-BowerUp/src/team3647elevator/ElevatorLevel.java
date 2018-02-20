@@ -43,7 +43,7 @@ public class ElevatorLevel
 	
 	public static boolean reachedPickUp()
 	{
-		if(elevatorEncoderValue > Constants.pickUp - 700 && elevatorEncoderValue < Constants.pickUp + 700)
+		if(elevatorEncoderValue > Constants.pickUp - 1000 && elevatorEncoderValue < Constants.pickUp + 1000)
 		{
 			return true;
 		}
@@ -55,7 +55,7 @@ public class ElevatorLevel
 	
 	public static boolean reachedSwitch()
 	{
-		if(elevatorEncoderValue > Constants.sWitch - 700 && elevatorEncoderValue < Constants.sWitch + 700)
+		if(elevatorEncoderValue > Constants.sWitch - 1000 && elevatorEncoderValue < Constants.sWitch + 1000)
 		{
 			return true;
 		}
@@ -67,7 +67,7 @@ public class ElevatorLevel
 	
 	public static boolean reachedScale()
 	{
-		if(elevatorEncoderValue > Constants.scale - 700 && elevatorEncoderValue < Constants.scale + 700)
+		if(elevatorEncoderValue > Constants.scale - 1000 && elevatorEncoderValue < Constants.scale + 1000)
 		{
 			return true;
 		}

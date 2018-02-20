@@ -118,12 +118,12 @@ public class Robot extends IterativeRobot {
 		eleVader.setElevatorEncoder();
 		Elevator.setElevatorButtons(joy.buttonA, joy.buttonB, joy.buttonY,  joy.buttonX);
 		Elevator.setManualOverride(joy.rightJoySticky * .4);
-		Elevator.runElevator();
+		Elevator.runDarthVader();
 		
 		System.out.println("CurrentState: " + Elevator.elevatorState + "; Supposed-State: " + Elevator.aimedElevatorState);
 		
 //		joy.updateControllers();
-//		Elevator.moveEleVader(joy.rightJoySticky * 0.4);	
+		//Elevator.moveEleVader(joy.rightJoySticky * 0.4);	
 //		System.out.println(joy.rightJoySticky);
 		
 //		yayt.setSafetyEnabled(false);
