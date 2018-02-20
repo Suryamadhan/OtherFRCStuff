@@ -133,8 +133,8 @@ public class Functions
 		}
 		else
 		{
-			eValue*=(-0.000025);
-			eValue+=1.15;
+			eValue*=(-0.000019696969697);
+			eValue+=1.1;
 			return eValue;
 			//.9 to .25
 		}
