@@ -92,10 +92,9 @@ public class Functions
 //		eValue/=2;
 //		speed = sinx(eValue);
 //		return speed;
-//		eValue*=(-0.0000666666666667);
-//		eValue+=.8;
-//		return eValue;
-		return .4;
+		eValue*=(-0.00006);
+		eValue+=.8;
+		return eValue;
 		//.8 to .2
 		
 	}
@@ -124,9 +123,21 @@ public class Functions
 //			eValue*=(-0.0000333333333333);
 //			eValue+=1.2;
 //			return eValue;
-//			//.9 to .2
+//			//.9 to .25
 //		}
-		return .4;
+//		return .4;
+		
+		if(eValue < Constants.sWitch)
+		{
+			return 1;
+		}
+		else
+		{
+			eValue*=(-0.000025);
+			eValue+=1.15;
+			return eValue;
+			//.9 to .25
+		}
 	}
 	
 	public static double pickUpToStop(double eValue)

@@ -43,7 +43,7 @@ public class ElevatorLevel
 	
 	public static boolean reachedPickUp()
 	{
-		if(elevatorEncoderValue > Constants.pickUp - 1000 && elevatorEncoderValue < Constants.pickUp + 1000)
+		if(elevatorEncoderValue > Constants.pickUp - 1000 && elevatorEncoderValue < Constants.pickUp + 3000)
 		{
 			return true;
 		}

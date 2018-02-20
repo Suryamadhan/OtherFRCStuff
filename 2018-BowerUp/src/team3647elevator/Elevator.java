@@ -123,7 +123,8 @@ public class Elevator
 						}
 						else
 						{
-							moveEleVader(.25);//
+//							moveEleVader(.25);//
+							moveEleVader(Functions.stopToPickUp(ElevatorLevel.elevatorEncoderValue));
 						}
 						break;
 					case 3:
@@ -134,7 +135,8 @@ public class Elevator
 						}
 						else
 						{
-							moveEleVader(.4);//
+//							moveEleVader(.4);//
+							moveEleVader(Functions.stopToSwitch(ElevatorLevel.elevatorEncoderValue));
 						}
 						break;
 					case 4:
@@ -146,6 +148,7 @@ public class Elevator
 						else
 						{
 							moveEleVader(.5);//
+							moveEleVader(Functions.stopToScale(ElevatorLevel.elevatorEncoderValue));
 						}
 						break;
 					case -1:
