@@ -114,6 +114,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void testPeriodic() 
 	{
+		joy.updateControllers();
 		eleVader.setElevatorEncoder();
 		Elevator.setElevatorButtons(joy.buttonA, joy.buttonB, joy.buttonY,  joy.buttonX);
 		Elevator.setManualOverride(joy.rightJoySticky * .4);
