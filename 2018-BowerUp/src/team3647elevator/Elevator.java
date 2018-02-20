@@ -89,41 +89,30 @@ public class Elevator
 				else if(stop)
 				{
 					aimedElevatorState = 1;
-					originalPositionButton = true;
 				}
 				else if(pickUp)
 				{
 					aimedElevatorState = 2;
-					originalPositionButton = false;
 				}
 				else if(sWitch)
 				{
 					aimedElevatorState = 3;
-					originalPositionButton = false;
 				}
 				else if(scale)
 				{
 					aimedElevatorState = 4;
-					originalPositionButton = false;
 				}
 				switch(aimedElevatorState)
 				{
 					case 1:
-						if(originalPositionButton)
+						if(ElevatorLevel.reachedStop())
 						{
-							if(ElevatorLevel.reachedStop())
-							{
-								stopEleVader();
-								originalPositionButton = false;
-							}
-							else
-							{
-								moveEleVader(-.2);//
-							}
+							stopEleVader();
+							originalPositionButton = false;
 						}
 						else
 						{
-							stopEleVader();
+							moveEleVader(-.2);//
 						}
 						break;
 					case 2:
@@ -203,25 +192,22 @@ public class Elevator
 						}
 						break;
 					case 2:
-						if(originalPositionButton)
+						if(ElevatorLevel.reachedPickUp())
 						{
-							if(ElevatorLevel.reachedPickUp())
+							stopEleVader();
+							originalPositionButton = false;
+						}
+						else
+						{
+							if(ElevatorLevel.elevatorEncoderValue > Constants.pickUp)
 							{
-								stopEleVader();
-								originalPositionButton = false;
+								moveEleVader(-.2);//
 							}
 							else
 							{
-								if(ElevatorLevel.elevatorEncoderValue > Constants.pickUp)
-								{
-									moveEleVader(-.2);//
-								}
-								else
-								{
-									moveEleVader(.2);//
-								}
-								
+								moveEleVader(.2);//
 							}
+							
 						}
 						break;
 					case 3:
@@ -302,24 +288,20 @@ public class Elevator
 						
 						break;
 					case 3:
-						if(originalPositionButton)
+						if(ElevatorLevel.reachedSwitch())
 						{
-							if(ElevatorLevel.reachedSwitch())
+							stopEleVader();
+							originalPositionButton = false;
+						}
+						else
+						{
+							if(ElevatorLevel.elevatorEncoderValue > Constants.sWitch)
 							{
-								stopEleVader();
-								originalPositionButton = false;
+								moveEleVader(-.2);//
 							}
 							else
 							{
-								if(ElevatorLevel.elevatorEncoderValue > Constants.sWitch)
-								{
-									moveEleVader(-.2);//
-								}
-								else
-								{
-									moveEleVader(.25);//
-								}
-								
+								moveEleVader(.25);//
 							}
 						}
 						break;
@@ -401,25 +383,22 @@ public class Elevator
 						}
 						break;
 					case 4:
-						if(originalPositionButton)
+						if(ElevatorLevel.reachedSwitch())
 						{
-							if(ElevatorLevel.reachedSwitch())
+							stopEleVader();
+							originalPositionButton = false;
+						}
+						else
+						{
+							if(ElevatorLevel.elevatorEncoderValue > Constants.scale)
 							{
-								stopEleVader();
-								originalPositionButton = false;
+								moveEleVader(-.1);//
 							}
 							else
 							{
-								if(ElevatorLevel.elevatorEncoderValue > Constants.scale)
-								{
-									moveEleVader(-.1);//
-								}
-								else
-								{
-									moveEleVader(.25);//
-								}
-								
+								moveEleVader(.25);//
 							}
+							
 						}
 						break;
 					case -1:
@@ -554,6 +533,10 @@ public class Elevator
 				}
 				else
 				{
+					if(!manualOverride)
+					{
+						overrideValue = 0;
+					}
 					moveEleVader(overrideValue);
 				}
 				break;
@@ -1062,6 +1045,10 @@ public class Elevator
 				}
 				else
 				{
+					if(!manualOverride)
+					{
+						overrideValue = 0;
+					}
 					moveEleVader(overrideValue);
 				}
 				break;
