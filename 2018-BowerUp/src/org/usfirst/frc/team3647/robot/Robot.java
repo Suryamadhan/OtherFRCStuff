@@ -88,7 +88,7 @@ public class Robot extends IterativeRobot {
 			eleVader.setElevatorEncoder();
 			Drivetrain.arcadeDrive(Encoders.leftEncoderValue, Encoders.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
 			//oof.b(joy.rightTrigger1, joy.leftTrigger1);
-			Clamps.runPiston(joy.leftBumper1);
+			Shifter.runPiston(joy.leftBumper);
 			intakeMechanism.runIntake(joy.rightBumper1);
 			//Elevator.moveEleVader(joy.rightJoySticky1 * 0.4);
 			//System.out.println(joy.rightBumper1);
