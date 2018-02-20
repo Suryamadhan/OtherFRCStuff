@@ -127,16 +127,16 @@ public class Functions
 //		}
 //		return .4;
 		
-		if(eValue < Constants.sWitch)
+		if(eValue < 25000)
 		{
 			return 1;
 		}
 		else
 		{
-			eValue*=(-0.000019696969697);
-			eValue+=1.1;
+			eValue*=(-0.0000333333333333);
+			eValue+=1.683;
 			return eValue;
-			//.9 to .25
+			//.85 to .25
 		}
 	}
 	

@@ -10,7 +10,7 @@ import team3647elevator.Intake;
 import team3647subsystems.Drivetrain;
 import team3647subsystems.Encoders;
 
-public class NewAutos 
+public class Autonomous 
 {
 	static int currentState;
 	static double lSSpeed, rSSpeed, adjustmentConstant;

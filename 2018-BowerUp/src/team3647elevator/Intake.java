@@ -12,7 +12,7 @@ public class Intake
 	
 //	public static DigitalInput bannerSensor = new DigitalInput(99); 
 	
-	public static void b(double lTrigger, double rTrigger)
+	public static void runIntake(double lTrigger, double rTrigger)
 	{
 		if(lTrigger > 0)
 		{	
@@ -35,16 +35,16 @@ public class Intake
 	
 	public static void shootCube()
 	{
-		b(0, 1);
+		runIntake(0, 1);
 	}
 	
 	public static void stopIntake()
 	{
-		b(0, 0);
+		runIntake(0, 0);
 	}
 	
 	public static void pickUpCube()
 	{
-		b(1, 0);
+		runIntake(1, 0);
 	}
 }

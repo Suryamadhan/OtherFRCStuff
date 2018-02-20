@@ -15,11 +15,14 @@ public class Ramps
 	{
 		rampPiston.set(false);
 	}
-	public static void runPiston(boolean joyValue) {
-		if(joyValue) {
+	public static void runPiston(boolean joyValue) 
+	{
+		if(joyValue) 
+		{
 			turnOnRamps();
 		}
-		else {
+		else 
+		{
 			turnOffRamps();
 		}
 	}

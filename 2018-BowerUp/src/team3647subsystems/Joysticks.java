@@ -49,12 +49,6 @@ public class Joysticks
 		buttonX1 = mainController1.getRawButton(3);
 	}
 	
-	public void updateControllers()
-	{
-		setMainContollerValues();
-		setCoDriverContollerValues();
-	}
-	
 	public static double fixJoystickValue(double jValue)
 	{
 		if(jValue < .15 && jValue > -.15)
