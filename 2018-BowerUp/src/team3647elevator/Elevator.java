@@ -201,11 +201,11 @@ public class Elevator
 						{
 							if(ElevatorLevel.elevatorEncoderValue > Constants.pickUp)
 							{
-								moveEleVader(-.1);//
+								moveEleVader(-.05);//
 							}
 							else
 							{
-								moveEleVader(.2);//
+								moveEleVader(.15);//
 							}
 							
 						}
@@ -297,11 +297,11 @@ public class Elevator
 						{
 							if(ElevatorLevel.elevatorEncoderValue > Constants.sWitch)
 							{
-								moveEleVader(-.1);//
+								moveEleVader(-.08);//
 							}
 							else
 							{
-								moveEleVader(.25);//
+								moveEleVader(.2);//
 							}
 						}
 						break;
@@ -392,11 +392,11 @@ public class Elevator
 						{
 							if(ElevatorLevel.elevatorEncoderValue > Constants.scale)
 							{
-								moveEleVader(-.1);//
+								moveEleVader(-.03);//
 							}
 							else
 							{
-								moveEleVader(.25);//
+								moveEleVader(.2);//
 							}
 							
 						}
