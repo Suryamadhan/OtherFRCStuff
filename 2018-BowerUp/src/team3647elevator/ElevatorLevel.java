@@ -55,7 +55,7 @@ public class ElevatorLevel
 	
 	public static boolean reachedSwitch()
 	{
-		if(elevatorEncoderValue > Constants.sWitch - 200 && elevatorEncoderValue < Constants.sWitch + 200)
+		if(elevatorEncoderValue > Constants.sWitch - 400 && elevatorEncoderValue < Constants.sWitch + 400)
 		{
 			return true;
 		}
@@ -67,7 +67,7 @@ public class ElevatorLevel
 	
 	public static boolean reachedScale()
 	{
-		if(elevatorEncoderValue > Constants.scale - 200 && elevatorEncoderValue < Constants.scale + 200)
+		if(elevatorEncoderValue > Constants.scale - 400 && elevatorEncoderValue < Constants.scale + 400)
 		{
 			return true;
 		}
