@@ -51,7 +51,7 @@ public class Robot extends IterativeRobot {
 		try 
 		{
 			CrashChecker.logAutoInit();
-			Autonomous.initialize();
+			//Autonomous.initialize();
 		}
 		catch(Throwable t)
 		{
@@ -66,7 +66,7 @@ public class Robot extends IterativeRobot {
 		while(DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
 		{
 			enc.setEncoderValuesInInches();
-			Autonomous.testDrift(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
+			//Autonomous.testDrift(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 		}
 	}
 	
@@ -85,7 +85,7 @@ public class Robot extends IterativeRobot {
 			updateJoysticks();
 			runMotorSafety();
 			runPistons();
-			runDrivetrain();
+			//runDrivetrain();
 			runElevator();
 		}
 		catch(Throwable t)
