@@ -84,8 +84,8 @@ public class Robot extends IterativeRobot {
 			CrashChecker.logTeleopPeriodic();
 			updateJoysticks();
 			runMotorSafety();
-			runPistons();
-			//runDrivetrain();
+			//runPistons();
+			runDrivetrain();
 			runElevator();
 		}
 		catch(Throwable t)
@@ -121,16 +121,16 @@ public class Robot extends IterativeRobot {
 	
 	public void runPistons()
 	{
-		Clamps.runPiston(joy.buttonA);
+		//Clamps.runPiston(joy.buttonA);
 		intakeMechanism.runIntake(joy.buttonB);
 		IntakeTilt.runPiston(joy.buttonX);
-		Shifter.runPiston(joy.buttonY);
+		//Shifter.runPiston(joy.buttonY);
 	}
 	
 	public void runDrivetrain()
 	{
 		enc.setEncoderValues();
-		Drivetrain.arcadeDrive(joy.leftJoySticky, joy.rightJoyStickx, Encoders.leftEncoderValue, Encoders.rightEncoderValue);
+		Drivetrain.FRCarcadedrive(joy.leftJoySticky, joy.rightJoyStickx);
 	}
 	
 	public void runMotorSafety()
