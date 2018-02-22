@@ -19,6 +19,126 @@ public class NewFunctions
 	public static double lslscfsmallTurn = 62.8318530718;
 	public static double lslscffirstTurnRatio = 1.775;
 	
+	public static double[] adjustmentValues(double lValue, double rValue, boolean yes)
+	{
+		double []adjustmentValues = new double[2];
+		if(Math.abs(rValue- lValue) < 30)
+		{
+			adjustmentValues[0] = 0;
+			adjustmentValues[1] = 0;
+		}
+		else
+		{
+			if(rValue > lValue)
+			{
+				if(Math.abs(rValue- lValue) < 90)
+				{
+					adjustmentValues[0] = .06;
+					adjustmentValues[1] = -.06;
+				}
+				else if(Math.abs(rValue- lValue) < 150)
+				{
+					adjustmentValues[0] = .14;
+					adjustmentValues[1] = -.14;
+				}
+				else if(Math.abs(rValue- lValue) < 200)
+				{
+					adjustmentValues[0] = .24;
+					adjustmentValues[1] = -.24;
+				}
+				else
+				{
+					adjustmentValues[0] = .3;
+					adjustmentValues[1] = -.3;
+				}
+			}
+			else
+			{
+				if(Math.abs(rValue- lValue) < 90)
+				{
+					adjustmentValues[0] = -.06;
+					adjustmentValues[1] = .06;
+				}
+				else if(Math.abs(rValue- lValue) < 150)
+				{
+					adjustmentValues[0] = -.14;
+					adjustmentValues[1] = .14;
+				}
+				else if(Math.abs(rValue- lValue) < 200)
+				{
+					adjustmentValues[0] = -.24;
+					adjustmentValues[1] = .24;
+				}
+				else
+				{
+					adjustmentValues[0] = -.3;
+					adjustmentValues[1] = .3;
+				}
+			}
+		}
+		return adjustmentValues;
+	}
+	
+	public static double[] goBack(double lValue, double rValue, boolean yes)
+	{
+		double []adjustmentValues = new double[2];
+		if(Math.abs(rValue- lValue) < 30)
+		{
+			adjustmentValues[0] = 0;
+			adjustmentValues[1] = 0;
+		}
+		else
+		{
+			if(rValue > lValue)
+			{
+				if(Math.abs(rValue- lValue) < 90)
+				{
+					adjustmentValues[0] = .06;
+					adjustmentValues[1] = -.06;
+				}
+				else if(Math.abs(rValue- lValue) < 150)
+				{
+					adjustmentValues[0] = .14;
+					adjustmentValues[1] = -.14;
+				}
+				else if(Math.abs(rValue- lValue) < 200)
+				{
+					adjustmentValues[0] = .24;
+					adjustmentValues[1] = -.24;
+				}
+				else
+				{
+					adjustmentValues[0] = .3;
+					adjustmentValues[1] = -.3;
+				}
+			}
+			else
+			{
+				if(Math.abs(rValue- lValue) < 90)
+				{
+					adjustmentValues[0] = -.06;
+					adjustmentValues[1] = .06;
+				}
+				else if(Math.abs(rValue- lValue) < 150)
+				{
+					adjustmentValues[0] = -.14;
+					adjustmentValues[1] = .14;
+				}
+				else if(Math.abs(rValue- lValue) < 200)
+				{
+					adjustmentValues[0] = -.24;
+					adjustmentValues[1] = .24;
+				}
+				else
+				{
+					adjustmentValues[0] = -.3;
+					adjustmentValues[1] = .3;
+				}
+			}
+		}
+		return adjustmentValues;
+	}
+	
 	public static double[] goStraight(double lValue, double rValue)
 	{
 		double []adjustmentValues = new double[2];

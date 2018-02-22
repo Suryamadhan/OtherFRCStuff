@@ -330,4 +330,14 @@ public class Functions
 	}
 	
 	
+	//JANK
+	public static double straightInitialRightSideJank(double eValue)
+	{
+		eValue*=(0.000256135436059);
+		eValue+=1.855;
+		speed = sinx(eValue/2.0);
+		return speed;
+		//.8 to .5
+	}
+	
 }
