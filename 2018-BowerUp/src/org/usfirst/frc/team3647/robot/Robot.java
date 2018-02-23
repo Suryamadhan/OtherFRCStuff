@@ -8,7 +8,7 @@ import team3647elevator.Elevator;
 import team3647elevator.ElevatorLevel;
 import team3647elevator.Intake;
 import team3647pistons.intakeMechanism;
-import team3647pistons.Clamps;
+
 import team3647pistons.IntakeTilt;
 import team3647pistons.Shifter;
 import team3647subsystems.Drivetrain;
@@ -98,10 +98,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void testPeriodic() 
 	{
-		eleVader.setElevatorEncoder();
-		Elevator.setElevatorButtons(joy.buttonA, joy.buttonB, joy.buttonY,  joy.buttonX);
-		Elevator.setManualOverride(joy.rightJoySticky * .4);
-		Elevator.runDarthVader();
+		updateJoysticks();
+		Elevator.moveEleVader(joy.rightJoySticky * .4);
+		Shifter.runPiston(joy.buttonY);
 	}
 	
 	public void updateJoysticks()

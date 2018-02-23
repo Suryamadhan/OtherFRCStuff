@@ -8,6 +8,7 @@ import team3647ConstantsAndFunctions.NewFunctions;
 import team3647elevator.Elevator;
 import team3647elevator.ElevatorLevel;
 import team3647elevator.Intake;
+import team3647pistons.intakeMechanism;
 import team3647subsystems.Drivetrain;
 import team3647subsystems.Encoders;
 
@@ -22,6 +23,7 @@ public class Autonomous
 	static double lSSpeed, rSSpeed, adjustmentConstant;
 	static double []adjustmentValues = new double[2];
 	static double prevLeftEncoder, prevRightEncoder, avg;
+	static double requiredLeftDist, requiredRightDist;
 	
 	public static void rightSideBigJank(double lValue, double rValue)
 	{
@@ -110,10 +112,21 @@ public class Autonomous
 				Intake.shootCube();
 				Encoders.resetEncoders();
 				Timer.delay(1);
-				currentState = 6;
+				currentState = 14;
+				break;
+			case 14:
+				if(ElevatorLevel.reachedStop())
+				{
+					Elevator.stopEleVader();
+					currentState = 6;
+				}
+				else
+				{
+					Intake.stopIntake();
+					Elevator.moveEleVader(-.3);
+				}
 				break;
 			case 6:
-				Intake.stopIntake();
 				lSSpeed = 0;
 				if(Math.abs(rValue) < AutoConstants.scaleJankTurnToScaleRightSide)
 				{
@@ -122,15 +135,155 @@ public class Autonomous
 				}
 				else
 				{
-					prevLeftEncoder = 0;
+					prevLeftEncoder = lValue;
 					prevRightEncoder = rValue;
 					currentState = 7;
 				}
 				break;
 			case 7:
-				
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.backUpAfterFirstScaleRightSide - 1500))
+				{
+					avg = (Math.abs(rValue) + Math.abs(lValue))/2.0;
+					lSSpeed = Functions.backUpAfterFirstCubeRightSideJank(avg);
+					rSSpeed = Functions.backUpAfterFirstCubeRightSideJank(avg);
+					adjustmentValues = NewFunctions.adjustmentValues(lValue, rValue, false);
+					Drivetrain.tankDrive(lSSpeed + adjustmentValues[0], rSSpeed + adjustmentValues[1]);
+				}
+				else
+				{
+					currentState = 8;
+				}
 				break;
-			
+			case 8:
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.backUpAfterFirstScaleRightSide))
+				{
+					avg = (Math.abs(rValue) + Math.abs(lValue))/2.0;
+					lSSpeed = -.2;
+					rSSpeed = -.2;
+					adjustmentValues = NewFunctions.adjustmentValues(lValue, rValue, false);
+					Drivetrain.tankDrive(lSSpeed + adjustmentValues[0], rSSpeed + adjustmentValues[1]);
+				}
+				else
+				{
+					Drivetrain.stop();
+					Timer.delay(.2);
+					currentState = 9;
+				}
+				break;
+			case 9:
+				if(lValue == 0 && rValue == 0)
+				{
+					currentState = 10;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+				}
+				break;
+			case 10:
+				if(Functions.uTurnForFirstCubeRightSideBigJank(rValue) != 0)
+				{
+					rSSpeed = Functions.uTurnForFirstCubeRightSideBigJank(rValue);
+					lSSpeed = rSSpeed/AutoConstants.UTurntoFirstCubeJankRightSideRatio;
+					Drivetrain.goStraightLeft(lValue, rValue, AutoConstants.bigUTurntoFirstCubeJankRightSide/AutoConstants.UTurntoFirstCubeJankRightSideRatio, AutoConstants.bigUTurntoFirstCubeJankRightSide, lSSpeed, rSSpeed, .06);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 11;
+				}
+				break;
+			case 11:
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				intakeMechanism.openIntake();
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.StraightToFirstCubeJankRightSide))
+				{
+					lSSpeed = .4;
+					rSSpeed = .4;
+					adjustmentValues = NewFunctions.adjustmentValues(lValue, rValue, true);
+					Drivetrain.tankDrive(lSSpeed + adjustmentValues[0], rSSpeed + adjustmentValues[1]);
+					Intake.pickUpCube();
+				}
+				else
+				{
+					currentState = 12;
+				}
+				break;
+			case 12:
+				Intake.stopIntake();
+				intakeMechanism.closeIntake();
+				Drivetrain.stop();
+				Timer.delay(.2);
+				currentState = 13;
+				break;
+			case 13:
+				if(ElevatorLevel.reachedSwitch())
+				{
+					Elevator.stopEleVader();
+					currentState = 15;
+				}
+				else
+				{
+					Elevator.moveEleVader(Functions.stopToSwitch(ElevatorLevel.elevatorEncoderValue));
+				}
+				break;
+				//no case 14
+			case 15:
+				Timer.delay(.2);
+				currentState = 16;
+				break;
+			case 16:
+//				if(Intake.bannerSensor.get())
+//				{
+//					Intake.shootCube();
+//				}
+//				else
+//				{
+//					Timer.delay(.3);
+//					currentState = 6;
+//				}
+				Intake.shootCube();
+				//shoot towards the right side of the robot
+				Encoders.resetEncoders();
+				Timer.delay(.7);
+				currentState = 17;
+				break;
+			case 17:
+				Intake.stopIntake();
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					currentState = 18;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					Elevator.moveEleVader(Functions.switchToStop(ElevatorLevel.elevatorEncoderValue));
+				}
+				break;
+			case 18:
+				if(Functions.backUpAfterPickUpFirstCubeRightSideBigJank(rValue, false) !=0)
+				{
+					rSSpeed = Functions.backUpAfterPickUpFirstCubeRightSideBigJank(rValue, false);
+					lSSpeed = rSSpeed/AutoConstants.BackUpAfterFirstCubeRatioJankRightSide;
+					Drivetrain.goBackLeft(lValue, rValue, AutoConstants.halfCircleTurnForCubesRightSideJank, AutoConstants.halfCircleTurnForCubesRightSideJank/AutoConstants.BackUpAfterFirstCubeRatioJankRightSide, lSSpeed, rSSpeed, .05);
+				}
+				else
+				{
+					currentState = 19;
+				}
+				break;
+			case 19:
+				Drivetrain.stop();
+				Timer.delay(.2);
+				currentState = 20;
+				break;
+				
 		}
 	}
 	
@@ -152,7 +305,7 @@ public class Autonomous
 				}
 				break;
 			case 1:
-				Drivetrain.drive.tankDrive(.9, .9, false);
+				Drivetrain.tankDrive(.9, .9);
 				Timer.delay(2.5);
 				currentState = 2;
 				break;
@@ -204,7 +357,7 @@ public class Autonomous
 				else
 				{
 					adjustmentValues = NewFunctions.msrswfadjustment(lValue, rValue, 1);
-					Drivetrain.drive.tankDrive(lSSpeed + adjustmentValues[0], rSSpeed + adjustmentValues[1], false);
+					Drivetrain.tankDrive(lSSpeed + adjustmentValues[0], rSSpeed + adjustmentValues[1]);
 				}
 				break;
 			case 2:
@@ -219,7 +372,7 @@ public class Autonomous
 				else
 				{
 					adjustmentValues = NewFunctions.msrswfadjustment(lValue, rValue, 2);
-					Drivetrain.drive.tankDrive(lSSpeed + adjustmentValues[0], rSSpeed + adjustmentValues[1], false);
+					Drivetrain.tankDrive(lSSpeed + adjustmentValues[0], rSSpeed + adjustmentValues[1]);
 				}
 				break;
 			case 3:
@@ -478,6 +631,9 @@ public class Autonomous
 	public static void initialize()
 	{
 		Encoders.resetEncoders();
+		Intake.stopIntake();
+		Elevator.stopEleVader();
+		intakeMechanism.closeIntake();
 		Elevator.elevatorState = 0;
 		currentState = 0;
 	}

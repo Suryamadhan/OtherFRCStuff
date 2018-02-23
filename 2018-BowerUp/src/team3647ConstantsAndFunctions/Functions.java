@@ -333,11 +333,77 @@ public class Functions
 	//JANK
 	public static double straightInitialRightSideJank(double eValue)
 	{
-		eValue*=(0.000256135436059);
+		eValue*=(0.000137051979513);
 		eValue+=1.855;
 		speed = sinx(eValue/2.0);
 		return speed;
-		//.8 to .5
+		//.8 to .6
 	}
+	
+	public static double backUpAfterFirstCubeRightSideJank(double eValue)
+	{
+		eValue*=(-0.0000577795654239);
+		eValue+=.9;
+		return eValue;
+	}
+	
+	public static double uTurnForFirstCubeRightSideBigJank(double eValue)
+	{
+		if(eValue<= AutoConstants.UTurntoFirstCubeJankRightSideRatio - 1800)
+		{
+			eValue*=(-0.0000388888888889);
+			eValue+=1;
+			return -eValue;
+		}
+		else if(eValue<= AutoConstants.UTurntoFirstCubeJankRightSideRatio)
+		{
+			return .45;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static double backUpAfterPickUpFirstCubeRightSideBigJank(double eValue, boolean sign)
+	{
+		if(sign)
+		{
+			if(eValue<= AutoConstants.halfCircleTurnForCubesRightSideJank - 1400)
+			{
+				eValue*=(-0.0000625);
+				eValue+=.9;
+				return eValue;
+			}
+			else if(eValue<= AutoConstants.halfCircleTurnForCubesRightSideJank)
+			{
+				return .5;
+			}
+			else
+			{
+				return 0;
+			}
+		}
+		else
+		{
+			if(eValue<= AutoConstants.halfCircleTurnForCubesRightSideJank - 1400)
+			{
+				eValue*=(-0.0000625);
+				eValue+=.9;
+				return -eValue;
+			}
+			else if(eValue<= AutoConstants.halfCircleTurnForCubesRightSideJank)
+			{
+				return -.5;
+			}
+			else
+			{
+				return -0;
+			}
+		}
+		
+	}
+	
+	
 	
 }
