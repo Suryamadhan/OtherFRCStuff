@@ -69,7 +69,7 @@ public class Autonomous
 				{
 					prevLeftEncoder = lValue;
 					prevRightEncoder = rValue;
-					currentState = 3;
+					currentState = 20;
 				}
 				break;
 			case 3:
@@ -282,6 +282,9 @@ public class Autonomous
 				Drivetrain.stop();
 				Timer.delay(.2);
 				currentState = 20;
+				break;
+			case 20:
+				Drivetrain.stop();
 				break;
 				
 		}

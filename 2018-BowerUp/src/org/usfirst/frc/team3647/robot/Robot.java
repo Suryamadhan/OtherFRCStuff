@@ -65,8 +65,10 @@ public class Robot extends IterativeRobot {
 	{
 		while(DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
 		{
-			enc.setEncoderValuesInInches();
-			//Autonomous.testDrift(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
+			enc.setEncoderValues();
+			eleVader.setElevatorEncoder();
+			Autonomous.rightSideBigJank(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
+			Encoders.testEncoders();
 		}
 	}
 	
@@ -101,6 +103,7 @@ public class Robot extends IterativeRobot {
 		updateJoysticks();
 		Elevator.moveEleVader(joy.rightJoySticky * .4);
 		Shifter.runPiston(joy.buttonY);
+		System.out.println("B: " + Elevator.leftElevator.get());
 	}
 	
 	public void updateJoysticks()
