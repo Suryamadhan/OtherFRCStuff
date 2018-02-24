@@ -51,7 +51,7 @@ public class Robot extends IterativeRobot {
 		try 
 		{
 			CrashChecker.logAutoInit();
-			//Autonomous.initialize();
+			Autonomous.initialize();
 		}
 		catch(Throwable t)
 		{
@@ -69,6 +69,7 @@ public class Robot extends IterativeRobot {
 			eleVader.setElevatorEncoder();
 			Autonomous.rightSideBigJank(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 			Encoders.testEncoders();
+			Drivetrain.testSpeed();
 		}
 	}
 	
@@ -81,6 +82,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() 
 	{
+		System.out.println("B: " + Elevator.leftElevator.getOutputCurrent());
 		try 
 		{
 			CrashChecker.logTeleopPeriodic();
@@ -101,9 +103,16 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() 
 	{
 		updateJoysticks();
-		Elevator.moveEleVader(joy.rightJoySticky * .4);
+		
 		Shifter.runPiston(joy.buttonY);
-		System.out.println("B: " + Elevator.leftElevator.get());
+		if(joy.buttonA)
+		{
+			Elevator.moveEleVader(.13);
+		}
+		else
+		{
+			Elevator.moveEleVader(joy.rightJoySticky * .4);
+		}
 	}
 	
 	public void updateJoysticks()
