@@ -85,7 +85,6 @@ public class Robot extends IterativeRobot {
 	{
 		try 
 		{
-			System.out.println("B: " + Intake.rightIntakeMotor.getOutputCurrent());
 			CrashChecker.logTeleopPeriodic();
 			updateJoysticks();
 			runMotorSafety();
@@ -104,7 +103,6 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() 
 	{
 		updateJoysticks();
-		System.out.println("B: " + Intake.leftIntakeMotor.getOutputCurrent());
 		Shifter.runPiston(joy.buttonY);
 		if(joy.buttonA)
 		{
@@ -149,7 +147,7 @@ public class Robot extends IterativeRobot {
 	public void runDrivetrain()
 	{
 		enc.setEncoderValues();
-		Drivetrain.FRCarcadedrive(joy.leftJoySticky, joy.rightJoyStickx);
+		Drivetrain.arcadeDrive(Encoders.leftEncoderValue, Encoders.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
 	}
 	
 	public void runMotorSafety()

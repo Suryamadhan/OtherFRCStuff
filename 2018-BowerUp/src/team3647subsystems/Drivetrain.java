@@ -61,33 +61,72 @@ public class Drivetrain
 		{
 			if(Math.abs(lValue - rValue) < 40)
 			{
-				tankDrive(speed, speed - .15);
+				tankDrive(speed, speed - .1);
 			}
 			else if(Math.abs(lValue - rValue) < 70)
 			{
-				tankDrive(speed, speed - .3);
+				tankDrive(speed, speed - .2);
 			}
 			else
 			{
-				tankDrive(speed, speed - .45);
+				tankDrive(speed, speed - .3);
 			}
 		}
 		else
 		{
 			if(Math.abs(lValue - rValue) < 40)
 			{
-				tankDrive(speed - .12, speed);
+				tankDrive(speed - .075, speed);
 			}
 			else if(Math.abs(lValue - rValue) < 70)
 			{
-				tankDrive(speed - .24, speed);
+				tankDrive(speed - .15, speed);
 			}
 			else
 			{
-				tankDrive(speed - .36, speed);
+				tankDrive(speed - .225, speed);
 			}
 		}
-		
+	}
+	
+	public static void  driveBack(double lValue, double rValue, double speed)
+	{
+		lValue = Math.abs(lValue);
+		rValue = Math.abs(rValue);
+		if(Math.abs(lValue - rValue) < 20)
+		{
+			tankDrive(speed, speed);
+		}
+		else if(rValue > lValue)
+		{
+			if(Math.abs(lValue - rValue) < 40)
+			{
+				tankDrive(speed, speed + .1);
+			}
+			else if(Math.abs(lValue - rValue) < 70)
+			{
+				tankDrive(speed, speed + .2);
+			}
+			else
+			{
+				tankDrive(speed, speed + .3);
+			}
+		}
+		else
+		{
+			if(Math.abs(lValue - rValue) < 40)
+			{
+				tankDrive(speed + .075, speed);
+			}
+			else if(Math.abs(lValue - rValue) < 70)
+			{
+				tankDrive(speed + .15, speed);
+			}
+			else
+			{
+				tankDrive(speed + .225, speed);
+			}
+		}
 	}
 
 	static double drift;
@@ -133,30 +172,27 @@ public class Drivetrain
 	 			{
 	 				lSpeed = yValue;
 	 				rSpeed = yValue;
+	 				drive.tankDrive(lSpeed, -rSpeed, false);
 	 				Encoders.resetEncoders();
 	 			}
 	 			else
 	 			{
-	 				adjustmentValues = NewFunctions.adjustmentValues(leftEnc, rightEnc, false);
-	 				lSpeed = yValue + adjustmentValues[0];
-	 				rSpeed = yValue + adjustmentValues[1];
+	 				driveForw(leftEnc,rightEnc, yValue);
 	 			}
-	 			drive.tankDrive(lSpeed, -rSpeed, false);
+	 			
 	 			break;
 	 		case "backward":
 	 			if(yValue > -.3)
 	 			{
 		 			lSpeed =yValue;
-		 			rSpeed =-yValue;
+		 			rSpeed = yValue;
+		 			drive.tankDrive(lSpeed, rSpeed, false);
 	 				Encoders.resetEncoders();
 	 			}
 	 			else
 	 			{
-	 				adjustmentValues = NewFunctions.adjustmentValues(leftEnc, rightEnc, false);
-	 				lSpeed = yValue + adjustmentValues[0];
-	 				rSpeed = yValue + adjustmentValues[1];
+	 				driveBack(leftEnc,rightEnc, yValue);
 	 			}
-	 			drive.tankDrive(lSpeed, -rSpeed, false);
 	 			break;
 	 		case "turning":
 	 			drive.arcadeDrive(yValue, xValue,false);
