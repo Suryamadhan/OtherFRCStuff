@@ -20,7 +20,7 @@ public class Autonomous
 	//Scale: X direction: 42 inches, start far edge to end robot
 	
 	static int currentState;
-	static double lSSpeed, rSSpeed, adjustmentConstant;
+	static double lSSpeed, rSSpeed, adjustmentConstant, speed;
 	static double []adjustmentValues = new double[2];
 	static double prevLeftEncoder, prevRightEncoder, avg;
 	static double requiredLeftDist, requiredRightDist;
@@ -46,10 +46,10 @@ public class Autonomous
 				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.scaleJankStraightRightSide - 1500))
 				{
 					avg = (lValue + rValue)/2.0;
-					lSSpeed = Functions.straightInitialRightSideJank(avg);
-					rSSpeed = Functions.straightInitialRightSideJank(avg);
-					adjustmentValues = NewFunctions.adjustmentValues(lValue, rValue, false);
-					Drivetrain.tankDrive(lSSpeed + adjustmentValues[0], rSSpeed + adjustmentValues[1]);
+					speed = Functions.straightInitialRightSideJank(avg);
+//					adjustmentValues = NewFunctions.adjustmentValues(lValue, rValue, false);
+//					Drivetrain.tankDrive(lSSpeed + adjustmentValues[0], rSSpeed + adjustmentValues[1]);
+					Drivetrain.driveForw(lValue, rValue, speed);
 				}
 				else
 				{
@@ -60,10 +60,10 @@ public class Autonomous
 				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.scaleJankStraightRightSide))
 				{
 					avg = (lValue + rValue)/2.0;
-					lSSpeed = .2;
-					rSSpeed = .2;
-					adjustmentValues = NewFunctions.adjustmentValues(lValue, rValue, false);
-					Drivetrain.tankDrive(lSSpeed + adjustmentValues[0], rSSpeed + adjustmentValues[1]);
+					speed = .2;
+					Drivetrain.driveForw(lValue, rValue, speed);
+					//adjustmentValues = NewFunctions.adjustmentValues(lValue, rValue, false);
+					//Drivetrain.tankDrive(lSSpeed + adjustmentValues[0], rSSpeed + adjustmentValues[1]);
 				}
 				else
 				{

@@ -51,6 +51,44 @@ public class Drivetrain
 		drive.tankDrive(lYValue, rYValue, false);
 	}
 	
+	public static void driveForw(double lValue, double rValue, double speed)
+	{
+		if(Math.abs(lValue - rValue) < 20)
+		{
+			tankDrive(speed, speed);
+		}
+		else if(rValue > lValue)
+		{
+			if(Math.abs(lValue - rValue) < 40)
+			{
+				tankDrive(speed, speed - .1);
+			}
+			else if(Math.abs(lValue - rValue) < 70)
+			{
+				tankDrive(speed, speed - .2);
+			}
+			else
+			{
+				tankDrive(speed, speed - .3);
+			}
+		}
+		else
+		{
+			if(Math.abs(lValue - rValue) < 40)
+			{
+				tankDrive(speed - .1, speed);
+			}
+			else if(Math.abs(lValue - rValue) < 70)
+			{
+				tankDrive(speed - .2, speed);
+			}
+			else
+			{
+				tankDrive(speed - .3, speed);
+			}
+		}
+		
+	}
 
 	static double drift;
 	static String movingStatus, driftStatus;
