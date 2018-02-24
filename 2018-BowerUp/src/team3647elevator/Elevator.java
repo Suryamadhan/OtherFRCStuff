@@ -384,7 +384,7 @@ public class Elevator
 					case 4:
 						if(ElevatorLevel.reachedScale())
 						{
-							stopEleVader();
+							moveEleVader(.12);
 							originalPositionButton = false;
 						}
 						else

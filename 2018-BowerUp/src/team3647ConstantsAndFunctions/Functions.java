@@ -219,30 +219,31 @@ public class Functions
 	
 	public static double scaleToStop(double eValue)//
 	{
-//		if(eValue > Constants.sWitch)
-//		{
-//			return -.7;
-//		}
-//		else
-//		{
-//			return switchToStop(eValue);
-//		}
-		eValue*=(-0.000010625);
-		eValue+=.046;
-		return eValue;
+		if(eValue > Constants.sWitch)
+		{
+			return -.7;
+		}
+		else if(eValue > Constants.pickUp)
+		{
+			return -.2;
+		}
+		else
+		{
+			return -.1;
+		}
+			
 	}
 	
 	public static double scaleToPickUp(double eValue)//
 	{
-//		if(eValue > Constants.sWitch)
-//		{
-//			return -.7;
-//		}
-//		else
-//		{
-//			return switchToPickUp(eValue);
-//		}
-		return -.2;
+		if(eValue > Constants.sWitch)
+		{
+			return -.7;
+		}
+		else
+		{
+			return -.18;
+		}
 	}
 	
 	public static double scaleToSwitch(double eValue)
@@ -252,7 +253,7 @@ public class Functions
 //		eValue/=2;
 //		speed = sinx(eValue);
 //		return -speed;
-		return -.2;
+		return -.32;
 	}
 	
 	// new auto functions
