@@ -139,7 +139,7 @@ public class Elevator
 					case 4:
 						if(ElevatorLevel.reachedScale())
 						{
-							stopEleVader();
+							moveEleVader(.13);
 							elevatorState = 4;
 						}
 						else
@@ -223,7 +223,7 @@ public class Elevator
 					case 4:
 						if(ElevatorLevel.reachedScale())
 						{
-							stopEleVader();
+							moveEleVader(.13);
 							elevatorState = 4;
 						}
 						else
@@ -307,7 +307,7 @@ public class Elevator
 					case 4:
 						if(ElevatorLevel.reachedScale())
 						{
-							stopEleVader();
+							moveEleVader(.13);
 							elevatorState = 4;
 						}
 						else
@@ -382,7 +382,7 @@ public class Elevator
 						}
 						break;
 					case 4:
-						if(ElevatorLevel.reachedSwitch())
+						if(ElevatorLevel.reachedScale())
 						{
 							stopEleVader();
 							originalPositionButton = false;
