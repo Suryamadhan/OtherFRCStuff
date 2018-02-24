@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3647.robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.MotorSafety;
@@ -82,13 +83,13 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() 
 	{
-		System.out.println("B: " + Elevator.leftElevator.getOutputCurrent());
 		try 
 		{
+			System.out.println("B: " + Intake.rightIntakeMotor.getOutputCurrent());
 			CrashChecker.logTeleopPeriodic();
 			updateJoysticks();
 			runMotorSafety();
-			//runPistons();
+			runPistons();
 			runDrivetrain();
 			runElevator();
 		}
@@ -103,7 +104,7 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() 
 	{
 		updateJoysticks();
-		
+		System.out.println("B: " + Intake.leftIntakeMotor.getOutputCurrent());
 		Shifter.runPiston(joy.buttonY);
 		if(joy.buttonA)
 		{
@@ -124,18 +125,25 @@ public class Robot extends IterativeRobot {
 	public void runElevator()
 	{
 		eleVader.setElevatorEncoder();
-		Elevator.setElevatorButtons(joy.buttonA1, joy.buttonB1, joy.buttonY1,  joy.buttonX1);
-		Elevator.setManualOverride(joy.rightJoySticky1 * .4);
-		Elevator.runDarthVader();
-		Intake.runIntake(joy.rightTrigger1, joy.leftTrigger1);
+		if(Shifter.piston.get() == DoubleSolenoid.Value.kForward)
+		{
+			Elevator.moveEleVader(joy.rightJoySticky * .4);
+		}
+		else
+		{
+			Elevator.setElevatorButtons(joy.buttonA1, joy.buttonB1, joy.buttonX1,  joy.buttonY1);
+			Elevator.setManualOverride(joy.rightJoySticky1 * .6);
+			Elevator.runDarthVader();
+			Intake.runIntake(joy.rightTrigger1, joy.leftTrigger1);
+		}
 	}
 	
 	public void runPistons()
 	{
 		//Clamps.runPiston(joy.buttonA);
-		intakeMechanism.runIntake(joy.buttonB);
+		intakeMechanism.runIntake(joy.rightBumper1);
 		IntakeTilt.runPiston(joy.buttonX);
-		//Shifter.runPiston(joy.buttonY);
+		Shifter.runPiston(joy.buttonY);
 	}
 	
 	public void runDrivetrain()

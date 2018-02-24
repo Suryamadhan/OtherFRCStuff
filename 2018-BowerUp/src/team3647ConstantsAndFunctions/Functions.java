@@ -221,15 +221,11 @@ public class Functions
 	{
 		if(eValue > Constants.sWitch)
 		{
-			return -.7;
-		}
-		else if(eValue > Constants.pickUp)
-		{
-			return -.2;
+			return -.5;
 		}
 		else
 		{
-			return -.1;
+			return -.17;
 		}
 			
 	}
