@@ -61,46 +61,48 @@ public class Drivetrain
 		{
 			if(Math.abs(lValue - rValue) < 30)
 			{
-				tankDrive(speed +.11, speed - .11);
+				tankDrive(speed + .08, speed - .08);
 			}
-			else if(Math.abs(lValue - rValue) < 40)
+			
+			else if(Math.abs(lValue - rValue) < 50)
 			{
-				tankDrive(speed + .15, speed - .15);
-			}
-			else if(Math.abs(lValue - rValue) < 55)
-			{
-				tankDrive(speed + .225, speed - .225);
+				tankDrive(speed + .11, speed - .11);
 			}
 			else if(Math.abs(lValue - rValue) < 70)
 			{
-				tankDrive(speed + .3, speed - .3);
+				tankDrive(speed + .15, speed - .15);
+			}
+			else if(Math.abs(lValue - rValue) < 100)
+			{
+				tankDrive(speed + .18, speed - .18);
 			}
 			else
 			{
-				tankDrive(speed + .445, speed - .445);
+				tankDrive(speed + .22, speed - .22);
 			}
 		}
 		else
 		{
 			if(Math.abs(lValue - rValue) < 30)
 			{
-				tankDrive(speed -.11, speed + .11);
+				tankDrive(speed - .08, speed + .08);
 			}
-			else if(Math.abs(lValue - rValue) < 40)
+			
+			else if(Math.abs(lValue - rValue) < 50)
 			{
-				tankDrive(speed - .15, speed + .15);
-			}
-			else if(Math.abs(lValue - rValue) < 55)
-			{
-				tankDrive(speed - .225, speed + .225);
+				tankDrive(speed - .11, speed + .11);
 			}
 			else if(Math.abs(lValue - rValue) < 70)
 			{
-				tankDrive(speed - .3, speed + .3);
+				tankDrive(speed - .15, speed + .15);
+			}
+			else if(Math.abs(lValue - rValue) < 100)
+			{
+				tankDrive(speed - .18, speed + .18);
 			}
 			else
 			{
-				tankDrive(speed - .445, speed + .445);
+				tankDrive(speed - .22, speed + .22);
 			}
 		}
 	}
