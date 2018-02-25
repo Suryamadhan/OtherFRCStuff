@@ -90,6 +90,7 @@ public class Robot extends IterativeRobot {
 			runMotorSafety();
 			runPistons();
 			runDrivetrain();
+			Encoders.testEncoders();
 			runElevator();
 		}
 		catch(Throwable t)

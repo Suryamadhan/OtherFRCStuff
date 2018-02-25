@@ -61,7 +61,7 @@ public class Drivetrain
 		{
 			if(Math.abs(lValue - rValue) < 30)
 			{
-				tankDrive(speed +.075, speed - 075);
+				tankDrive(speed +.11, speed - .11);
 			}
 			else if(Math.abs(lValue - rValue) < 40)
 			{
@@ -84,7 +84,7 @@ public class Drivetrain
 		{
 			if(Math.abs(lValue - rValue) < 30)
 			{
-				tankDrive(speed -.075, speed + 075);
+				tankDrive(speed -.11, speed + .11);
 			}
 			else if(Math.abs(lValue - rValue) < 40)
 			{
