@@ -61,15 +61,15 @@ public class Drivetrain
 		{
 			if(Math.abs(lValue - rValue) < 40)
 			{
-				tankDrive(speed, speed - .1);
+				tankDrive(speed, speed - .15);
 			}
 			else if(Math.abs(lValue - rValue) < 70)
 			{
-				tankDrive(speed, speed - .2);
+				tankDrive(speed, speed - .3);
 			}
 			else
 			{
-				tankDrive(speed, speed - .3);
+				tankDrive(speed, speed - .445);
 			}
 		}
 		else
@@ -101,15 +101,15 @@ public class Drivetrain
 		{
 			if(Math.abs(lValue - rValue) < 40)
 			{
-				tankDrive(speed, speed + .1);
+				tankDrive(speed, speed + .15);
 			}
 			else if(Math.abs(lValue - rValue) < 70)
 			{
-				tankDrive(speed, speed + .2);
+				tankDrive(speed, speed + .3);
 			}
 			else
 			{
-				tankDrive(speed, speed + .3);
+				tankDrive(speed, speed + .45);
 			}
 		}
 		else
