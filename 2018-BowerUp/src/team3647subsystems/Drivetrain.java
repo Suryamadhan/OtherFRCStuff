@@ -61,48 +61,48 @@ public class Drivetrain
 		{
 			if(Math.abs(lValue - rValue) < 60)
 			{
-				tankDrive(speed + .05, speed - .05);
+				tankDrive(speed + .05, speed - .08);
 			}
 			
 			else if(Math.abs(lValue - rValue) < 90)
 			{
-				tankDrive(speed + .08, speed - .08);
+				tankDrive(speed + .08, speed - .13);
 			}
 			else if(Math.abs(lValue - rValue) < 120)
 			{
-				tankDrive(speed + .13, speed - .13);
+				tankDrive(speed + .13, speed - .17);
 			}
 			else if(Math.abs(lValue - rValue) < 180)
 			{
-				tankDrive(speed + .17, speed - .17);
+				tankDrive(speed + .17, speed - .22);
 			}
 			else
 			{
-				tankDrive(speed + .22, speed - .22);
+				tankDrive(speed + .22, speed - .27);
 			}
 		}
 		else
 		{
 			if(Math.abs(lValue - rValue) < 60)
 			{
-				tankDrive(speed - .05, speed + .05);
+				tankDrive(speed - .05, speed + .08);
 			}
 			
 			else if(Math.abs(lValue - rValue) < 90)
 			{
-				tankDrive(speed - .08, speed + .08);
+				tankDrive(speed - .08, speed + .13);
 			}
 			else if(Math.abs(lValue - rValue) < 120)
 			{
-				tankDrive(speed - .13, speed + .13);
+				tankDrive(speed - .13, speed + .17);
 			}
 			else if(Math.abs(lValue - rValue) < 180)
 			{
-				tankDrive(speed - .17, speed + .17);
+				tankDrive(speed - .17, speed + .22);
 			}
 			else
 			{
-				tankDrive(speed - .22, speed + .22);
+				tankDrive(speed - .22, speed + .27);
 			}
 		}
 	}
