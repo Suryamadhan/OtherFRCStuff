@@ -46,7 +46,7 @@ public class Autonomous
 				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.scaleJankStraightRightSide - 1500))
 				{
 					avg = (lValue + rValue)/2.0;
-					speed = .5;
+					speed = .8;
 //					adjustmentValues = NewFunctions.adjustmentValues(lValue, rValue, false);
 //					Drivetrain.tankDrive(lSSpeed + adjustmentValues[0], rSSpeed + adjustmentValues[1]);
 					Drivetrain.driveForw(lValue, rValue, speed);
