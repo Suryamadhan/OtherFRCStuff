@@ -53,28 +53,28 @@ public class Drivetrain
 	
 	public static void driveForw(double lValue, double rValue, double speed)
 	{
-		if(Math.abs(lValue - rValue) < 20)
+		if(Math.abs(lValue - rValue) < 30)
 		{
 			tankDrive(speed, speed);
 		}
 		else if(rValue > lValue)
 		{
-			if(Math.abs(lValue - rValue) < 30)
+			if(Math.abs(lValue - rValue) < 60)
+			{
+				tankDrive(speed + .05, speed - .05);
+			}
+			
+			else if(Math.abs(lValue - rValue) < 90)
 			{
 				tankDrive(speed + .08, speed - .08);
 			}
-			
-			else if(Math.abs(lValue - rValue) < 50)
+			else if(Math.abs(lValue - rValue) < 120)
 			{
-				tankDrive(speed + .11, speed - .11);
+				tankDrive(speed + .13, speed - .13);
 			}
-			else if(Math.abs(lValue - rValue) < 70)
+			else if(Math.abs(lValue - rValue) < 180)
 			{
-				tankDrive(speed + .15, speed - .15);
-			}
-			else if(Math.abs(lValue - rValue) < 100)
-			{
-				tankDrive(speed + .18, speed - .18);
+				tankDrive(speed + .17, speed - .17);
 			}
 			else
 			{
@@ -83,22 +83,22 @@ public class Drivetrain
 		}
 		else
 		{
-			if(Math.abs(lValue - rValue) < 30)
+			if(Math.abs(lValue - rValue) < 60)
+			{
+				tankDrive(speed - .05, speed + .05);
+			}
+			
+			else if(Math.abs(lValue - rValue) < 90)
 			{
 				tankDrive(speed - .08, speed + .08);
 			}
-			
-			else if(Math.abs(lValue - rValue) < 50)
+			else if(Math.abs(lValue - rValue) < 120)
 			{
-				tankDrive(speed - .11, speed + .11);
+				tankDrive(speed - .13, speed + .13);
 			}
-			else if(Math.abs(lValue - rValue) < 70)
+			else if(Math.abs(lValue - rValue) < 180)
 			{
-				tankDrive(speed - .15, speed + .15);
-			}
-			else if(Math.abs(lValue - rValue) < 100)
-			{
-				tankDrive(speed - .18, speed + .18);
+				tankDrive(speed - .17, speed + .17);
 			}
 			else
 			{
