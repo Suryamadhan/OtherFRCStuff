@@ -140,9 +140,13 @@ public class Robot extends IterativeRobot {
 	public void runPistons()
 	{
 		//Clamps.runPiston(joy.buttonA);
-		intakeMechanism.runIntake(joy.rightBumper1);
-		IntakeTilt.runPiston(joy.buttonX);
-		Shifter.runPiston(joy.buttonY);
+		if(Drivetrain.leftSRX.get() == 0 && Drivetrain.rightSRX.get() == 0 && Elevator.elevatorState == Elevator.aimedElevatorState && Elevator.aimedElevatorState!=-1)
+		{
+			intakeMechanism.runIntake(joy.rightBumper1);
+			IntakeTilt.runPiston(joy.buttonX);
+			Shifter.runPiston(joy.buttonY);
+		}
+		
 	}
 	
 	public void runDrivetrain()
