@@ -303,9 +303,8 @@ public class Drivetrain
 		}
 	}
 	
-	public static void goStraightLeft(double lValue, double rValue, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment)
+	public static void goStraightLeft(double lValue, double rValue, double aimedRatio, double leftSpeed, double rightSpeed, double adjustment)
 	{
-		aimedRatio = ((requiredRightDist)/(requiredLeftDist));
 		currentRatio = (((rValue)/(lValue))/aimedRatio);
 		sum = (rValue) + (lValue);
 		if(currentRatio >= .9 && currentRatio <= 1.1)
@@ -349,9 +348,8 @@ public class Drivetrain
 		}
 	}
 	
-	public static void goStraightRight(double lValue, double rValue, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment)
+	public static void goStraightRight(double lValue, double rValue, double aimedRatio, double leftSpeed, double rightSpeed, double adjustment)
 	{
-		aimedRatio = ((requiredLeftDist)/(requiredRightDist));
 		currentRatio = (((lValue)/(rValue))/aimedRatio);
 		sum = (rValue) + (lValue);
 		if(currentRatio >= .9 && currentRatio <= 1.1)
@@ -395,9 +393,8 @@ public class Drivetrain
 		}
 	}
 	
-	public static void goBackLeft(double lValue, double rValue, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment)
+	public static void goBackLeft(double lValue, double rValue, double aimedRatio, double leftSpeed, double rightSpeed, double adjustment)
 	{
-		aimedRatio = ((requiredRightDist)/(requiredLeftDist));
 		rValue = Math.abs(rValue);
 		lValue = Math.abs(lValue);
 		currentRatio = (((rValue)/(lValue))/aimedRatio);
@@ -435,9 +432,8 @@ public class Drivetrain
 		}
 	}
 	
-	public static void goBackRight(double lValue, double rValue, double requiredLeftDist, double requiredRightDist, double leftSpeed, double rightSpeed, double adjustment)
+	public static void goBackRight(double lValue, double rValue, double aimedRatio, double leftSpeed, double rightSpeed, double adjustment)
 	{
-		aimedRatio = ((requiredLeftDist)/(requiredRightDist));
 		rValue = Math.abs(rValue);
 		lValue = Math.abs(lValue);
 		currentRatio = (((lValue)/(rValue))/aimedRatio);

@@ -25,8 +25,189 @@ public class Autonomous
 	static double prevLeftEncoder, prevRightEncoder, avg;
 	static double requiredLeftDist, requiredRightDist;
 	
+	public static void middleSideLeftAuto(double lValue, double rValue)//switch
+	{
+		//Before Straight: Make sure X is 72 inches to the left
+		//After Straight: Make sure Y is 140 inches at end.
+		
+		switch(currentState)
+		{
+			case 0:
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					currentState = 1;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					Elevator.moveEleVader(-.2);
+				}
+				break;
+			case 1:
+				if(Functions.firstTurnSpeedForMSlSW(rValue) == 0)
+				{
+					requiredLeftDist = lValue;
+					requiredRightDist = rValue;
+					currentState = 2;
+				}
+				else
+				{
+					rSSpeed = Functions.firstTurnSpeedForMSlSW(rValue);
+					lSSpeed = rSSpeed/AutoConstants.ratioForFirstTurnMSLSW;
+					Drivetrain.goStraightLeft(lValue, rValue, AutoConstants.ratioForFirstTurnMSLSW, lSSpeed, rSSpeed, .06);
+				}
+				break;
+			case 2:
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				if(Functions.secondTurnSpeedForMSlSW(lValue) == 0)
+				{
+					requiredLeftDist = lValue;
+					requiredRightDist = rValue;
+					currentState = 6;
+				}
+				else
+				{
+					lSSpeed = Functions.secondTurnSpeedForMSlSW(rValue);
+					rSSpeed = lSSpeed/AutoConstants.ratioForSecondTurnMSLSW;
+					Drivetrain.goStraightRight(lValue, rValue, AutoConstants.ratioForSecondTurnMSLSW, lSSpeed, rSSpeed, .06);
+				}
+				break;
+			case 3:
+				Drivetrain.stop();
+				if(ElevatorLevel.reachedSwitch())
+				{
+					Elevator.stopEleVader();
+					Timer.delay(.2);
+					currentState = 4;
+				}
+				else
+				{
+					Elevator.moveEleVader(Functions.stopToSwitch(ElevatorLevel.elevatorEncoderValue));
+				}
+				break;
+			case 4:
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				avg = (lValue + rValue)/2.0;
+				if(Drivetrain.reachedDistance(lValue, rValue, AutoConstants.straightForSwitchMSLSW))
+				{
+					Drivetrain.driveForw(lValue, rValue, .7);
+				}
+				else
+				{
+					currentState = 5;
+				}
+				break;
+			case 5:
+				Drivetrain.stop();
+				Timer.delay(.2);
+				Intake.shootCube();
+				Timer.delay(1);
+				currentState = 6;
+				break;
+			case 6:
+				Drivetrain.stop();
+				Intake.stopIntake();
+				break;
+		}
+	}
+	
+	public static void middleSideRightAuto(double lValue, double rValue)//switch
+	{
+		switch(currentState)
+		{
+			//Check after curves: 36 in at the end of all the turns
+			//At end around 140 inches
+			case 0 :
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					currentState = 1;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					Elevator.moveEleVader(-.2);
+				}
+				break;
+			case 1:
+				if(Functions.firstTurnSpeedForMSRSW(lValue) == 0)
+				{
+					requiredLeftDist = lValue;
+					requiredRightDist = rValue;
+					currentState = 2;
+				}
+				else
+				{
+					lSSpeed = Functions.firstTurnSpeedForMSRSW(lValue);
+					rSSpeed = lSSpeed/AutoConstants.ratioForFirstTurnMSRSW;
+					Drivetrain.goStraightRight(lValue, rValue, AutoConstants.ratioForFirstTurnMSRSW, lSSpeed, rSSpeed, .06);
+				}
+				break;
+			case 2:
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				if(rValue < AutoConstants.secondBigOneWheelCurveMSRSW)
+				{
+					Drivetrain.tankDrive(0, Functions.secondTurnSpeedForMSRSW(rValue));
+				}
+				else
+				{
+					requiredLeftDist = lValue;
+					requiredRightDist = rValue;
+					currentState = 3;
+				}
+				break;
+			case 3:
+				Drivetrain.stop();
+				if(ElevatorLevel.reachedSwitch())
+				{
+					Elevator.stopEleVader();
+					Timer.delay(.2);
+					currentState = 4;
+				}
+				else
+				{
+					Elevator.moveEleVader(Functions.stopToSwitch(ElevatorLevel.elevatorEncoderValue));
+				}
+				break;
+			case 4:
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				avg = (lValue + rValue)/2.0;
+				if(Drivetrain.reachedDistance(lValue, rValue, AutoConstants.straightForSwitchMSRSW))
+				{
+					Drivetrain.driveForw(lValue, rValue, .7);
+				}
+				else
+				{
+					currentState = 5;
+				}
+				break;
+			case 5:
+				Drivetrain.stop();
+				Timer.delay(.2);
+				Intake.shootCube();
+				Timer.delay(1);
+				currentState = 5;
+				break;
+			case 6:
+				Drivetrain.stop();
+				Intake.stopIntake();
+				break;
+		}
+	}
+	
+	
 	public static void rightSideBigJank(double lValue, double rValue)
 	{
+		//First check if the first step goes 250 inches
+		//Then check if delivers scale to the right dimensions
+		//Box of scale: X:(), Y: ()
 		switch(currentState)
 		{
 			case 0 :
@@ -46,9 +227,7 @@ public class Autonomous
 				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.scaleJankStraightRightSide - 1500))
 				{
 					avg = (lValue + rValue)/2.0;
-					speed = .8;
-//					adjustmentValues = NewFunctions.adjustmentValues(lValue, rValue, false);
-//					Drivetrain.tankDrive(lSSpeed + adjustmentValues[0], rSSpeed + adjustmentValues[1]);
+					speed = Functions.straightInitialRightSideJank(avg);
 					Drivetrain.driveForw(lValue, rValue, speed);
 				}
 				else
@@ -62,8 +241,6 @@ public class Autonomous
 					avg = (lValue + rValue)/2.0;
 					speed = .2;
 					Drivetrain.driveForw(lValue, rValue, speed);
-					//adjustmentValues = NewFunctions.adjustmentValues(lValue, rValue, false);
-					//Drivetrain.tankDrive(lSSpeed + adjustmentValues[0], rSSpeed + adjustmentValues[1]);
 				}
 				else
 				{
@@ -76,26 +253,36 @@ public class Autonomous
 				lValue-=prevLeftEncoder;
 				rValue-=prevRightEncoder;
 				lSSpeed = 0;
-				if(rValue < AutoConstants.scaleJankTurnToScaleRightSide)
+				if(rValue < AutoConstants.scaleJankTurnToScaleRightSide && !ElevatorLevel.reachedScale())
 				{
 					rSSpeed = .35;
 					Drivetrain.tankDrive(lSSpeed, rSSpeed);
+					Elevator.moveEleVader(Functions.stopToScale(ElevatorLevel.elevatorEncoderValue));
+				}
+				else if(rValue >= AutoConstants.scaleJankTurnToScaleRightSide && !ElevatorLevel.reachedScale())
+				{
+					Drivetrain.stop();
+					if(ElevatorLevel.elevatorEncoderValue < Constants.scale)
+					{
+						Elevator.moveEleVader(Functions.stopToScale(ElevatorLevel.elevatorEncoderValue));
+					}
+					else
+					{
+						Elevator.moveEleVader(-.2);
+					}
+						
+				}
+				else if(rValue < AutoConstants.scaleJankTurnToScaleRightSide && ElevatorLevel.reachedScale())
+				{
+					rSSpeed = .35;
+					Drivetrain.tankDrive(lSSpeed, rSSpeed);
+					Elevator.moveEleVader(.13);
 				}
 				else
 				{
 					Drivetrain.stop();
+					Elevator.moveEleVader(.13);
 					Timer.delay(.2);
-					currentState = 4;
-				}
-				break;
-			case 4:
-				if(ElevatorLevel.reachedScale())
-				{
-					Elevator.moveEleVader(Functions.stopToScale(ElevatorLevel.elevatorEncoderValue));
-				}
-				else
-				{
-					Elevator.stopEleVader();
 					currentState = 5;
 				}
 				break;
@@ -118,7 +305,7 @@ public class Autonomous
 				if(ElevatorLevel.reachedStop())
 				{
 					Elevator.stopEleVader();
-					currentState = 6;
+					currentState = 20;
 				}
 				else
 				{

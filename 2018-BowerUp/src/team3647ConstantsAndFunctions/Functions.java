@@ -489,7 +489,106 @@ public class Functions
 				return -0;
 			}
 		}
-		
+	}
+	
+	public static double firstTurnSpeedForMSlSW(double eValue)
+	{
+		if(eValue < AutoConstants.firstBigTurnMSLSW - 3000)
+		{
+			return .9;
+		}
+		if(eValue < AutoConstants.firstBigTurnMSLSW - 2000)
+		{
+			return .65;
+		}
+		else if(eValue < AutoConstants.firstBigTurnMSLSW)
+		{
+			return .3;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static double secondTurnSpeedForMSlSW(double eValue)
+	{
+		if(eValue < AutoConstants.secondBigTurnMSLSW - 2500)
+		{
+			return .8;
+		}
+		if(eValue < AutoConstants.secondBigTurnMSLSW - 2000)
+		{
+			return .7;
+		}
+		else if(eValue < AutoConstants.secondBigTurnMSLSW)
+		{
+			return .6;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static double straightToSwitchMSlSW(double eValue)
+	{
+		if(eValue < AutoConstants.secondBigTurnMSLSW - 2500)
+		{
+			return .8;
+		}
+		if(eValue < AutoConstants.secondBigTurnMSLSW - 2000)
+		{
+			return .7;
+		}
+		else if(eValue < AutoConstants.secondBigTurnMSLSW)
+		{
+			return .6;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static double firstTurnSpeedForMSRSW(double eValue)
+	{
+		if(eValue < AutoConstants.firstBigTurnMSRSW - 2500)
+		{
+			return .9;
+		}
+		if(eValue < AutoConstants.firstBigTurnMSRSW - 1400)
+		{
+			return .65;
+		}
+		else if(eValue < AutoConstants.firstBigTurnMSRSW)
+		{
+			return .3;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static double secondTurnSpeedForMSRSW(double eValue)
+	{
+		if(eValue < AutoConstants.secondBigOneWheelCurveMSRSW - 2000)
+		{
+			return .8;
+		}
+		else if(eValue < AutoConstants.secondBigOneWheelCurveMSRSW - 1440)
+		{
+			return .5;
+		}
+		else if(eValue < AutoConstants.secondBigOneWheelCurveMSRSW)
+		{
+			return .3;
+		}
+		else
+		{
+			return 0;
+		}
 	}
 	
 	
