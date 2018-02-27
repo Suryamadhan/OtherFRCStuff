@@ -65,6 +65,18 @@ public class ElevatorLevel
 		}
 	}
 	
+	public static boolean reachedLowerScale()
+	{
+		if(elevatorEncoderValue > Constants.lowerScale - 2500 && elevatorEncoderValue < Constants.lowerScale + 2500)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
 	public static boolean reachedScale()
 	{
 		if(elevatorEncoderValue > Constants.scale - 3000 && elevatorEncoderValue < Constants.scale + 3000)

@@ -186,16 +186,26 @@ public class Functions
 	
 	public static double switchToStop(double eValue)
 	{
-		eValue*=(-0.000035);
-		eValue-=.15;
-		return eValue;
+		if(eValue > 5000)
+		{
+			return -.4;
+		}
+		else
+		{
+			return - .18;
+		}
 	}
 	
 	public static double switchToPickUp(double eValue)
 	{
-		eValue*=(-0.0000471428571429);
-		eValue+=.07;
-		return eValue;
+		if(eValue > 5000)
+		{
+			return -.35;
+		}
+		else
+		{
+			return - .16;
+		}
 	}
 	
 	public static double switchToScale(double eValue)//
@@ -217,6 +227,87 @@ public class Functions
 		//.8 to .2
 	}
 	
+	public static double stopToLowerScale(double eValue)
+	{
+		if(eValue<Constants.sWitch)
+		{
+			return 1;
+		}
+		else
+		{
+			eValue*=(-0.0000230769230769);
+			eValue+=1.031;
+			return eValue;
+		}
+	}
+	
+	public static double pickUpToLowerScale(double eValue)
+	{
+		if(eValue<Constants.sWitch)
+		{
+			return 1;
+		}
+		else
+		{
+			eValue*=(-0.0000230769230769);
+			eValue+=1.031;
+			return eValue;
+		}
+	}
+	
+	public static double switchToLowerScale(double eValue)
+	{
+		eValue*=(-0.0000230769230769);
+		eValue+=1.031;
+		return eValue;
+	}
+	
+	public static double scaleToLowerScale(double eValue)
+	{
+		return -.2;
+	}
+	
+	public static double lowerScaleToScale(double eValue)
+	{
+		if(eValue < 40000)
+		{
+			return .4;
+		}
+		else
+		{
+			return .2;
+		}
+	}
+	
+	public static double lowerScaleToSwitch(double eValue)
+	{
+		return -.28;
+	}
+	
+	public static double lowerScaleToPickUp(double eValue)
+	{
+		if(eValue > Constants.sWitch)
+		{
+			return -.5;
+		}
+		else
+		{
+			return -.15;
+		}
+	}
+	
+	public static double lowerScaleToStop(double eValue)
+	{
+		if(eValue > Constants.sWitch)
+		{
+			return -.5;
+		}
+		else
+		{
+			return -.17;
+		}
+	}
+	
 	public static double scaleToStop(double eValue)//
 	{
 		if(eValue > Constants.sWitch)
@@ -234,11 +325,11 @@ public class Functions
 	{
 		if(eValue > Constants.sWitch)
 		{
-			return -.7;
+			return -.5;
 		}
 		else
 		{
-			return -.18;
+			return -.15;
 		}
 	}
 	
