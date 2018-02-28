@@ -68,9 +68,8 @@ public class Robot extends IterativeRobot {
 		{
 			enc.setEncoderValues();
 			eleVader.setElevatorEncoder();
-			Autonomous.rightSideBigJank(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
-			Encoders.testEncoders();
-			Drivetrain.testSpeed();
+			Autonomous.middleSideRightAuto(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
+			//Autonomous.rightSideBigJank(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 		}
 	}
 	
@@ -88,7 +87,7 @@ public class Robot extends IterativeRobot {
 			CrashChecker.logTeleopPeriodic();
 			updateJoysticks();
 			runMotorSafety();
-			runPistons();
+			//runPistons();
 			runDrivetrain();
 			Encoders.testEncoders();
 			runElevator();
@@ -104,6 +103,7 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() 
 	{
 		updateJoysticks();
+		eleVader.setElevatorEncoder();
 		Shifter.runPiston(joy.buttonY);
 		if(joy.buttonA)
 		{
@@ -113,6 +113,7 @@ public class Robot extends IterativeRobot {
 		{
 			Elevator.moveEleVader(joy.rightJoySticky * .4);
 		}
+		ElevatorLevel.testElevatorEncoders();
 	}
 	
 	public void updateJoysticks()
@@ -130,7 +131,7 @@ public class Robot extends IterativeRobot {
 		}
 		else
 		{
-			Elevator.setElevatorButtons(joy.buttonA1, joy.buttonB1, joy.buttonX1,  joy.buttonY1);
+			Elevator.setElevatorButtons(joy.buttonA1, joy.buttonB1, joy.buttonX1,  joy.buttonY1, joy.rightBumper1);
 			Elevator.setManualOverride(joy.rightJoySticky1 * .6);
 			Elevator.runDarthVader();
 			Intake.runIntake(joy.rightTrigger1, joy.leftTrigger1);
@@ -140,12 +141,12 @@ public class Robot extends IterativeRobot {
 	public void runPistons()
 	{
 		//Clamps.runPiston(joy.buttonA);
-		if(Drivetrain.leftSRX.get() == 0 && Drivetrain.rightSRX.get() == 0 && Elevator.elevatorState == Elevator.aimedElevatorState && Elevator.aimedElevatorState!=-1)
-		{
+//		if(Drivetrain.leftSRX.get() == 0 && Drivetrain.rightSRX.get() == 0 && Elevator.elevatorState == Elevator.aimedElevatorState && Elevator.aimedElevatorState!=-1)
+//		{
 			intakeMechanism.runIntake(joy.rightBumper1);
 			IntakeTilt.runPiston(joy.buttonX);
 			Shifter.runPiston(joy.buttonY);
-		}
+		//}
 		
 	}
 	

@@ -17,16 +17,16 @@ public class AutoConstants
 //	public final static double scaleJankSmallBackUpToWallRightSide = 1872;48
 	
 	//Middle Auto Left Side
-	public final static double firstBigTurnMSLSW = 8928;
-	public final static double ratioForFirstTurnMSLSW = 1.72222222222;
-	public final static double secondBigTurnMSLSW = 5184;
-	public final static double ratioForSecondTurnMSLSW = 3.6;
-	public final static double straightForSwitchMSLSW = 2750;
+	public final static double firstBigTurnMSLSW = 7600;
+	public final static double ratioForFirstTurnMSLSW = 2.6;
+	public final static double secondBigTurnMSLSW = 5500;
+	public final static double ratioForSecondTurnMSLSW = 6;
+	public final static double straightForSwitchMSLSW = 1500;
 	
 	//Middle Auto Left Side
-	public final static double firstBigTurnMSRSW = 5184;
+	public final static double firstBigTurnMSRSW = 5100;
 	public final static double ratioForFirstTurnMSRSW = 3.6;
-	public final static double secondBigOneWheelCurveMSRSW = 3744;
+	public final static double secondBigOneWheelCurveMSRSW = 4800;
 	public final static double straightForSwitchMSRSW = 2750;
 	
 	
