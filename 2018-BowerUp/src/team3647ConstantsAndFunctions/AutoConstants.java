@@ -4,7 +4,7 @@ public class AutoConstants
 {
 	//New Constants
 //	public final static double scaleJankStraightRightSide = 22918.3118052;
-	public final static double scaleJankStraightRightSide = 18000;
+	public final static double scaleJankStraightRightSide = 16000;
 	public final static double scaleJankTurnToScaleRightSide = 2016;
 	public final static double backUpAfterFirstScaleRightSide = 6692.14704713;
 	

@@ -235,279 +235,279 @@ public class Autonomous
 	}
 	
 	
-//	public static void rightSideBigJank(double lValue, double rValue)
-//	{
-//		//First check if the first step goes 250 inches
-//		//Then check if delivers scale to the right dimensions
-//		//Box of scale: X:(), Y: ()
-//		switch(currentState)
-//		{
-//			case 0 :
-//				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
+	public static void rightSideBigJank(double lValue, double rValue)
+	{
+		//First check if the first step goes 250 inches
+		//Then check if delivers scale to the right dimensions
+		//Box of scale: X:(), Y: ()
+		switch(currentState)
+		{
+			case 0 :
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					currentState = 1;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					Elevator.moveEleVader(-.2);
+				}
+				break;
+			case 1:
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.scaleJankStraightRightSide - 1600))
+				{
+					avg = (lValue + rValue)/2.0;
+					speed = Functions.straightInitialRightSideJank(avg);
+					Drivetrain.driveForw(lValue, rValue, speed);
+				}
+				else
+				{
+					currentState = 2;
+				}
+				break;
+			case 2:
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.scaleJankStraightRightSide))
+				{
+					avg = (lValue + rValue)/2.0;
+					speed = .2;
+					Drivetrain.driveForw(lValue, rValue, speed);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 20;
+				}
+				break;
+			case 3:
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				lSSpeed = 0;
+				if(rValue < AutoConstants.scaleJankTurnToScaleRightSide && !ElevatorLevel.reachedScale())
+				{
+					rSSpeed = .35;
+					Drivetrain.tankDrive(lSSpeed, rSSpeed);
+					Elevator.moveEleVader(Functions.stopToScale(ElevatorLevel.elevatorEncoderValue));
+				}
+				else if(rValue >= AutoConstants.scaleJankTurnToScaleRightSide && !ElevatorLevel.reachedScale())
+				{
+					Drivetrain.stop();
+					if(ElevatorLevel.elevatorEncoderValue < Constants.scale)
+					{
+						Elevator.moveEleVader(Functions.stopToScale(ElevatorLevel.elevatorEncoderValue));
+					}
+					else
+					{
+						Elevator.moveEleVader(-.2);
+					}
+						
+				}
+				else if(rValue < AutoConstants.scaleJankTurnToScaleRightSide && ElevatorLevel.reachedScale())
+				{
+					rSSpeed = .35;
+					Drivetrain.tankDrive(lSSpeed, rSSpeed);
+					Elevator.moveEleVader(.13);
+				}
+				else
+				{
+					Drivetrain.stop();
+					Elevator.moveEleVader(.13);
+					Timer.delay(.2);
+					currentState = 5;
+				}
+				break;
+			case 5:
+//				if(Intake.bannerSensor.get())
 //				{
-//					Elevator.stopEleVader();
-//					ElevatorLevel.resetElevatorEncoders();
-//					currentState = 1;
+//					Intake.shootCube();
 //				}
 //				else
 //				{
-//					Encoders.resetEncoders();
-//					Elevator.moveEleVader(-.2);
+//					Timer.delay(.3);
+//					currentState = 6;
 //				}
-//				break;
-//			case 1:
-//				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.scaleJankStraightRightSide - 1500))
+				Intake.shootCube();
+				Encoders.resetEncoders();
+				Timer.delay(1);
+				currentState = 14;
+				break;
+			case 14:
+				if(ElevatorLevel.reachedStop())
+				{
+					Elevator.stopEleVader();
+					currentState = 20;
+				}
+				else
+				{
+					Intake.stopIntake();
+					Elevator.moveEleVader(-.3);
+				}
+				break;
+			case 6:
+				lSSpeed = 0;
+				if(Math.abs(rValue) < AutoConstants.scaleJankTurnToScaleRightSide)
+				{
+					rSSpeed = -.3;
+					Drivetrain.tankDrive(lSSpeed, rSSpeed);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 7;
+				}
+				break;
+			case 7:
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.backUpAfterFirstScaleRightSide - 1500))
+				{
+					avg = (Math.abs(rValue) + Math.abs(lValue))/2.0;
+					lSSpeed = Functions.backUpAfterFirstCubeRightSideJank(avg);
+					rSSpeed = Functions.backUpAfterFirstCubeRightSideJank(avg);
+					adjustmentValues = NewFunctions.adjustmentValues(lValue, rValue, false);
+					Drivetrain.tankDrive(lSSpeed + adjustmentValues[0], rSSpeed + adjustmentValues[1]);
+				}
+				else
+				{
+					currentState = 8;
+				}
+				break;
+			case 8:
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.backUpAfterFirstScaleRightSide))
+				{
+					avg = (Math.abs(rValue) + Math.abs(lValue))/2.0;
+					lSSpeed = -.2;
+					rSSpeed = -.2;
+					adjustmentValues = NewFunctions.adjustmentValues(lValue, rValue, false);
+					Drivetrain.tankDrive(lSSpeed + adjustmentValues[0], rSSpeed + adjustmentValues[1]);
+				}
+				else
+				{
+					Drivetrain.stop();
+					Timer.delay(.2);
+					currentState = 9;
+				}
+				break;
+			case 9:
+				if(lValue == 0 && rValue == 0)
+				{
+					currentState = 10;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+				}
+				break;
+			case 10:
+				if(Functions.uTurnForFirstCubeRightSideBigJank(rValue) != 0)
+				{
+					rSSpeed = Functions.uTurnForFirstCubeRightSideBigJank(rValue);
+					lSSpeed = rSSpeed/AutoConstants.UTurntoFirstCubeJankRightSideRatio;
+					//Drivetrain.goStraightLeft(lValue, rValue, AutoConstants.bigUTurntoFirstCubeJankRightSide/AutoConstants.UTurntoFirstCubeJankRightSideRatio, AutoConstants.bigUTurntoFirstCubeJankRightSide, lSSpeed, rSSpeed, .06);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 11;
+				}
+				break;
+			case 11:
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				intakeMechanism.openIntake();
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.StraightToFirstCubeJankRightSide))
+				{
+					lSSpeed = .4;
+					rSSpeed = .4;
+					adjustmentValues = NewFunctions.adjustmentValues(lValue, rValue, true);
+					Drivetrain.tankDrive(lSSpeed + adjustmentValues[0], rSSpeed + adjustmentValues[1]);
+					Intake.pickUpCube();
+				}
+				else
+				{
+					currentState = 12;
+				}
+				break;
+			case 12:
+				Intake.stopIntake();
+				intakeMechanism.closeIntake();
+				Drivetrain.stop();
+				Timer.delay(.2);
+				currentState = 13;
+				break;
+			case 13:
+				if(ElevatorLevel.reachedSwitch())
+				{
+					Elevator.stopEleVader();
+					currentState = 15;
+				}
+				else
+				{
+					Elevator.moveEleVader(Functions.stopToSwitch(ElevatorLevel.elevatorEncoderValue));
+				}
+				break;
+				//no case 14
+			case 15:
+				Timer.delay(.2);
+				currentState = 16;
+				break;
+			case 16:
+//				if(Intake.bannerSensor.get())
 //				{
-//					avg = (lValue + rValue)/2.0;
-//					speed = Functions.straightInitialRightSideJank(avg);
-//					Drivetrain.driveForw(lValue, rValue, speed);
+//					Intake.shootCube();
 //				}
 //				else
 //				{
-//					currentState = 2;
+//					Timer.delay(.3);
+//					currentState = 6;
 //				}
-//				break;
-//			case 2:
-//				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.scaleJankStraightRightSide))
-//				{
-//					avg = (lValue + rValue)/2.0;
-//					speed = .2;
-//					Drivetrain.driveForw(lValue, rValue, speed);
-//				}
-//				else
-//				{
-//					prevLeftEncoder = lValue;
-//					prevRightEncoder = rValue;
-//					currentState = 20;
-//				}
-//				break;
-//			case 3:
-//				lValue-=prevLeftEncoder;
-//				rValue-=prevRightEncoder;
-//				lSSpeed = 0;
-//				if(rValue < AutoConstants.scaleJankTurnToScaleRightSide && !ElevatorLevel.reachedScale())
-//				{
-//					rSSpeed = .35;
-//					Drivetrain.tankDrive(lSSpeed, rSSpeed);
-//					Elevator.moveEleVader(Functions.stopToScale(ElevatorLevel.elevatorEncoderValue));
-//				}
-//				else if(rValue >= AutoConstants.scaleJankTurnToScaleRightSide && !ElevatorLevel.reachedScale())
-//				{
-//					Drivetrain.stop();
-//					if(ElevatorLevel.elevatorEncoderValue < Constants.scale)
-//					{
-//						Elevator.moveEleVader(Functions.stopToScale(ElevatorLevel.elevatorEncoderValue));
-//					}
-//					else
-//					{
-//						Elevator.moveEleVader(-.2);
-//					}
-//						
-//				}
-//				else if(rValue < AutoConstants.scaleJankTurnToScaleRightSide && ElevatorLevel.reachedScale())
-//				{
-//					rSSpeed = .35;
-//					Drivetrain.tankDrive(lSSpeed, rSSpeed);
-//					Elevator.moveEleVader(.13);
-//				}
-//				else
-//				{
-//					Drivetrain.stop();
-//					Elevator.moveEleVader(.13);
-//					Timer.delay(.2);
-//					currentState = 5;
-//				}
-//				break;
-//			case 5:
-////				if(Intake.bannerSensor.get())
-////				{
-////					Intake.shootCube();
-////				}
-////				else
-////				{
-////					Timer.delay(.3);
-////					currentState = 6;
-////				}
-//				Intake.shootCube();
-//				Encoders.resetEncoders();
-//				Timer.delay(1);
-//				currentState = 14;
-//				break;
-//			case 14:
-//				if(ElevatorLevel.reachedStop())
-//				{
-//					Elevator.stopEleVader();
-//					currentState = 20;
-//				}
-//				else
-//				{
-//					Intake.stopIntake();
-//					Elevator.moveEleVader(-.3);
-//				}
-//				break;
-//			case 6:
-//				lSSpeed = 0;
-//				if(Math.abs(rValue) < AutoConstants.scaleJankTurnToScaleRightSide)
-//				{
-//					rSSpeed = -.3;
-//					Drivetrain.tankDrive(lSSpeed, rSSpeed);
-//				}
-//				else
-//				{
-//					prevLeftEncoder = lValue;
-//					prevRightEncoder = rValue;
-//					currentState = 7;
-//				}
-//				break;
-//			case 7:
-//				lValue-=prevLeftEncoder;
-//				rValue-=prevRightEncoder;
-//				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.backUpAfterFirstScaleRightSide - 1500))
-//				{
-//					avg = (Math.abs(rValue) + Math.abs(lValue))/2.0;
-//					lSSpeed = Functions.backUpAfterFirstCubeRightSideJank(avg);
-//					rSSpeed = Functions.backUpAfterFirstCubeRightSideJank(avg);
-//					adjustmentValues = NewFunctions.adjustmentValues(lValue, rValue, false);
-//					Drivetrain.tankDrive(lSSpeed + adjustmentValues[0], rSSpeed + adjustmentValues[1]);
-//				}
-//				else
-//				{
-//					currentState = 8;
-//				}
-//				break;
-//			case 8:
-//				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.backUpAfterFirstScaleRightSide))
-//				{
-//					avg = (Math.abs(rValue) + Math.abs(lValue))/2.0;
-//					lSSpeed = -.2;
-//					rSSpeed = -.2;
-//					adjustmentValues = NewFunctions.adjustmentValues(lValue, rValue, false);
-//					Drivetrain.tankDrive(lSSpeed + adjustmentValues[0], rSSpeed + adjustmentValues[1]);
-//				}
-//				else
-//				{
-//					Drivetrain.stop();
-//					Timer.delay(.2);
-//					currentState = 9;
-//				}
-//				break;
-//			case 9:
-//				if(lValue == 0 && rValue == 0)
-//				{
-//					currentState = 10;
-//				}
-//				else
-//				{
-//					Encoders.resetEncoders();
-//				}
-//				break;
-//			case 10:
-//				if(Functions.uTurnForFirstCubeRightSideBigJank(rValue) != 0)
-//				{
-//					rSSpeed = Functions.uTurnForFirstCubeRightSideBigJank(rValue);
-//					lSSpeed = rSSpeed/AutoConstants.UTurntoFirstCubeJankRightSideRatio;
-//					Drivetrain.goStraightLeft(lValue, rValue, AutoConstants.bigUTurntoFirstCubeJankRightSide/AutoConstants.UTurntoFirstCubeJankRightSideRatio, AutoConstants.bigUTurntoFirstCubeJankRightSide, lSSpeed, rSSpeed, .06);
-//				}
-//				else
-//				{
-//					prevLeftEncoder = lValue;
-//					prevRightEncoder = rValue;
-//					currentState = 11;
-//				}
-//				break;
-//			case 11:
-//				lValue-=prevLeftEncoder;
-//				rValue-=prevRightEncoder;
-//				intakeMechanism.openIntake();
-//				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.StraightToFirstCubeJankRightSide))
-//				{
-//					lSSpeed = .4;
-//					rSSpeed = .4;
-//					adjustmentValues = NewFunctions.adjustmentValues(lValue, rValue, true);
-//					Drivetrain.tankDrive(lSSpeed + adjustmentValues[0], rSSpeed + adjustmentValues[1]);
-//					Intake.pickUpCube();
-//				}
-//				else
-//				{
-//					currentState = 12;
-//				}
-//				break;
-//			case 12:
-//				Intake.stopIntake();
-//				intakeMechanism.closeIntake();
-//				Drivetrain.stop();
-//				Timer.delay(.2);
-//				currentState = 13;
-//				break;
-//			case 13:
-//				if(ElevatorLevel.reachedSwitch())
-//				{
-//					Elevator.stopEleVader();
-//					currentState = 15;
-//				}
-//				else
-//				{
-//					Elevator.moveEleVader(Functions.stopToSwitch(ElevatorLevel.elevatorEncoderValue));
-//				}
-//				break;
-//				//no case 14
-//			case 15:
-//				Timer.delay(.2);
-//				currentState = 16;
-//				break;
-//			case 16:
-////				if(Intake.bannerSensor.get())
-////				{
-////					Intake.shootCube();
-////				}
-////				else
-////				{
-////					Timer.delay(.3);
-////					currentState = 6;
-////				}
-//				Intake.shootCube();
-//				//shoot towards the right side of the robot
-//				Encoders.resetEncoders();
-//				Timer.delay(.7);
-//				currentState = 17;
-//				break;
-//			case 17:
-//				Intake.stopIntake();
-//				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
-//				{
-//					Elevator.stopEleVader();
-//					ElevatorLevel.resetElevatorEncoders();
-//					currentState = 18;
-//				}
-//				else
-//				{
-//					Encoders.resetEncoders();
-//					Elevator.moveEleVader(Functions.switchToStop(ElevatorLevel.elevatorEncoderValue));
-//				}
-//				break;
-//			case 18:
-//				if(Functions.backUpAfterPickUpFirstCubeRightSideBigJank(rValue, false) !=0)
-//				{
-//					rSSpeed = Functions.backUpAfterPickUpFirstCubeRightSideBigJank(rValue, false);
-//					lSSpeed = rSSpeed/AutoConstants.BackUpAfterFirstCubeRatioJankRightSide;
-//					Drivetrain.goBackLeft(lValue, rValue, AutoConstants.halfCircleTurnForCubesRightSideJank, AutoConstants.halfCircleTurnForCubesRightSideJank/AutoConstants.BackUpAfterFirstCubeRatioJankRightSide, lSSpeed, rSSpeed, .05);
-//				}
-//				else
-//				{
-//					currentState = 19;
-//				}
-//				break;
-//			case 19:
-//				Drivetrain.stop();
-//				Timer.delay(.2);
-//				currentState = 20;
-//				break;
-//			case 20:
-//				Drivetrain.stop();
-//				break;
-//				
-//		}
-//	}
+				Intake.shootCube();
+				//shoot towards the right side of the robot
+				Encoders.resetEncoders();
+				Timer.delay(.7);
+				currentState = 17;
+				break;
+			case 17:
+				Intake.stopIntake();
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					currentState = 18;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					Elevator.moveEleVader(Functions.switchToStop(ElevatorLevel.elevatorEncoderValue));
+				}
+				break;
+			case 18:
+				if(Functions.backUpAfterPickUpFirstCubeRightSideBigJank(rValue, false) !=0)
+				{
+					rSSpeed = Functions.backUpAfterPickUpFirstCubeRightSideBigJank(rValue, false);
+					lSSpeed = rSSpeed/AutoConstants.BackUpAfterFirstCubeRatioJankRightSide;
+					//Drivetrain.goBackLeft(lValue, rValue, AutoConstants.halfCircleTurnForCubesRightSideJank, AutoConstants.halfCircleTurnForCubesRightSideJank/AutoConstants.BackUpAfterFirstCubeRatioJankRightSide, lSSpeed, rSSpeed, .05);
+				}
+				else
+				{
+					currentState = 19;
+				}
+				break;
+			case 19:
+				Drivetrain.stop();
+				Timer.delay(.2);
+				currentState = 20;
+				break;
+			case 20:
+				Drivetrain.stop();
+				break;
+				
+		}
+	}
 //	
 //	public static void testDrift(double lValue, double rValue)
 //	{

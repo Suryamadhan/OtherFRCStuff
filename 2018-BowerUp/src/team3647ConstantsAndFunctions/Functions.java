@@ -421,10 +421,14 @@ public class Functions
 	//JANK
 	public static double straightInitialRightSideJank(double eValue)
 	{
-		eValue*=(0.000137051979513);
-		eValue+=1.855;
-		speed = sinx(eValue/2.0);
-		return speed;
+		if(eValue < 10000)
+		{
+			return 1;
+		}
+		else
+		{
+			return .8;
+		}
 		//.8 to .6
 	}
 	
@@ -512,26 +516,6 @@ public class Functions
 	}
 	
 	public static double secondTurnSpeedForMSlSW(double eValue)
-	{
-		if(eValue < AutoConstants.secondBigTurnMSLSW - 2500)
-		{
-			return .8;
-		}
-		if(eValue < AutoConstants.secondBigTurnMSLSW - 2000)
-		{
-			return .7;
-		}
-		else if(eValue < AutoConstants.secondBigTurnMSLSW)
-		{
-			return .6;
-		}
-		else
-		{
-			return 0;
-		}
-	}
-	
-	public static double straightToSwitchMSlSW(double eValue)
 	{
 		if(eValue < AutoConstants.secondBigTurnMSLSW - 2500)
 		{
