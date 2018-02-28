@@ -278,7 +278,7 @@ public class Autonomous
 				{
 					prevLeftEncoder = lValue;
 					prevRightEncoder = rValue;
-					currentState = 20;
+					currentState = 3;
 				}
 				break;
 			case 3:
@@ -306,7 +306,7 @@ public class Autonomous
 				}
 				else if(rValue < AutoConstants.scaleJankTurnToScaleRightSide && ElevatorLevel.reachedScale())
 				{
-					rSSpeed = .35;
+					rSSpeed = .55;
 					Drivetrain.tankDrive(lSSpeed, rSSpeed);
 					Elevator.moveEleVader(.13);
 				}
@@ -331,7 +331,7 @@ public class Autonomous
 				Intake.shootCube();
 				Encoders.resetEncoders();
 				Timer.delay(1);
-				currentState = 14;
+				currentState = 20;
 				break;
 			case 14:
 				if(ElevatorLevel.reachedStop())

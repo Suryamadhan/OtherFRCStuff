@@ -68,7 +68,7 @@ public class Robot extends IterativeRobot {
 		{
 			enc.setEncoderValues();
 			eleVader.setElevatorEncoder();
-			Autonomous.middleSideRightAuto(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
+			Autonomous.rightSideBigJank(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 			//Autonomous.rightSideBigJank(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 		}
 	}
@@ -114,6 +114,7 @@ public class Robot extends IterativeRobot {
 			Elevator.moveEleVader(joy.rightJoySticky * .4);
 		}
 		ElevatorLevel.testElevatorEncoders();
+		System.out.println(ElevatorLevel.bannerSensor.get());
 	}
 	
 	public void updateJoysticks()

@@ -3,9 +3,9 @@ package team3647ConstantsAndFunctions;
 public class AutoConstants 
 {
 	//New Constants
-//	public final static double scaleJankStraightRightSide = 22918.3118052;
-	public final static double scaleJankStraightRightSide = 16000;
-	public final static double scaleJankTurnToScaleRightSide = 2016;
+//	public final static double scaleJankStraightRightSide = ;
+	public final static double scaleJankStraightRightSide = 10000;//21000
+	public final static double scaleJankTurnToScaleRightSide = 5500;
 	public final static double backUpAfterFirstScaleRightSide = 6692.14704713;
 	
 	public final static double bigUTurntoFirstCubeJankRightSide = 10800;
