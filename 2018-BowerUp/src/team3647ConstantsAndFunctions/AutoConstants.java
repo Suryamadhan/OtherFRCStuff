@@ -4,7 +4,7 @@ public class AutoConstants
 {
 	//New Constants
 //	public final static double scaleJankStraightRightSide = ;
-	public final static double scaleJankStraightRightSide = 10000;//21000
+	public final static double scaleJankStraightRightSide = 14000;//21000
 	public final static double scaleJankTurnToScaleRightSide = 5500;
 	public final static double backUpAfterFirstScaleRightSide = 6692.14704713;
 	
@@ -28,6 +28,5 @@ public class AutoConstants
 	public final static double ratioForFirstTurnMSRSW = 3.6;
 	public final static double secondBigOneWheelCurveMSRSW = 4800;
 	public final static double straightForSwitchMSRSW = 2750;
-	
 	
 }

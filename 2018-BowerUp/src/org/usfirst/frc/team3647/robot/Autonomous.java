@@ -328,29 +328,30 @@ public class Autonomous
 //					Timer.delay(.3);
 //					currentState = 6;
 //				}
+				Elevator.moveEleVader(.13);
 				Intake.shootCube();
 				Encoders.resetEncoders();
 				Timer.delay(1);
-				currentState = 20;
-				break;
-			case 14:
-				if(ElevatorLevel.reachedStop())
-				{
-					Elevator.stopEleVader();
-					currentState = 20;
-				}
-				else
-				{
-					Intake.stopIntake();
-					Elevator.moveEleVader(-.3);
-				}
+				currentState = 6;
 				break;
 			case 6:
 				lSSpeed = 0;
-				if(Math.abs(rValue) < AutoConstants.scaleJankTurnToScaleRightSide)
+				if(Math.abs(rValue) < AutoConstants.scaleJankTurnToScaleRightSide && !ElevatorLevel.reachedStop())
 				{
-					rSSpeed = -.3;
+					rSSpeed = -.55;
 					Drivetrain.tankDrive(lSSpeed, rSSpeed);
+					Elevator.moveEleVader(Functions.scaleToStop(ElevatorLevel.elevatorEncoderValue));
+				}
+				else if(Math.abs(rValue) >= AutoConstants.scaleJankTurnToScaleRightSide && !ElevatorLevel.reachedStop())
+				{
+					Drivetrain.stop();
+					Elevator.moveEleVader(Functions.scaleToStop(ElevatorLevel.elevatorEncoderValue));
+				}
+				else if(Math.abs(rValue) < AutoConstants.scaleJankTurnToScaleRightSide && ElevatorLevel.reachedStop())
+				{
+					rSSpeed = -.55;
+					Drivetrain.tankDrive(lSSpeed, rSSpeed);
+					Elevator.stopEleVader();
 				}
 				else
 				{
@@ -388,7 +389,7 @@ public class Autonomous
 				{
 					Drivetrain.stop();
 					Timer.delay(.2);
-					currentState = 9;
+					currentState = 20;
 				}
 				break;
 			case 9:

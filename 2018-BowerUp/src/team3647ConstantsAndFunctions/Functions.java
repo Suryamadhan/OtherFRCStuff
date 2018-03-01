@@ -429,6 +429,28 @@ public class Functions
 		{
 			return .8;
 		}
+		/*
+		if(eValue < 2000)
+		{
+			return .6;
+		}
+		else if(eValue < 3500)
+		{
+			return .7;
+		}
+		else if(eValue < 5000)
+		{
+			return .9;
+		}
+		else if(eValue < 16000)
+		{
+			return 1;
+		}
+		else
+		{
+			return .8;
+		}
+		 */
 		//.8 to .6
 	}
 	
