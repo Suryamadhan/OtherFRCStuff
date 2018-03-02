@@ -336,18 +336,18 @@ public class Autonomous
 				break;
 			case 6:
 				lSSpeed = 0;
-				if(Math.abs(rValue) < AutoConstants.scaleJankTurnToScaleRightSide && !ElevatorLevel.reachedStop())
+				if(Math.abs(rValue) < AutoConstants.scaleBackUpTurnJankTurnToScaleRightSide && !ElevatorLevel.reachedStop())
 				{
 					rSSpeed = -.55;
 					Drivetrain.tankDrive(lSSpeed, rSSpeed);
 					Elevator.moveEleVader(Functions.scaleToStop(ElevatorLevel.elevatorEncoderValue));
 				}
-				else if(Math.abs(rValue) >= AutoConstants.scaleJankTurnToScaleRightSide && !ElevatorLevel.reachedStop())
+				else if(Math.abs(rValue) >= AutoConstants.scaleBackUpTurnJankTurnToScaleRightSide && !ElevatorLevel.reachedStop())
 				{
 					Drivetrain.stop();
 					Elevator.moveEleVader(Functions.scaleToStop(ElevatorLevel.elevatorEncoderValue));
 				}
-				else if(Math.abs(rValue) < AutoConstants.scaleJankTurnToScaleRightSide && ElevatorLevel.reachedStop())
+				else if(Math.abs(rValue) < AutoConstants.scaleBackUpTurnJankTurnToScaleRightSide && ElevatorLevel.reachedStop())
 				{
 					rSSpeed = -.55;
 					Drivetrain.tankDrive(lSSpeed, rSSpeed);
@@ -366,10 +366,8 @@ public class Autonomous
 				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.backUpAfterFirstScaleRightSide - 1500))
 				{
 					avg = (Math.abs(rValue) + Math.abs(lValue))/2.0;
-					lSSpeed = Functions.backUpAfterFirstCubeRightSideJank(avg);
-					rSSpeed = Functions.backUpAfterFirstCubeRightSideJank(avg);
-					adjustmentValues = NewFunctions.adjustmentValues(lValue, rValue, false);
-					Drivetrain.tankDrive(lSSpeed + adjustmentValues[0], rSSpeed + adjustmentValues[1]);
+					speed = Functions.backUpAfterFirstCubeRightSideJank(avg);
+					Drivetrain.driveBack(lValue, rValue, speed);
 				}
 				else
 				{
@@ -380,10 +378,8 @@ public class Autonomous
 				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.backUpAfterFirstScaleRightSide))
 				{
 					avg = (Math.abs(rValue) + Math.abs(lValue))/2.0;
-					lSSpeed = -.2;
-					rSSpeed = -.2;
-					adjustmentValues = NewFunctions.adjustmentValues(lValue, rValue, false);
-					Drivetrain.tankDrive(lSSpeed + adjustmentValues[0], rSSpeed + adjustmentValues[1]);
+					speed = -.2;
+					Drivetrain.driveBack(lValue, rValue, speed);
 				}
 				else
 				{
@@ -505,6 +501,7 @@ public class Autonomous
 				break;
 			case 20:
 				Drivetrain.stop();
+				Intake.stopIntake();
 				break;
 				
 		}

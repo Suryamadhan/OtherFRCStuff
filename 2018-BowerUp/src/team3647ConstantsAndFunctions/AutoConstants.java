@@ -6,6 +6,7 @@ public class AutoConstants
 //	public final static double scaleJankStraightRightSide = ;
 	public final static double scaleJankStraightRightSide = 14000;//21000
 	public final static double scaleJankTurnToScaleRightSide = 5500;
+	public final static double scaleBackUpTurnJankTurnToScaleRightSide = 3100;//3100
 	public final static double backUpAfterFirstScaleRightSide = 6692.14704713;
 	
 	public final static double bigUTurntoFirstCubeJankRightSide = 10800;

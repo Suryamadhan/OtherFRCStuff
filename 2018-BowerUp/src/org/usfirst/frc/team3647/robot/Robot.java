@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3647.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -23,6 +24,7 @@ public class Robot extends IterativeRobot {
 	ElevatorLevel eleVader;
 	MotorSafety safety;
 	MotorSafetyHelper safetyChecker;
+	CameraServer yayt;
 
 	@Override
 	public void robotInit() 
@@ -35,6 +37,8 @@ public class Robot extends IterativeRobot {
 			safetyChecker = new MotorSafetyHelper(safety);
 			joy = new Joysticks();
 			eleVader = new ElevatorLevel();
+			yayt = CameraServer.getInstance();
+			yayt.startAutomaticCapture("cam1", 1);
 			Encoders.resetEncoders();
 			ElevatorLevel.resetElevatorEncoders();
 			Drivetrain.drivetrainInitialization();

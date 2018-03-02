@@ -458,7 +458,7 @@ public class Functions
 	{
 		eValue*=(-0.0000577795654239);
 		eValue+=.9;
-		return eValue;
+		return -eValue;
 	}
 	
 	public static double uTurnForFirstCubeRightSideBigJank(double eValue)
