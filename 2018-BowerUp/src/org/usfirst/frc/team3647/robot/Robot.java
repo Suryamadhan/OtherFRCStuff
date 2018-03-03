@@ -37,8 +37,8 @@ public class Robot extends IterativeRobot {
 			safetyChecker = new MotorSafetyHelper(safety);
 			joy = new Joysticks();
 			eleVader = new ElevatorLevel();
-			yayt = CameraServer.getInstance();
-			yayt.startAutomaticCapture("cam1", 1);
+//			yayt = CameraServer.getInstance();
+//			yayt.startAutomaticCapture("cam1", 1);
 			Encoders.resetEncoders();
 			ElevatorLevel.resetElevatorEncoders();
 			Drivetrain.drivetrainInitialization();
@@ -72,7 +72,8 @@ public class Robot extends IterativeRobot {
 		{
 			enc.setEncoderValues();
 			eleVader.setElevatorEncoder();
-			Autonomous.rightSideBigJank(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
+			Autonomous.frontLeftto8(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
+			//System.out.println(Autonomous.currentState);
 			//Autonomous.rightSideBigJank(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 		}
 	}
@@ -91,7 +92,7 @@ public class Robot extends IterativeRobot {
 			CrashChecker.logTeleopPeriodic();
 			updateJoysticks();
 			runMotorSafety();
-			//runPistons();
+			runPistons();
 			runDrivetrain();
 			Encoders.testEncoders();
 			runElevator();
@@ -148,7 +149,7 @@ public class Robot extends IterativeRobot {
 		//Clamps.runPiston(joy.buttonA);
 //		if(Drivetrain.leftSRX.get() == 0 && Drivetrain.rightSRX.get() == 0 && Elevator.elevatorState == Elevator.aimedElevatorState && Elevator.aimedElevatorState!=-1)
 //		{
-			intakeMechanism.runIntake(joy.rightBumper1);
+			intakeMechanism.runIntake(joy.leftBumper1);
 			IntakeTilt.runPiston(joy.buttonX);
 			Shifter.runPiston(joy.buttonY);
 		//}

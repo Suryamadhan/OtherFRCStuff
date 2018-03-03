@@ -20,7 +20,7 @@ public class AutoConstants
 	//Middle Auto Left Side
 	public final static double firstBigTurnMSLSW = 7600;
 	public final static double ratioForFirstTurnMSLSW = 2.6;
-	public final static double secondBigTurnMSLSW = 5500;
+	public final static double secondBigTurnMSLSW = 5300;
 	public final static double ratioForSecondTurnMSLSW = 6;
 	public final static double straightForSwitchMSLSW = 1500;
 	
@@ -30,15 +30,15 @@ public class AutoConstants
 	public final static double secondBigOneWheelCurveMSRSW = 4800;
 	public final static double straightForSwitchMSRSW = 2750;
 	
-	public final static double testStraights = 7000;
-	public final static double backRightTurnDist = 7000;
-	public final static double backRightTurnRatio = 3.6;
+	public final static double testStraights = 5300;
+	public final static double backRightTurnDist = 9000;
+	public final static double backRightTurnRatio = 2;
 	
-	public final static double frontLeftTurn8Dist = 7000;
-	public final static double frontLeftTurn8Ratio = 3.6;
+	public final static double frontLeftTurn8Dist = 7500;
+	public final static double frontLeftTurn8Ratio = 2.1;
 	
-	public final static double frontLeftTurn6Dist = 7000;
-	public final static double frontLeftTurn6Ratio = 3.6;
+	public final static double frontLeftTurn6Dist = 9000;
+	public final static double frontLeftTurn6Ratio = 2.8;
 	public final static double pickUpCube = 4000;
 	
 	public final static double frontRightTurn8Dist = 7000;
