@@ -537,6 +537,8 @@ public class Autonomous
 		switch(currentState)
 		{
 			case 0:
+				prevLeftEncoder = 0;
+				prevRightEncoder = 0;
 				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
 				{
 					Elevator.stopEleVader();
@@ -553,7 +555,7 @@ public class Autonomous
 				if(ElevatorLevel.reachedPickUp())
 				{
 					Elevator.stopEleVader();
-					currentState = 2;
+					currentState = 7;
 				}
 				else
 				{
@@ -709,7 +711,7 @@ public class Autonomous
 				}
 				else
 				{
-					currentState = 10;
+					currentState = 14;
 				}
 				break;
 			case 10:
