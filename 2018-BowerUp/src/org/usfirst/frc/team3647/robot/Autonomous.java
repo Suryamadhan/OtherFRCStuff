@@ -665,7 +665,7 @@ public class Autonomous
 				{
 					prevLeftEncoder = lValue;
 					prevRightEncoder = rValue;
-					currentState = 7;
+					currentState = 14;
 				}
 				break;
 			case 7:
@@ -714,6 +714,50 @@ public class Autonomous
 				break;
 			case 10:
 				ElevatorLevel.maintainPickUpPosition();
+				Drivetrain.stop();
+				Timer.delay(.1);
+				currentState = 11;
+				break;
+			case 11:
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedPickUp())
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					currentState = 12;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					ElevatorLevel.maintainPickUpPosition();
+				}
+				break;
+			case 12:
+				ElevatorLevel.maintainPickUpPosition();
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.rrStraightToCube - 1600))
+				{
+					Drivetrain.driveForw(lValue, rValue, .8);
+				}
+				else
+				{
+					currentState = 12;
+				}
+				break;
+			case 13:
+				ElevatorLevel.maintainPickUpPosition();
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.rrStraightToCube))
+				{
+					avg = (lValue + rValue)/2.0;
+					speed = .2;
+					Drivetrain.driveForw(lValue, rValue, speed);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 14;
+				}
+				break;
+			case 14:
 				Drivetrain.stop();
 				break;
 		}
