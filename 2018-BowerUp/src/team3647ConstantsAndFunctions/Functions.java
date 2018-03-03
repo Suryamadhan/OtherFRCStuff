@@ -597,6 +597,86 @@ public class Functions
 		}
 	}
 	
+	public static double frontLeftTurn8Speed(double eValue)
+	{
+		if(eValue < AutoConstants.frontLeftTurn8Dist - 1500)
+		{
+			return .8;
+		}
+		else if(eValue < AutoConstants.frontLeftTurn8Dist)
+		{
+			return .6;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static double frontRightTurn8Speed(double eValue)
+	{
+		if(eValue < AutoConstants.frontRightTurn8Dist - 1500)
+		{
+			return .8;
+		}
+		else if(eValue < AutoConstants.frontRightTurn8Dist)
+		{
+			return .6;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static double frontRightTurn6Speed(double eValue)
+	{
+		if(eValue < AutoConstants.frontRightTurn6Dist - 1500)
+		{
+			return .8;
+		}
+		else if(eValue < AutoConstants.frontRightTurn6Dist)
+		{
+			return .6;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static double frontLeftTurn6Speed(double eValue)
+	{
+		if(eValue < AutoConstants.frontLeftTurn6Dist - 1500)
+		{
+			return .8;
+		}
+		else if(eValue < AutoConstants.frontLeftTurn6Dist)
+		{
+			return .6;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static double backUpRightTurnSpeed(double eValue)
+	{
+		if(eValue < AutoConstants.backRightTurnDist - 1500)
+		{
+			return -.8;
+		}
+		else if(eValue < AutoConstants.backRightTurnDist)
+		{
+			return -.6;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
 	
 	
 }

@@ -30,4 +30,23 @@ public class AutoConstants
 	public final static double secondBigOneWheelCurveMSRSW = 4800;
 	public final static double straightForSwitchMSRSW = 2750;
 	
+	public final static double testStraights = 7000;
+	public final static double backRightTurnDist = 7000;
+	public final static double backRightTurnRatio = 3.6;
+	
+	public final static double frontLeftTurn8Dist = 7000;
+	public final static double frontLeftTurn8Ratio = 3.6;
+	
+	public final static double frontLeftTurn6Dist = 7000;
+	public final static double frontLeftTurn6Ratio = 3.6;
+	public final static double pickUpCube = 4000;
+	
+	public final static double frontRightTurn8Dist = 7000;
+	public final static double frontRightTurn8Ratio = 3.6;
+	
+	public final static double frontRightTurn6Dist = 7000;
+	public final static double frontRightTurn6Ratio = 3.6;
+
+
+	
 }
