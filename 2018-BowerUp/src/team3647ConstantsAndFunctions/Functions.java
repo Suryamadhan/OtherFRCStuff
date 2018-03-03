@@ -681,15 +681,15 @@ public class Functions
 	
 	public static double rrStarightToScale(double eValue)
 	{
-		if(eValue < 2000)
+		if(eValue < 1000)
 		{
 			return .6;
 		}
-		else if(eValue < 3500)
+		else if(eValue < 2000)
 		{
 			return .8;
 		}
-		else if(eValue < 10000)
+		else if(eValue < 7000)
 		{
 			return 1;
 		}

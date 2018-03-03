@@ -49,11 +49,11 @@ public class AutoConstants
 	
 	
 	//RR constants
-	public final static double rrStraightToScale = 14000;//21000
-	public final static double rrScaleTurn = 5500;
-	public final static double rrBackTurnAfterSwitch = 3100;
+	public final static double rrStraightToScale = 10000;//21000
+	public final static double rrScaleTurn = 6800;
+	public final static double rrBackTurnAfterSwitch = 2400;
 	public final static double rrbackUpStraightAfterScale = 2750;
-	public final static double rrbackUpToWallTurnDist = 4800;
+	public final static double rrbackUpToWallTurnDist = 8150;
 	
 	//front, right where it started
 	//61.5 inches back from 

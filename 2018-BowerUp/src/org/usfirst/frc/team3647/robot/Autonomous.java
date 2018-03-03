@@ -557,7 +557,7 @@ public class Autonomous
 				}
 				else
 				{
-					Elevator.moveEleVader(Functions.stopToPickUp(ElevatorLevel.elevatorEncoderValue));
+					Elevator.moveEleVader(.5);
 				}
 				break;
 			case 2:
@@ -585,7 +585,7 @@ public class Autonomous
 				{
 					prevLeftEncoder = lValue;
 					prevRightEncoder = rValue;
-					currentState = 10;
+					currentState = 4;
 				}
 				break;
 			case 4:
@@ -613,7 +613,7 @@ public class Autonomous
 				}
 				else if(rValue < AutoConstants.scaleJankTurnToScaleRightSide && ElevatorLevel.reachedScale())
 				{
-					rSSpeed = .55;
+					rSSpeed = .7;
 					Drivetrain.tankDrive(lSSpeed, rSSpeed);
 					ElevatorLevel.maintainScalePosition();
 				}
