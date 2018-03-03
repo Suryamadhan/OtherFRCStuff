@@ -70,6 +70,7 @@ public class Robot extends IterativeRobot {
 	{
 		while(DriverStation.getInstance().isAutonomous() && !DriverStation.getInstance().isDisabled())
 		{
+			runMotorSafety();
 			enc.setEncoderValues();
 			eleVader.setElevatorEncoder();
 			Autonomous.frontLeftto8(Encoders.leftEncoderValue, Encoders.rightEncoderValue);

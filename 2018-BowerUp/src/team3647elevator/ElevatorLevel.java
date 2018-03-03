@@ -132,7 +132,7 @@ public class ElevatorLevel
 	{
 		if(reachedScale())
 		{
-			Elevator.stopEleVader();
+			Elevator.moveEleVader(.13);
 		}
 		else
 		{

@@ -46,6 +46,17 @@ public class AutoConstants
 	
 	public final static double frontRightTurn6Dist = 7000;
 	public final static double frontRightTurn6Ratio = 3.6;
+	
+	
+	//RR constants
+	public final static double rrStraightToScale = 14000;//21000
+	public final static double rrScaleTurn = 5500;
+	public final static double rrBackTurnAfterSwitch = 3100;
+	public final static double rrbackUpStraightAfterScale = 2750;
+	public final static double rrbackUpToWallTurnDist = 4800;
+	
+	//11.5 inches back from the start
+	//61.5 inches back from 
 
 
 	
