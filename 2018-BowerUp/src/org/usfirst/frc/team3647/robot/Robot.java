@@ -73,7 +73,7 @@ public class Robot extends IterativeRobot {
 			runMotorSafety();
 			enc.setEncoderValues();
 			eleVader.setElevatorEncoder();
-			Autonomous.frontLeftto8(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
+			Autonomous.rr(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 			//System.out.println(Autonomous.currentState);
 			//Autonomous.rightSideBigJank(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 		}

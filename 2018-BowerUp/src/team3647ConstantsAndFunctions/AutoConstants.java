@@ -55,7 +55,7 @@ public class AutoConstants
 	public final static double rrbackUpStraightAfterScale = 2750;
 	public final static double rrbackUpToWallTurnDist = 4800;
 	
-	//11.5 inches back from the start
+	//front, right where it started
 	//61.5 inches back from 
 
 
