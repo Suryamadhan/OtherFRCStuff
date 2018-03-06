@@ -738,7 +738,66 @@ public class Functions
 		}
 	}
 
+	//rr functions
 	
+		public static double lrStarightToScale(double eValue)
+		{
+			if(eValue < 1000)
+			{
+				return .6;
+			}
+			else if(eValue < 2000)
+			{
+				return .8;
+			}
+			else if(eValue < 7000)
+			{
+				return 1;
+			}
+			else
+			{
+				return .8;
+			}
+			/*
+			if(eValue < 2000)
+			{
+				return .6;
+			}
+			else if(eValue < 3500)
+			{
+				return .7;
+			}
+			else if(eValue < 5000)
+			{
+				return .9;
+			}
+			else if(eValue < 16000)
+			{
+				return 1;
+			}
+			else
+			{
+				return .8;
+			}
+			 */
+			//.8 to .6
+		}
+		
+		public static double lrPickUpCube(double eValue)
+		{
+			if(eValue < AutoConstants.rrCubeTurn - 1500)
+			{
+				return .8;
+			}
+			else if(eValue < AutoConstants.rrCubeTurn)
+			{
+				return .5;
+			}
+			else
+			{
+				return 0;
+			}
+		}
 	
 	
 }
