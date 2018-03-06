@@ -55,6 +55,19 @@ public class AutoConstants
 	public final static double rrbackUpStraightAfterScale = 2750;
 	public final static double rrbackUpToWallTurnDist = 8150;
 	public final static double rrStraightToCube = 3400;
+	public final static double rrCubeTurn = 7600;
+	public final static double rrCubeTurnRatio = 2.2;
+	
+
+	//LR constants
+	public final static double lrStraightToScale = 10000;//21000
+	public final static double lrScaleTurn = 6800;
+	public final static double lrBackTurnAfterSwitch = 2400;
+	public final static double lrbackUpStraightAfterScale = 2750;
+	public final static double lrbackUpToWallTurnDist = 8150;
+	public final static double lrStraightToCube = 10000;
+	public final static double lrCubeTurn = 7600;
+	public final static double lrCubeTurnRatio = 2.2;
 	
 	//front, right where it started
 	//61.5 inches back from 

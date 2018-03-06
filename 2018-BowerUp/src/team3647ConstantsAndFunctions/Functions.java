@@ -722,22 +722,22 @@ public class Functions
 		//.8 to .6
 	}
 	
-	public static double rrBackUpToWallTurn(double eValue)
+	public static double rrPickUpCube(double eValue)
 	{
-		eValue = Math.abs(eValue);
-		if(eValue < AutoConstants.rrbackUpToWallTurnDist - 1500)
+		if(eValue < AutoConstants.rrCubeTurn - 1500)
 		{
-			return -.8;
+			return .8;
 		}
-		else if(eValue < AutoConstants.rrbackUpToWallTurnDist)
+		else if(eValue < AutoConstants.rrCubeTurn)
 		{
-			return -.5;
+			return .5;
 		}
-		else 
+		else
 		{
 			return 0;
 		}
 	}
+
 	
 	
 	
