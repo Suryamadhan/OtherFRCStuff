@@ -26,8 +26,8 @@ public class Intake
 		}
 		else
 		{
-			rightIntakeMotor.set(ControlMode.PercentOutput, 0);
-			leftIntakeMotor.set(ControlMode.PercentOutput, 0);
+			rightIntakeMotor.set(ControlMode.PercentOutput, -.1);
+			leftIntakeMotor.set(ControlMode.PercentOutput, -.1);
 		}
 			
 		
