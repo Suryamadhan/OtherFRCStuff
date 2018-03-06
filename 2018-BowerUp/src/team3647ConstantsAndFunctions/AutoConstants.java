@@ -50,7 +50,7 @@ public class AutoConstants
 	
 	//RR constants
 	public final static double rrStraightToScale = 10000;//21000
-	public final static double rrScaleTurn = 6800;
+	public final static double rrScaleTurn = 2600;
 	public final static double rrBackTurnAfterSwitch = 2400;
 	public final static double rrbackUpStraightAfterScale = 2750;
 	public final static double rrbackUpToWallTurnDist = 8150;

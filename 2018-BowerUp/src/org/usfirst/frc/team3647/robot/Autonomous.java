@@ -323,7 +323,7 @@ public class Autonomous
 				{
 					prevLeftEncoder = lValue;
 					prevRightEncoder = rValue;
-					currentState = 4;
+					currentState = 19;
 				}
 				break;
 			case 4:
@@ -403,7 +403,7 @@ public class Autonomous
 				{
 					prevLeftEncoder = lValue;
 					prevRightEncoder = rValue;
-					currentState = 7;
+					currentState = 19;
 				}
 				break;
 			case 7:
