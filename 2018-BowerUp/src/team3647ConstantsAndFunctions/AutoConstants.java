@@ -69,6 +69,51 @@ public class AutoConstants
 	public final static double lrCubeTurn = 7600;
 	public final static double lrCubeTurnRatio = 2.2;
 	
+	//LL constants
+	public final static double llStraightBeforeTurn = 10000;//14868
+	public final static double llFirstTurn = 4948.0084294;
+	public final static double llFirstTurnRatio = 3.26086956522;
+	public final static double llcrossFieldDist = 10000;//19194
+	public final static double llFirstTurnToScale = 4948.0084294;
+	public final static double llFirstTurnToScaleRatio = 3.26086956522;
+	public final static double llStraightBeforeSecond = 2952.6;
+	public final static double llSecondTurnToScale = 4948.0084294;
+	public final static double llSecondTurnToScaleRatio = 3.26086956522;
+	public final static double llStraightToScale = 3360;
+	public final static double llBackUpAfterScale = 5040;
+	public final static double llFirstTurnAfterScale = 4948.0084294;
+	public final static double llFirstTurnAfterScaleRatio = 3.26086956522;
+	public final static double llFirstStraightAfterScale = 2952.6;
+	public final static double llSecondTurnAfterScale = 4948.0084294;
+	public final static double llSecondTurnAfterScaleRatio = 3.26086956522;
+	public final static double llStraightBeforeSwitch = 840;
+	public final static double llPickUpCubeTurn = 4948.0084294;
+	public final static double llPickUpCubeTurnRatio = 3.26086956522;
+	public final static double llPickUpCubeStraight = 1680;
+	
+	//RL Constants
+	public final static double rlStraightBeforeTurn = 10000;//14868
+	public final static double rlFirstTurn = 4948.0084294;
+	public final static double rlFirstTurnRatio = 3.26086956522;
+	public final static double rlcrossFieldDist = 10000;//19194
+	public final static double rlFirstTurnToScale = 4948.0084294;
+	public final static double rlFirstTurnToScaleRatio = 3.26086956522;
+	public final static double rlStraightBeforeSecond = 2952.6;
+	public final static double rlSecondTurnToScale = 4948.0084294;
+	public final static double rlSecondTurnToScaleRatio = 3.26086956522;
+	public final static double rlStraightToScale = 3360;
+	public final static double rlBackUpAfterScale = 5040;
+	public final static double rlFirstTurnAfterScale = 4948.0084294;
+	public final static double rlFirstTurnAfterScaleRatio = 3.26086956522;
+	public final static double rlFirstStraightAfterScale = 2952.6;
+	public final static double rlSecondTurnAfterScale = 4948.0084294;
+	public final static double rlSecondTurnAfterScaleRatio = 3.26086956522;
+	public final static double rlStraightBeforeSwitch = 10000;//12642
+	public final static double rlPickUpCubeTurn = 4948.0084294;
+	public final static double rlPickUpCubeTurnRatio = 3.26086956522;
+	public final static double rlPickUpCubeStraight = 1680;
+	
+	
 	//front, right where it started
 	//61.5 inches back from 
 

@@ -802,6 +802,318 @@ public class Functions
 				return 0;
 			}
 		}
+		
+	public static double llStraightBeforeTurn(double eValue)
+	{
+		if(eValue < 1000)
+		{
+			return .6;
+		}
+		else if(eValue < 2500)
+		{
+			return .8;
+		}
+		else if(eValue < 6500)
+		{
+			return 1;
+		}
+		else if(eValue < 7500)
+		{
+			return .8;
+		}
+		else
+		{
+			return .7;
+		}
+	}
 	
+	public static double llFirstTurn(double eValue)
+	{
+		if(eValue < AutoConstants.llFirstTurn - 1500)
+		{
+			return .8;
+		}
+		else if(eValue < AutoConstants.llFirstTurn)
+		{
+			return .5;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static double llcrossFieldDist(double eValue)
+	{
+		if(eValue < 1000)
+		{
+			return .6;
+		}
+		else if(eValue < 2500)
+		{
+			return .8;
+		}
+		else if(eValue < 6500)
+		{
+			return 1;
+		}
+		else if(eValue < 7500)
+		{
+			return .8;
+		}
+		else
+		{
+			return .7;
+		}
+	}
+	
+	public static double llFirstTurnToScale(double eValue)
+	{
+		if(eValue < AutoConstants.llFirstTurnToScale - 1500)
+		{
+			return .8;
+		}
+		else if(eValue < AutoConstants.llFirstTurnToScale)
+		{
+			return .5;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static double llSecondTurnToScale(double eValue)
+	{
+		if(eValue < AutoConstants.llSecondTurnToScale - 1500)
+		{
+			return .8;
+		}
+		else if(eValue < AutoConstants.llSecondTurnToScale)
+		{
+			return .5;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static double llFirstTurnAfterScale(double eValue)
+	{
+		if(eValue < AutoConstants.llFirstTurnAfterScale - 1500)
+		{
+			return .8;
+		}
+		else if(eValue < AutoConstants.llFirstTurnAfterScale)
+		{
+			return .5;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static double llSecondTurnAfterScale(double eValue)
+	{
+		if(eValue < AutoConstants.llSecondTurnAfterScale - 1500)
+		{
+			return .8;
+		}
+		else if(eValue < AutoConstants.llSecondTurnAfterScale)
+		{
+			return .5;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static double llPickUpCubeTurn(double eValue)
+	{
+		if(eValue < AutoConstants.llPickUpCubeTurn - 1500)
+		{
+			return .8;
+		}
+		else if(eValue < AutoConstants.llPickUpCubeTurn)
+		{
+			return .5;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static double rlStraightBeforeTurn(double eValue)
+	{
+		if(eValue < 1000)
+		{
+			return .6;
+		}
+		else if(eValue < 2500)
+		{
+			return .8;
+		}
+		else if(eValue < 6500)
+		{
+			return 1;
+		}
+		else if(eValue < 7500)
+		{
+			return .8;
+		}
+		else
+		{
+			return .7;
+		}
+	}
+	
+	public static double rlFirstTurn(double eValue)
+	{
+		if(eValue < AutoConstants.rlFirstTurn - 1500)
+		{
+			return .8;
+		}
+		else if(eValue < AutoConstants.rlFirstTurn)
+		{
+			return .5;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static double rlcrossFieldDist(double eValue)
+	{
+		if(eValue < 1000)
+		{
+			return .6;
+		}
+		else if(eValue < 2500)
+		{
+			return .8;
+		}
+		else if(eValue < 6500)
+		{
+			return 1;
+		}
+		else if(eValue < 7500)
+		{
+			return .8;
+		}
+		else
+		{
+			return .7;
+		}
+	}
+	
+	public static double rlFirstTurnToScale(double eValue)
+	{
+		if(eValue < AutoConstants.rlFirstTurnToScale - 1500)
+		{
+			return .8;
+		}
+		else if(eValue < AutoConstants.rlFirstTurnToScale)
+		{
+			return .5;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static double rlSecondTurnToScale(double eValue)
+	{
+		if(eValue < AutoConstants.rlSecondTurnToScale - 1500)
+		{
+			return .8;
+		}
+		else if(eValue < AutoConstants.rlSecondTurnToScale)
+		{
+			return .5;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static double rlFirstTurnAfterScale(double eValue)
+	{
+		if(eValue < AutoConstants.rlFirstTurnAfterScale - 1500)
+		{
+			return .8;
+		}
+		else if(eValue < AutoConstants.rlFirstTurnAfterScale)
+		{
+			return .5;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static double rlSecondTurnAfterScale(double eValue)
+	{
+		if(eValue < AutoConstants.rlSecondTurnAfterScale - 1500)
+		{
+			return .8;
+		}
+		else if(eValue < AutoConstants.rlSecondTurnAfterScale)
+		{
+			return .5;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	public static double rlStraightBeforeSwitch(double eValue)
+	{
+		if(eValue < 1000)
+		{
+			return .6;
+		}
+		else if(eValue < 2500)
+		{
+			return .8;
+		}
+		else if(eValue < 6500)
+		{
+			return 1;
+		}
+		else if(eValue < 7500)
+		{
+			return .8;
+		}
+		else
+		{
+			return .7;
+		}
+	}
+	
+	
+	public static double rlPickUpCubeTurn(double eValue)
+	{
+		if(eValue < AutoConstants.rlPickUpCubeTurn - 1500)
+		{
+			return .8;
+		}
+		else if(eValue < AutoConstants.rlPickUpCubeTurn)
+		{
+			return .5;
+		}
+		else
+		{
+			return 0;
+		}
+	}
 	
 }
