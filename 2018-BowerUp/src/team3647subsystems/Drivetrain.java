@@ -61,62 +61,62 @@ public class Drivetrain
 		{
 			if(Math.abs(lValue - rValue) < 45)
 			{
-				FRCarcadedrive(speed, .05);
+				FRCarcadedrive(speed, .15);
 			}
 			else if(Math.abs(lValue - rValue) < 60)
 			{
-				FRCarcadedrive(speed, .1);
+				FRCarcadedrive(speed, .2);
 			}
 			else if(Math.abs(lValue - rValue) < 80)
 			{
-				FRCarcadedrive(speed, .15);
+				FRCarcadedrive(speed, .25);
 			}
 			else if(Math.abs(lValue - rValue) < 100)
 			{
-				FRCarcadedrive(speed, .2);
+				FRCarcadedrive(speed, .3);
 			}
 			else if(Math.abs(lValue - rValue) < 125)
 			{
-				FRCarcadedrive(speed, .25);
+				FRCarcadedrive(speed, .35);
 			}
 			else if(Math.abs(lValue - rValue) < 150)
 			{
-				FRCarcadedrive(speed, .3);
+				FRCarcadedrive(speed, .4);
 			}
 			else
 			{
-				FRCarcadedrive(speed, .4);
+				FRCarcadedrive(speed, .5);
 			}
 		}
 		else
 		{
 			if(Math.abs(lValue - rValue) < 45)
 			{
-				FRCarcadedrive(speed, -.05);
+				FRCarcadedrive(speed, .05);
 			}
 			else if(Math.abs(lValue - rValue) < 60)
 			{
-				FRCarcadedrive(speed, -0.1);
+				FRCarcadedrive(speed, 0);
 			}
 			else if(Math.abs(lValue - rValue) < 80)
 			{
-				FRCarcadedrive(speed, -.15);
+				FRCarcadedrive(speed, -.05);
 			}
 			else if(Math.abs(lValue - rValue) < 100)
 			{
-				FRCarcadedrive(speed, -.2);
+				FRCarcadedrive(speed, -.1);
 			}
 			else if(Math.abs(lValue - rValue) < 125)
 			{
-				FRCarcadedrive(speed, -.25);
+				FRCarcadedrive(speed, -.15);
 			}
 			else if(Math.abs(lValue - rValue) < 150)
 			{
-				FRCarcadedrive(speed, -.3);
+				FRCarcadedrive(speed, -.2);
 			}
 			else
 			{
-				FRCarcadedrive(speed, -.4);
+				FRCarcadedrive(speed, -.3);
 			}
 		}
 	}
@@ -128,9 +128,40 @@ public class Drivetrain
 		
 		if(Math.abs(lValue - rValue) < 30)
 		{
-			FRCarcadedrive(speed, 0);
+			FRCarcadedrive(speed, -.1);
 		}
 		else if(rValue > lValue)
+		{
+			if(Math.abs(lValue - rValue) < 45)
+			{
+				FRCarcadedrive(speed, -.15);
+			}
+			else if(Math.abs(lValue - rValue) < 60)
+			{
+				FRCarcadedrive(speed, -.2);
+			}
+			else if(Math.abs(lValue - rValue) < 80)
+			{
+				FRCarcadedrive(speed, -.25);
+			}
+			else if(Math.abs(lValue - rValue) < 100)
+			{
+				FRCarcadedrive(speed, -.3);
+			}
+			else if(Math.abs(lValue - rValue) < 125)
+			{
+				FRCarcadedrive(speed, -.35);
+			}
+			else if(Math.abs(lValue - rValue) < 150)
+			{
+				FRCarcadedrive(speed, -.4);
+			}
+			else
+			{
+				FRCarcadedrive(speed, -.5);
+			}
+		}
+		else
 		{
 			if(Math.abs(lValue - rValue) < 45)
 			{
@@ -138,61 +169,31 @@ public class Drivetrain
 			}
 			else if(Math.abs(lValue - rValue) < 60)
 			{
-				FRCarcadedrive(speed, -.1);
+				FRCarcadedrive(speed, 0);
 			}
 			else if(Math.abs(lValue - rValue) < 80)
-			{
-				FRCarcadedrive(speed, -.15);
-			}
-			else if(Math.abs(lValue - rValue) < 100)
-			{
-				FRCarcadedrive(speed, -.2);
-			}
-			else if(Math.abs(lValue - rValue) < 125)
-			{
-				FRCarcadedrive(speed, -.25);
-			}
-			else if(Math.abs(lValue - rValue) < 150)
-			{
-				FRCarcadedrive(speed, -.3);
-			}
-			else
-			{
-				FRCarcadedrive(speed, -.4);
-			}
-		}
-		else
-		{
-			if(Math.abs(lValue - rValue) < 45)
 			{
 				FRCarcadedrive(speed, .05);
 			}
-			else if(Math.abs(lValue - rValue) < 60)
+			else if(Math.abs(lValue - rValue) < 100)
 			{
 				FRCarcadedrive(speed, .1);
 			}
-			else if(Math.abs(lValue - rValue) < 80)
+			else if(Math.abs(lValue - rValue) < 125)
 			{
 				FRCarcadedrive(speed, .15);
 			}
-			else if(Math.abs(lValue - rValue) < 100)
+			else if(Math.abs(lValue - rValue) < 150)
 			{
 				FRCarcadedrive(speed, .2);
 			}
-			else if(Math.abs(lValue - rValue) < 125)
-			{
-				FRCarcadedrive(speed, .25);
-			}
-			else if(Math.abs(lValue - rValue) < 150)
+			else
 			{
 				FRCarcadedrive(speed, .3);
 			}
-			else
-			{
-				FRCarcadedrive(speed, .4);
-			}
 		}
 	}
+
 
 	static double drift;
 	static String movingStatus, driftStatus;

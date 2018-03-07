@@ -301,7 +301,7 @@ public class Autonomous
 				break;
 			case 2:
 				ElevatorLevel.maintainPickUpPosition();
-				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.rrStraightToScale - 1600))
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.rrStraightToScale - 1800))
 				{
 					avg = (lValue + rValue)/2.0;
 					speed = Functions.rrStarightToScale(avg);
@@ -323,7 +323,7 @@ public class Autonomous
 				{
 					prevLeftEncoder = lValue;
 					prevRightEncoder = rValue;
-					currentState = 19;
+					currentState = 4;
 				}
 				break;
 			case 4:
@@ -403,7 +403,7 @@ public class Autonomous
 				{
 					prevLeftEncoder = lValue;
 					prevRightEncoder = rValue;
-					currentState = 19;
+					currentState = 7;
 				}
 				break;
 			case 7:
@@ -445,7 +445,7 @@ public class Autonomous
 				}
 				else
 				{
-					currentState = 10;
+					currentState = 19;
 				}
 				break;
 			case 10:

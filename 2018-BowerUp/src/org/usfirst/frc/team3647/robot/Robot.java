@@ -160,7 +160,7 @@ public class Robot extends IterativeRobot {
 	public void runDrivetrain()
 	{
 		enc.setEncoderValues();
-		Drivetrain.FRCarcadedrive(joy.leftJoySticky, joy.rightJoyStickx);
+		Drivetrain.arcadeDrive(Encoders.leftEncoderValue, Encoders.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
 	}
 	
 	public void runMotorSafety()

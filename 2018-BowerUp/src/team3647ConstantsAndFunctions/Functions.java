@@ -689,13 +689,17 @@ public class Functions
 		{
 			return .8;
 		}
-		else if(eValue < 7000)
+		else if(eValue < 6000)
 		{
 			return 1;
 		}
-		else
+		else  if(eValue < 7000)
 		{
 			return .8;
+		}
+		else
+		{
+			return .7;
 		}
 		/*
 		if(eValue < 2000)
