@@ -51,150 +51,295 @@ public class Drivetrain
 		drive.tankDrive(lYValue, rYValue, false);
 	}
 	
+//	public static void driveForw(double lValue, double rValue, double speed)
+//	{
+//		if(Math.abs(lValue - rValue) < 30)
+//		{
+//			FRCarcadedrive(speed, 0);
+//		}
+//		else if(rValue > lValue)
+//		{
+//			if(Math.abs(lValue - rValue) < 45)
+//			{
+//				FRCarcadedrive(speed, .15);
+//			}
+//			else if(Math.abs(lValue - rValue) < 60)
+//			{
+//				FRCarcadedrive(speed, .2);
+//			}
+//			else if(Math.abs(lValue - rValue) < 80)
+//			{
+//				FRCarcadedrive(speed, .25);
+//			}
+//			else if(Math.abs(lValue - rValue) < 100)
+//			{
+//				FRCarcadedrive(speed, .3);
+//			}
+//			else if(Math.abs(lValue - rValue) < 125)
+//			{
+//				FRCarcadedrive(speed, .35);
+//			}
+//			else if(Math.abs(lValue - rValue) < 150)
+//			{
+//				FRCarcadedrive(speed, .4);
+//			}
+//			else
+//			{
+//				FRCarcadedrive(speed, .5);
+//			}
+//		}
+//		else
+//		{
+//			if(Math.abs(lValue - rValue) < 45)
+//			{
+//				FRCarcadedrive(speed, .05);
+//			}
+//			else if(Math.abs(lValue - rValue) < 60)
+//			{
+//				FRCarcadedrive(speed, 0);
+//			}
+//			else if(Math.abs(lValue - rValue) < 80)
+//			{
+//				FRCarcadedrive(speed, -.05);
+//			}
+//			else if(Math.abs(lValue - rValue) < 100)
+//			{
+//				FRCarcadedrive(speed, -.1);
+//			}
+//			else if(Math.abs(lValue - rValue) < 125)
+//			{
+//				FRCarcadedrive(speed, -.15);
+//			}
+//			else if(Math.abs(lValue - rValue) < 150)
+//			{
+//				FRCarcadedrive(speed, -.2);
+//			}
+//			else
+//			{
+//				FRCarcadedrive(speed, -.3);
+//			}
+//		}
+//	}
+//	
+//	public static void  driveBack(double lValue, double rValue, double speed)
+//	{
+//		lValue = Math.abs(lValue);
+//		rValue = Math.abs(rValue);
+//		
+//		if(Math.abs(lValue - rValue) < 30)
+//		{
+//			FRCarcadedrive(speed, -.1);
+//		}
+//		else if(rValue > lValue)
+//		{
+//			if(Math.abs(lValue - rValue) < 45)
+//			{
+//				FRCarcadedrive(speed, -.15);
+//			}
+//			else if(Math.abs(lValue - rValue) < 60)
+//			{
+//				FRCarcadedrive(speed, -.2);
+//			}
+//			else if(Math.abs(lValue - rValue) < 80)
+//			{
+//				FRCarcadedrive(speed, -.25);
+//			}
+//			else if(Math.abs(lValue - rValue) < 100)
+//			{
+//				FRCarcadedrive(speed, -.3);
+//			}
+//			else if(Math.abs(lValue - rValue) < 125)
+//			{
+//				FRCarcadedrive(speed, -.35);
+//			}
+//			else if(Math.abs(lValue - rValue) < 150)
+//			{
+//				FRCarcadedrive(speed, -.4);
+//			}
+//			else
+//			{
+//				FRCarcadedrive(speed, -.5);
+//			}
+//		}
+//		else
+//		{
+//			if(Math.abs(lValue - rValue) < 45)
+//			{
+//				FRCarcadedrive(speed, -.05);
+//			}
+//			else if(Math.abs(lValue - rValue) < 60)
+//			{
+//				FRCarcadedrive(speed, 0);
+//			}
+//			else if(Math.abs(lValue - rValue) < 80)
+//			{
+//				FRCarcadedrive(speed, .05);
+//			}
+//			else if(Math.abs(lValue - rValue) < 100)
+//			{
+//				FRCarcadedrive(speed, .1);
+//			}
+//			else if(Math.abs(lValue - rValue) < 125)
+//			{
+//				FRCarcadedrive(speed, .15);
+//			}
+//			else if(Math.abs(lValue - rValue) < 150)
+//			{
+//				FRCarcadedrive(speed, .2);
+//			}
+//			else
+//			{
+//				FRCarcadedrive(speed, .3);
+//			}
+//		}
+//	}
+
 	public static void driveForw(double lValue, double rValue, double speed)
 	{
-		if(Math.abs(lValue - rValue) < 30)
-		{
-			FRCarcadedrive(speed, 0);
-		}
-		else if(rValue > lValue)
-		{
-			if(Math.abs(lValue - rValue) < 45)
-			{
-				FRCarcadedrive(speed, .15);
-			}
-			else if(Math.abs(lValue - rValue) < 60)
-			{
-				FRCarcadedrive(speed, .2);
-			}
-			else if(Math.abs(lValue - rValue) < 80)
-			{
-				FRCarcadedrive(speed, .25);
-			}
-			else if(Math.abs(lValue - rValue) < 100)
-			{
-				FRCarcadedrive(speed, .3);
-			}
-			else if(Math.abs(lValue - rValue) < 125)
-			{
-				FRCarcadedrive(speed, .35);
-			}
-			else if(Math.abs(lValue - rValue) < 150)
-			{
-				FRCarcadedrive(speed, .4);
-			}
-			else
-			{
-				FRCarcadedrive(speed, .5);
-			}
-		}
-		else
-		{
-			if(Math.abs(lValue - rValue) < 45)
-			{
-				FRCarcadedrive(speed, .05);
-			}
-			else if(Math.abs(lValue - rValue) < 60)
-			{
-				FRCarcadedrive(speed, 0);
-			}
-			else if(Math.abs(lValue - rValue) < 80)
-			{
-				FRCarcadedrive(speed, -.05);
-			}
-			else if(Math.abs(lValue - rValue) < 100)
-			{
-				FRCarcadedrive(speed, -.1);
-			}
-			else if(Math.abs(lValue - rValue) < 125)
-			{
-				FRCarcadedrive(speed, -.15);
-			}
-			else if(Math.abs(lValue - rValue) < 150)
-			{
-				FRCarcadedrive(speed, -.2);
-			}
-			else
-			{
-				FRCarcadedrive(speed, -.3);
-			}
-		}
+//		if(Math.abs(lValue - rValue) < 30)
+//		{
+//			FRCarcadedrive(speed, 0);
+//		}
+//		else if(rValue > lValue)
+//		{
+//			if(Math.abs(lValue - rValue) < 45)
+//			{
+//				FRCarcadedrive(speed, .05);
+//			}
+//			else if(Math.abs(lValue - rValue) < 60)
+//			{
+//				FRCarcadedrive(speed, .1);
+//			}
+//			else if(Math.abs(lValue - rValue) < 80)
+//			{
+//				FRCarcadedrive(speed, .15);
+//			}
+//			else if(Math.abs(lValue - rValue) < 100)
+//			{
+//				FRCarcadedrive(speed, .2);
+//			}
+//			else if(Math.abs(lValue - rValue) < 125)
+//			{
+//				FRCarcadedrive(speed, .25);
+//			}
+//			else if(Math.abs(lValue - rValue) < 150)
+//			{
+//				FRCarcadedrive(speed, .3);
+//			}
+//			else
+//			{
+//				FRCarcadedrive(speed, .4);
+//			}
+//		
+//		}
+//		else
+//		{
+//			if(Math.abs(lValue - rValue) < 45)
+//			{
+//				FRCarcadedrive(speed, -.05);
+//			}
+//			else if(Math.abs(lValue - rValue) < 60)
+//			{
+//				FRCarcadedrive(speed, -0.1);
+//			}
+//			else if(Math.abs(lValue - rValue) < 80)
+//			{
+//				FRCarcadedrive(speed, -.15);
+//			}
+//			else if(Math.abs(lValue - rValue) < 100)
+//			{
+//				FRCarcadedrive(speed, -.2);
+//			}
+//			else if(Math.abs(lValue - rValue) < 125)
+//			{
+//				FRCarcadedrive(speed, -.25);
+//			}
+//			else if(Math.abs(lValue - rValue) < 150)
+//			{
+//				FRCarcadedrive(speed, -.3);
+//			}
+//			else
+//			{
+//				FRCarcadedrive(speed, -.4);
+//			}
+//		}
+		FRCarcadedrive(speed, 0);
 	}
 	
 	public static void  driveBack(double lValue, double rValue, double speed)
 	{
-		lValue = Math.abs(lValue);
-		rValue = Math.abs(rValue);
+//		lValue = Math.abs(lValue);
+//		rValue = Math.abs(rValue);
+//		
+//		if(Math.abs(lValue - rValue) < 30)
+//		{
+//			FRCarcadedrive(speed, 0);
+//		}
+//		else if(rValue > lValue)
+//		{
+//			if(Math.abs(lValue - rValue) < 45)
+//			{
+//				FRCarcadedrive(speed, -.05);
+//			}
+//			else if(Math.abs(lValue - rValue) < 60)
+//			{
+//				FRCarcadedrive(speed, -.1);
+//			}
+//			else if(Math.abs(lValue - rValue) < 80)
+//			{
+//				FRCarcadedrive(speed, -.15);
+//			}
+//			else if(Math.abs(lValue - rValue) < 100)
+//			{
+//				FRCarcadedrive(speed, -.2);
+//			}
+//			else if(Math.abs(lValue - rValue) < 125)
+//			{
+//				FRCarcadedrive(speed, -.25);
+//			}
+//			else if(Math.abs(lValue - rValue) < 150)
+//			{
+//				FRCarcadedrive(speed, -.3);
+//			}
+//			else
+//			{
+//				FRCarcadedrive(speed, -.4);
+//			}
+//		}
+//		else
+//		{
+//			if(Math.abs(lValue - rValue) < 45)
+//			{
+//				FRCarcadedrive(speed, .05);
+//			}
+//			else if(Math.abs(lValue - rValue) < 60)
+//			{
+//				FRCarcadedrive(speed, .1);
+//			}
+//			else if(Math.abs(lValue - rValue) < 80)
+//			{
+//				FRCarcadedrive(speed, .15);
+//			}
+//			else if(Math.abs(lValue - rValue) < 100)
+//			{
+//				FRCarcadedrive(speed, .2);
+//			}
+//			else if(Math.abs(lValue - rValue) < 125)
+//			{
+//				FRCarcadedrive(speed, .25);
+//			}
+//			else if(Math.abs(lValue - rValue) < 150)
+//			{
+//				FRCarcadedrive(speed, .3);
+//			}
+//			else
+//			{
+//				FRCarcadedrive(speed, .4);
+//			}
+//		}
 		
-		if(Math.abs(lValue - rValue) < 30)
-		{
-			FRCarcadedrive(speed, -.1);
-		}
-		else if(rValue > lValue)
-		{
-			if(Math.abs(lValue - rValue) < 45)
-			{
-				FRCarcadedrive(speed, -.15);
-			}
-			else if(Math.abs(lValue - rValue) < 60)
-			{
-				FRCarcadedrive(speed, -.2);
-			}
-			else if(Math.abs(lValue - rValue) < 80)
-			{
-				FRCarcadedrive(speed, -.25);
-			}
-			else if(Math.abs(lValue - rValue) < 100)
-			{
-				FRCarcadedrive(speed, -.3);
-			}
-			else if(Math.abs(lValue - rValue) < 125)
-			{
-				FRCarcadedrive(speed, -.35);
-			}
-			else if(Math.abs(lValue - rValue) < 150)
-			{
-				FRCarcadedrive(speed, -.4);
-			}
-			else
-			{
-				FRCarcadedrive(speed, -.5);
-			}
-		}
-		else
-		{
-			if(Math.abs(lValue - rValue) < 45)
-			{
-				FRCarcadedrive(speed, -.05);
-			}
-			else if(Math.abs(lValue - rValue) < 60)
-			{
-				FRCarcadedrive(speed, 0);
-			}
-			else if(Math.abs(lValue - rValue) < 80)
-			{
-				FRCarcadedrive(speed, .05);
-			}
-			else if(Math.abs(lValue - rValue) < 100)
-			{
-				FRCarcadedrive(speed, .1);
-			}
-			else if(Math.abs(lValue - rValue) < 125)
-			{
-				FRCarcadedrive(speed, .15);
-			}
-			else if(Math.abs(lValue - rValue) < 150)
-			{
-				FRCarcadedrive(speed, .2);
-			}
-			else
-			{
-				FRCarcadedrive(speed, .3);
-			}
-		}
+		FRCarcadedrive(speed, 0);
 	}
-
-
 	static double drift;
 	static String movingStatus, driftStatus;
 	public static void arcadeDrive(double leftEnc, double rightEnc, double yValue, double xValue)
