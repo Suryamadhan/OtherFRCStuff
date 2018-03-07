@@ -68,6 +68,7 @@ public class AutoConstants
 	public final static double lrStraightToCube = 10000;
 	public final static double lrCubeTurn = 7600;
 	public final static double lrCubeTurnRatio = 2.2;
+	public final static double lrPickUpCubeStraight = 1680;
 	
 	//LL constants
 	public final static double llStraightBeforeTurn = 10000;//14868

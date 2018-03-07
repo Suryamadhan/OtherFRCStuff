@@ -1652,7 +1652,7 @@ public class Autonomous
 				rValue-=prevRightEncoder;
 				rSSpeed = 0;
 				lValue = Math.abs(lValue);
-				if(lValue < AutoConstants.rrbackUpToWallTurnDist)
+				if(lValue < AutoConstants.lrbackUpToWallTurnDist)
 				{
 					lSSpeed = -.6;
 					Drivetrain.tankDrive(lSSpeed, rSSpeed);
@@ -1702,7 +1702,7 @@ public class Autonomous
 				Intake.pickUpCube();
 				intakeMechanism.openIntake();
 				ElevatorLevel.maintainPickUpPosition();
-				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.rlPickUpCubeStraight))
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.lrPickUpCubeStraight))
 				{
 					Drivetrain.driveForw(lValue, rValue, .6);
 				}
@@ -1718,6 +1718,271 @@ public class Autonomous
 				Intake.stopIntake();
 				Elevator.stopEleVader();
 				Drivetrain.stop();
+				break;
+		}
+	}
+	
+	public static void test1ForOppositeSide(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 0:
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					currentState = 1;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					Elevator.moveEleVader(-.25);
+				}
+				break;
+			case 1:
+				if(ElevatorLevel.reachedPickUp())
+				{
+					Elevator.stopEleVader();
+					currentState = 2;
+				}
+				else
+				{
+					Elevator.moveEleVader(.5);
+				}
+				break;
+			case 2:
+				ElevatorLevel.maintainPickUpPosition();
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.llStraightBeforeTurn - 1600))
+				{
+					avg = (lValue + rValue)/2.0;
+					Drivetrain.driveForw(lValue, rValue, Functions.llStraightBeforeTurn(avg));
+				}
+				else
+				{
+					currentState = 3;
+				}
+				break;
+			case 3:
+				ElevatorLevel.maintainPickUpPosition();
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.llStraightBeforeTurn))
+				{
+					avg = (lValue + rValue)/2.0;
+					Drivetrain.driveForw(lValue, rValue, .2);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 4;
+				}
+				break;
+			case 4:
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				ElevatorLevel.maintainPickUpPosition();
+				if(Functions.llFirstTurn(rValue) != 0)
+				{
+					rSSpeed = Functions.llFirstTurn(rValue);
+					lSSpeed = rSSpeed/AutoConstants.llFirstTurnRatio;
+					Drivetrain.goStraightLeft(lValue, rValue, AutoConstants.llFirstTurnRatio, lSSpeed, rSSpeed, .06);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 5;
+				}
+				break;
+			case 5:
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				ElevatorLevel.maintainPickUpPosition();
+				if(!Drivetrain.reachedDistance(lValue, rValue, 5000))
+				{
+					avg = (lValue + rValue)/2.0;
+					Drivetrain.driveForw(lValue, rValue, .8);
+				}
+				else
+				{
+					currentState = 6;
+				}
+				break;
+			case 6:
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				ElevatorLevel.maintainPickUpPosition();
+				if(!Drivetrain.reachedDistance(lValue, rValue, 6500))
+				{
+					avg = (lValue + rValue)/2.0;
+					Drivetrain.driveForw(lValue, rValue, .2);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 7;
+				}
+				break;
+			case 7:
+				intakeMechanism.closeIntake();
+				Intake.stopIntake();
+				Elevator.stopEleVader();
+				Drivetrain.stop();
+				break;
+		}
+	}
+	
+	public static void test2ForOppositeSide(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 0:
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					currentState = 1;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					Elevator.moveEleVader(-.25);
+				}
+				break;
+			case 1:
+				if(ElevatorLevel.reachedPickUp())
+				{
+					Elevator.stopEleVader();
+					currentState = 5;
+				}
+				else
+				{
+					Elevator.moveEleVader(.5);
+				}
+				break;
+			case 5:
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				ElevatorLevel.maintainPickUpPosition();
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.rlcrossFieldDist - 1600))
+				{
+					avg = (lValue + rValue)/2.0;
+					Drivetrain.driveForw(lValue, rValue, Functions.rlcrossFieldDist(avg));
+				}
+				else
+				{
+					currentState = 6;
+				}
+				break;
+			case 6:
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				ElevatorLevel.maintainPickUpPosition();
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.rlStraightBeforeTurn))
+				{
+					avg = (lValue + rValue)/2.0;
+					Drivetrain.driveForw(lValue, rValue, .2);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 7;
+				}
+				break;
+			case 7:
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				ElevatorLevel.maintainPickUpPosition();
+				if(Functions.rlFirstTurnToScale(rValue) != 0)
+				{
+					lSSpeed = Functions.rlFirstTurnToScale(lValue);
+					rSSpeed = lSSpeed/AutoConstants.rlFirstTurnToScaleRatio;
+					Drivetrain.goStraightRight(lValue, rValue, AutoConstants.rlFirstTurnToScaleRatio, lSSpeed, rSSpeed, .06);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 8;
+				}
+				break;
+			case 8:
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				ElevatorLevel.maintainPickUpPosition();
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.rlStraightBeforeSecond - 1600))
+				{
+					Drivetrain.driveForw(lValue, rValue, .74);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 9;
+				}
+				break;
+			case 9:
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				ElevatorLevel.maintainPickUpPosition();
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.rlStraightBeforeSecond))
+				{
+					Drivetrain.driveForw(lValue, rValue, .2);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 10;
+				}
+				break;
+			case 10:
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				ElevatorLevel.maintainPickUpPosition();
+				if(Functions.rlSecondTurnToScale(rValue) != 0)
+				{
+					lSSpeed = Functions.rlSecondTurnToScale(lValue);
+					rSSpeed = lSSpeed/AutoConstants.rlSecondTurnToScaleRatio;
+					Drivetrain.goStraightRight(lValue, rValue, AutoConstants.rlSecondTurnToScaleRatio, lSSpeed, rSSpeed, .06);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 11;
+				}
+				break;
+			case 11:
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				ElevatorLevel.maintainPickUpPosition();
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.rlStraightToScale - 1600))
+				{
+					Drivetrain.driveForw(lValue, rValue, .74);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 12;
+				}
+				break;
+			case 12:
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				ElevatorLevel.maintainPickUpPosition();
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.rlStraightToScale))
+				{
+					Drivetrain.driveForw(lValue, rValue, .2);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 13;
+				}
 				break;
 		}
 	}
