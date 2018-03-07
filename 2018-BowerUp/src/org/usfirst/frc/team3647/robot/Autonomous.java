@@ -1461,6 +1461,267 @@ public class Autonomous
 		}
 	}
 	
+	//Test Functions
+	public static void test2ForSameSide(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 0:
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					currentState = 1;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					Elevator.moveEleVader(-.25);
+				}
+				break;
+			case 1:
+				if(ElevatorLevel.reachedPickUp())
+				{
+					Elevator.stopEleVader();
+					currentState = 2;
+				}
+				else
+				{
+					Elevator.moveEleVader(.5);
+				}
+				break;
+			case 2:
+				ElevatorLevel.maintainPickUpPosition();
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.rrBackTurnAfterSwitch - 1500))
+				{
+					Drivetrain.driveBack(lValue, rValue, -.8);
+				}
+				else
+				{
+					currentState = 3;
+				}
+				break;
+			case 3:
+				ElevatorLevel.maintainPickUpPosition();
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.rrBackTurnAfterSwitch))
+				{
+					Drivetrain.driveBack(lValue, rValue, -.2);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 4;
+				}
+				break;
+			case 4:
+				ElevatorLevel.maintainPickUpPosition();
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				rSSpeed = 0;
+				lValue = Math.abs(lValue);
+				if(lValue < AutoConstants.rrbackUpToWallTurnDist)
+				{
+					lSSpeed = -.6;
+					Drivetrain.tankDrive(lSSpeed, rSSpeed);
+				}
+				else
+				{
+					currentState = 5;
+				}
+				break;
+			case 5:
+				ElevatorLevel.maintainPickUpPosition();
+				Drivetrain.stop();
+				Timer.delay(.3);
+				Encoders.resetEncoders();
+				Timer.delay(.2);
+				currentState = 6;
+				break;
+			case 6:
+				ElevatorLevel.maintainPickUpPosition();
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.rrStraightToCube - 1600))
+				{
+					Drivetrain.driveForw(lValue, rValue, .8);
+				}
+				else
+				{
+					currentState = 7;
+				}
+				break;
+			case 7:
+				ElevatorLevel.maintainPickUpPosition();
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.rrStraightToCube))
+				{
+					speed = .2;
+					Drivetrain.driveForw(lValue, rValue, speed);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 8;
+				}
+				break;
+			case 8:
+				ElevatorLevel.maintainPickUpPosition();
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				Intake.pickUpCube();
+				intakeMechanism.openIntake();
+				ElevatorLevel.maintainPickUpPosition();
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.rlPickUpCubeStraight))
+				{
+					Drivetrain.driveForw(lValue, rValue, .6);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 9;
+				}
+				break;
+			case 9:
+				intakeMechanism.closeIntake();
+				Intake.stopIntake();
+				Elevator.stopEleVader();
+				Drivetrain.stop();
+				break;
+		}
+	}
+	
+	public static void test3ForSameSide(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 0:
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					currentState = 1;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					Elevator.moveEleVader(-.25);
+				}
+				break;
+			case 1:
+				if(ElevatorLevel.reachedPickUp())
+				{
+					Elevator.stopEleVader();
+					currentState = 2;
+				}
+				else
+				{
+					Elevator.moveEleVader(.5);
+				}
+				break;
+			case 2:
+				ElevatorLevel.maintainPickUpPosition();
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.rrBackTurnAfterSwitch - 1500))
+				{
+					Drivetrain.driveBack(lValue, rValue, -.8);
+				}
+				else
+				{
+					currentState = 3;
+				}
+				break;
+			case 3:
+				ElevatorLevel.maintainPickUpPosition();
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.rrBackTurnAfterSwitch))
+				{
+					Drivetrain.driveBack(lValue, rValue, -.2);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 4;
+				}
+				break;
+			case 4:
+				ElevatorLevel.maintainPickUpPosition();
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				rSSpeed = 0;
+				lValue = Math.abs(lValue);
+				if(lValue < AutoConstants.rrbackUpToWallTurnDist)
+				{
+					lSSpeed = -.6;
+					Drivetrain.tankDrive(lSSpeed, rSSpeed);
+				}
+				else
+				{
+					currentState = 5;
+				}
+				break;
+			case 5:
+				ElevatorLevel.maintainPickUpPosition();
+				Drivetrain.stop();
+				Timer.delay(.3);
+				Encoders.resetEncoders();
+				Timer.delay(.2);
+				currentState = 6;
+				break;
+			case 6:
+				ElevatorLevel.maintainPickUpPosition();
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.lrStraightToCube - 1600))
+				{
+					Drivetrain.driveForw(lValue, rValue, .8);
+				}
+				else
+				{
+					currentState = 7;
+				}
+				break;
+			case 7:
+				ElevatorLevel.maintainPickUpPosition();
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.lrStraightToCube))
+				{
+					speed = .2;
+					Drivetrain.driveForw(lValue, rValue, speed);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 8;
+				}
+				break;
+			case 8:
+				ElevatorLevel.maintainPickUpPosition();
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				Intake.pickUpCube();
+				intakeMechanism.openIntake();
+				ElevatorLevel.maintainPickUpPosition();
+				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.rlPickUpCubeStraight))
+				{
+					Drivetrain.driveForw(lValue, rValue, .6);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 9;
+				}
+				break;
+			case 9:
+				intakeMechanism.closeIntake();
+				Intake.stopIntake();
+				Elevator.stopEleVader();
+				Drivetrain.stop();
+				break;
+		}
+	}
+	
 	public static void initialize()
 	{
 		Encoders.resetEncoders();
