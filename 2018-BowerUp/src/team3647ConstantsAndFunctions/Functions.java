@@ -728,13 +728,13 @@ public class Functions
 	
 	public static double rrPickUpCube(double eValue)
 	{
-		if(eValue < AutoConstants.rrCubeTurn - 1500)
+		if(eValue < AutoConstants.rrCubeTurn - 2400)
 		{
-			return .8;
+			return .5;
 		}
 		else if(eValue < AutoConstants.rrCubeTurn)
 		{
-			return .5;
+			return .25;
 		}
 		else
 		{

@@ -11,7 +11,6 @@ import team3647elevator.ElevatorLevel;
 import team3647elevator.Intake;
 import team3647pistons.intakeMechanism;
 
-import team3647pistons.IntakeTilt;
 import team3647pistons.Shifter;
 import team3647subsystems.Drivetrain;
 import team3647subsystems.Encoders;
@@ -73,8 +72,7 @@ public class Robot extends IterativeRobot {
 			runMotorSafety();
 			enc.setEncoderValues();
 			eleVader.setElevatorEncoder();
-			Autonomous.rr(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
-			//System.out.println(Autonomous.currentState);
+			Autonomous.middleSideLeftAuto(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 			//Autonomous.rightSideBigJank(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 		}
 	}
@@ -151,7 +149,6 @@ public class Robot extends IterativeRobot {
 //		if(Drivetrain.leftSRX.get() == 0 && Drivetrain.rightSRX.get() == 0 && Elevator.elevatorState == Elevator.aimedElevatorState && Elevator.aimedElevatorState!=-1)
 //		{
 			intakeMechanism.runIntake(joy.leftBumper1);
-			IntakeTilt.runPiston(joy.buttonX);
 			Shifter.runPiston(joy.buttonY);
 		//}
 		

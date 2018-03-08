@@ -1471,7 +1471,7 @@ public class Autonomous
 				{
 					Elevator.stopEleVader();
 					ElevatorLevel.resetElevatorEncoders();
-					currentState = 1;
+					currentState = 6;
 				}
 				else
 				{
@@ -1483,7 +1483,7 @@ public class Autonomous
 				if(ElevatorLevel.reachedPickUp())
 				{
 					Elevator.stopEleVader();
-					currentState = 2;
+					currentState = 6;
 				}
 				else
 				{
@@ -1507,7 +1507,7 @@ public class Autonomous
 				ElevatorLevel.maintainPickUpPosition();
 				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.rrBackTurnAfterSwitch))
 				{
-					Drivetrain.driveBack(lValue, rValue, -.2);
+					Drivetrain.driveBack(lValue, rValue, -.4);
 				}
 				else
 				{
@@ -1538,21 +1538,21 @@ public class Autonomous
 				Timer.delay(.3);
 				Encoders.resetEncoders();
 				Timer.delay(.2);
-				currentState = 6;
+				currentState = 9;
 				break;
 			case 6:
-				ElevatorLevel.maintainPickUpPosition();
-				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.rrStraightToCube - 1600))
+				//ElevatorLevel.maintainPickUpPosition();
+				Encoders.testEncoders();
+				if(!Drivetrain.reachedDistance(lValue, rValue, 3000))
 				{
 					Drivetrain.driveForw(lValue, rValue, .8);
 				}
-				else
 				{
-					currentState = 7;
+					currentState = 8;
 				}
 				break;
 			case 7:
-				ElevatorLevel.maintainPickUpPosition();
+				//ElevatorLevel.maintainPickUpPosition();
 				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.rrStraightToCube))
 				{
 					speed = .2;
@@ -1566,6 +1566,25 @@ public class Autonomous
 				}
 				break;
 			case 8:
+				lValue-=prevLeftEncoder;
+				rValue-=prevRightEncoder;
+				//ElevatorLevel.maintainPickUpPosition();
+				Intake.pickUpCube();
+				intakeMechanism.openIntake();
+				if(Functions.rrPickUpCube(rValue) != 0)
+				{
+					rSSpeed = Functions.rrPickUpCube(rValue);
+					lSSpeed = rSSpeed/AutoConstants.rrCubeTurnRatio;
+					Drivetrain.goStraightLeft(lValue, rValue, AutoConstants.rrCubeTurnRatio, lSSpeed, rSSpeed, .06);
+				}
+				else
+				{
+					prevLeftEncoder = lValue;
+					prevRightEncoder = rValue;
+					currentState = 10;
+				}
+				break;
+			case 9:
 				ElevatorLevel.maintainPickUpPosition();
 				lValue-=prevLeftEncoder;
 				rValue-=prevRightEncoder;
@@ -1580,14 +1599,15 @@ public class Autonomous
 				{
 					prevLeftEncoder = lValue;
 					prevRightEncoder = rValue;
-					currentState = 9;
+					currentState = 10;
 				}
 				break;
-			case 9:
+			case 10:
 				intakeMechanism.closeIntake();
 				Intake.stopIntake();
 				Elevator.stopEleVader();
 				Drivetrain.stop();
+				System.out.println("L");
 				break;
 		}
 	}
