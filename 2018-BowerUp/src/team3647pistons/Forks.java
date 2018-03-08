@@ -11,7 +11,7 @@ import team3647subsystems.Encoders;
 
 public class Forks 
 {
-	public static DoubleSolenoid piston = new DoubleSolenoid(1,0);
+	public static DoubleSolenoid piston = new DoubleSolenoid(4,5);
 	
 	public static void forks()
 	{

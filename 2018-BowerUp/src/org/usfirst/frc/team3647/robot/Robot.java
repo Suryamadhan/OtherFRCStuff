@@ -10,7 +10,7 @@ import team3647elevator.Elevator;
 import team3647elevator.ElevatorLevel;
 import team3647elevator.Intake;
 import team3647pistons.intakeMechanism;
-
+import team3647pistons.Forks;
 import team3647pistons.Shifter;
 import team3647subsystems.Drivetrain;
 import team3647subsystems.Encoders;
@@ -108,14 +108,8 @@ public class Robot extends IterativeRobot {
 		updateJoysticks();
 		eleVader.setElevatorEncoder();
 		Shifter.runPiston(joy.buttonY);
-		if(joy.buttonA)
-		{
-			Elevator.moveEleVader(.13);
-		}
-		else
-		{
-			Elevator.moveEleVader(joy.rightJoySticky * .4);
-		}
+		runDrivetrain();
+		Elevator.moveEleVader(joy.rightJoySticky * .4);
 		ElevatorLevel.testElevatorEncoders();
 		System.out.println(ElevatorLevel.bannerSensor.get());
 	}
@@ -131,23 +125,24 @@ public class Robot extends IterativeRobot {
 		eleVader.setElevatorEncoder();
 		if(Shifter.piston.get() == DoubleSolenoid.Value.kForward)
 		{
-			Elevator.moveEleVader(joy.rightJoySticky * .4);
+			Elevator.moveEleVader(joy.rightJoySticky1 * .4);
 		}
 		else
 		{
-			Elevator.setElevatorButtons(joy.buttonA1, joy.buttonB1, joy.buttonX1,  joy.buttonY1, joy.rightBumper1);
+			Elevator.setElevatorButtons(joy.buttonA1, false, joy.buttonB1,  joy.buttonY1, joy.buttonX1);
 			Elevator.setManualOverride(joy.rightJoySticky1 * .6);
 			Elevator.runDarthVader();
 			Intake.runIntake(joy.rightTrigger1, joy.leftTrigger1);
 		}
 	}
-	
+
 	public void runPistons()
 	{
 		//Clamps.runPiston(joy.buttonA);
 //		if(Drivetrain.leftSRX.get() == 0 && Drivetrain.rightSRX.get() == 0 && Elevator.elevatorState == Elevator.aimedElevatorState && Elevator.aimedElevatorState!=-1)
 //		{
-			intakeMechanism.runIntake(joy.leftBumper1);
+			intakeMechanism.runIntake(joy.rightBumper1);
+			Forks.runPiston(joy.buttonX);
 			Shifter.runPiston(joy.buttonY);
 		//}
 		
