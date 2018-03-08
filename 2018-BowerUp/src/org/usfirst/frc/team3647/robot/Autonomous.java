@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3647.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import team3647ConstantsAndFunctions.AutoConstants;
 import team3647ConstantsAndFunctions.Constants;
@@ -18,11 +19,81 @@ public class Autonomous
 	//Scale: Y direction: 324 inches, center of the robot
 	//Scale: X direction: 42 inches, start far edge to end robot
 	
+	
+	
 	static int currentState;
 	static double lSSpeed, rSSpeed, adjustmentConstant, speed;
 	static double []adjustmentValues = new double[2];
 	static double prevLeftEncoder, prevRightEncoder, avg;
 	static double requiredLeftDist, requiredRightDist;
+	
+	public static void runAuto(double lValue, double rValue)
+	{
+		String gameData;
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		if(gameData.charAt(0) == 'L')
+		{
+			middleSideLeftAuto(lValue, rValue);
+		}
+		else if(gameData.charAt(0) == 'R')
+		{
+			middleSideRightAuto(lValue, rValue);
+		}
+		else
+		{
+			crossBaseline(lValue, rValue);
+			System.out.println("Crossing Baseline");
+			System.out.println("GameData: " + gameData);
+		}
+	}
+
+	public static void crossBaseline(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 0:
+				prevLeftEncoder = 0;
+				prevRightEncoder = 0;
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					currentState = 1;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					Elevator.moveEleVader(-.25);
+				}
+				break;
+			case 1:
+				if(ElevatorLevel.reachedPickUp())
+				{
+					Elevator.stopEleVader();
+					currentState = 11;
+				}
+				else
+				{
+					Elevator.moveEleVader(.5);
+				}
+				break;
+			case 2:
+				if(!Drivetrain.reachedDistance(lValue, rValue, 13000))
+				{
+					avg = (lValue + rValue)/2.0;
+					speed = .7;
+					Drivetrain.driveForw(lValue, rValue, speed);
+				}
+				else
+				{
+					currentState = 3;
+				}
+				break;
+			case 3:
+				Drivetrain.stop();
+				break;
+		}
+	}
 	
 	public static void lr(double lValue, double rValue)
 	{

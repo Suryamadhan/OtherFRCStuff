@@ -416,6 +416,92 @@ public class Drivetrain
 	 	}
 	}
 	
+	public static void turnLeft(double lValue, double rValue)//facing left at end
+	{
+		lValue = Math.abs(lValue);
+		rValue = Math.abs(rValue);
+		if(Math.abs(lValue - rValue) < 24)
+		{
+			drive.tankDrive(-.6, .6, false);
+		}
+		else
+		{
+			if(lValue > rValue)
+			{
+				if(Math.abs(lValue - rValue) < 40)
+				{
+					drive.tankDrive(-.5, .7, false);
+				}
+				else if(Math.abs(lValue - rValue) < 70)
+				{
+					drive.tankDrive(-.4, .8, false);
+				}
+				else
+				{
+					drive.tankDrive(-.3, .9, false);
+				}
+			}
+			else
+			{
+				if(Math.abs(lValue - rValue) < 40)
+				{
+					drive.tankDrive(-.7, .5, false);
+				}
+				else if(Math.abs(lValue - rValue) < 70)
+				{
+					drive.tankDrive(-.8, .4, false);
+				}
+				else
+				{
+					drive.tankDrive(-.9, .3, false);
+				}
+			}
+		}
+	}
+	
+	public static void turnRight(double lValue, double rValue)
+	{
+		lValue = Math.abs(lValue);
+		rValue = Math.abs(rValue);
+		if(Math.abs(lValue - rValue) < 24)
+		{
+			drive.tankDrive(.6, - .6, false);
+		}
+		else
+		{
+			if(lValue > rValue)
+			{
+				if(Math.abs(lValue - rValue) < 40)
+				{
+					drive.tankDrive(.5, - .7, false);
+				}
+				else if(Math.abs(lValue - rValue) < 70)
+				{
+					drive.tankDrive(.4, - .8, false);
+				}
+				else
+				{
+					drive.tankDrive(.3, - .9, false);
+				}
+			}
+			else
+			{
+				if(Math.abs(lValue - rValue) < 40)
+				{
+					drive.tankDrive(.7, - .5, false);
+				}
+				else if(Math.abs(lValue - rValue) < 70)
+				{
+					drive.tankDrive(.8, - .4, false);
+				}
+				else
+				{
+					drive.tankDrive(.9, - .3, false);
+				}
+			}
+		}
+	}
+	
 	public static boolean reachedDistance(double leftEnc, double rightEnc, double distance)
 	{
 		

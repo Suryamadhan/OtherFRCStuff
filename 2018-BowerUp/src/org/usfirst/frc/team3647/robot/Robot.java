@@ -72,7 +72,7 @@ public class Robot extends IterativeRobot {
 			runMotorSafety();
 			enc.setEncoderValues();
 			eleVader.setElevatorEncoder();
-			Autonomous.middleSideLeftAuto(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
+			Autonomous.runAuto(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 			//Autonomous.rightSideBigJank(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 		}
 	}
@@ -93,7 +93,6 @@ public class Robot extends IterativeRobot {
 			runMotorSafety();
 			runPistons();
 			runDrivetrain();
-			Encoders.testEncoders();
 			runElevator();
 		}
 		catch(Throwable t)
