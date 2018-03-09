@@ -27,7 +27,7 @@ public class AutoConstants
 	//Middle Auto Left Side
 	public final static double firstBigTurnMSRSW = 5100;
 	public final static double ratioForFirstTurnMSRSW = 3.6;
-	public final static double secondBigOneWheelCurveMSRSW = 4800;
+	public final static double secondBigOneWheelCurveMSRSW = 4100;
 	public final static double straightForSwitchMSRSW = 2750;
 	
 	public final static double testStraights = 5300;

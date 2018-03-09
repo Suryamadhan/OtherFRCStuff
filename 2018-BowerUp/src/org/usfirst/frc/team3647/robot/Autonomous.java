@@ -48,6 +48,89 @@ public class Autonomous
 			System.out.println("GameData: " + gameData);
 		}
 	}
+	
+
+	public static void rightTurn(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 0:
+				prevLeftEncoder = 0;
+				prevRightEncoder = 0;
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					currentState = 1;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					Elevator.moveEleVader(-.25);
+				}
+				break;
+			case 1:
+				avg = (Math.abs(lValue) + Math.abs(rValue))/2.0;
+				if(avg < 3200)
+				{
+					Drivetrain.turnRight(lValue, rValue);
+				}
+				else
+				{
+					currentState = 2;
+				}
+				break;
+			case 2:
+				Drivetrain.stop();
+				Timer.delay(.3);
+				currentState = 3;
+				break;
+			case 3:
+				Drivetrain.stop();
+				break;
+		}
+	}
+	
+	public static void leftTurn(double lValue, double rValue)
+	{
+		switch(currentState)
+		{
+			case 0:
+				prevLeftEncoder = 0;
+				prevRightEncoder = 0;
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					currentState = 1;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					Elevator.moveEleVader(-.25);
+				}
+				break;
+			case 1:
+				avg = (Math.abs(lValue) + Math.abs(rValue))/2.0;
+				if(avg < 3200)
+				{
+					Drivetrain.turnLeft(lValue, rValue);
+				}
+				else
+				{
+					currentState = 2;
+				}
+				break;
+			case 2:
+				Drivetrain.stop();
+				Timer.delay(.3);
+				currentState = 3;
+				break;
+			case 3:
+				Drivetrain.stop();
+				break;
+		}
+	}
 
 	public static void crossBaseline(double lValue, double rValue)
 	{
@@ -640,53 +723,8 @@ public class Autonomous
 		}
 	}
 	
+
 	public static void middleSideLeftAuto(double lValue, double rValue)//switch
-	{
-		//Before Straight: Make sure X is 72 inches to the left
-		//After Straight: Make sure Y is 140 inches at end.
-		
-		switch(currentState)
-		{
-			case 0:
-				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
-				{
-					Elevator.stopEleVader();
-					ElevatorLevel.resetElevatorEncoders();
-					currentState = 1;
-				}
-				else
-				{
-					Encoders.resetEncoders();
-					Elevator.moveEleVader(-.2);
-				}
-				break;
-			case 1:
-				Intake.runIntake(.5, 0);
-				Timer.delay(1);
-				currentState = 2;
-				break;
-			case 2:
-				if(ElevatorLevel.reachedSwitch())
-				{
-					ElevatorLevel.maintainSwitchPosition();
-					Encoders.resetEncoders();
-					Timer.delay(1);
-					currentState = 3;
-				}
-				else
-				{
-					Intake.runIntake(.5, 0);
-					Elevator.moveEleVader(Functions.stopToSwitch(ElevatorLevel.elevatorEncoderValue));
-				}
-				break;
-			case 3:
-				ElevatorLevel.maintainSwitchPosition();
-				Intake.shootCube();
-				break;
-		}
-	}
-	
-	public static void menono(double lValue, double rValue)//switch
 	{
 		//Before Straight: Make sure X is 72 inches to the left
 		//After Straight: Make sure Y is 140 inches at end.
@@ -837,7 +875,7 @@ public class Autonomous
 			case 4:
 				if(!Drivetrain.reachedDistance(lValue, rValue, AutoConstants.straightForSwitchMSRSW))
 				{
-					Drivetrain.driveForw(lValue, rValue, .6);
+					Drivetrain.driveForw(lValue, rValue, .74);
 				}
 				else
 				{

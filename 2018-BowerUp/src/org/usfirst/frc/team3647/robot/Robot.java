@@ -72,7 +72,8 @@ public class Robot extends IterativeRobot {
 			runMotorSafety();
 			enc.setEncoderValues();
 			eleVader.setElevatorEncoder();
-			Autonomous.middleSideLeftAuto(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
+			Autonomous.runAuto(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
+			//.middleSideLeftAuto(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 			//Autonomous.rightSideBigJank(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 		}
 	}
@@ -114,7 +115,9 @@ public class Robot extends IterativeRobot {
 		Elevator.moveEleVader(joy.rightJoySticky * .4);
 		ElevatorLevel.testElevatorEncoders();
 		System.out.println(ElevatorLevel.bannerSensor.get());
+		Encoders.testEncoders();
 	}
+	
 	
 	public void updateJoysticks()
 	{
@@ -127,7 +130,7 @@ public class Robot extends IterativeRobot {
 		eleVader.setElevatorEncoder();
 		if(Shifter.piston.get() == DoubleSolenoid.Value.kReverse)
 		{
-			Elevator.moveEleVader(joy.rightJoySticky1 * .4);
+			Elevator.moveEleVader(joy.rightJoySticky1 * 1);
 		}
 		else
 		{
