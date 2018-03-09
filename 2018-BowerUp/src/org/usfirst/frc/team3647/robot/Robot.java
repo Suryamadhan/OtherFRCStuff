@@ -72,7 +72,7 @@ public class Robot extends IterativeRobot {
 			runMotorSafety();
 			enc.setEncoderValues();
 			eleVader.setElevatorEncoder();
-			Autonomous.runAuto(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
+			Autonomous.middleSideLeftAuto(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 			//Autonomous.rightSideBigJank(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 		}
 	}
@@ -80,6 +80,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopInit()
 	{
+		Forks.notForks();
+		Shifter.Shifted();
 		Elevator.elevatorState = 0;
 	}
 	
@@ -123,7 +125,7 @@ public class Robot extends IterativeRobot {
 	public void runElevator()
 	{
 		eleVader.setElevatorEncoder();
-		if(Shifter.piston.get() == DoubleSolenoid.Value.kForward)
+		if(Shifter.piston.get() == DoubleSolenoid.Value.kReverse)
 		{
 			Elevator.moveEleVader(joy.rightJoySticky1 * .4);
 		}

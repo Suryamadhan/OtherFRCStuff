@@ -17,6 +17,7 @@ public class Shifter
 		public static void notShifted()
 		{
 			piston.set(DoubleSolenoid.Value.kReverse);
+			
 		}
 		
 		public static void runPiston(boolean joyValue)

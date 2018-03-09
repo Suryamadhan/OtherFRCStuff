@@ -8,6 +8,8 @@ import team3647ConstantsAndFunctions.Functions;
 import team3647elevator.Elevator;
 import team3647elevator.ElevatorLevel;
 import team3647elevator.Intake;
+import team3647pistons.Forks;
+import team3647pistons.Shifter;
 import team3647pistons.intakeMechanism;
 import team3647subsystems.Drivetrain;
 import team3647subsystems.Encoders;
@@ -639,6 +641,52 @@ public class Autonomous
 	}
 	
 	public static void middleSideLeftAuto(double lValue, double rValue)//switch
+	{
+		//Before Straight: Make sure X is 72 inches to the left
+		//After Straight: Make sure Y is 140 inches at end.
+		
+		switch(currentState)
+		{
+			case 0:
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					currentState = 1;
+				}
+				else
+				{
+					Encoders.resetEncoders();
+					Elevator.moveEleVader(-.2);
+				}
+				break;
+			case 1:
+				Intake.runIntake(.5, 0);
+				Timer.delay(1);
+				currentState = 2;
+				break;
+			case 2:
+				if(ElevatorLevel.reachedSwitch())
+				{
+					ElevatorLevel.maintainSwitchPosition();
+					Encoders.resetEncoders();
+					Timer.delay(1);
+					currentState = 3;
+				}
+				else
+				{
+					Intake.runIntake(.5, 0);
+					Elevator.moveEleVader(Functions.stopToSwitch(ElevatorLevel.elevatorEncoderValue));
+				}
+				break;
+			case 3:
+				ElevatorLevel.maintainSwitchPosition();
+				Intake.shootCube();
+				break;
+		}
+	}
+	
+	public static void menono(double lValue, double rValue)//switch
 	{
 		//Before Straight: Make sure X is 72 inches to the left
 		//After Straight: Make sure Y is 140 inches at end.
@@ -2080,6 +2128,10 @@ public class Autonomous
 	
 	public static void initialize()
 	{
+		Drivetrain.stop();
+		Forks.notForks();
+		Shifter.Shifted();
+		intakeMechanism.closeIntake();
 		Encoders.resetEncoders();
 		Intake.stopIntake();
 		Elevator.stopEleVader();

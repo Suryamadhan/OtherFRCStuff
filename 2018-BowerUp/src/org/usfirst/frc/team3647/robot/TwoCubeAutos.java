@@ -634,7 +634,7 @@ public class TwoCubeAutos
 				intakeMechanism.closeIntake();
 				break;
 		}
-	}15792
+	}
 	
 	public static void ll(double lValue, double rValue)
 	{
