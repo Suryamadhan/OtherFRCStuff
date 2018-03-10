@@ -19,7 +19,7 @@ public class Joysticks
 	
 	public void setMainContollerValues()
 	{
-		rightBumper =	mainController.getRawButton(6);
+		//rightBumper =	mainController.getRawButton(6);
 		leftBumper =	mainController.getRawButton(5);
 		leftTrigger = fixJoystickValue(mainController.getRawAxis(2));
 		buttonA =	mainController.getRawButton(1);

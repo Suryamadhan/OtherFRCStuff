@@ -97,6 +97,7 @@ public class Robot extends IterativeRobot {
 			runPistons();
 			runDrivetrain();
 			runElevator();
+			//Encoders.testEncoders();
 		}
 		catch(Throwable t)
 		{
@@ -156,7 +157,16 @@ public class Robot extends IterativeRobot {
 	public void runDrivetrain()
 	{
 		enc.setEncoderValues();
-		Drivetrain.arcadeDrive(Encoders.leftEncoderValue, Encoders.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
+		if(joy.leftBumper)
+		{
+			Drivetrain.arcadeDrive(Encoders.leftEncoderValue, Encoders.rightEncoderValue, joy.leftJoySticky * .65, joy.rightJoyStickx * .65);
+		}
+		else
+		{
+			Drivetrain.arcadeDrive(Encoders.leftEncoderValue, Encoders.rightEncoderValue, joy.leftJoySticky, joy.rightJoyStickx);
+		}
+			
+		
 	}
 	
 	public void runMotorSafety()
