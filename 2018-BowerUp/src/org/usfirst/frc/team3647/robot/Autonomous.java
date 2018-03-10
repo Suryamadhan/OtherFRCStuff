@@ -21,7 +21,8 @@ public class Autonomous
 	//Scale: Y direction: 324 inches, center of the robot
 	//Scale: X direction: 42 inches, start far edge to end robot
 	
-	
+	StopWatch yes = new StopWatch();
+	static double time;
 	
 	static int currentState;
 	static double lSSpeed, rSSpeed, adjustmentConstant, speed;
@@ -751,10 +752,22 @@ public class Autonomous
 		switch(currentState)
 		{
 			case 0:
+				yes.start();
+				currentState = 100;
+				break;
+			case 100:
+				time = yes.getDuration();
 				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop() && ElevatorLevel.elevatorEncoderValue == 0)
 				{
 					Elevator.stopEleVader();
 					ElevatorLevel.resetElevatorEncoders();
+					currentState = 99;
+				}
+				else if(lValue == 0 && rValue == 0 && time >=2)
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					Timer.delay(.2);
 					currentState = 99;
 				}
 				else
@@ -1065,13 +1078,23 @@ public class Autonomous
 	{
 		switch(currentState)
 		{
-			//Check after curves: 36 in at the end of all the turns
-			//At end around 140 inches
-			case 0 :
+			case 0:
+				yes.start();
+				currentState = 100;
+				break;
+			case 100:
+				time = yes.getDuration();
 				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop() && ElevatorLevel.elevatorEncoderValue == 0)
 				{
 					Elevator.stopEleVader();
 					ElevatorLevel.resetElevatorEncoders();
+					currentState = 99;
+				}
+				else if(lValue == 0 && rValue == 0 && time >=2)
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					Timer.delay(.2);
 					currentState = 99;
 				}
 				else
