@@ -1,5 +1,7 @@
 package org.usfirst.frc.team3647.robot;
 
+import com.ctre.phoenix.time.StopWatch;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import team3647ConstantsAndFunctions.AutoConstants;
@@ -21,7 +23,7 @@ public class Autonomous
 	//Scale: Y direction: 324 inches, center of the robot
 	//Scale: X direction: 42 inches, start far edge to end robot
 	
-	StopWatch yes = new StopWatch();
+	static StopWatch yes = new StopWatch();
 	static double time;
 	
 	static int currentState;
@@ -58,7 +60,11 @@ public class Autonomous
 		{
 			middleSideLeftAuto(lValue, rValue);
 		}
-//		if(gameData.charAt(0) == 'R')
+//		if(gameData.charAt(1) == 'R')
+//		{
+//			rightScale(lValue, rValue);
+//		}
+//		else if(gameData.charAt(0) == 'R')
 //		{
 //			rightSwicth(lValue, rValue);
 //		}
@@ -860,30 +866,40 @@ public class Autonomous
 			//Check after curves: 36 in at the end of all the turns
 			//At end around 140 inches
 			case 0:
-				prevLeftEncoder = 0;
-				prevRightEncoder = 0;
-				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop())
+				yes.start();
+				Intake.runIntake(.3, 0);
+				currentState = 100;
+				break;
+			case 100:
+				time = yes.getDuration();
+				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop() && ElevatorLevel.elevatorEncoderValue == 0)
 				{
 					Elevator.stopEleVader();
 					ElevatorLevel.resetElevatorEncoders();
-					currentState = 1;
+					currentState = 99;
+				}
+				else if(lValue == 0 && rValue == 0 && time >=2)
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					Timer.delay(.2);
+					currentState = 99;
 				}
 				else
 				{
 					Encoders.resetEncoders();
-					Elevator.moveEleVader(-.25);
+					Elevator.moveEleVader(-.2);
 				}
 				break;
-			case 1:
+			case 99:
 				if(ElevatorLevel.reachedPickUp())
 				{
-					Intake.stopIntake();
 					Elevator.stopEleVader();
 					currentState = 2;
 				}
 				else
 				{
-					Elevator.moveEleVader(.5);
+					Elevator.moveEleVader(.3);
 				}
 				break;
 			case 2:
@@ -919,7 +935,8 @@ public class Autonomous
 				}
 				else
 				{
-					currentState = 3;
+					currentState = 6
+							;
 				}
 				break;
 			case 3:
@@ -935,7 +952,7 @@ public class Autonomous
 			case 4:
 				ElevatorLevel.maintainPickUpPosition();
 				avg = (Math.abs(lValue) + Math.abs(rValue))/2.0;
-				if(avg < 2300)
+				if(avg < 2500)
 				{
 					Drivetrain.turnLeft(lValue, rValue);
 				}
@@ -961,6 +978,7 @@ public class Autonomous
 			case 6:
 				ElevatorLevel.maintainScalePosition();
 				Intake.shootCube();
+				Drivetrain.stop();
 				break;
 		}
 		
@@ -973,25 +991,35 @@ public class Autonomous
 			//Check after curves: 36 in at the end of all the turns
 			//At end around 140 inches
 			case 0:
-				prevLeftEncoder = 0;
-				prevRightEncoder = 0;
+				yes.start();
+				Intake.runIntake(.3, 0);
+				currentState = 100;
+				break;
+			case 100:
+				time = yes.getDuration();
 				if(lValue == 0 && rValue == 0 && ElevatorLevel.reachedStop() && ElevatorLevel.elevatorEncoderValue == 0)
 				{
 					Elevator.stopEleVader();
 					ElevatorLevel.resetElevatorEncoders();
-					currentState = 1;
+					currentState = 99;
+				}
+				else if(lValue == 0 && rValue == 0 && time >=2)
+				{
+					Elevator.stopEleVader();
+					ElevatorLevel.resetElevatorEncoders();
+					Timer.delay(.2);
+					currentState = 99;
 				}
 				else
 				{
 					Encoders.resetEncoders();
-					Elevator.moveEleVader(-.25);
+					Elevator.moveEleVader(-.2);
 				}
 				break;
-			case 1:
+			case 99:
 				if(ElevatorLevel.reachedPickUp())
 				{
 					Elevator.stopEleVader();
-					Intake.pickUpCube();
 					currentState = 2;
 				}
 				else

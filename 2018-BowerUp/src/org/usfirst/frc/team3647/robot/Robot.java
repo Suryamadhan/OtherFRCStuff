@@ -73,6 +73,7 @@ public class Robot extends IterativeRobot {
 			enc.setEncoderValues();
 			eleVader.setElevatorEncoder();
 			Autonomous.runAuto(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
+			
 			//.middleSideLeftAuto(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 			//Autonomous.rightSideBigJank(Encoders.leftEncoderValue, Encoders.rightEncoderValue);
 		}

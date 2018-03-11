@@ -71,7 +71,11 @@ public class Elevator
 		switch(elevatorState)
 		{
 			case 0://start
-				if(ElevatorLevel.reachedStop())
+				if(manualOverride)
+				{
+					elevatorState = -1;
+				}
+				else if(ElevatorLevel.reachedStop())
 				{
 					stopEleVader();
 					aimedElevatorState = 1;
