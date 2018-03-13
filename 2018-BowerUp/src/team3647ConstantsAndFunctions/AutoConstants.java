@@ -25,9 +25,9 @@ public class AutoConstants
 	public final static double straightForSwitchMSLSW = 1500;
 	
 	//Middle Auto Left Side
-	public final static double firstBigTurnMSRSW = 5100;
+	public final static double firstBigTurnMSRSW = 4500;
 	public final static double ratioForFirstTurnMSRSW = 3.6;
-	public final static double secondBigOneWheelCurveMSRSW = 4800;
+	public final static double secondBigOneWheelCurveMSRSW = 4300;
 	public final static double straightForSwitchMSRSW = 2750;
 	
 	public final static double testStraights = 5300;
@@ -53,10 +53,10 @@ public class AutoConstants
 	public final static double rrScaleTurn = 2000;
 	public final static double rrBackTurnAfterSwitch = 2600;
 	public final static double rrbackUpStraightAfterScale = 2750;
-	public final static double rrbackUpToWallTurnDist = 8150;
-	public final static double rrStraightToCube = 3400;
-	public final static double rrCubeTurn = 7600;
-	public final static double rrCubeTurnRatio = 2.2;
+	public final static double rrbackUpToWallTurnDist = 5000;
+	public final static double rrStraightToCube = 3000;
+	public final static double rrCubeTurn = 5000;
+	public final static double rrCubeTurnRatio = 2.7;
 	
 
 	//LR constants

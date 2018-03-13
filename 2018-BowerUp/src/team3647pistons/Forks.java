@@ -2,29 +2,43 @@
 package team3647pistons;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
+import team3647elevator.Elevator;
+import team3647elevator.ElevatorLevel;
+import team3647subsystems.Drivetrain;
+import team3647subsystems.Encoders;
 
-public class Forks{ 
+
+public class Forks
+{ 
 	double pistonValue = piston.get();
-	public static DoubleSolenoid piston = new DoubleSolenoid(1, 2);
+	public static DoubleSolenoid piston = new DoubleSolenoid(4,5);
 	
-	public static void openPiston() {
+	public static void forks() 
+  {
 		piston.set(DoubleSolenoid.Value.kForward);
 	}
-	public static void closePiston() {
+	public static void notForks() 
+  {
 		piston.set(DoubleSolenoid.Value.kReverse);
 	}
-	public static void runPistons(boolean joyvalue) {
-		if(joyvalue) {
-			if(pistonValue = DoubleSolenoid.Value.kReverse)
-			openPiston();
+	public static void runPistons(boolean joyvalue) 
+  {
+		if(joyValue)
+		{
+			if(piston.get() == DoubleSolenoid.Value.kReverse)
+			{
+				forks();
+				Timer.delay(.75);
+			}
+			else
+			{
+				notForks();
+				Timer.delay(.75);
+			}
 		}
-		else {
-			closePiston();
-		}
-	}
+  }
 }
-
-
 

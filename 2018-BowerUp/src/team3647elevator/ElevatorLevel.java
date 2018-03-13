@@ -113,7 +113,7 @@ public class ElevatorLevel
 	{
 		if(reachedSwitch())
 		{
-			Elevator.stopEleVader();
+			Elevator.moveEleVader(.06);
 		}
 		else
 		{

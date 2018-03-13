@@ -94,7 +94,7 @@ public class Functions
 //		eValue/=2;
 //		speed = sinx(eValue);
 //		return speed;
-		eValue*=(-0.00006);
+		eValue*=(-0.000046153834);
 		eValue+=.8;
 		return eValue;
 		//.8 to .2
@@ -154,8 +154,8 @@ public class Functions
 //		eValue/=2;
 //		speed = sinx(eValue);
 //		return speed;
-		eValue*=(-0.0000785714285714);
-		eValue+=.9;
+		eValue*=(-0.000046153834);
+		eValue+=.8;
 		return eValue;
 		//.7 to .2
 	}
@@ -728,13 +728,13 @@ public class Functions
 	
 	public static double rrPickUpCube(double eValue)
 	{
-		if(eValue < AutoConstants.rrCubeTurn - 1500)
+		if(eValue < AutoConstants.rrCubeTurn - 2400)
 		{
-			return .8;
+			return .5;
 		}
 		else if(eValue < AutoConstants.rrCubeTurn)
 		{
-			return .5;
+			return .25;
 		}
 		else
 		{

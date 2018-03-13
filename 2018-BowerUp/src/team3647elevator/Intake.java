@@ -16,8 +16,8 @@ public class Intake
 	{
 		if(lTrigger > 0)
 		{	
-			rightIntakeMotor.set(ControlMode.PercentOutput, -lTrigger*0.7);
-			leftIntakeMotor.set(ControlMode.PercentOutput, -lTrigger*0.7);
+			rightIntakeMotor.set(ControlMode.PercentOutput, -lTrigger*.8);
+			leftIntakeMotor.set(ControlMode.PercentOutput, -lTrigger*.8);
 		}
 		else if(rTrigger > 0)
 		{
@@ -26,8 +26,8 @@ public class Intake
 		}
 		else
 		{
-			rightIntakeMotor.set(ControlMode.PercentOutput, .1);
-			leftIntakeMotor.set(ControlMode.PercentOutput, .1);
+			rightIntakeMotor.set(ControlMode.PercentOutput, -.1);
+			leftIntakeMotor.set(ControlMode.PercentOutput, -.1);
 		}
 			
 		
